@@ -15,24 +15,24 @@ class AddTokenAction extends CardGameAction {
     setup() {
         this.name = 'addToken';
         this.targetType = ['creature', 'artifact', 'upgrade'];
-        let token = '+1 ?͗ʎw????';
+        let token = '+1 power counters';
         if (this.amount === 1) {
-            token = '+1 ?͗ʎw????';
+            token = '+1 power counter';
         }
 
         if (this.multiplier > 1) {
             this.effectMsg =
-                '???ݠ{0} ?㓉' +
+                'multiply the number of ' +
                 (this.type === 'power' ? token : this.type) +
-                ' ???ʘ??Ƞ' +
+                ' on {0} by ' +
                 this.multiplier;
         } else {
             this.effectMsg =
-                '???u ' +
+                'place ' +
                 this.amount +
-                '?? ' +
+                ' ' +
                 (this.type === 'power' ? token : this.type) +
-                ' ?ݠ{0} ?㧠+
+                ' on {0} ' +
                 (this.multiplier > 1 ? 'for each ' + token + ' on {0}' : '');
         }
     }
