@@ -1,4 +1,4 @@
-const CardAction = require('./CardGameAction');
+﻿const CardAction = require('./CardGameAction');
 const AbilityResolver = require('../gamesteps/abilityresolver.js');
 const SimpleStep = require('../gamesteps/simplestep.js');
 
@@ -23,11 +23,11 @@ class ResolveAbilityAction extends CardAction {
         super.setup();
         this.name = 'resolveAbility';
         if (this.ability) {
-            this.effectMsg = `resolve {0}'s ${
+            this.effectMsg = `结算了 {0}的 ${
                 this.ability.title ? this.ability.title + ' ' : ''
             }ability`;
         } else {
-            this.effectMsg = 'resolve an ability on {0}';
+            this.effectMsg = '结算了 {0}的能力';
         }
     }
 

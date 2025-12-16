@@ -20,7 +20,7 @@ class PrecisionStriker extends Card {
                             .includes(card),
                     gameAction: ability.actions.returnToDeck({ bottom: true })
                 },
-                message: "{0} uses {1} to put {3} on the bottom of {4}'s deck",
+                message: "{0} 使用 {1} 将 {3} 放到 {4} 的牌库底",
                 messageArgs: (context) => [context.target, context.player.opponent]
             }
         });

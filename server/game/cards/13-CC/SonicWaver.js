@@ -1,4 +1,4 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class SonicWaver extends Card {
     // At the end of each player's turn, if there are no stunned creatures in play, purge Sonic Waver.
@@ -27,7 +27,7 @@ class SonicWaver extends Card {
             gameAction: ability.actions.purge((context) => ({
                 target: context.source
             })),
-            effect: 'purge {0} because there are no stunned creatures in play'
+            effect: '清除 {0} 因为场上没有被击晕的生物'
         });
     }
 }

@@ -13,7 +13,7 @@ class Cultist extends Card {
                     controller: 'self',
                     gameAction: ability.actions.ward()
                 },
-                message: '{0} wards {2}', // can't use the token name here because it's already flipped over in the discard
+                message: '{0} 界护 {2}', // can't use the token name here because it's already flipped over in the discard
                 messageArgs: (context) => [context.player, context.target]
             }
         });

@@ -1,4 +1,4 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class LeyEarlOfHurl extends Card {
     // Destroyed: If Ley, Earl of Hurl is not on a flank, fully heal
@@ -6,7 +6,7 @@ class LeyEarlOfHurl extends Card {
     setupCardAbilities(ability) {
         this.destroyed({
             condition: (context) => !context.source.isOnFlank(),
-            effect: 'heal all damage from {0}, exhaust it, ward it and move it to a flank',
+            effect: '治疗 {0} 的所有伤害, 横置它, 界护它并将它移至侧翼',
             effectArgs: () => this,
             gameAction: [
                 ability.actions.heal({ fully: true }),

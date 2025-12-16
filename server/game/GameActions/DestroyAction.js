@@ -1,10 +1,10 @@
-const CardGameAction = require('./CardGameAction');
+﻿const CardGameAction = require('./CardGameAction');
 
 class DestroyAction extends CardGameAction {
     constructor(propertyFactory, isSacrifice = false) {
         super(propertyFactory);
         this.name = isSacrifice ? 'sacrifice' : 'destroy';
-        this.effectMsg = isSacrifice ? 'sacrifice {0}' : 'destroy {0}';
+        this.effectMsg = isSacrifice ? '牺牲 {0}' : '摧毁 {0}';
     }
 
     setDefaultProperties() {

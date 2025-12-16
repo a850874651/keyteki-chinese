@@ -1,4 +1,4 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class NamelsConfession extends Card {
     // Play: Destroy a friendly creature. If you do, gain A equal to half its power (rounding down the gain).
@@ -9,7 +9,7 @@ class NamelsConfession extends Card {
                 controller: 'self',
                 gameAction: ability.actions.destroy()
             },
-            effect: 'destroy {0} and gain amber equal to half its power',
+            effect: '摧毁 {0} 并获得了其力量值一半的琥珀',
             then: {
                 condition: (context) =>
                     context.preThenEvents &&

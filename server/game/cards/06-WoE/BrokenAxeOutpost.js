@@ -15,7 +15,7 @@ class BrokenAxeOutpost extends Card {
                     controller: 'opponent',
                     gameAction: ability.actions.dealDamage({ amount: 6 })
                 },
-                message: '{0} uses {1} to deal 6 damage to {2}'
+                message: '{0} 使用 {1} 造成6点伤害对 {2}'
             }
         });
     }

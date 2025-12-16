@@ -1,4 +1,4 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class Endurance extends Card {
     // Each of Endurance's Skyborn neighbors gain, "After Reap: Ready and fight with this creature."
@@ -11,7 +11,7 @@ class Endurance extends Card {
                     ability.actions.ready(),
                     ability.actions.fight()
                 ]),
-                effect: 'ready and fight with {0}'
+                effect: '重整并使 {0} 战斗'
             })
         });
     }

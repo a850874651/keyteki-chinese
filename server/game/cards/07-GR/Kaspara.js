@@ -25,7 +25,7 @@ class Kaspara extends Card {
                             target: context.player.opponent
                         }))
                     ],
-                    message: '{0} uses {1} to make both players gain 1 amber',
+                    message: '{0} 使用 {1} 使每位玩家都获得1琥珀',
                     messageArgs: (context) => [context.player, context.source]
                 }),
                 ability.effects.gainAbility('destroyed', {
@@ -35,7 +35,7 @@ class Kaspara extends Card {
                             target: context.player.opponent
                         }))
                     ],
-                    message: '{0} uses {1} to make both players gain 1 amber',
+                    message: '{0} 使用 {1} 使每位玩家都获得1琥珀',
                     messageArgs: (context) => [context.player, context.source]
                 })
             ]

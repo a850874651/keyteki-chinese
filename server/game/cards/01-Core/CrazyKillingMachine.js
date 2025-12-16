@@ -36,7 +36,7 @@ class CrazyKillingMachine extends Card {
                         gameAction: ability.actions.destroy()
                     }
                 },
-                message: '{0} uses {1} to choose and destroy {3}',
+                message: '{0} 使用 {1} 进行了选择与摧毁 {3}',
                 messageArgs: (context) => [
                     context.targets.c1 || context.targets.c2
                         ? [context.targets.c1, context.targets.c2].filter((card) => !!card)
@@ -45,7 +45,7 @@ class CrazyKillingMachine extends Card {
                 then: {
                     alwaysTriggers: true,
                     condition: (context) => context.preThenEvents.length < 2,
-                    message: '{0} uses {1} to destroy {1} since 2 cards were not destroyed',
+                    message: '{0} 使用 {1} 摧毁 {1} 由于没有摧毁2张卡牌',
                     gameAction: ability.actions.destroy()
                 }
             }

@@ -1,4 +1,4 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class GeneticStrain extends Card {
     // Play: Each Mutant captures 1A.
@@ -18,7 +18,7 @@ class GeneticStrain extends Card {
                         : []
                 }))
             ]),
-            effect: 'capture 1 amber on each Mutant creature'
+            effect: '每个变异体生物抢占1琥珀'
         });
 
         this.fate({

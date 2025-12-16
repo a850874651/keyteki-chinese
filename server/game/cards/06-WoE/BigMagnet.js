@@ -1,4 +1,4 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class BigMagnet extends Card {
     // Play: Choose a friendly creature. Take control of each upgrade in play and move it to that creature.
@@ -13,7 +13,7 @@ class BigMagnet extends Card {
                         .flatMap((card) => card.upgrades || [])
                 }))
             },
-            effect: 'take control of each upgrade in play and move it to {0}'
+            effect: '获得场上每个升级的控制权并将它们移至{0}'
         });
     }
 }

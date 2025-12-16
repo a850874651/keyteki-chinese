@@ -1,4 +1,4 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class SecurityDetail extends Card {
     // Play: A friendly creature and each of its neighbors captures 1A.
@@ -11,7 +11,7 @@ class SecurityDetail extends Card {
                     target: context.target.neighbors.concat(context.target)
                 }))
             },
-            effect: 'capture 1 amber onto {1}',
+            effect: '抢占 1 琥珀到 {1} 上',
             effectArgs: (context) => [context.target.neighbors.concat(context.target)]
         });
     }

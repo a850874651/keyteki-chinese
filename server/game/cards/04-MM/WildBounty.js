@@ -10,7 +10,7 @@ class WildBounty extends Card {
                     onCardPlayed: (event) =>
                         event.player === context.player && event.card !== context.source
                 },
-                message: '{0} uses {1} to resolve the bonus icons of {2} an additional time',
+                message: '{0} 使用 {1} 额外结算 {2} 的奖励图标一次',
                 messageArgs: (context) => [context.player, context.source, context.event.card],
                 multipleTrigger: false,
                 triggeredAbilityType: 'interrupt',

@@ -1,4 +1,4 @@
-const CardGameAction = require('./CardGameAction');
+﻿const CardGameAction = require('./CardGameAction');
 
 class PlaceUnderAction extends CardGameAction {
     constructor(propertyFactory, isGraft = false) {
@@ -16,9 +16,9 @@ class PlaceUnderAction extends CardGameAction {
         this.name = this.isGraft ? 'graft' : 'placeUnder';
         this.effectArgs = this.parent;
         if (this.isGraft) {
-            this.effectMsg = 'graft {0} onto {1}';
+            this.effectMsg = '嫁接 {0} 到 {1} 上';
         } else {
-            this.effectMsg = 'place ' + (this.facedown ? 'a card' : '{0}') + ' under {1}';
+            this.effectMsg = '放 ' + (this.facedown ? '1张卡牌' : '{0}') + ' 到 {1} 下方';
         }
     }
 

@@ -14,7 +14,7 @@ class TormentedBadge extends Card {
                     effect: ability.effects.takeControl(context.player)
                 }))
             },
-            effect: 'take control of {0}'
+            effect: '获得了 {0} 的控制权'
         });
 
         this.fate({
@@ -28,7 +28,7 @@ class TormentedBadge extends Card {
                     effect: ability.effects.takeControl(context.game.activePlayer.opponent)
                 }))
             },
-            message: '{0} uses {1} to give control of {2} to their opponent',
+            message: '{0} 使用 {1} 将 {2} 的控制权给其对手',
             messageArgs: (context) => [context.player, context.source, context.target]
         });
     }

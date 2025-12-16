@@ -1,4 +1,4 @@
-const PlayerAction = require('./PlayerAction');
+﻿const PlayerAction = require('./PlayerAction');
 
 class FulfillProphecyAction extends PlayerAction {
     setDefaultProperties() {
@@ -8,7 +8,7 @@ class FulfillProphecyAction extends PlayerAction {
     setup() {
         super.setup();
         this.name = 'fulfillProphecy';
-        this.effectMsg = 'fulfill its prophecy';
+        this.effectMsg = '实现了预言';
     }
 
     defaultTargets(context) {

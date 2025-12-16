@@ -1,4 +1,4 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class CacophonousRiot extends Card {
     // Play: Ready and enrage a creature and each of its neighbors.
@@ -15,7 +15,7 @@ class CacophonousRiot extends Card {
                     }))
                 ])
             },
-            effect: 'ready and enrage {1}',
+            effect: '重整并激怒 {1}',
             effectArgs: (context) => [context.target.neighbors.concat(context.target)]
         });
     }

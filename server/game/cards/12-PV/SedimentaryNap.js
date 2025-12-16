@@ -1,4 +1,4 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class SedimentaryNap extends Card {
     // Play: Shuffle a creature into its owner's deck.
@@ -9,7 +9,7 @@ class SedimentaryNap extends Card {
                 cardType: 'creature',
                 gameAction: ability.actions.returnToDeck({ shuffle: true })
             },
-            effect: "shuffle {0} into its owner's deck"
+            effect: "将 {0} 洗入其所有者的牌库"
         });
 
         this.fate({

@@ -6,7 +6,7 @@ class TomesGigantica extends Card {
     // hand. Purge Tomes Gigantica.
     setupCardAbilities(ability) {
         this.play({
-            effect: 'search for two parts of a Gigantic creature part and put them in their hand',
+            effect: '寻找1个巨大生物的两个部分，并将它们放入手中',
             gameAction: ability.actions.search({
                 cardCondition: (card) => card.gigantic,
                 amount: 2,
@@ -17,7 +17,7 @@ class TomesGigantica extends Card {
                 gameAction: ability.actions.purge((context) => ({
                     target: context.source
                 })),
-                message: '{0} uses {1} to purge {1}'
+                message: '{0} 使用 {1} 清除 {1}'
             }
         });
     }

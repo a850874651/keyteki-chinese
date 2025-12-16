@@ -1,10 +1,10 @@
-const CardGameAction = require('./CardGameAction');
+﻿const CardGameAction = require('./CardGameAction');
 
 class WardAction extends CardGameAction {
     setup() {
         this.name = 'ward';
         this.targetType = ['creature'];
-        this.effectMsg = 'ward {0}';
+        this.effectMsg = '界护了 {0}';
     }
 
     canAffect(card, context) {

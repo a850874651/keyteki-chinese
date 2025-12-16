@@ -1,11 +1,11 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class PubliusScipio extends Card {
     // Splash-attack 4.
     // Fate: For the remainder of the turn, after you use a friendly creature, deal 4 to its neighbors.
     setupCardAbilities(ability) {
         this.fate({
-            effect: 'deal 4 damage to neighbors of friendly creatures used this turn',
+            effect: '本回合剩余时间内，每使用1个友方生物，其对其相邻生物造成4点伤害',
             gameAction: ability.actions.untilPlayerTurnEnd({
                 when: {
                     onUseCard: (event, context) =>

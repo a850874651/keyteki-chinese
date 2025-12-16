@@ -44,7 +44,7 @@ class CreedOfNurture extends Card {
                         })
                     }
                 },
-                message: '{0} reveals {3} and choses to give its text box to {4}',
+                message: '{0} 展示 {3} 并选择将其文本框给 {4}',
                 messageArgs: (context) => [
                     context.targets.creatureInHand,
                     context.targets.creatureInPlay

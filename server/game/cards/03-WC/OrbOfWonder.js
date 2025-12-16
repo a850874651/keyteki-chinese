@@ -6,7 +6,7 @@ class OrbOfWonder extends Card {
         this.omni({
             gameAction: ability.actions.sacrifice(),
             then: {
-                message: '{0} uses {1} to move a card from their deck to their hand',
+                message: '{0} 使用 {1} 移动1张卡牌从他的牌库到手中',
                 gameAction: ability.actions.search({
                     location: ['deck'],
                     amount: 1,

@@ -1,4 +1,4 @@
-const CardGameAction = require('./CardGameAction');
+﻿const CardGameAction = require('./CardGameAction');
 
 class SwapAction extends CardGameAction {
     constructor(propertyFactory, swapTokens = false, swapUpgrades = false) {
@@ -23,7 +23,7 @@ class SwapAction extends CardGameAction {
     setup() {
         this.name = 'swap';
         this.targetType = ['creature'];
-        this.effectMsg = 'swap the position of {0} and {1}';
+        this.effectMsg = '交换了 {0} 和 {1} 的位置';
         this.effectArgs = this.origin;
     }
 

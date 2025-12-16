@@ -1,4 +1,4 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class FeatsOfStrength extends Card {
     // Play: For the remainder of the turn, each time an enemy
@@ -6,7 +6,7 @@ class FeatsOfStrength extends Card {
     setupCardAbilities(ability) {
         this.play({
             effect:
-                'make a token creature each time an enemy creature is destroyed in a fight for the remainder of the turn',
+                '本回合剩余时间内，每有1个敌方生物在战斗中被摧毁，制造1个代标生物',
             gameAction: ability.actions.untilPlayerTurnEnd((context) => ({
                 when: {
                     onCardDestroyed: (event) =>

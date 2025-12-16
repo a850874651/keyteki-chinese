@@ -6,12 +6,12 @@ class SilAT8 extends Card {
     setupCardAbilities(ability) {
         this.fight({
             reap: true,
-            effect: 'ready {1} non-Robot creature{2}',
+            effect: '重整 {1} 个非机器人生物{2}',
             effectArgs: (context) => {
                 const count = context.source.neighbors.filter((card) =>
                     card.hasHouse('staralliance')
                 ).length;
-                return [count, count === 1 ? '' : 's'];
+                return [count, count === 1 ? '' : ''];
             },
             gameAction: ability.actions.sequentialForEach((context) => ({
                 num: context.source.neighbors.filter((card) => card.hasHouse('staralliance'))
@@ -20,7 +20,7 @@ class SilAT8 extends Card {
                     promptForSelect: {
                         cardType: 'creature',
                         cardCondition: (card) => !card.hasTrait('robot'),
-                        message: '{0} uses {1} to ready {2}',
+                        message: '{0} 使用 {1} 重整 {2}',
                         messageArgs: (card) => [context.player, context.source, card]
                     }
                 })

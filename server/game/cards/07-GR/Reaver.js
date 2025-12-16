@@ -1,4 +1,4 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class Reaver extends Card {
     // After Reap: Move 1 A from a friendly creature to your pool. If you do,
@@ -11,7 +11,7 @@ class Reaver extends Card {
                 controller: 'self',
                 gameAction: ability.actions.removeAmber()
             },
-            effect: 'move 1 amber from {0} to their pool',
+            effect: '移动1琥珀从 {0} 到其琥珀池中',
             then: {
                 gameAction: ability.actions.gainAmber(),
                 then: {

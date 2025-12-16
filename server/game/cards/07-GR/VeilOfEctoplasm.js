@@ -1,4 +1,4 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class VeilOfEctoplasm extends Card {
     // Play: For each Geistoid card in your discard pile, a friendly
@@ -7,7 +7,7 @@ class VeilOfEctoplasm extends Card {
         this.play({
             condition: (context) => !!context.player.opponent && context.player.opponent.amber > 0,
             effect:
-                'capture 1 amber on a friendly creature for each Geistoid creature in your discard pile',
+                '你的弃牌堆中每有1个灵鬼生物，1个友方生物抢占1琥珀',
             gameAction: ability.actions.sequentialForEach((context) => ({
                 num: Math.min(
                     context.player.opponent.amber,

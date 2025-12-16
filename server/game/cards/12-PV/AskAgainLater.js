@@ -1,4 +1,4 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class AskAgainLater extends Card {
     // Each time your opponent chooses their active house, they must name a house on your identity card. Reveal the top card of your deck. If the revealed card does not match the named house, fulfill Ask Again Later.
@@ -11,7 +11,7 @@ class AskAgainLater extends Card {
                 mode: 'house',
                 houses: (context) => context.source.controller.houses
             },
-            effect: 'make {1} name house {2}',
+            effect: '使得 {1} 猜势力 {2}',
             effectArgs: (context) => [context.game.activePlayer, context.house],
             gameAction: ability.actions.reveal((context) => ({
                 location: 'deck',

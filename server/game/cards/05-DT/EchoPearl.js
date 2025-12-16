@@ -17,7 +17,7 @@ class EchoPearl extends Card {
                         ability.actions.enrage()
                     ]
                 },
-                message: '{0} uses {1} to exhaust, stun and enrage {2}'
+                message: '{0} 使用 {1} 横置、击晕并激怒 {2}'
             }
         });
     }

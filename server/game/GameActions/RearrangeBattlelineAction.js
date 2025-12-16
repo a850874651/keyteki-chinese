@@ -1,4 +1,4 @@
-const CardGameAction = require('./CardGameAction');
+﻿const CardGameAction = require('./CardGameAction');
 
 class RearrangeBattlelineAction extends CardGameAction {
     setDefaultProperties() {}
@@ -6,7 +6,7 @@ class RearrangeBattlelineAction extends CardGameAction {
     setup() {
         super.setup();
         this.name = 'rearrangeBattleline';
-        this.effectMsg = 'rearrange creatures on a battleline';
+        this.effectMsg = '重新排列了战线上的生物';
     }
 
     promptForNextSwap(context) {

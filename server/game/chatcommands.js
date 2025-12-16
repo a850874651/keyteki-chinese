@@ -99,7 +99,7 @@ class ChatCommands {
             return false;
         }
 
-        this.game.addAlert('danger', '{0} is changing the tide', player);
+        this.game.addAlert('danger', '{0} 正在变更潮位', player);
         this.game.changeTide(player, Constants.Tide[level.toUpperCase()], true);
     }
 
@@ -116,7 +116,7 @@ class ChatCommands {
             return false;
         }
 
-        this.game.addAlert('danger', '{0} is attempting to forge the {1} key', player, color);
+        this.game.addAlert('danger', '{0} 尝试锻造 {1} 钥匙', player, color);
         this.game.queueStep(new ManualKeyForgePrompt(this.game, player, color));
 
         return true;
@@ -135,7 +135,7 @@ class ChatCommands {
             return false;
         }
 
-        this.game.addAlert('danger', '{0} unforges the {1}', player, `unforgedkey${color}`);
+        this.game.addAlert('danger', '{0} 熔毁了 {1}', player, `unforgedkey${color}`);
         player.keys[color] = false;
         let forgedKeyIndex = player.keysForgedThisRound.findIndex((key) => key === color);
         if (forgedKeyIndex !== -1) {
@@ -151,14 +151,14 @@ class ChatCommands {
             return false;
         } else if (!player.activeHouse) {
             this.game.addMessage(
-                '{0} attempted to change their active house with /active-house, but they cannot have an active house currently',
+                '{0} 试图变更当前势力为 /active-house, 但他现在不能拥有势力',
                 player,
                 house
             );
             return false;
         } else if (!this.houses.includes(house.toLowerCase())) {
             this.game.addMessage(
-                '{0} attempted to change their active house with /active-house, but {1} is not a valid house',
+                '{0} 试图变更当前势力为 /active-house, 但 {1} 不是个有效的势力',
                 player,
                 house
             );
@@ -167,7 +167,7 @@ class ChatCommands {
 
         this.game.addAlert(
             'danger',
-            '{0} manually changed their active house to {1}',
+            '{0} 手动变更了其当前势力为{1}',
             player,
             house
         );
@@ -176,18 +176,18 @@ class ChatCommands {
     }
 
     startClocks(player) {
-        this.game.addAlert('danger', '{0} restarts the timers', player);
+        this.game.addAlert('danger', '{0} 重启了计时器', player);
         _.each(this.game.getPlayers(), (player) => player.clock.restart());
     }
 
     stopClocks(player) {
-        this.game.addAlert('danger', '{0} stops the timers', player);
+        this.game.addAlert('danger', '{0} 暂停了计时器', player);
         _.each(this.game.getPlayers(), (player) => player.clock.pause());
     }
 
     modifyClock(player, args) {
         let num = this.getNumberOrDefault(args[1], 60);
-        this.game.addAlert('danger', '{0} adds {1} seconds to their clock', player, num);
+        this.game.addAlert('danger', '{0} 增加了 {1} 秒到其计时器', player, num);
         player.clock.modify(num);
     }
 
@@ -196,7 +196,7 @@ class ChatCommands {
         if (num === 0) {
             return false;
         }
-        this.game.addAlert('danger', '{0} draws {1} cards to their hand', player, num);
+        this.game.addAlert('danger', '{0} 抽取了 {1}张卡牌到其手中', player, num);
         player.drawCardsToHand(num);
         return true;
     }
@@ -205,10 +205,10 @@ class ChatCommands {
         let num = this.getNumberOrDefault(args[1], 1);
         this.game.addAlert(
             'danger',
-            '{0} discard{2} {1} card{2} at random',
+            '{0} 随机弃掉了{2} {1} 张卡牌{2}',
             player,
             num,
-            num > 1 ? 's' : ''
+            num > 1 ? '' : ''
         );
         GameActions.discardAtRandom({ amount: num }).resolve(
             player,
@@ -220,10 +220,10 @@ class ChatCommands {
         let num = this.getNumberOrDefault(args[1], 1);
         this.game.addAlert(
             'danger',
-            '{0} discards {1} card{2} from top of their deck',
+            '{0} 从其牌库顶弃掉了 {1} 张卡牌{2} ',
             player,
             num,
-            num > 1 ? 's' : ''
+            num > 1 ? '' : ''
         );
         GameActions.discardTopOfDeck({ amount: num }).resolve(
             player,
@@ -232,17 +232,17 @@ class ChatCommands {
     }
 
     shuffle(player) {
-        this.game.addAlert('danger', '{0} is shuffling their deck', player);
+        this.game.addAlert('danger', '{0} 正在混洗卡组', player);
         player.shuffleDeck();
     }
 
     mulligan(player) {
-        this.game.addAlert('danger', '{0} mulligans their hand', player);
+        this.game.addAlert('danger', '{0} 重调了手牌', player);
         player.takeMulligan();
     }
 
     cancelPrompt(player) {
-        this.game.addAlert('danger', '{0} skips the current step.', player);
+        this.game.addAlert('danger', '{0} 跳过了当前阶段.', player);
         this.game.pipeline.cancelStep();
         this.game.cancelPromptUsed = true;
     }
@@ -283,7 +283,7 @@ class ChatCommands {
             cardCondition: (card) => card.facedown && card.controller === player,
             onSelect: (player, card) => {
                 card.facedown = false;
-                this.game.addAlert('danger', '{0} reveals {1}', player, card);
+                this.game.addAlert('danger', '{0} 展示了 {1}', player, card);
                 return true;
             }
         });
@@ -296,9 +296,9 @@ class ChatCommands {
     manual(player) {
         if (this.game.manualMode) {
             this.game.manualMode = false;
-            this.game.addAlert('danger', '{0} switches manual mode off', player);
+            this.game.addAlert('danger', '{0} 关闭了手动模式', player);
         } else if (this.game.lastManualMode !== player) {
-            this.game.addAlert('danger', '{0} is attempting to switch manual mode on', player);
+            this.game.addAlert('danger', '{0} 尝试开启手动模式', player);
             this.game.queueStep(new ManualModePrompt(this.game, player));
         }
     }
@@ -308,7 +308,7 @@ class ChatCommands {
 
         this.game.addAlert(
             'warning',
-            '{0} {1}mutes spectators',
+            '{0} {1}禁言了观战者',
             player,
             this.game.muteSpectators ? '' : 'un'
         );
@@ -340,11 +340,11 @@ class ChatCommands {
 
     rematch(player) {
         if (this.game.finishedAt) {
-            this.game.addAlert('info', '{0} is requesting a rematch', player);
+            this.game.addAlert('info', '{0} 请求再次对局', player);
         } else {
             this.game.addAlert(
                 'danger',
-                '{0} is requesting a rematch.  The current game is not finished',
+                '{0} 请求再次对局.  当前对局未结束',
                 player
             );
         }
@@ -355,7 +355,7 @@ class ChatCommands {
     firstPlayer(player, args) {
         const firstPlayerName = args[1];
         if (this.game.startingHandsDrawn) {
-            this.game.addAlert('danger', 'Cannot change first player at this stage of the game');
+            this.game.addAlert('danger', '在游戏的这个阶段无法修改先手玩家');
             return;
         }
 
@@ -364,13 +364,13 @@ class ChatCommands {
         for (const p of players) {
             if (p.name === firstPlayerName) {
                 this.game.activePlayer = p;
-                this.game.addAlert('info', '{0} changed first player to {1}', player, p);
+                this.game.addAlert('info', '{0} 变更先手玩家为 {1}', player, p);
                 return;
             }
         }
         this.game.addAlert(
             'danger',
-            'Cannot change first player: player {0} does not exist',
+            '无法变更先手玩家: 玩家 {0} 不存在',
             firstPlayerName
         );
     }

@@ -11,7 +11,7 @@ class PerimeterAlarm extends Card {
                 cardCondition: (card) => !card.exhausted && !card.hasHouse('staralliance'),
                 gameAction: ability.actions.use()
             },
-            message: '{0} uses {1} to use {2}{3}',
+            message: '{0} 使用 {1} 来使用 {2}{3}',
             messageArgs: (context) => [
                 context.player,
                 context.source,

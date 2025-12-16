@@ -1,4 +1,4 @@
-const AllPlayerPrompt = require('./allplayerprompt');
+﻿const AllPlayerPrompt = require('./allplayerprompt');
 
 class ManualKeyForgePrompt extends AllPlayerPrompt {
     constructor(game, requestingPlayer, color) {
@@ -35,10 +35,10 @@ class ManualKeyForgePrompt extends AllPlayerPrompt {
 
     onMenuCommand(player, arg) {
         if (arg === 'yes') {
-            this.game.addAlert('info', '{0} allows forging the {1} key', player, this.color);
+            this.game.addAlert('info', '{0} 同意锻造 {1} 钥匙', player, this.color);
             this.completedPlayers.add(player);
         } else {
-            this.game.addAlert('info', '{0} disallows forging a key', player);
+            this.game.addAlert('info', '{0} 不同意锻造1把钥匙', player);
             this.cancelled = true;
         }
 

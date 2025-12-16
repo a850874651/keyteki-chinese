@@ -1,4 +1,4 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class CognitiveAssumptions extends Card {
     // Play: Reveal up to 3 Logos cards from your hand. For each card
@@ -17,11 +17,11 @@ class CognitiveAssumptions extends Card {
                     amount: context.target.length
                 }))
             },
-            effect: 'reveal {1} and make {2} token creature{3}',
+            effect: '展示 {1} 并制造 {2} 个代标生物{3}',
             effectArgs: (context) => [
                 context.target,
                 context.target.length,
-                context.target.length === 1 ? '' : 's'
+                context.target.length === 1 ? '' : ''
             ]
         });
     }

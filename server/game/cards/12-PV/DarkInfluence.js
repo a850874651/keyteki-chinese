@@ -25,7 +25,7 @@ class DarkInfluence extends Card {
                     context.preThenEvents[0].card.type === 'creature' &&
                     context.preThenEvents[0].card.hasTrait('mutant'),
                 gameAction: ability.actions.gainAmber({ amount: 1 }),
-                message: '{0} uses {1} to gain 1 amber',
+                message: '{0} 使用 {1} 获得1琥珀',
                 messageArgs: (context) => [context.player, context.source]
             }
         });

@@ -1,4 +1,4 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 const _ = require('underscore');
 
 class EddyOfDis extends Card {
@@ -17,7 +17,7 @@ class EddyOfDis extends Card {
         });
 
         this.fate({
-            effect: "shuffle {1}'s discard into their deck and have them draw a card",
+            effect: "将 {1}的弃牌堆洗入其牌库并使其抽1张牌",
             effectArgs: (context) => [context.game.activePlayer.opponent],
             gameAction: ability.actions.sequential([
                 ability.actions.returnToDeck((context) => ({

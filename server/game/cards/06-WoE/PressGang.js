@@ -1,4 +1,4 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 const EventRegistrar = require('../../eventregistrar.js');
 
 class PressGang extends Card {
@@ -26,11 +26,11 @@ class PressGang extends Card {
                     }))
                 })
             ]),
-            effect: 'make a token creature{1}{2}',
+            effect: '制造1个代标生物{1}{2}',
             effectArgs: (context) =>
                 context.player.opponent &&
                 this.creaturesDestroyed[context.player.opponent.uuid] >= 1
-                    ? [' and archive ', context.source]
+                    ? [' 并归档 ', context.source]
                     : ['', '']
         });
     }

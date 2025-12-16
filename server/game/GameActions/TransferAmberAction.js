@@ -1,4 +1,4 @@
-const PlayerAction = require('./PlayerAction');
+﻿const PlayerAction = require('./PlayerAction');
 
 class TransferAmberAction extends PlayerAction {
     setDefaultProperties() {
@@ -8,7 +8,7 @@ class TransferAmberAction extends PlayerAction {
     setup() {
         super.setup();
         this.name = 'transfer';
-        this.effectMsg = 'transfer ' + this.amount + ' amber from {0}';
+        this.effectMsg = '转移了 ' + this.amount + ' 个琥珀从 {0}';
     }
 
     canAffect(player, context) {

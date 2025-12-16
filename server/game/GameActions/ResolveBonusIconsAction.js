@@ -4,7 +4,7 @@ class ResolveBonusIconsAction extends CardGameAction {
     setup() {
         super.setup();
         this.name = 'resolveBonusIcons';
-        this.effectMsg = "resolve {0}'s bonus icons";
+        this.effectMsg = "结算了 {0}的奖励图标";
     }
 
     resolveIcon(context, event, icon) {
@@ -14,7 +14,7 @@ class ResolveBonusIconsAction extends CardGameAction {
                     .gainAmber({ bonus: true })
                     .resolve(context.player, context.game.getFrameworkContext(context.player));
                 context.game.addMessage(
-                    "{0} gains an amber due to {1}'s bonus icon",
+                    "{0} 获得了1个琥珀，通过 {1}的奖励图标",
                     context.player,
                     event.card
                 );
@@ -24,7 +24,7 @@ class ResolveBonusIconsAction extends CardGameAction {
                     .draw({ bonus: true })
                     .resolve(context.player, context.game.getFrameworkContext(context.player));
                 context.game.addMessage(
-                    "{0} draws a card due to {1}'s bonus icon",
+                    "{0} 抽取了1张卡牌，通过 {1}的奖励图标",
                     context.player,
                     event.card
                 );
@@ -38,7 +38,7 @@ class ResolveBonusIconsAction extends CardGameAction {
                             context.game.getFrameworkContext(context.player)
                         );
                     context.game.addMessage(
-                        "{0} steals an amber due to {1}'s bonus icon",
+                        "{0} 窃取了1个琥珀，通过 {1}的奖励图标",
                         context.player,
                         event.card
                     );
@@ -60,7 +60,7 @@ class ResolveBonusIconsAction extends CardGameAction {
                                 .capture({ bonus: true })
                                 .resolve(card, context.game.getFrameworkContext(player));
                             context.game.addMessage(
-                                "{0} captures an amber on {1} due to {2}'s bonus icon",
+                                "{0} 抢占了1个琥珀到 {1} 上，通过 {2}的奖励图标",
                                 player,
                                 card,
                                 event.card
@@ -81,7 +81,7 @@ class ResolveBonusIconsAction extends CardGameAction {
                                 .dealDamage({ bonus: true })
                                 .resolve(card, context.game.getFrameworkContext(player));
                             context.game.addMessage(
-                                "{0} deals 1 damage to {1} due to {2}'s bonus icon",
+                                "{0} 对 {1} 造成了1点伤害，通过 {2}的奖励图标",
                                 player,
                                 card,
                                 event.card
@@ -103,7 +103,7 @@ class ResolveBonusIconsAction extends CardGameAction {
                                 .discard({ chatMessage: false })
                                 .resolve(card, context.game.getFrameworkContext(player));
                             context.game.addMessage(
-                                "{0} discards {1} due to {2}'s bonus icon",
+                                "{0} 弃掉了 {1} ，通过 {2}的奖励图标",
                                 player,
                                 card,
                                 event.card
@@ -122,7 +122,7 @@ class ResolveBonusIconsAction extends CardGameAction {
                             context.game.getFrameworkContext(context.player)
                         );
                     context.game.addMessage(
-                        "{0} makes a token creature due to {1}'s bonus icon",
+                        "{0} 制造了一个代标生物，通过 {1}的奖励图标",
                         context.player,
                         event.card
                     );

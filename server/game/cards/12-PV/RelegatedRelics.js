@@ -1,4 +1,4 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class RelegatedRelics extends Card {
     // Play: Shuffle each artifact into its owner's deck.
@@ -12,7 +12,7 @@ class RelegatedRelics extends Card {
         });
 
         this.fate({
-            effect: 'purge each artifact',
+            effect: '清除每个神器',
             gameAction: ability.actions.purge((context) => ({
                 target: context.game.cardsInPlay.filter((card) => card.type === 'artifact')
             }))

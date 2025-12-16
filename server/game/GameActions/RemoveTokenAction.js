@@ -1,4 +1,4 @@
-const CardGameAction = require('./CardGameAction');
+﻿const CardGameAction = require('./CardGameAction');
 
 class RemoveTokenAction extends CardGameAction {
     constructor(propertyFactory, type = 'power') {
@@ -15,12 +15,12 @@ class RemoveTokenAction extends CardGameAction {
         this.name = 'removeToken';
         this.targetType = ['artifact', 'creature', 'upgrade'];
 
-        let type = this.type === 'power' ? 'power counter' : this.type;
+        let type = this.type === 'power' ? '力量指示物' : this.type;
         if (!this.all && this.amount > 1) {
-            type += 's';
+            type += '';
         }
 
-        this.effectMsg = `remove ${this.all ? 'all' : this.amount} ${type} from {0}`;
+        this.effectMsg = `移除 ${this.all ? '所有' : this.amount} ${type} 从 {0}`;
     }
 
     getAmount(card) {
@@ -58,7 +58,7 @@ class RemoveTokenAction extends CardGameAction {
                         choiceHandler: (choice) => {
                             event.amount = parseInt(choice);
                             context.game.addMessage(
-                                "{0} removes {1} tokens {2} using {3}'s ability",
+                                "{0} 移除了 {1} 的指示物 {2} 个，通过 {3}的能力",
                                 context.player,
                                 event.card,
                                 choice,

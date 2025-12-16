@@ -1,4 +1,4 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class ArcaneTransmitter extends Card {
     // Action: Discard the top 4 cards of any player's deck.
@@ -14,7 +14,7 @@ class ArcaneTransmitter extends Card {
                     "Opponent's": (context) => !!context.player.opponent
                 }
             },
-            effect: 'discard the top 4 cards of a deck',
+            effect: '弃掉1个牌库顶的4张牌',
             gameAction: ability.actions.conditional((context) => ({
                 condition:
                     !context.select || context.select === 'Mine'

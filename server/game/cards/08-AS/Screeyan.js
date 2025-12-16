@@ -21,7 +21,7 @@ class Screeyan extends Card {
                         .map((h) => ability.effects.stopHouseChoice(h))
                 })),
                 effectAlert: true,
-                message: '{0} uses {1} to prevent {3} from calling house {4} next turn',
+                message: '{0} 使用 {1} 防止 {3} 下回合宣 {4} 势力',
                 messageArgs: (context) => [
                     context.player.opponent,
                     context.preThenEvent.card.getHouses()

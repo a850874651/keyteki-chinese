@@ -1,11 +1,11 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class FutureIsPast extends Card {
     // Play: Swap each player's deck with their discard pile. Shuffle
     // each player's deck.
     setupCardAbilities(ability) {
         this.play({
-            effect: "swap each player's deck and discard pile, and shuffle their decks",
+            effect: "交换每位玩家的牌库和弃牌堆，并混洗各自的牌库",
             gameAction: [
                 ability.actions.discard((context) => ({
                     target: context.player.deck.concat(

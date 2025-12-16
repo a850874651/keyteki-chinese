@@ -1,7 +1,7 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class Doppelganger extends Card {
-    // At the start of your turn, choose one of Doppelganger’s
+    // At the start of your turn, choose one of Doppelganger窶冱
     // neighbors.  For the remainder of the turn, Doppelganger gains
     // the text box of the chosen creature.
     setupCardAbilities(ability) {
@@ -43,7 +43,7 @@ class Doppelganger extends Card {
                     };
                 })
             },
-            message: '{0} uses {1} to give {1} the text box of {2} for the remainder of the turn',
+            message: '{0} 使用 {1} 把 {1} 的文本框变成了 {2} 的直到回合结束',
             messageArgs: (context) => [context.player, context.source, context.target]
         });
     }

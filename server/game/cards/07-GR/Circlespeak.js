@@ -1,4 +1,4 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class Circlespeak extends Card {
     // Play: Choose a creature. It captures 2A from each haunted player.
@@ -26,7 +26,7 @@ class Circlespeak extends Card {
                     }))
                 ]
             },
-            effect: 'capture {1} amber from {2} and {3} amber from {4} onto {0}',
+            effect: '抢占 {1} 琥珀从 {2} 并抢占 {3} 琥珀从 {4} 到 {0} 上',
             effectArgs: (context) => [
                 Math.min(context.player.isHaunted() ? 2 : 0, context.player.amber),
                 context.player,

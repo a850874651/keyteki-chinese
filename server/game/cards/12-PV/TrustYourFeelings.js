@@ -1,4 +1,4 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class TrustYourFeelings extends Card {
     // When a card is placed under Trust Your Feelings, name a house. The next time your opponent chooses the named house as their active house, fulfill Trust Your Feelings.
@@ -12,7 +12,7 @@ class TrustYourFeelings extends Card {
             target: {
                 mode: 'house'
             },
-            effect: 'name {1}',
+            effect: '宣言了 {1}',
             effectArgs: (context) => [context.house],
             gameAction: ability.actions.lastingEffect((context) => ({
                 until: {

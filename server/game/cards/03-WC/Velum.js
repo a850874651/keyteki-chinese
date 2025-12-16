@@ -11,7 +11,7 @@ class Velum extends Card {
                     location: 'hand',
                     controller: 'self',
                     mode: 'exactly',
-                    message: '{0} uses {1} to archive {2} card',
+                    message: '{0} 使用 {1} 归档 {2} 张卡牌',
                     messageArgs: (cards) => [context.player, context.source, cards.length],
                     numCards: context.player.cardsInPlay.some((card) => card.name === 'Hyde')
                         ? 2
@@ -26,7 +26,7 @@ class Velum extends Card {
                 target: context.player.discard.filter((card) => card.name === 'Hyde')
             })),
             then: {
-                message: '{0} uses {1} to archive {1}',
+                message: '{0} 使用 {1} 归档 {1}',
                 gameAction: ability.actions.archive()
             }
         });

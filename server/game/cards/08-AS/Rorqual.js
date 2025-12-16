@@ -1,4 +1,4 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class Rorqual extends Card {
     // Rorqual gets +1 power for each A on it.
@@ -16,7 +16,7 @@ class Rorqual extends Card {
 
         this.action({
             condition: (context) => context.source.amber > 0,
-            effect: 'move {1} amber from {0} to their pool',
+            effect: '移动 {1} 琥珀从 {0} 到其琥珀池中',
             effectArgs: (context) => [context.source.amber],
             gameAction: ability.actions.removeAmber({ all: true }),
             then: {

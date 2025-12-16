@@ -1,10 +1,10 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class TillTheEarth extends Card {
     // Play: Each player shuffles their discard pile into their deck.
     setupCardAbilities(ability) {
         this.play({
-            effect: 'have each player shuffle their discard pile into their deck',
+            effect: '使每位玩家将其弃牌堆洗回牌库',
             gameAction: [
                 ability.actions.returnToDeck((context) => ({
                     shuffle: true,

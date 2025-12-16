@@ -33,15 +33,15 @@ class FirstPlayerSelection extends AllPlayerPrompt {
 
         if (!otherPlayer) {
             this.game.activePlayer = player;
-            message = '{0} will go first';
+            message = '{0} 先手';
         } else if (arg === player.name) {
             this.game.activePlayer = player;
-            message = '{0} chooses to go first';
+            message = '{0} 选择了先手';
         } else if (arg === otherPlayer.name) {
             this.game.activePlayer = otherPlayer;
-            message = '{0} chooses to go second';
+            message = '{0} 选择了后手';
         } else {
-            message = '{0} chooses to randomize the first player';
+            message = '{0} 选择了随机先后手';
         }
 
         this.game.addMessage(message, player.name);
@@ -55,7 +55,7 @@ class FirstPlayerSelection extends AllPlayerPrompt {
         if (!this.game.activePlayer) {
             let allPlayersShuffled = _.shuffle(this.game.getPlayers());
             this.game.activePlayer = allPlayersShuffled.shift();
-            this.game.addMessage('{0} won the flip and is first player', this.game.activePlayer);
+            this.game.addMessage('{0} 赢得了猜先，成为先手', this.game.activePlayer);
         }
 
         this.game.firstPlayer = this.game.activePlayer;

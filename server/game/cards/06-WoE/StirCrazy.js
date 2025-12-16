@@ -1,10 +1,10 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class StirCrazy extends Card {
     //Play: Each ready creature captures 1A from its opponent.
     setupCardAbilities(ability) {
         this.play({
-            effect: 'cause each ready creature to capture 1 amber from their opponent',
+            effect: '每个重整状态的生物从其对手处抢占1琥珀',
             gameAction: [
                 ability.actions.capture((context) => ({
                     target: context.player.creaturesInPlay.filter((card) => !card.exhausted)

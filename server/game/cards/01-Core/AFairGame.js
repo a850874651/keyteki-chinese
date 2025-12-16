@@ -1,4 +1,4 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class AFairGame extends Card {
     // Play: Discard the top card of your opponents deck and reveal their hand. You gain 1A for each card of the discarded cards house revealed this way. Your opponent repeats the preceding effect on you.
@@ -6,7 +6,7 @@ class AFairGame extends Card {
         this.play({
             condition: (context) => !!context.player.opponent,
             effect:
-                "discard the top card of {1}'s deck:{2} and reveal their hand: {3}, gaining {4} amber. Then {1} discards the top card of {5}'s deck: {6} and reveals their hand:{7}, gaining {8} amber",
+                "弃置 {1}牌库顶的1张卡牌:{2} 并展示其手牌: {3}, 获取 {4} 个琥魄. 然后 {1} 弃置{5}牌库顶的1张卡牌: {6} 并展示其手牌:{7}, 获取 {8} 个琥魄",
             effectArgs: (context) => {
                 let oppTop =
                     context.player.opponent.deck.length > 0 ? context.player.opponent.deck[0] : '';

@@ -27,7 +27,7 @@ class ReturnToHandFromDiscardAction extends BaseAbility {
 
     executeHandler(context) {
         context.game.actions.returnToHand({ location: 'discard' }).resolve(this.card, context);
-        context.game.addMessage('{0} returns {1} to their hand', context.player, context.source);
+        context.game.addMessage('{0} 将 {1} 返回到其手中', context.player, context.source);
     }
 
     isAction() {

@@ -1,11 +1,11 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class MemorializeTheFallen extends Card {
     // Play: Each player loses A equal to the number of creatures in
     // their discard pile.
     setupCardAbilities(ability) {
         this.play({
-            effect: 'make {1} lose {2} amber and {3} lose {4} amber',
+            effect: '使 {1} 失去 {2} 琥珀并使 {3} 失去 {4} 琥珀',
             effectArgs: (context) => [
                 context.player,
                 context.player.discard.filter((c) => c.type === 'creature').length,

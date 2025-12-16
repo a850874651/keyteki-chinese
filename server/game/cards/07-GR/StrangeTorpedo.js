@@ -38,7 +38,7 @@ class StrangeTorpedo extends Card {
                             .map((event) => event.card)
                     }))
                 ],
-                message: '{0} uses {1} to stun and exhaust the creatures damaged by {1}'
+                message: '{0} 使用 {1} 击晕并横置受到 {1} 伤害的生物'
             }
         });
     }

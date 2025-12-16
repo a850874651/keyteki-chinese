@@ -24,7 +24,7 @@ class PracticalMethods extends Card {
                         gameAction: ability.actions.destroy()
                     }
                 },
-                message: '{0} uses {1} to destroy {3}',
+                message: '{0} 使用 {1} 摧毁 {3}',
                 messageArgs: (context) => [Object.values(context.targets)]
             }
         });

@@ -1,4 +1,4 @@
-const CardGameAction = require('./CardGameAction');
+﻿const CardGameAction = require('./CardGameAction');
 
 class ReturnToDeckAction extends CardGameAction {
     setDefaultProperties() {
@@ -19,11 +19,11 @@ class ReturnToDeckAction extends CardGameAction {
                     ['play area', 'discard', 'purged'].includes(card.location)
                 )
             ) {
-                this.effectMsg = "return {0} to their owner's deck";
+                this.effectMsg = "返还 {0} 到其所有者的牌库";
             } else if (this.target.length === 1) {
-                this.effectMsg = "return a card to their owner's deck";
+                this.effectMsg = "返还1张卡牌到其所有者的牌库";
             } else {
-                this.effectMsg = "return cards to their owner's deck";
+                this.effectMsg = "返还卡牌到其所有者的牌库";
             }
         } else {
             if (
@@ -33,19 +33,19 @@ class ReturnToDeckAction extends CardGameAction {
                 )
             ) {
                 this.effectMsg =
-                    'return {0} to the ' +
-                    (this.bottom ? 'bottom' : 'top') +
-                    " of their owner's deck";
+                    '返还 {0} 到其所有者的牌库' +
+                    (this.bottom ? '底' : '顶') +
+                    " ";
             } else if (this.target.length === 1) {
                 this.effectMsg =
-                    'return a card to the ' +
-                    (this.bottom ? 'bottom' : 'top') +
-                    " of their owner's deck";
+                    '返还1张卡牌到其所有者的牌库' +
+                    (this.bottom ? '底' : '顶') +
+                    " ";
             } else {
                 this.effectMsg =
-                    'return cards to the ' +
-                    (this.bottom ? 'bottom' : 'top') +
-                    " of their owner's deck";
+                    '返还卡牌到其所有者的牌库' +
+                    (this.bottom ? '底' : '顶') +
+                    " ";
             }
         }
     }

@@ -1,4 +1,4 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class FancyDonavon extends Card {
     // Scrap: Ready and fight with a friendly non-Brobnar creature.
@@ -14,7 +14,7 @@ class FancyDonavon extends Card {
                     ability.actions.fight()
                 ])
             },
-            effect: 'ready and fight with {1}',
+            effect: '重整并使 {1} 战斗',
             effectArgs: (context) => [context.target]
         });
     }

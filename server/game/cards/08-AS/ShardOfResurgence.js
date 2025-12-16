@@ -15,12 +15,12 @@ class ShardOfResurgence extends Card {
                         activePromptTitle: 'Choose a card to archive',
                         controller: 'self',
                         location: 'discard',
-                        message: '{0} uses {1} to archive {2}',
+                        message: '{0} 使用 {1} 归档 {2}',
                         messageArgs: (cards) => [context.player, context.source, cards]
                     }
                 })
             })),
-            effect: 'archive a card from their discard pile for each friendly shard'
+            effect: '每有1个友方碎片从弃牌堆归档1张卡牌'
         });
     }
 }

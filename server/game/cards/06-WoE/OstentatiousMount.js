@@ -1,11 +1,11 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class OstentatiousMount extends Card {
     // Play: Move this creature anywhere in its controller's battleline.
     // This creature gains taunt.
     setupCardAbilities(ability) {
         this.play({
-            effect: 'move {1} and give it taunt',
+            effect: '移动 {1} 并给予其嘲讽',
             effectArgs: (context) => context.source.parent,
             gameAction: ability.actions.moveOnBattleline((context) => ({
                 target: context.source.parent,

@@ -18,7 +18,7 @@ class MidyearFestivities extends Card {
             },
             then: (preThenContext) => ({
                 alwaysTriggers: true,
-                message: '{0} uses {1} to destroy {3}',
+                message: '{0} 使用 {1} 摧毁 {3}',
                 messageArgs: [preThenContext.target],
                 gameAction: ability.actions.destroy({
                     target: preThenContext.target

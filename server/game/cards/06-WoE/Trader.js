@@ -1,4 +1,4 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class Trader extends Card {
     //Action: Steal 1A icon. Destroy Trader.
@@ -8,7 +8,7 @@ class Trader extends Card {
                 ability.actions.steal(),
                 ability.actions.destroy()
             ]),
-            effect: 'steal 1 amber and destroy {0}'
+            effect: '窃取1琥珀并摧毁{0}'
         });
     }
 }

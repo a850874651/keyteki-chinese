@@ -15,7 +15,7 @@ class RaiseYourGlass extends Card {
                     ability.actions.use()
                 ])
             },
-            effect: 'ready and use {1}',
+            effect: 'd®›óŽg—p {1}',
             effectArgs: (context) => [context.target]
         });
     }

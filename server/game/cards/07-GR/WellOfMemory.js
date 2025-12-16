@@ -23,7 +23,7 @@ class WellOfMemory extends Card {
                         location: 'discard'
                     })
                 },
-                message: '{0} uses {1} to return {3} to their hand',
+                message: '{0} 使用 {1} 将 {3} 返回其手中',
                 messageArgs: (context) => [context.target]
             })
         });

@@ -17,7 +17,7 @@ class CurseOfDisappearances extends Card {
                     activePromptTitle: 'Choose a creature to archive',
                     cardType: 'creature',
                     controller: 'self',
-                    message: "{0} uses {1} to put {2} into {3}'s archives",
+                    message: "{0} Žg—p {1} « {2} •ú“ü {3} “IžƒˆÄ",
                     messageArgs: (card) => [
                         context.player,
                         context.source,

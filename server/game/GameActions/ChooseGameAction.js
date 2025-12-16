@@ -1,18 +1,18 @@
-const GameAction = require('./GameAction');
+﻿const GameAction = require('./GameAction');
 
 class ChooseGameAction extends GameAction {
     setDefaultProperties() {
         this.choice = null;
         this.choices = {};
         this.messages = {};
-        this.activePromptTitle = 'Select an action:';
+        this.activePromptTitle = '选择1个行动:';
 
         this.gameActions = []; // This shouldn't be set as a property
     }
 
     setup() {
         super.setup();
-        this.effectMsg = 'choose between different actions';
+        this.effectMsg = '从不同的行动间进行选择';
     }
 
     update(context) {

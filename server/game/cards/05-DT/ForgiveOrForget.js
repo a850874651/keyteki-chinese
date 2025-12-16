@@ -1,4 +1,4 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class ForgiveOrForget extends Card {
     // Play: Choose one:
@@ -22,8 +22,8 @@ class ForgiveOrForget extends Card {
             effect: '{1}{2}',
             effectArgs: (context) =>
                 context.selects.action && context.selects.action.choice === 'Archive 2 cards'
-                    ? ['archive ', this.reduceTargets(context)]
-                    : ['purge ', this.reduceTargets(context)],
+                    ? ['归档 ', this.reduceTargets(context)]
+                    : ['清除 ', this.reduceTargets(context)],
             targets: {
                 action: {
                     mode: 'select',

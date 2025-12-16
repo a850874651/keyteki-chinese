@@ -27,7 +27,7 @@ class Purify extends Card {
                 };
                 if (card && !card.gigantic) {
                     result.then = {
-                        message: '{0} uses {1} to put {3} into play',
+                        message: '{0} 使用 {1} 将 {3} 放置入场',
                         messageArgs: card,
                         gameAction: ability.actions.putIntoPlay({
                             target: card

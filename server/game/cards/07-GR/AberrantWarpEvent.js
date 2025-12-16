@@ -31,7 +31,7 @@ function playLastDiscardedCardAndDestroyNeighbors(ability) {
                     context.preThenEvents[context.preThenEvents.length - 1].card.neighbors.includes(
                         c
                     ),
-                message: '{0} uses {1} to destroy {2}',
+                message: '{0} 使用 {1} 摧毁 {2}',
                 messageArgs: (card) => [context.player, context.source, card]
             }
         }))
@@ -64,7 +64,7 @@ class AberrantWarpEvent extends Card {
                     condition: wasCreatureDiscarded,
                     trueGameAction: playLastDiscardedCardAndDestroyNeighbors(ability)
                 }),
-                message: '{0} uses {1} to {3}',
+                message: '{0} 使用 {1} 对 {3}',
                 messageArgs: (context) => putIntoPlayMessageArgs(context, context.player),
                 then: {
                     alwaysTriggers: true,
@@ -76,7 +76,7 @@ class AberrantWarpEvent extends Card {
                     then: {
                         condition: wasCreatureDiscarded,
                         gameAction: playLastDiscardedCardAndDestroyNeighbors(ability),
-                        message: '{0} uses {1} to {3}',
+                        message: '{0} 使用 {1} 对 {3}',
                         messageArgs: (context) =>
                             putIntoPlayMessageArgs(context, context.player.opponent)
                     }

@@ -18,7 +18,7 @@ class GovernessSilvina extends Card {
                 gameAction: ability.actions.placeAmber((context) => ({
                     amount: context.preThenEvent.amount,
                     promptForSelect: {
-                        message: '{0} uses {1} to place amber on {2}',
+                        message: '{0} 使用 {1} 放置1琥珀在 {2} 上',
                         messageArgs: (card) => [context.player, context.source, card],
                         cardType: 'creature',
                         controller: 'opponent',

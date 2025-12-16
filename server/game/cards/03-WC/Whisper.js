@@ -7,7 +7,7 @@ class Whisper extends Card {
         this.action({
             gameAction: ability.actions.loseAmber((context) => ({ target: context.player })),
             then: {
-                message: '{0} uses {1} to destroy {2}',
+                message: '{0} 使用 {1} 摧毁 {2}',
                 target: {
                     cardType: 'creature',
                     gameAction: ability.actions.destroy()

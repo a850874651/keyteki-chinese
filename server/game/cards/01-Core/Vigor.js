@@ -10,7 +10,7 @@ class Vigor extends Card {
             },
             then: {
                 condition: (context) => context.preThenEvent.amount === 3,
-                message: '{0} gains an additional amber due to {1} healing 3 damage',
+                message: '{0} 获得了1个额外琥珀，通过 {1} 治疗了3点伤害',
                 gameAction: ability.actions.gainAmber()
             }
         });

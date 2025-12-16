@@ -1,15 +1,15 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class IndigoHalyard extends Card {
-    // While your blue key is forged, Indigo Halyard gains, “After
-    // Reap: Ready and fight with another friendly creature.”
-    // While your opponent’s blue key is forged, each of Indigo
-    // Halyard’s neighbors gains taunt.
+    // While your blue key is forged, Indigo Halyard gains, 窶廣fter
+    // Reap: Ready and fight with another friendly creature.窶�
+    // While your opponent窶冱 blue key is forged, each of Indigo
+    // Halyard窶冱 neighbors gains taunt.
     setupCardAbilities(ability) {
         this.persistentEffect({
             match: (card, context) => card === context.source && card.controller.keys.blue,
             effect: ability.effects.gainAbility('reap', {
-                effect: 'ready and fight with {1}',
+                effect: '重整并使 {1} 战斗',
                 effectArgs: (context) => [context.target],
                 target: {
                     cardType: 'creature',

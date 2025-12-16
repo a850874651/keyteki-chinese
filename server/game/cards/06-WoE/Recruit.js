@@ -1,4 +1,4 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 const EventRegistrar = require('../../eventregistrar.js');
 
 class Recruit extends Card {
@@ -24,10 +24,10 @@ class Recruit extends Card {
                     }))
                 })
             ]),
-            effect: 'make a token creature{1}{2}',
+            effect: '制造1个代标生物{1}{2}',
             effectArgs: (context) =>
                 this.creaturesExalted[context.player.uuid] >= 1
-                    ? [' and archive ', context.source]
+                    ? [' 并归档 ', context.source]
                     : ['', '']
         });
     }

@@ -1,4 +1,4 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class Braindart extends Card {
     //Play: Enrage an enemy creature. It captures 1A from its own side.
@@ -15,7 +15,7 @@ class Braindart extends Card {
                     }))
                 ])
             },
-            effect: 'enrage {0} and make it capture 1 amber from its own side'
+            effect: '激怒 {0} 使其抢占其己方1琥珀'
         });
     }
 }

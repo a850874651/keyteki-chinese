@@ -51,6 +51,12 @@ fabric.nodeCanvas.registerFont(path.join(__dirname, './fonts/Kanit-Bold.ttf'), {
 });
 
 const buildHalfSize = async (card, imgPath, filename, language) => {
+    // 严格检查：如果没有指定语言的数据，直接跳过，不生成图片
+    if (!card.locale || !card.locale[language] || !card.locale[language].name) {
+        console.warn(`跳过卡牌 ${card.id || card.name || 'unknown'}: 没有 ${language} 语言数据`);
+        return;  // 直接返回，不处理这张卡
+    }
+
     const canvas = new fabric.StaticCanvas(null, {
         width: parameters[card.type].width,
         height: parameters[card.type].height
@@ -86,6 +92,8 @@ const buildHalfSize = async (card, imgPath, filename, language) => {
     let barCanvas;
     let Power;
     let Armor;
+    
+    // 只使用指定语言的名称，不使用 fallback
     let Name = new fabric.Text(card.locale[language].name, {
         fill: '#fdfbfa',
         fontFamily: 'TeutonFett',
@@ -93,6 +101,7 @@ const buildHalfSize = async (card, imgPath, filename, language) => {
         fontSize: 20,
         shadow: new fabric.Shadow(shadowProps)
     });
+    
     let cardType = new fabric.Text(
         card.type === 'creature1' ? 'CREATURE' : card.type.toUpperCase(),
         {

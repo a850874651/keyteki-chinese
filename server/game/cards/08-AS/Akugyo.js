@@ -1,7 +1,7 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class Akugyo extends Card {
-    // Each A that would be added to your opponent’s pool is captured
+    // Each A that would be added to your opponent窶冱 pool is captured
     // by Akugyo instead.
     // After Fight: Move 2A from Akugyo to your pool.
     setupCardAbilities(ability) {
@@ -20,12 +20,12 @@ class Akugyo extends Card {
                     amount: 0
                 }))
             ]),
-            effect: "capture amber instead of adding it to opponent's pool"
+            effect: "抢占琥珀替代了琥珀进池"
         });
 
         this.fight({
             condition: (context) => context.source.amber > 0,
-            effect: 'move {1} amber from {0} to their pool',
+            effect: '移动 {1} 琥珀从 {0} 到其琥珀池中',
             effectArgs: (context) => [context.source.amber > 1 ? 2 : context.source.amber],
             gameAction: ability.actions.removeAmber({ amount: 2 }),
             then: {

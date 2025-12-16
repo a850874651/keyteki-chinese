@@ -1,11 +1,11 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class TachyonManifold extends Card {
     // Action: Take another turn after this one. Your opponent draws
     // 10 cards. Purge Tachyon Manifold.
     setupCardAbilities(ability) {
         this.action({
-            effect: 'take another turn after this one and purge {0}',
+            effect: '本回合结束后获得额外1回合并清除 {0}',
             effectAlert: true,
             gameAction: [
                 ability.actions.untilPlayerTurnEnd({

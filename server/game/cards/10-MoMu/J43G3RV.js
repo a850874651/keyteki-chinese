@@ -1,4 +1,4 @@
-const GiganticCard = require('../../GiganticCard.js');
+﻿const GiganticCard = require('../../GiganticCard.js');
 
 class J43G3RV extends GiganticCard {
     // (Play only with the other half of J43G3R V.)
@@ -14,7 +14,7 @@ class J43G3RV extends GiganticCard {
         super.setupCardAbilities(ability);
 
         this.reap({
-            effect: 'allow them to reap with up to 2 non staralliance card this turn',
+            effect: '本回合允许使用最多2个非星盟生物进行收获',
             gameAction: ability.actions.untilPlayerTurnEnd({
                 effect: [
                     ability.effects.canReapNonHouse('staralliance'),
@@ -24,7 +24,7 @@ class J43G3RV extends GiganticCard {
         });
 
         this.fight({
-            effect: 'allow them to fight with up to 2 non staralliance card this turn',
+            effect: '本回合允许使用最多2个非星盟生物进行战斗',
             gameAction: ability.actions.untilPlayerTurnEnd({
                 effect: [
                     ability.effects.canFightNonHouse('staralliance'),

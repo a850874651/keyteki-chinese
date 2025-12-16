@@ -1,4 +1,4 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class VestedHarold extends Card {
     // Scrap: Choose a friendly creature and an enemy creature. Put
@@ -25,12 +25,12 @@ class VestedHarold extends Card {
                     })
                 }
             },
-            effect: 'archive {1}',
+            effect: '归档 {1}',
             effectArgs: (context) => [Object.values(context.targets)]
         });
     }
 }
 
-VestedHarold.id = 'vĕsted-harŏld';
+VestedHarold.id = 'vﾄ不ted-harﾅ粛d';
 
 module.exports = VestedHarold;

@@ -22,8 +22,8 @@ class TheLongCon extends Card {
             effect: '{1}',
             effectArgs: (context) => [
                 context.player.tokenCard && context.player.tokenCard.name === 'Stooge'
-                    ? 'make a token creature'
-                    : 'do nothing'
+                    ? '制造1个代标生物'
+                    : ''
             ],
             then: {
                 alwaysTriggers: true,
@@ -34,10 +34,10 @@ class TheLongCon extends Card {
                     cardCondition: (card) => card.name === 'Stooge',
                     gameAction: ability.actions.destroy()
                 },
-                message: '{0} uses {1} to destroy {3} Stooge{4}',
+                message: '{0} 使用 {1} 摧毁 {3} 个代标生物{4}',
                 messageArgs: (context) => [
                     context.target.length,
-                    context.target.length === 1 ? '' : 's'
+                    context.target.length === 1 ? '' : ''
                 ],
                 then: {
                     condition: (context) =>
@@ -48,7 +48,7 @@ class TheLongCon extends Card {
                         })),
                         ability.actions.purge()
                     ]),
-                    message: '{0} uses {1} to purge {1}'
+                    message: '{0} 使用 {1} 清除 {1}'
                 }
             }
         });

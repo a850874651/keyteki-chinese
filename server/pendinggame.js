@@ -138,7 +138,7 @@ class PendingGame {
             }
         }
 
-        this.addMessage('{0} has joined the game', user.username);
+        this.addMessage('{0} 加入了游戏', user.username);
         this.addPlayer(id, user);
 
         if (!this.isOwner(this.owner.username)) {
@@ -158,7 +158,7 @@ class PendingGame {
     watch(id, user, password) {
         if (user && user.permissions && user.permissions.canManageGames) {
             this.addSpectator(id, user);
-            this.addMessage('{0} has joined the game as a spectator', user.username);
+            this.addMessage('{0} 加入了围观', user.username);
 
             return;
         }
@@ -178,7 +178,7 @@ class PendingGame {
         }
 
         this.addSpectator(id, user);
-        this.addMessage('{0} has joined the game as a spectator', user.username);
+        this.addMessage('{0} 加入了围观', user.username);
     }
 
     leave(playerName) {
@@ -188,7 +188,7 @@ class PendingGame {
         }
 
         if (!this.started) {
-            this.addMessage('{0} has left the game', playerName);
+            this.addMessage('{0} 离开了游戏', playerName);
         }
 
         if (this.players[playerName]) {
@@ -213,7 +213,7 @@ class PendingGame {
         }
 
         if (!this.started) {
-            this.addMessage('{0} has disconnected', playerName);
+            this.addMessage('{0} 断线了', playerName);
         }
 
         if (this.players[playerName]) {

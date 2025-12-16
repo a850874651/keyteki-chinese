@@ -1,10 +1,10 @@
-const CardGameAction = require('./CardGameAction');
+﻿const CardGameAction = require('./CardGameAction');
 
 class FlipAction extends CardGameAction {
     setup() {
         this.name = 'flip';
         this.targetType = ['creature'];
-        this.effectMsg = 'flip {0}';
+        this.effectMsg = '翻转 {0}';
     }
 
     canAffect(card, context) {

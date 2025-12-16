@@ -13,7 +13,7 @@ class DumaTheReturned extends Card {
                 alwaysTriggers: true,
                 condition: (context) => context.source.controller.isHaunted(),
                 gameAction: ability.actions.archive(),
-                message: '{0} uses {1} to archive {1}'
+                message: '{0} 使用 {1} 归档 {1}'
             }
         });
     }

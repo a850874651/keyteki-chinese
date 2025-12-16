@@ -11,7 +11,7 @@ class BlastFromThePast extends Card {
             },
             then: {
                 alwaysTriggers: true,
-                message: '{0} uses {1} to archive {2}',
+                message: '{0} 使用 {1} 归档 {2}',
                 target: {
                     cardType: 'creature',
                     location: 'discard',
@@ -20,7 +20,7 @@ class BlastFromThePast extends Card {
                     gameAction: ability.actions.archive()
                 },
                 then: (context) => ({
-                    message: '{0} uses {1} to deal {3} damage to {2}',
+                    message: '{0} 使用 {1} 造成 {3} 点伤害对 {2}',
                     messageArgs: () => [context.target.power],
                     target: {
                         cardType: 'creature',

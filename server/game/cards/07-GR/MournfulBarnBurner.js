@@ -1,7 +1,7 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class MournfulBarnBurner extends Card {
-    // After Fight: Discard the top 2 cards of a player’s deck.
+    // After Fight: Discard the top 2 cards of a player窶冱 deck.
     //
     // Scrap: Each player discards the top card of their deck.
     setupCardAbilities(ability) {
@@ -14,7 +14,7 @@ class MournfulBarnBurner extends Card {
                     "Opponent's": (context) => !!context.player.opponent
                 }
             },
-            effect: "discard the top 2 cards of {1}'s deck",
+            effect: "弃掉 {1} 牌库顶的2张牌",
             effectArgs: (context) => [
                 !context.select || context.select === 'Mine'
                     ? context.player
@@ -56,7 +56,7 @@ class MournfulBarnBurner extends Card {
                     }))
                 })
             ],
-            message: "{0} uses {1} to discard the top card of each player's deck",
+            message: "{0} 使用 {1} 弃掉每位玩家牌库顶的卡牌",
             messageArgs: (context) => [context.player, context.source]
         });
     }

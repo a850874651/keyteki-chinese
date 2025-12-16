@@ -1,4 +1,4 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class CWOTucheay extends Card {
     // Play/After Reap: Fully heal and use a friendly creature.
@@ -13,7 +13,7 @@ class CWOTucheay extends Card {
                     ability.actions.use()
                 ])
             },
-            effect: 'fully heal and use {0}'
+            effect: '完全治疗并使用 {0}'
         });
     }
 }

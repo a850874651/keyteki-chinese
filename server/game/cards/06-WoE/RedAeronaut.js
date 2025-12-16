@@ -1,4 +1,4 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class RedAeronaut extends Card {
     // Play: Search your deck and discard pile for a Nautilixian and
@@ -9,7 +9,7 @@ class RedAeronaut extends Card {
     setupCardAbilities(ability) {
         this.play({
             effect:
-                'search their deck and discard for a Nautilixian and put it into play, and shuffle their deck',
+                '查找牌库和弃牌堆中的1张鹦鹉螺机甲并将其放置入场，然后混洗牌库',
             target: {
                 controller: 'self',
                 location: ['discard', 'deck'],
@@ -21,7 +21,7 @@ class RedAeronaut extends Card {
         });
 
         this.action({
-            effect: 'a friendly Nautilixian gets +5 power for the remainder of the turn',
+            effect: '1个友方鹦鹉螺机甲获得+5力量直到本回合结束',
             target: {
                 controller: 'self',
                 cardCondition: (card) => card.name === 'Nautilixian',

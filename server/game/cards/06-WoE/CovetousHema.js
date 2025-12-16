@@ -10,7 +10,7 @@ class CovetousHema extends Card {
         });
         this.play({
             gameAction: ability.actions.capture({ amount: 3 }),
-            message: '{0} uses {1} to capture {2} amber from {3}',
+            message: '{0} 使用 {1} 抢占 {2} 琥珀从 {3}',
             messageArgs: (context) => [
                 context.player,
                 context.source,

@@ -13,7 +13,7 @@ class SkipperHuko extends Card {
                         ? context.player.opponent.creaturesInPlay.filter((c) => c.isOnFlank())
                         : []
                 })),
-                message: '{0} uses {1} to exalt {3}',
+                message: '{0} 使用 {1} 褒奖 {3}',
                 messageArgs: (context) => [
                     context.player.opponent
                         ? context.player.opponent.creaturesInPlay.filter((c) => c.isOnFlank())

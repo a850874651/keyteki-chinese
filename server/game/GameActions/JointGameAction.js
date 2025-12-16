@@ -1,4 +1,4 @@
-const GameAction = require('./GameAction');
+﻿const GameAction = require('./GameAction');
 
 class JointGameAction extends GameAction {
     constructor(gameActions) {
@@ -8,7 +8,7 @@ class JointGameAction extends GameAction {
 
     setup() {
         super.setup();
-        this.effectMsg = 'do several things';
+        this.effectMsg = '做多件事';
     }
 
     update(context) {

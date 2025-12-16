@@ -12,7 +12,7 @@ class BeachDay extends Card {
                 alwaysTriggers: true,
                 condition: (context) => context.player.isTideHigh(),
                 gameAction: ability.actions.gainAmber(),
-                message: '{0} uses {1} to gain 1 amber'
+                message: '{0} 使用 {1} 获得1琥珀'
             }
         });
     }

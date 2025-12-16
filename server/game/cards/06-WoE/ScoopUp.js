@@ -1,10 +1,10 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class ScoopUp extends Card {
     // Play: Put a friendly non-Mars creature and an enemy non-Mars
     // creature into your archives. If either card leaves your
     // archives and you are not the owner of it, put it into its
-    // owner’s hand instead.
+    // owner窶冱 hand instead.
     setupCardAbilities(ability) {
         this.play({
             targets: {
@@ -31,7 +31,7 @@ class ScoopUp extends Card {
                     })
                 }
             },
-            effect: 'archive {1}',
+            effect: '归档 {1}',
             effectArgs: (context) => [Object.values(context.targets)]
         });
     }

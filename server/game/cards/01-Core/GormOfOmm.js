@@ -11,7 +11,7 @@ class GormOfOmm extends Card {
                     cardType: 'artifact',
                     gameAction: ability.actions.destroy()
                 },
-                message: '{0} uses {1} to destroy {2}'
+                message: '{0} 使用 {1} 摧毁 {2}'
             }
         });
     }

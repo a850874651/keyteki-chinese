@@ -1,4 +1,4 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class ReplayPod extends Card {
     // Each friendly Mars creature gains "Destroyed: Place this
@@ -36,7 +36,7 @@ class ReplayPod extends Card {
         });
 
         this.action({
-            effect: 'return the cards under it to hand and purge {0}',
+            effect: '将其下方的卡牌返回手中并清除 {0}',
             gameAction: [
                 ability.actions.returnToHand((context) => ({
                     location: 'under',

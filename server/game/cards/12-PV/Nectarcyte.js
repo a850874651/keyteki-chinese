@@ -6,12 +6,12 @@ class Nectarcyte extends Card {
     setupCardAbilities(ability) {
         this.fight({
             reap: true,
-            effect: 'give {0} three +1 power counters',
+            effect: '给与 {0} 3个 +1 力量指示物',
             gameAction: ability.actions.addPowerCounter({ amount: 3 }),
             then: {
                 alwaysTriggers: true,
                 target: {
-                    activePromptTitle: 'Choose a number',
+                    activePromptTitle: '选择数量',
                     mode: 'options',
                     options: (context) =>
                         [
@@ -34,7 +34,7 @@ class Nectarcyte extends Card {
                             amount: preThenContext.option.value
                         })
                     },
-                    message: '{0} uses {1} to move {3} +1 power counters to {4}',
+                    message: '{0} 使用 {1} 移动 {3} 个1力量指示物到 {4} 上',
                     messageArgs: (context) => [preThenContext.option.value, context.target]
                 })
             }

@@ -1,4 +1,4 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 function discard(deck) {
     const index = deck.findIndex((card) => card.type === 'creature');
@@ -19,7 +19,7 @@ function wasCreatureDiscarded(context) {
 class Belcher extends Card {
     // Action: Discard cards from the top of your deck until you
     // discard a creature or run out of cards. If you discarded a
-    // creature this way, deal D equal to the discarded creature’s
+    // creature this way, deal D equal to the discarded creature窶冱
     // power to an enemy creature.
     setupCardAbilities(ability) {
         this.action({
@@ -39,7 +39,7 @@ class Belcher extends Card {
                                 : 0
                     }))
                 },
-                message: '{0} uses {1} to deal {3} damage to {4}',
+                message: '{0} 使用 {1} 治疗 {3} 点伤害对 {4}',
                 messageArgs: (context) => [
                     context.preThenEvents.length > 0
                         ? context.preThenEvents[context.preThenEvents.length - 1].card.getPower()

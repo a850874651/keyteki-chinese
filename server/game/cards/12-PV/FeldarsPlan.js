@@ -5,14 +5,14 @@ class FeldarsPlan extends Card {
     setupCardAbilities(ability) {
         this.play({
             condition: (context) => !!context.player.opponent,
-            effect: 'steal an amber each time {1} plays a card during their next turn',
+            effect: ' {1} 下回合每打出1张牌，窃取1琥珀',
             effectArgs: (context) => context.player.opponent,
             effectAlert: true,
             gameAction: ability.actions.duringOpponentNextTurn({
                 when: {
                     onCardPlayed: () => true
                 },
-                message: '{0} uses {1} to steal 1 amber from {2}',
+                message: '{0} 使用 {1} 窃取1琥珀从 {2}',
                 messageArgs: (context) => [context.player.opponent, context.source, context.player],
                 gameAction: ability.actions.steal()
             })

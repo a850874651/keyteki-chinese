@@ -1,4 +1,4 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class JourneyOnward extends Card {
     // Play: Choose a friendly Skyborn creature. For the remainder of the turn, it gains "After Fight: Steal 1." Ready and fight with that creature.
@@ -18,7 +18,7 @@ class JourneyOnward extends Card {
                 ])
             },
             effect:
-                'give {0} an After Fight ability for the remainder of the turn, ready it, and fight with it'
+                '在本回合剩余时间内给与 {0} 战斗后效果, 重整它, 并使其战斗'
         });
     }
 }

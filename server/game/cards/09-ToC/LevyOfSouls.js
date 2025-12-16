@@ -10,7 +10,7 @@ class LevyOfSouls extends Card {
                 alwaysTriggers: true,
                 condition: (context) => !!context.player.opponent,
                 message:
-                    "{0} uses {1} to increase key cost +1 amber for each friendly token creature during {2}'s next turn",
+                    "{0} 使用 {1} 每拥有1个友方代标生物就增加1钥匙费用在 {2} 的下回合中",
                 messageArgs: (context) => [context.player, context.source, context.player.opponent],
                 gameAction: ability.actions.duringOpponentNextTurn({
                     targetController: 'any',

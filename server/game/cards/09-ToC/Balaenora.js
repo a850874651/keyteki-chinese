@@ -1,4 +1,4 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class Balaenora extends Card {
     // Balaenora cannot be played unless your opponent has 7A or more
@@ -28,7 +28,7 @@ class Balaenora extends Card {
                 duration: 'lastingEffect',
                 effect: ability.effects.takeControl(context.source.controller.opponent)
             })),
-            effect: 'give control of {0} to {1}',
+            effect: '把 {0} 的控制权给 {1}',
             effectArgs: (context) => [context.player.opponent]
         });
     }

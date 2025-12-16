@@ -16,7 +16,7 @@ class RemmysHorror extends Card {
                     gameAction: ability.actions.destroy()
                 }
             },
-            message: '{0} uses {1} to destroy {2}',
+            message: '{0} 使用 {1} 摧毁 {2}',
             messageArgs: (context) => [
                 context.player,
                 context.source,

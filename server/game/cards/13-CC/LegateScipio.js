@@ -1,4 +1,4 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class LegateScipio extends Card {
     // Enhance .
@@ -9,7 +9,7 @@ class LegateScipio extends Card {
             gameAction: ability.actions.exalt((context) => ({
                 target: context.game.creaturesInPlay.filter((card) => card.hasHouse('saurian'))
             })),
-            effect: 'exalt each Saurian creature'
+            effect: '褒奖每个蜥族生物'
         });
     }
 }

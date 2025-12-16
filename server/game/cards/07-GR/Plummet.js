@@ -19,7 +19,7 @@ class Plummet extends Card {
                         return cards.length || events.length;
                     })()
                 })),
-                message: '{0} uses {1} to deal {3} damage to each creature',
+                message: '{0} 使用 {1} 造成 {3} 点伤害对每个生物',
                 messageArgs: (context) => [
                     (() => {
                         const events = context.preThenEvents || [];

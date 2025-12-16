@@ -1,6 +1,7 @@
 const AbilityContext = require('../AbilityContext');
 const BaseAbility = require('../baseability.js');
 const Costs = require('../costs.js');
+const { EVENTS } = require('../Events/types');
 
 class BasePlayAction extends BaseAbility {
     constructor(card, target) {
@@ -15,7 +16,7 @@ class BasePlayAction extends BaseAbility {
     }
 
     displayMessage(context) {
-        context.game.addMessage('{0} plays {1}', context.player, context.source);
+        context.game.addMessage('{0} 打出了 {1}', context.player, context.source);
     }
 
     meetsRequirements(context = this.createContext(), ignoredRequirements = []) {
@@ -45,7 +46,7 @@ class BasePlayAction extends BaseAbility {
     }
 
     addSubEvent(event, context) {
-        let bonusEvent = context.game.getEvent('unnamedEvent', {}, () => {
+        let bonusEvent = context.game.getEvent(EVENTS.unnamedEvent, {}, () => {
             context.game.checkGameState(true);
             // update game state to consider effects
             if (context.source.hasKeyword('omega')) {
@@ -55,7 +56,7 @@ class BasePlayAction extends BaseAbility {
         });
         bonusEvent.addSubEvent(
             context.game.getEvent(
-                'onCardPlayedAfterBonusIcons',
+                EVENTS.onCardPlayedAfterBonusIcons,
                 {
                     player: context.player,
                     card: context.source
@@ -73,7 +74,7 @@ class BasePlayAction extends BaseAbility {
 
     executeHandler(context) {
         let event = context.game.getEvent(
-            'onCardPlayed',
+            EVENTS.onCardPlayed,
             {
                 player: context.player,
                 card: context.source,

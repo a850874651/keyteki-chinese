@@ -238,7 +238,7 @@ const Costs = {
             return context.player.amber >= aggregatedCost.amber;
         },
         payEvent: (context) => {
-            context.game.addMessage('{0} pays {1} to their opponent', context.player, amount);
+            context.game.addMessage('{0} 支付 {1} 给他的对手', context.player, amount);
 
             let action = context.game.actions.transferAmber({ amount: amount });
             action.name = 'pay';

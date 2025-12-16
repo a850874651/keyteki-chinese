@@ -23,7 +23,7 @@ class TrainingCosts extends Card {
                 alwaysTriggers: true,
                 condition: (context) => context.preThenEvent.amount < 2,
                 gameAction: ability.actions.returnToDeck({ shuffle: true }),
-                message: '{0} uses {1} to shuffle it back into their deck'
+                message: '{0} 使用 {1} 将其洗回牌库'
             }
         });
     }

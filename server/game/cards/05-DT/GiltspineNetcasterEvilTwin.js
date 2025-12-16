@@ -1,4 +1,4 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class GiltspineNetcasterEvilTwin extends Card {
     // Enhance (PTPT). (These icons have already been added to cards in your deck.)
@@ -14,7 +14,7 @@ class GiltspineNetcasterEvilTwin extends Card {
                     ability.actions.use()
                 ])
             },
-            effect: 'ready and use {0}'
+            effect: '重整并使用 {0}'
         });
     }
 }

@@ -1,4 +1,4 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class GreedyReprisal extends Card {
     // Play: For each A in your opponent's pool, destroy a creature.
@@ -17,7 +17,7 @@ class GreedyReprisal extends Card {
 
         this.fate({
             effect:
-                'deal 2 damage to a friendly creature for each point of armor on enemy creatures',
+                '敌方生物每有1点护甲对1个友方生物造成2点伤害',
             gameAction: ability.actions.allocateDamage((context) => ({
                 damageStep: 2,
                 numSteps: context.game.activePlayer.opponent.creaturesInPlay.reduce(

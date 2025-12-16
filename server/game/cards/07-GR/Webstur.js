@@ -1,4 +1,4 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class Webstur extends Card {
     // After Fight: For each damage on Webstur, you may discard the top card
@@ -12,7 +12,7 @@ class Webstur extends Card {
                 return this.discards < context.source.tokens.damage;
             },
             effect:
-                "choose whether to discard cards from each player's deck for each damage on {0}",
+                "每有1点伤害在{0}上，可以选择弃掉每位玩家牌库顶的1张牌 ",
             then: {
                 alwaysTriggers: true,
                 condition: (context) => this.discards < context.source.tokens.damage,

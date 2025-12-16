@@ -1,4 +1,4 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class ChonkEvermore extends Card {
     // Play: You may give two creatures a +1 power counter. Double the number of +1 power counters on each creature.
@@ -17,7 +17,7 @@ class ChonkEvermore extends Card {
                     target: context.game.creaturesInPlay.filter((card) => !!card.tokens.power),
                     multiplier: 2
                 })),
-                message: '{0} uses {1} to double the number of +1 power counters on each creature',
+                message: '{0} 使用 {1} 翻倍了每个生物上的+1力量指示物数量',
                 messageArgs: (context) => [context.player, context.source]
             }
         });

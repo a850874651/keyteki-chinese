@@ -17,7 +17,7 @@ class SacrificialAltar extends Card {
                     location: 'discard',
                     gameAction: ability.actions.playCard()
                 },
-                message: "{0} plays {1} from their discard pile due to {1}'s effect"
+                message: "{0} 打出了 {1} 从他的弃牌堆，通过 {1}的效果"
             }
         });
     }

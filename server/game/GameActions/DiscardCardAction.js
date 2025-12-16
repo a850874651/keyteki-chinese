@@ -102,7 +102,7 @@ class DiscardCardAction extends CardGameAction {
 
             if (orderedTargets.length > 0 && this.chatMessage) {
                 context.game.addMessage(
-                    '{0} uses {1} to discard {2}',
+                    '{0} 使用 {1} 来弃置 {2}',
                     context.player,
                     context.source,
                     this.target
@@ -125,7 +125,7 @@ class DiscardCardAction extends CardGameAction {
             .map((card) => this.getEvent(card, context));
         if (events.length > 0 && this.chatMessage) {
             context.game.addMessage(
-                '{0} uses {1} to discard {2}',
+                '{0} 使用 {1} 来弃置 {2}',
                 context.player,
                 context.source,
                 this.target

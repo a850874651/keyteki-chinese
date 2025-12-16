@@ -1,4 +1,4 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class BiomeDiscovery extends Card {
     // (T) Play: If the tide is high, you may look at the top 2 cards of your deck and discard 1 of them. Otherwise, raise the tide.
@@ -11,8 +11,8 @@ class BiomeDiscovery extends Card {
             effect: '{1}',
             effectArgs: (context) =>
                 !context.player.isTideHigh()
-                    ? 'raise the tide'
-                    : 'conditionally look at top 2 deck cards',
+                    ? '抬升潮位'
+                    : '查看牌库顶的2张牌',
             then: {
                 alwaysTriggers: true,
                 condition: (context) =>

@@ -1,4 +1,4 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class GrislyExchange extends Card {
     // Play: Put the top 5 cards of your opponent's discard pile on
@@ -6,7 +6,7 @@ class GrislyExchange extends Card {
     setupCardAbilities(ability) {
         this.play({
             effect:
-                "put the top 5 cards of {2}'s discard pile on the bottom of their deck, and discard the top 5 cards of {1}'s deck",
+                "将 {2}的弃牌堆顶的5张牌放到其牌库底, 并弃掉 {1}牌库顶的5张牌",
             effectArgs: (context) => [context.player, context.player.opponent],
             gameAction: [
                 ability.actions.conditional((context) => ({

@@ -1,4 +1,4 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class TokenOfAppreciation extends Card {
     // Play: Make a token creature.
@@ -8,7 +8,7 @@ class TokenOfAppreciation extends Card {
     setupCardAbilities(ability) {
         this.play({
             effect:
-                'make a token creature and forge a key for +7 current cost, minus 1 amber for each friendly token creature',
+                '制造1个代标生物并以当前钥匙费用+7锻造1把钥匙，每有1个友方代标生物减少1费用',
             gameAction: ability.actions.sequential([
                 ability.actions.makeTokenCreature(),
                 ability.actions.forgeKey((context) => ({

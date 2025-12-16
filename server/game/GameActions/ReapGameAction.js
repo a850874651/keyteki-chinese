@@ -1,10 +1,10 @@
-const CardGameAction = require('./CardGameAction');
+﻿const CardGameAction = require('./CardGameAction');
 
 class ReapGameAction extends CardGameAction {
     setup() {
         this.name = 'reap';
         this.targetType = ['creature'];
-        this.effectMsg = 'reap with {0}';
+        this.effectMsg = '用 {0} 收获了';
     }
 
     canAffect(card, context) {

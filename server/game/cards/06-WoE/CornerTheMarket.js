@@ -1,4 +1,4 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class CornerTheMarket extends Card {
     // Play: During your opponent's next turn, they cannot play cards,
@@ -8,7 +8,7 @@ class CornerTheMarket extends Card {
         this.play({
             condition: (context) => !!context.player.opponent,
             effect:
-                'stop {1} from playing cards during their next turn; after {1} discards a card, they may archive that card from their discard pile instead',
+                '下回合，{1} 无法打出卡牌， 每当 {1} 弃掉1张牌，可以归档那张牌',
             effectArgs: (context) => context.player.opponent,
             effectAlert: true,
             gameAction: [
@@ -33,7 +33,7 @@ class CornerTheMarket extends Card {
                             cards: [context.event.card],
                             choices: ['Discard'],
                             handlers: [() => {}],
-                            message: '{0} uses {1} to archive {2} from the discard pile',
+                            message: '{0} 使用 {1} 归档 {2} 从弃牌堆',
                             messageArgs: (cards) => [context.player, context.source, cards]
                         }
                     }))

@@ -14,7 +14,7 @@ class AusteralisSeaborg extends Card {
                     context.preThenEvent.destroyEvent.destroyedByDamageDealt &&
                     context.preThenEvent.destroyEvent.resolved,
                 gameAction: ability.actions.raiseTide(),
-                message: '{0} uses {1} to raise the tide'
+                message: '{0} 使用 {1} 抬潮'
             }
         });
     }

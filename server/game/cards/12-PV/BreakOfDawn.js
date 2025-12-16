@@ -14,7 +14,7 @@ class BreakOfDawn extends Card {
                         .filter((e) => !!e.card && e.card.hasHouse('untamed'))
                         .map((e) => e.card)
                 })),
-                message: '{0} uses {1} to return {3} to hand',
+                message: '{0} 使用 {1} 将 {3} 返回手中',
                 messageArgs: (context) => [
                     context.preThenEvents
                         .filter((e) => !!e.card && e.card.hasHouse('untamed'))

@@ -1,4 +1,4 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class FightToTheEnd extends Card {
     // Play: Choose a friendly creature. If you are haunted, that
@@ -16,7 +16,7 @@ class FightToTheEnd extends Card {
                     })
                 })
             },
-            effect: '{1}ready and fight with {0}',
+            effect: '{1} 重整并使用 {0} 进行战斗',
             effectArgs: (context) =>
                 context.player.isHaunted()
                     ? 'give ' + context.target.name + ' skirmish until it leaves play, then '

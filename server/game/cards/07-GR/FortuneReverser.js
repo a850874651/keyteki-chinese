@@ -1,4 +1,4 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class FortuneReverser extends Card {
     // This creature's text box is considered blank, except for traits.
@@ -13,7 +13,7 @@ class FortuneReverser extends Card {
             gameAction: ability.actions.destroy((context) => ({
                 target: context.source.parent.upgrades.filter((c) => c !== context.source)
             })),
-            effect: 'destroy each upgrade attached to {1}',
+            effect: '摧毁 {1} 上的每个升级',
             effectArgs: (context) => [context.source.parent]
         });
     }

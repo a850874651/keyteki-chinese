@@ -1,4 +1,4 @@
-const CardGameAction = require('./CardGameAction');
+﻿const CardGameAction = require('./CardGameAction');
 
 class PutIntoPlayAction extends CardGameAction {
     setDefaultProperties() {
@@ -17,7 +17,7 @@ class PutIntoPlayAction extends CardGameAction {
     setup() {
         this.name = 'putIntoPlay';
         this.targetType = ['creature', 'artifact'];
-        this.effectMsg = 'put {0} into play';
+        this.effectMsg = '把 {0} 放置入场';
     }
 
     canAffect(card, context) {

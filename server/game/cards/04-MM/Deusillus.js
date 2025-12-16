@@ -28,7 +28,7 @@ class Deusillus extends GiganticCard {
                         cardType: 'creature',
                         controller: 'opponent',
                         message:
-                            '{0} uses {1} to capture all {2} amber from {3} and deal 5 damage to {4}',
+                            '{0} 使用 {1} 抢占全部 {2} 琥珀从 {3} 并造成5点伤害对 {4}',
                         messageArgs: (card) => [
                             context.player,
                             context.source,
@@ -44,7 +44,7 @@ class Deusillus extends GiganticCard {
         this.fight({
             reap: true,
             message:
-                "{0} uses {1} to remove {2} amber from {1} and deal 2 damage to all of {3}'s creatures",
+                "{0} 使用 {1} 移除 {2} 琥珀从 {1} 并造成2点伤害对 {3} 的全部生物",
             messageArgs: (context) => [
                 context.player,
                 context.source,

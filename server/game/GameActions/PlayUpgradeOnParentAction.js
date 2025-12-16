@@ -9,7 +9,7 @@ class PlayUpgradeOnParentAction extends CardGameAction {
     setup() {
         super.setup();
         this.name = 'play';
-        this.effectMsg = 'play {0}';
+        this.effectMsg = '打出 {0}';
     }
 
     canAffect(card, context) {
@@ -69,7 +69,7 @@ class PlayUpgradeOnParentAction extends CardGameAction {
                 } else {
                     if (this.revealOnIllegalTarget) {
                         context.game.addMessage(
-                            '{0} was unable to be played so is returned to its original location',
+                            '{0} 无法被打出所以它回到了它原来的位置',
                             card
                         );
                     }

@@ -1,10 +1,10 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class GhoulKeeping extends Card {
     // Play: Ready a friendly Geistoid creature.
     setupCardAbilities(ability) {
         this.play({
-            effect: 'ready a friendly Geistoid creature.',
+            effect: '重整1个友方灵鬼生物',
             target: {
                 controller: 'self',
                 cardType: 'creature',

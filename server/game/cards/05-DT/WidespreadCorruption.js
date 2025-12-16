@@ -1,4 +1,4 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class WidespreadCorruption extends Card {
     // After a player gains A by reaping, a creature they do not control captures that A.
@@ -27,7 +27,7 @@ class WidespreadCorruption extends Card {
                     }))
                 ])
             },
-            effect: 'capture 1 amber on {1}'
+            effect: '抢占1琥珀在{1}上'
         });
     }
 }

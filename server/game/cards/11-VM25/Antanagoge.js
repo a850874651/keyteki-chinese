@@ -1,4 +1,4 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class Antanagoge extends Card {
     // Play: You may graft an enemy creature onto Antanagoge.
@@ -15,7 +15,7 @@ class Antanagoge extends Card {
         });
 
         this.reap({
-            effect: 'deal damage to each creature equal to the power of {0}',
+            effect: '对每个生物造成等同于 {0} 的力量的伤害',
             condition: (context) =>
                 context.source.childCards.filter((card) => card.location === 'grafted').length > 0,
             target: {

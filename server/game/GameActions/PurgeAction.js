@@ -1,4 +1,4 @@
-const CardGameAction = require('./CardGameAction');
+﻿const CardGameAction = require('./CardGameAction');
 
 const locationsHiddenFromPurge = ['hand', 'archives'];
 
@@ -6,7 +6,7 @@ class PurgeAction extends CardGameAction {
     setup() {
         super.setup();
         this.name = 'purge';
-        this.effectMsg = 'purge {0}';
+        this.effectMsg = '清除 {0}';
     }
 
     setDefaultProperties() {

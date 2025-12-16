@@ -1,4 +1,4 @@
-const CardGameAction = require('./CardGameAction');
+﻿const CardGameAction = require('./CardGameAction');
 
 class ReduceArmorAction extends CardGameAction {
     setDefaultProperties() {
@@ -9,7 +9,7 @@ class ReduceArmorAction extends CardGameAction {
     setup() {
         this.name = 'reduceArmor';
         this.targetType = ['creature'];
-        this.effectMsg = "reduce {0}'s armor";
+        this.effectMsg = "减少了 {0}的护甲";
     }
 
     canAffect(card, context) {

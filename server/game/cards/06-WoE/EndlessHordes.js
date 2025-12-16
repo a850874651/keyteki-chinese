@@ -50,7 +50,7 @@ class EndlessHordes extends Card {
                         })
                     }))
                 },
-                message: '{0} uses {1} to ready and fight with all tokens'
+                message: '{0} 使用 {1} 重整所有代标生物并使其战斗'
             }
         });
     }

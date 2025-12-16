@@ -12,7 +12,7 @@ class BaitAndSwitch extends Card {
                 condition: (context) =>
                     context.player.opponent && context.player.amber < context.player.opponent.amber,
                 gameAction: ability.actions.steal(),
-                message: '{0} uses {1} to steal an additional amber'
+                message: '{0} 使用 {1} 额外窃取了1琥珀'
             }
         });
     }

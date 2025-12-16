@@ -16,7 +16,7 @@ class Hyde extends Card {
                 target: context.player.discard.filter((card) => card.name === 'Velum')
             })),
             then: {
-                message: '{0} uses {1} to archive {1}',
+                message: '{0} 使用 {1} 归档 {1}',
                 gameAction: ability.actions.archive()
             }
         });

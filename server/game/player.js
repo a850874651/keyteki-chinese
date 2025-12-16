@@ -6,6 +6,7 @@ const Deck = require('./deck');
 const ClockSelector = require('./Clocks/ClockSelector');
 const PlayableLocation = require('./playablelocation');
 const PlayerPromptState = require('./playerpromptstate');
+const { EVENTS } = require('./Events/types');
 
 class Player extends GameObject {
     constructor(id, user, owner, game, clockdetails) {
@@ -185,7 +186,7 @@ class Player extends GameObject {
      * Called when one of the players decks runs out of cards, removing 5 honor and shuffling the discard pile back into the deck
      */
     deckRanOutOfCards() {
-        this.game.addMessage("{0}'s deck has run out of cards, so they shuffle", this);
+        this.game.addMessage("{0} 的牌库已经用完, 所以他混洗牌库", this);
         for (let card of this.discard) {
             this.moveCard(card, 'deck', { aboutToShuffle: true });
         }
@@ -201,7 +202,7 @@ class Player extends GameObject {
         if (this.isTopCardOfDeckVisible() && this.deck.length > 0) {
             this.addTopCardOfDeckVisibleMessage();
         }
-        this.game.raiseEvent('onDeckShuffled', {
+        this.game.raiseEvent(EVENTS.onDeckShuffled, {
             player: this,
             shuffledDiscardIntoDeck: shuffledDiscardIntoDeck
         });
@@ -321,7 +322,7 @@ class Player extends GameObject {
 
         this.game.addAlert(
             'danger',
-            '{0} manually moves {1} from their {2} to their {3}',
+            '{0} 手动移动 {1} 从他的 {2} 到他的 {3}',
             this,
             display,
             source,
@@ -535,7 +536,7 @@ class Player extends GameObject {
             return;
         } else if (card.location === 'archives' && card.controller !== card.owner) {
             this.game.addMessage(
-                `{0} leaves the archives and will be returned its owner hand`,
+                `{0} 离开了档案回到了其拥有者的手中`,
                 card
             );
 
@@ -574,7 +575,7 @@ class Player extends GameObject {
             card.image = card.id;
         }
 
-        this.game.raiseEvent('onCardPlaced', {
+        this.game.raiseEvent(EVENTS.onCardPlaced, {
             card: card,
             // Remember the card as it was originally (e.g.,
             // tokens that have left play need to be remembered as tokens).
@@ -584,7 +585,7 @@ class Player extends GameObject {
             drawn: options.drawn
         });
         if (composedPart) {
-            this.game.raiseEvent('onCardPlaced', {
+            this.game.raiseEvent(EVENTS.onCardPlaced, {
                 card: composedPart,
                 from: location,
                 to: targetLocation,
@@ -825,7 +826,7 @@ class Player extends GameObject {
                 let min = Math.max(0, modifiedCost - this.amber - totalAvailable + sourceAmber);
                 if (max === min) {
                     this.game.addMessage(
-                        `{0} uses ${max} amber from {1} to forge a key`,
+                        `{0} 使用 ${max} 琥珀从 {1} 锻造了1把钥匙`,
                         this.game.activePlayer,
                         source
                     );
@@ -852,7 +853,7 @@ class Player extends GameObject {
                         if (choice) {
                             source.removeToken('amber', choice);
                             this.game.addMessage(
-                                `{0} uses ${choice} amber from {1} to forge a key`,
+                                `{0} 使用 ${choice} 琥珀从 {1} 锻造了1把钥匙`,
                                 this.game.activePlayer,
                                 source
                             );
@@ -879,7 +880,7 @@ class Player extends GameObject {
             let min = Math.max(0, modifiedCost - this.amber - totalAvailable + 1);
             if (max === min) {
                 this.game.addMessage(
-                    `{0} spends {1} to forge a key`,
+                    `{0} 花费 {1} 锻造了1把钥匙`,
                     this.game.activePlayer,
                     source
                 );
@@ -908,7 +909,7 @@ class Player extends GameObject {
                         source.removeToken('ward', source.tokens.ward);
                         this.moveCard(source, 'discard');
                         this.game.addMessage(
-                            `{0} spends {1} to forge a key`,
+                            `{0} 花费 {1} 锻造了1把钥匙`,
                             this.game.activePlayer,
                             source
                         );
@@ -965,7 +966,7 @@ class Player extends GameObject {
         this.modifyAmber(-modifiedCost);
         this.keys[key] = true;
         this.keysForgedThisRound.push(key);
-        this.game.addMessage('{0} forges the {1}, paying {2} amber', this, `forgedkey${key}`, cost);
+        this.game.addMessage('{0} 锻造了 {1}, 花费了 {2} 琥珀', this, `forgedkey${key}`, cost);
     }
 
     unforgeKey(choices) {
@@ -980,10 +981,10 @@ class Player extends GameObject {
                     this.game.queueSimpleStep(() => {
                         if (this.keys[key.value]) {
                             this.game.addMessage(
-                                '{0} unforges {1}{2}{3}',
+                                '{0} 熔毁了 {1}{2}{3}',
                                 this.game.activePlayer,
                                 this.game.activePlayer === this ? 'their' : this,
-                                this.game.activePlayer === this ? ' ' : "'s ",
+                                this.game.activePlayer === this ? ' ' : "的",
                                 `forgedkey${key.value}`
                             );
                         }
@@ -995,10 +996,10 @@ class Player extends GameObject {
         } else if (choices.length === 1) {
             if (this.keys[choices[0].toLowerCase()]) {
                 this.game.addMessage(
-                    '{0} unforges {1}{2}{3}',
+                    '{0} 熔毁了 {1}{2}{3}',
                     this.game.activePlayer,
                     this.game.activePlayer === this ? 'their' : this,
-                    this.game.activePlayer === this ? ' ' : "'s ",
+                    this.game.activePlayer === this ? ' ' : "的 ",
                     `forgedkey${choices[0].toLowerCase()}`
                 );
             }
@@ -1035,7 +1036,7 @@ class Player extends GameObject {
 
     addTopCardOfDeckVisibleMessage() {
         this.game.addMessage(
-            '{0} uses {1} to reveal {2} on top of their deck',
+            '{0} 使用 {1} 展示了 {2} 在其的牌库顶',
             this,
             this.mostRecentEffect('topCardOfDeckVisible'),
             this.deck[0]
@@ -1197,13 +1198,19 @@ class Player extends GameObject {
         return this.prophecyCards[index - 1];
     }
 
-    // A prophecy can be activated if it is a prophecy card and not already active, and the flip side of the prophecy is not active.
+    // A prophecy can be activated if it is a prophecy card and not already active,
+    // and the flip side of the prophecy is not active. It must also be controlled
+    // by this player and it must be this player’s turn.
     canActivateProphecy(prophecyCard) {
         if (
             !prophecyCard.isProphecy() ||
             prophecyCard.activeProphecy ||
             prophecyCard.controller !== this ||
-            (this.game.propheciesActivatedThisPhase.length > 0 && !this.game.manualMode) ||
+            (!this.game.manualMode &&
+                (this.game.propheciesActivatedThisPhase.length > 0 ||
+                    // TODO(fionawhim): Also require that we’re in the main
+                    // step.
+                    this.game.activePlayer !== this)) ||
             this.hand.length === 0
         ) {
             return false;
@@ -1221,10 +1228,10 @@ class Player extends GameObject {
         }
         this.game.prophecyActivated(prophecyCard);
         prophecyCard.activeProphecy = true;
-        this.game.raiseEvent('onProphecyActivated', { prophecyCard: prophecyCard });
+        this.game.raiseEvent(EVENTS.onProphecyActivated, { prophecyCard: prophecyCard });
 
         if (showMessage) {
-            this.game.addMessage('{0} activates their prophecy {1}', this, prophecyCard);
+            this.game.addMessage('{0} 激活了他的预言 {1}', this, prophecyCard);
         }
 
         return true;
@@ -1232,7 +1239,7 @@ class Player extends GameObject {
 
     deactivateProphecy(prophecyCard) {
         prophecyCard.activeProphecy = false;
-        this.game.raiseEvent('onProphecyDeactivated', { prophecyCard: prophecyCard });
+        this.game.raiseEvent(EVENTS.onProphecyDeactivated, { prophecyCard: prophecyCard });
     }
 
     flipProphecy(context, prophecyCard) {
@@ -1251,7 +1258,7 @@ class Player extends GameObject {
         flipSide.childCards.forEach((card) => {
             card.parent = flipSide;
         });
-        this.game.raiseEvent('onProphecyFlipped', { prophecyCard: flipSide });
+        this.game.raiseEvent(EVENTS.onProphecyFlipped, { prophecyCard: flipSide });
         return true;
     }
 }

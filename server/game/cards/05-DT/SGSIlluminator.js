@@ -22,7 +22,7 @@ class SGSIlluminator extends Card {
                         context.preThenEvents.filter((event) => !event.cancelled).length,
                     gameAction: [ability.actions.stun(), ability.actions.exalt()]
                 },
-                message: '{0} uses {1} to stun and exalt {2}'
+                message: '{0} 使用 {1} 击晕并褒奖 {2}'
             }
         });
     }

@@ -23,7 +23,7 @@ class MercurialWormhole extends Card {
                 gameAction: ability.actions.changeActiveHouse((context) => ({
                     house: context.house
                 })),
-                message: '{0} uses {1} to change the active house to {3}',
+                message: '{0} 使用 {1} 改变当前势力为 {3}',
                 messageArgs: (context) => [context.house]
             }
         });

@@ -1,4 +1,4 @@
-const AllPlayerPrompt = require('./allplayerprompt');
+﻿const AllPlayerPrompt = require('./allplayerprompt');
 
 class RematchPrompt extends AllPlayerPrompt {
     constructor(game, requestingPlayer) {
@@ -40,13 +40,13 @@ class RematchPrompt extends AllPlayerPrompt {
         if (arg === 'yes') {
             this.game.addAlert(
                 'info',
-                '{0} agrees to a rematch{1}, setting it up now',
+                '{0} 同意 {1} 再次对局，正在准备',
                 player,
                 this.swap ? ' and swap decks' : ''
             );
             this.completedPlayers.add(player);
         } else {
-            this.game.addAlert('info', '{0} would not like a rematch', player);
+            this.game.addAlert('info', '{0} 不同意再次对局', player);
             this.cancelled = true;
         }
 
@@ -61,7 +61,7 @@ class RematchPrompt extends AllPlayerPrompt {
         this.game.rematch();
         this.game.addAlert(
             'danger',
-            '{0} uses /rematch to reset the game and start a rematch',
+            '{0} 以 /rematch 重置了游戏并开启再次对局',
             this.requestingPlayer
         );
     }

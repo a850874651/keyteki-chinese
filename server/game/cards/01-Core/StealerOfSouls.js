@@ -4,7 +4,7 @@ class StealerOfSouls extends Card {
     // After an enemy creature is destroyed fighting Stealer of Souls, purge that creature and gain 1<A>.
     setupCardAbilities(ability) {
         this.reaction({
-            message: '{0} uses {1} to purge {2} and gain 1 amber',
+            message: '{0} 使用 {1} 清除 {2} 并获得1琥珀',
             messageArgs: (context) => {
                 return [context.player, context.source, context.target];
             },

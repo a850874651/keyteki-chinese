@@ -1,4 +1,4 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class NeotechnicGopher extends Card {
     // Play/After Reap: Discard a card. If you have no cards in your hand, gain 1 amber.
@@ -7,15 +7,15 @@ class NeotechnicGopher extends Card {
         this.play({
             reap: true,
             target: {
-                activePromptTitle: 'Choose a card to discard',
+                activePromptTitle: '选择1张牌弃置',
                 location: 'hand',
                 controller: 'self',
                 gameAction: ability.actions.discard()
             },
-            effect: 'discard {1}{2}',
+            effect: '弃置 {1}{2}',
             effectArgs: (context) => [
-                context.target ? context.target.name : 'nothing',
-                context.player.hand.length <= 1 ? ' and gain 1 amber' : ''
+                context.target ? context.target.name : '了空气',
+                context.player.hand.length <= 1 ? ' 并获得1琥珀' : ''
             ],
             then: {
                 alwaysTriggers: true,
@@ -25,7 +25,7 @@ class NeotechnicGopher extends Card {
         });
 
         this.fate({
-            effect: 'make their opponent draw a card',
+            effect: '使对手抽1张牌',
             gameAction: ability.actions.draw((context) => ({
                 target: context.game.activePlayer.opponent
             }))

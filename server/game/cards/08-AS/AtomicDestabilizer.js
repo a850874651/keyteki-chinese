@@ -18,7 +18,7 @@ class AtomicDestabilizer extends Card {
                         target: context.source.controller,
                         amount: context.source.amber
                     })),
-                    message: '{0} uses {1} to lose {3} amber',
+                    message: '{0} 使用 {1} 失去 {3} 琥珀',
                     messageArgs: (context) => [context.source.amber]
                 }
             })

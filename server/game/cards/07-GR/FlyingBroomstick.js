@@ -1,4 +1,4 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class FlyingBroomstick extends Card {
     // This creature gains elusive, and "After Reap: Heal all damage
@@ -17,7 +17,7 @@ class FlyingBroomstick extends Card {
                             ability.actions.removeAllTokens()
                         ]
                     },
-                    effect: 'heal and remove all amber and counters from {1}',
+                    effect: '治疗并移除 {1} 上的所有的琥珀以及指示物',
                     effectArgs: (context) => [context.target]
                 })
             ]

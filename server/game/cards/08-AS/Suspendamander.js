@@ -1,4 +1,4 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class Suspendamander extends Card {
     // After Fight: Choose a house. Your opponent cannot play action
@@ -8,7 +8,7 @@ class Suspendamander extends Card {
             target: {
                 mode: 'house'
             },
-            effect: 'prevent {1} from playing actions of house {2} next turn',
+            effect: '使得 {1} 下回合无法打出 {2} 势力的行动牌',
             effectArgs: (context) => [context.player.opponent, context.house],
             effectAlert: true,
             gameAction: ability.actions.duringOpponentNextTurn((context) => ({

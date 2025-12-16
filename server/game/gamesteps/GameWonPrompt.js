@@ -37,20 +37,20 @@ class GameWonPrompt extends AllPlayerPrompt {
         let message = '';
         switch (arg) {
             case 'continue':
-                message = 'to continue';
+                message = '继续对局';
                 break;
             case 'rematch':
-                message = 'a rematch';
+                message = '再次对局';
                 break;
             case 'rematch-swap':
-                message = 'a rematch and swap decks';
+                message = '互换卡组再次对局';
                 break;
             case 'rematch-with-new-decks':
-                message = 'a rematch with new decks';
+                message = '用新的卡组再次对局';
                 break;
         }
 
-        this.game.addMessage('{0} would like {1}', player, message);
+        this.game.addMessage('{0} 希望 {1}', player, message);
 
         this.clickedButton[player.name] = true;
 

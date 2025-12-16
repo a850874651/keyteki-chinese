@@ -1,4 +1,4 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class ProfEmeritusKering extends Card {
     // Deploy.
@@ -7,7 +7,7 @@ class ProfEmeritusKering extends Card {
         this.play({
             reap: true,
             fight: true,
-            effect: 'use its neighbors',
+            effect: '使用其相邻生物',
             target: {
                 cardType: 'creature',
                 cardCondition: (card, context) => context.source.neighbors.includes(card),

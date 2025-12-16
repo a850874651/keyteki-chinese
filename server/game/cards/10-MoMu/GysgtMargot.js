@@ -18,7 +18,7 @@ class GysgtMargot extends Card {
                     controller: 'self',
                     gameAction: ability.actions.ward()
                 },
-                message: '{0} uses {1} to ward {3}',
+                message: '{0} 使用 {1} 界护 {3}',
                 messageArgs: (context) => [context.target]
             }
         });

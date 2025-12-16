@@ -26,7 +26,7 @@ class Plunder extends Card {
                     )
                 )[0]
             })),
-            message: "{0} uses {1} to reveal a random unrevealed card from {2}'s hand",
+            message: "{0} 使用 {1} 从 {2} 的手中随机展示一张未展示的卡牌",
             messageArgs: (context) => [context.player, context.source, context.player.opponent],
             then: (preThenContext) => ({
                 alwaysTriggers: true,

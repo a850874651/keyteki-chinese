@@ -13,7 +13,7 @@ class Ransack extends Card {
             effectStyle: 'append',
             then: (preThenContext) => ({
                 alwaysTriggers: true,
-                message: '{0} uses {1} to resolve its effect again',
+                message: '{0} 使用 {1} 再次结算其效果',
                 gameAction: ability.actions.resolveAbility((context) => {
                     let event = context.preThenEvents.find((event) => !!event.card);
                     return {

@@ -26,7 +26,7 @@ class IntoTheWarp extends Card {
                     }))
                 })
             ],
-            message: "{0} uses {1} to discard the top card of each player's deck",
+            message: "{0} 使用 {1} 弃掉每位玩家牌库顶的牌",
             messageArgs: (context) => [context.player, context.source],
             then: {
                 gameAction: ability.actions.destroy((context) => ({
@@ -37,7 +37,7 @@ class IntoTheWarp extends Card {
                             .some((h) => c.hasHouse(h))
                     )
                 })),
-                message: '{0} uses {1} to discard {3} and destroy {4}',
+                message: '{0} 使用 {1} 弃掉 {3} 并摧毁 {4}',
                 messageArgs: (context) => [
                     context.preThenEvents.map((e) => e.card.name),
                     context.game.creaturesInPlay.filter((c) =>

@@ -1,12 +1,12 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class BondedAuctioneer extends Card {
     // After Reap: Destroy an artifact. If you do, its controller gains 1A.
     //
-    // Scrap: Return an artifact to its owner’s hand.
+    // Scrap: Return an artifact to its owner窶冱 hand.
     setupCardAbilities(ability) {
         this.reap({
-            effect: 'destroy {0} and have {1} gain 1 amber',
+            effect: '摧毁 {0} 并使 {1} 获得1琥珀',
             effectArgs: (context) => [context.target.controller],
             target: {
                 cardType: 'artifact',

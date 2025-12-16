@@ -1,4 +1,4 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class RecruitingStation extends Card {
     // Omni: Choose a house. Discard the top card of your deck. If it
@@ -8,7 +8,7 @@ class RecruitingStation extends Card {
             target: {
                 mode: 'house'
             },
-            effect: 'choose {1} and discard {2}',
+            effect: '选择 {1} 并弃掉 {2}',
             effectArgs: (context) => [context.house, context.player.deck[0]],
             gameAction: ability.actions.discard((context) => ({
                 target: context.player.deck.length ? context.player.deck[0] : []

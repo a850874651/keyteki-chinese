@@ -1,4 +1,4 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class ImmortalGreking extends Card {
     // Play: Take control of an enemy creature and place it anywhere
@@ -31,7 +31,7 @@ class ImmortalGreking extends Card {
                 ])
             },
             effect:
-                'take control of {1} and place it anywhere in their battleline, making it belong to {2} until {3} leaves play',
+                '获得 {1} 的控制权并将其放到其战线的任意位置, 使其属于 {2} 势力直到 {3} 离场',
             effectArgs: (context) => [context.target, context.source.printedHouse, context.source]
         });
 

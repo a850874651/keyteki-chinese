@@ -1,8 +1,8 @@
-const GiganticCard = require('../../GiganticCard.js');
+﻿const GiganticCard = require('../../GiganticCard.js');
 
 class SirsColossus extends GiganticCard {
     // (Play only with the other half of Sirs Colossus.)
-    // Play: Capture all your opponent’s A, distributed
+    // Play: Capture all your opponent窶冱 A, distributed
     // among any number of friendly creatures.
     // After Fight: Move all A from a friendly creature to the common supply.
     constructor(owner, cardData) {
@@ -13,7 +13,7 @@ class SirsColossus extends GiganticCard {
         super.setupCardAbilities(ability);
 
         this.play({
-            effect: "capture all of {1}'s amber onto friendly creatures",
+            effect: "抢占 {1}的全部琥珀到友方生物上",
             effectArgs: (context) => [context.player.opponent],
             gameAction: ability.actions.sequentialForEach((context) => ({
                 num: context.player.opponent ? context.player.opponent.amber : 0,

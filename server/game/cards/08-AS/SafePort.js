@@ -18,7 +18,7 @@ class SafePort extends Card {
                 condition: (context) =>
                     context.player.opponent && context.player.opponent.keys.yellow,
                 gameAction: ability.actions.steal(),
-                message: '{0} uses {1} to steal 1 amber from {3}',
+                message: '{0} Žg—p {1} ÞŽæ1àæàß˜¸ {3}',
                 messageArgs: (context) => [context.player.opponent]
             }
         });

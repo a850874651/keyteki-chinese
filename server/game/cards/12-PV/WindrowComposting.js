@@ -1,4 +1,4 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class WindrowComposting extends Card {
     // Play: Shuffle a card from your discard pile into your deck.
@@ -13,7 +13,7 @@ class WindrowComposting extends Card {
         });
 
         this.fate({
-            effect: 'have each player shuffle their discard pile into their deck',
+            effect: '每位玩家将其弃牌堆洗入牌库',
             gameAction: [
                 ability.actions.returnToDeck((context) => ({
                     shuffle: true,

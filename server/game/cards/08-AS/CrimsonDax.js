@@ -1,4 +1,4 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class CrimsonDax extends Card {
     // After Reap: You may reveal a non-Mars card from your hand. If you do, purge it and give a Mars creature three +1 power counters.
@@ -18,7 +18,7 @@ class CrimsonDax extends Card {
                     cardType: 'creature',
                     gameAction: ability.actions.addPowerCounter({ amount: 3 })
                 },
-                effect: 'give {0} three +1 power counters'
+                effect: '给与 {0} 3个+1力量指示物'
             }
         });
     }

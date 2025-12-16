@@ -13,7 +13,7 @@ class XypTheImplanter extends Card {
                     effect: ability.effects.takeControl(context.player)
                 }))
             },
-            effect: 'take control of {1}',
+            effect: '获得 {1} 的控制权',
             effectArgs: (context) => [context.target ? context.target : 'nothing'],
             then: {
                 alwaysTriggers: true,
@@ -22,7 +22,7 @@ class XypTheImplanter extends Card {
                     controller: 'self',
                     gameAction: ability.actions.destroy()
                 },
-                message: '{0} uses {1} to destroy {3}',
+                message: '{0} 使用 {1} 摧毁 {3}',
                 messageArgs: (context) => [context.target]
             }
         });

@@ -1,10 +1,10 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class Redhawk extends Card {
     // Action: Each player gains 1A. Make a token creature.
     setupCardAbilities(ability) {
         this.action({
-            effect: 'make each player gain 1 amber and make a token creature',
+            effect: '使每位玩家获得1琥珀并制造1个代标生物',
             gameAction: [
                 ability.actions.gainAmber(),
                 ability.actions.gainAmber((context) => ({

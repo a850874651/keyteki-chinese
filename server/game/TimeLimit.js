@@ -1,4 +1,4 @@
-const moment = require('moment');
+﻿const moment = require('moment');
 
 class TimeLimit {
     constructor(game) {
@@ -36,7 +36,7 @@ class TimeLimit {
             if (differenceBetweenStartOfTimerAndNow.asSeconds() / 60 >= this.timeLimitInMinutes) {
                 this.game.addAlert(
                     'warning',
-                    'Time up.  The game will end after the current round has finished'
+                    '时间到.  游戏将在当前回合结束时结束'
                 );
                 this.isTimeLimitReached = true;
                 this.timeLimitStarted = false;

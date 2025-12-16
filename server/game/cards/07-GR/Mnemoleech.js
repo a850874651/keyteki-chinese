@@ -10,7 +10,7 @@ class Mnemoleech extends Card {
                 trueGameAction: ability.actions.steal({ amount: 2 }),
                 falseGameAction: ability.actions.steal({ amount: 1 })
             }),
-            message: '{0} uses {1} to steal {2} amber',
+            message: '{0} 使用 {1} 窃取 {2} 琥珀',
             messageArgs: (context) => [
                 context.player,
                 context.source,

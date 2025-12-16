@@ -1,11 +1,11 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class Badgemagus extends Card {
     // Deploy. (This creature can enter play anywhere in your battleline.)
     // Fight: Ready and fight with each of Badgemagus's neighbors, one at a time.
     setupCardAbilities(ability) {
         this.fight({
-            effect: 'ready and fight with each of its neighbors one at a time',
+            effect: '重整并使其相邻生物逐一战斗',
             target: {
                 cardType: 'creature',
                 cardCondition: (card, context) => context.source.neighbors.includes(card),

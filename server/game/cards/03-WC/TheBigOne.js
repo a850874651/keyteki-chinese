@@ -13,7 +13,7 @@ class TheBigOne extends Card {
             then: {
                 condition: (context) =>
                     context.source.hasToken('fuse') && context.source.tokens.fuse >= 10,
-                message: '{1} has 10 fuse counters and destroys all creatures and artifacts',
+                message: '{1} 有10个爆炸指示物，摧毁所有生物和神器',
                 messageArgs: (context) => [context.source],
                 gameAction: ability.actions.destroy((context) => ({
                     target: context.game.cardsInPlay.filter(

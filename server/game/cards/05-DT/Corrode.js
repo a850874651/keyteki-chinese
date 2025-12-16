@@ -1,4 +1,4 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class Corrode extends Card {
     // Play: Choose one:
@@ -26,7 +26,7 @@ class Corrode extends Card {
                         (c.type === 'creature' && c.armor > 0)
                     );
                 }),
-            effect: 'destroy {1}',
+            effect: '摧毁 {1}',
             effectArgs: (context) => [this.reduceTargets(context)],
             targets: {
                 action: {

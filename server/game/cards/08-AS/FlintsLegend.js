@@ -1,11 +1,11 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class FlintsLegend extends Card {
     // Play: Move 1A from your opponent's pool to Treasure Island.
     setupCardAbilities(ability) {
         this.play({
             condition: (context) => context.player.opponent && context.player.opponent.amber > 0,
-            effect: 'move one amber from their pool to Treasure Island',
+            effect: '从其琥珀池中移动1琥珀到金银岛',
             target: {
                 cardType: 'artifact',
                 controller: 'any',

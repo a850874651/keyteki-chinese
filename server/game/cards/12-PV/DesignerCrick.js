@@ -9,7 +9,7 @@ class DesignerCrick extends Card {
                     event.location === 'hand' && event.card.controller !== context.source.controller
             },
             gameAction: [ability.actions.draw(), ability.actions.capture()],
-            message: '{0} uses {1} to draw a card and capture 1 amber',
+            message: '{0} 使用 {1} 抽1张牌并抢占1琥珀',
             messageArgs: (context) => [context.player, context.source]
         });
     }

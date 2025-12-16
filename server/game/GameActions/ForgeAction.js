@@ -1,4 +1,4 @@
-const PlayerAction = require('./PlayerAction');
+﻿const PlayerAction = require('./PlayerAction');
 
 class ForgeAction extends PlayerAction {
     setDefaultProperties() {
@@ -10,9 +10,9 @@ class ForgeAction extends PlayerAction {
         super.setup();
         this.name = 'forgeKey';
         if (this.keyColor !== '') {
-            this.effectMsg = 'forge the ' + this.keyColor + ' key';
+            this.effectMsg = '锻造了 ' + this.keyColor + ' 钥匙';
         } else {
-            this.effectMsg = 'forge a key';
+            this.effectMsg = '锻造了1把钥匙';
         }
         this.effectArgs = this.modifier;
     }

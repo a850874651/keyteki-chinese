@@ -38,7 +38,7 @@ class RiggedLottery extends Card {
                         : [];
                 return {
                     message:
-                        "{0} discards {3} from {4}'s deck, and {4} gains {5} amber. They also discard {6} from {7}'s deck and {7} gains {8} amber",
+                        "{0} 弃掉了 {3} 从 {4}的牌库, 并且 {4} 获得了 {5} 琥珀. 他还弃掉了 {6} 从 {7}的牌库，并且 {7} 获得了 {8} 琥珀",
                     messageArgs: [
                         myCards,
                         preThenContext.player,

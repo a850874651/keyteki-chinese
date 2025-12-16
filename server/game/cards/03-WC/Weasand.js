@@ -16,7 +16,7 @@ class Weasand extends Card {
         this.persistentEffect({
             effect: ability.effects.terminalCondition({
                 condition: (context) => context.source.isOnFlank(),
-                message: '{0} is destroyed because it is on a flank',
+                message: '{0} 因为其在侧翼而被摧毁',
                 gameAction: ability.actions.destroy()
             })
         });

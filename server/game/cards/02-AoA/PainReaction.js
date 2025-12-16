@@ -18,7 +18,7 @@ class PainReaction extends Card {
                     amount: 2,
                     target: context.preThenEvent.clone.neighbors
                 })),
-                message: '{0} uses {1} to deal extra 2 damage to {3}',
+                message: '{0} 使用 {1} 造成了额外2点伤害对 {3}',
                 messageArgs: (context) => [context.preThenEvent.clone.neighbors]
             }
         });

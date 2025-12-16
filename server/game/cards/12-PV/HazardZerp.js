@@ -1,4 +1,4 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class HazardZerp extends Card {
     // Play: Deal 3 damage to a creature. If that creature is destroyed, draw a card.
@@ -19,7 +19,7 @@ class HazardZerp extends Card {
         });
 
         this.scrap({
-            effect: 'discard {1} and deal 3 damage to {2}',
+            effect: '弃置 {1} 并造成3点伤害对 {2}',
             effectArgs: (context) => [
                 context.targets.discard ? context.targets.discard : 'nothing',
                 context.targets.damage ? context.targets.damage : 'nothing'

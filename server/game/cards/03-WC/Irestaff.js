@@ -7,7 +7,7 @@ class Irestaff extends Card {
             target: {
                 cardType: 'creature'
             },
-            message: '{0} uses {1} to enrage and add a +1 power counter to {2}',
+            message: '{0} 使用 {1} 激怒并增加1个1力量指示物给 {2}',
             messageArgs: (context) => [context.player, context.source, context.target],
             gameAction: [
                 ability.actions.enrage((context) => ({ target: context.target })),

@@ -1,11 +1,11 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class LoyaltyImplants extends Card {
     // Omni: Destroy Loyalty Implants. You may use friendly Mars
     // creatures this turn.
     setupCardAbilities(ability) {
         this.omni({
-            effect: 'destroy {0} and use friendly Mars creatures this turn',
+            effect: '摧毁 {0} 使得本回合可以使用友方火星生物',
             gameAction: [
                 ability.actions.destroy(),
                 ability.actions.untilPlayerTurnEnd({

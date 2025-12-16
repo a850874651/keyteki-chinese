@@ -1,4 +1,4 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class Touchstone extends Card {
     // After Reap: If you are haunted, draw 2 cards. Otherwise, discard the
@@ -15,7 +15,7 @@ class Touchstone extends Card {
             }),
             effect: '{1}',
             effectArgs: (context) => [
-                context.player.isHaunted() ? 'draw 2 cards' : 'discard 2 cards from their deck'
+                context.player.isHaunted() ? '抽2张牌' : '弃掉牌库顶的2张牌'
             ]
         });
     }

@@ -17,7 +17,7 @@ class SuckerPunch extends Card {
                     context.preThenEvent.destroyEvent.destroyedByDamageDealt &&
                     context.preThenEvent.destroyEvent.resolved,
                 gameAction: ability.actions.archive(),
-                message: '{0} uses {1} to archive a card'
+                message: '{0} 使用 {1} 归档1张卡牌'
             }
         });
     }

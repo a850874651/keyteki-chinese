@@ -1,4 +1,4 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class EnlistNumeri extends Card {
     // Play: Take control of an enemy creature with A on it. While under your control, it belongs to house Saurian. (Instead of its original house.)
@@ -14,7 +14,7 @@ class EnlistNumeri extends Card {
                         effect: ability.effects.takeControl(context.player)
                     }))
                 ],
-                effect: 'take control of {0}'
+                effect: '获得 {0}的控制权'
             },
             then: (context) => ({
                 gameAction: ability.actions.cardLastingEffect({

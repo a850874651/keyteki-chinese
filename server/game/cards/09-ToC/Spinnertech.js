@@ -14,7 +14,7 @@ class Spinnertech extends Card {
             then: {
                 alwaysTriggers: true,
                 gameAction: ability.actions.makeTokenCreature(),
-                message: '{0} uses {1} to make a token creature'
+                message: '{0} 使用 {1} 制造1个代标生物'
             }
         });
         this.destroyed({
@@ -26,7 +26,7 @@ class Spinnertech extends Card {
             then: {
                 alwaysTriggers: true,
                 gameAction: ability.actions.makeTokenCreature(),
-                message: '{0} uses {1} to make a token creature'
+                message: '{0} 使用 {1} 制造1个代标生物'
             }
         });
     }

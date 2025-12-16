@@ -1,4 +1,4 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class LambentMycelium extends Card {
     // After another creature enters play, put two +1 power counters on Lambent Mycelium.
@@ -22,7 +22,7 @@ class LambentMycelium extends Card {
                     effect: ability.effects.addKeyword({ taunt: 1 })
                 })
             },
-            effect: 'give {1} taunt for the remainder of the turn',
+            effect: '给与 {1} 嘲讽效果直到本回合结束',
             effectArgs: (context) => [context.target]
         });
     }

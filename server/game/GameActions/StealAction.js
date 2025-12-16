@@ -1,4 +1,4 @@
-const PlayerAction = require('./PlayerAction');
+﻿const PlayerAction = require('./PlayerAction');
 
 class StealAction extends PlayerAction {
     setDefaultProperties() {
@@ -8,7 +8,7 @@ class StealAction extends PlayerAction {
     setup() {
         super.setup();
         this.name = 'steal';
-        this.effectMsg = 'steal ' + this.amount + ' amber from {0}';
+        this.effectMsg = '窃取 ' + this.amount + ' 个琥珀从{0}';
     }
 
     canAffect(player, context) {

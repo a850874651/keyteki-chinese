@@ -1,4 +1,4 @@
-const GameAction = require('./GameAction');
+﻿const GameAction = require('./GameAction');
 const Effects = require('../effects.js');
 
 class LastingEffectAction extends GameAction {
@@ -28,7 +28,7 @@ class LastingEffectAction extends GameAction {
     setup() {
         super.setup();
         this.name = 'applyLastingEffect';
-        this.effectMsg = 'apply a lasting effect';
+        this.effectMsg = '生效一个持续效果';
     }
 
     hasLegalTarget(context) {

@@ -14,7 +14,7 @@ class RedSkies extends Card {
                     ability.actions.ready()
                 ])
             },
-            effect: 'move {1} to a flank and ready it',
+            effect: '移动 {1} 到侧翼并重整它',
             effectArgs: (context) => [context.target],
             then: {
                 condition: (context) =>
@@ -31,7 +31,7 @@ class RedSkies extends Card {
                     ])
                 },
                 message:
-                    '{0} uses {1} to repeat the preceding effect and move {3} to a flank and ready it',
+                    '{0} 使用 {1} 重复之前的效果将 {3} 移至侧翼并重整它',
                 messageArgs: (context) => [context.target]
             }
         });

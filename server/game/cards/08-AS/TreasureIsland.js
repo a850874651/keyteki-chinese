@@ -18,7 +18,7 @@ class TreasureIsland extends Card {
                 gameAction: ability.actions.loseAmber((context) => ({
                     target: context.player
                 })),
-                effect: 'move 1 amber from their pool to {1}',
+                effect: '移动 1 琥珀从其琥珀池中到 {1}',
                 effectArgs: () => [this],
                 then: {
                     gameAction: ability.actions.placeAmber({

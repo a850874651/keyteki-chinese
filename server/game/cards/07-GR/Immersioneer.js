@@ -1,4 +1,4 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class Immersioneer extends Card {
     // After Reap: Discard the top 3 cards of any player's deck.
@@ -14,7 +14,7 @@ class Immersioneer extends Card {
                     "Opponent's": (context) => !!context.player.opponent
                 }
             },
-            effect: "discard the top 3 cards of {1}'s deck",
+            effect: "弃掉 {1} 牌库顶的3张牌",
             effectArgs: (context) => [
                 !context.select || context.select === 'Mine'
                     ? context.player

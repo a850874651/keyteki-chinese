@@ -1,4 +1,4 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class RevoHooligans extends Card {
     // After Reap: Put a paint counter on an artifact. While that
@@ -6,7 +6,7 @@ class RevoHooligans extends Card {
     // of its other houses).
     setupCardAbilities(ability) {
         this.reap({
-            effect: 'put a paint counter on {0}, making it belong to house Mars',
+            effect: '将1个涂料指示物放到{0}上, 使其属于火星势力',
             target: {
                 cardType: 'artifact',
                 gameAction: [

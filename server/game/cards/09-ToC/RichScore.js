@@ -1,4 +1,4 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class RichScore extends Card {
     // Play: Make a token creature. Steal A equal to half the number
@@ -13,7 +13,7 @@ class RichScore extends Card {
                     )
                 }))
             ]),
-            effect: 'make a token creature and steal {1} amber',
+            effect: '制造1个代标生物并窃取 {1} 琥珀',
             effectArgs: (context) => [
                 Math.ceil(
                     (context.player.creaturesInPlay.filter((c) => c.isToken()).length +

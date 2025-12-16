@@ -13,7 +13,7 @@ class Sleight extends Card {
 
         this.fate({
             effect:
-                "for each enemy Shadows creature, shuffle a friendly creature into its owner's deck",
+                "每有1个敌方暗影生物，将1个友方生物洗回其所有者的牌库",
             gameAction: ability.actions.sequentialForEach((context) => ({
                 num: context.game.activePlayer.opponent.creaturesInPlay.filter((card) =>
                     card.hasHouse('shadows')
@@ -24,7 +24,7 @@ class Sleight extends Card {
                             "Choose a friendly creature to shuffle into its owner's deck",
                         cardType: 'creature',
                         controller: 'opponent',
-                        message: '{0} uses {1} to shuffle {2} into their deck',
+                        message: '{0} 使用 {1} 将 {2} 洗入其牌库',
                         messageArgs: (cards) => [context.source, context.player, cards]
                     },
                     shuffle: true

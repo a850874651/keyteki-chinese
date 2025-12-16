@@ -1,4 +1,4 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class CorporalBridger extends Card {
     // Play/After Fight/After Reap: You may use a non-Star Alliance
@@ -7,7 +7,7 @@ class CorporalBridger extends Card {
         this.play({
             fight: true,
             reap: true,
-            effect: 'allow them to use one non staralliance creature this turn',
+            effect: '本回合允许其使用1个非星盟生物',
             gameAction: ability.actions.untilPlayerTurnEnd({
                 effect: ability.effects.canUseNonHouseCreature('staralliance')
             })

@@ -35,7 +35,7 @@ class ChainBiddingPrompt extends AllPlayerPrompt {
                 argType: 'link',
                 label: deck.deckName
             };
-            this.game.addMessage('{0} passes.', player, arg);
+            this.game.addMessage('{0} ：过.', player, arg);
             const otherPlayer = this.game.getOtherPlayer(player);
 
             if (this.bidDeck.owner !== otherPlayer.name) {
@@ -43,7 +43,7 @@ class ChainBiddingPrompt extends AllPlayerPrompt {
             }
 
             this.game.addMessage(
-                '{0} has won the bid with {1} chains and will play {2}',
+                '{0} 赢得了竞标，以 {1} 枷锁来打 {2}',
                 otherPlayer.name,
                 this.adaptive.chains,
                 link
@@ -53,7 +53,7 @@ class ChainBiddingPrompt extends AllPlayerPrompt {
             this.game.adaptive.biddingWinner = otherPlayer.name;
             this.clickedButton[player.name] = true;
         } else {
-            this.game.addMessage('{0} bids {1} chains', player, arg);
+            this.game.addMessage('{0} 竞拍了 {1} 枷锁', player, arg);
             this.adaptive.chains = +arg;
             this.clickedButton = { [player.name]: true };
         }

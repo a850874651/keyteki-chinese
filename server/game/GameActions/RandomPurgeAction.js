@@ -1,4 +1,4 @@
-const PlayerAction = require('./PlayerAction');
+﻿const PlayerAction = require('./PlayerAction');
 const _ = require('underscore');
 
 class RandomPurgeAction extends PlayerAction {
@@ -12,9 +12,9 @@ class RandomPurgeAction extends PlayerAction {
         super.setup();
         this.name = 'purge';
         this.effectMsg =
-            'purge ' +
-            (this.amount === 1 ? 'a card' : `${this.amount} cards`) +
-            ` at random from {0}'s ${this.location}`;
+            '随机清除了 ' +
+            (this.amount === 1 ? '1张卡牌' : `${this.amount} 张卡牌`) +
+            ` 从 {0}的 ${this.location}`;
     }
 
     canAffect(player, context) {
@@ -31,10 +31,10 @@ class RandomPurgeAction extends PlayerAction {
             }
 
             if (cards.length > 0) {
-                context.game.addMessage('{0} purges {1} at random', player, cards);
+                context.game.addMessage('{0} 随机清除了 {1}', player, cards);
                 context.game.actions.purge().resolve(cards, context);
             } else {
-                context.game.addMessage('{0} purges no cards', player);
+                context.game.addMessage('{0} 未清除卡牌', player);
             }
         });
     }

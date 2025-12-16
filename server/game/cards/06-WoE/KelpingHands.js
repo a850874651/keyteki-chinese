@@ -1,4 +1,4 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class KelpingHands extends Card {
     //Omni: Destroy Kelping Hands. For the remainder of the turn, each friendly creature gains poison.
@@ -16,7 +16,7 @@ class KelpingHands extends Card {
                 })
             ]),
             effect:
-                'destroy {0}. For the remainder of the turn, each friendly creature gains poison',
+                '摧毁 {0}. 在本回合的剩余时间内，每个友方生物具有剧毒',
             effectAlert: true
         });
     }

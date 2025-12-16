@@ -10,7 +10,7 @@ class PrescriptiveGrammarbot extends Card {
                 numCards: 1,
                 cardType: 'creature'
             },
-            message: '{0} uses {1} to enrage {2}',
+            message: '{0} 使用 {1} 激怒 {2}',
             messageArgs: (context) => [context.player, context.source, context.target],
             gameAction: [ability.actions.enrage((context) => ({ target: context.target }))]
         });

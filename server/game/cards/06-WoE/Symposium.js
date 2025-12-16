@@ -1,4 +1,4 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class Symposium extends Card {
     // Play: Exalt, ready, and use a friendly creature. If it is a
@@ -21,7 +21,7 @@ class Symposium extends Card {
                     ability.actions.use()
                 ])
             },
-            effect: 'exalt, ready, and use {0}',
+            effect: '褒奖、重整、并使用 {0}',
             then: (preThenContext) => ({
                 condition: () => preThenContext.event?.targetClone?.isToken(),
                 target: {
@@ -35,7 +35,7 @@ class Symposium extends Card {
                         ability.actions.use()
                     ])
                 },
-                message: '{0} uses {1} to exalt, ready, and use {2}'
+                message: '{0} 使用 {1} 褒奖、重整、并使用 {2}'
             })
         });
     }

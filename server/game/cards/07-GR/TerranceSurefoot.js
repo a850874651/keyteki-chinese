@@ -1,4 +1,4 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class TerranceSurefoot extends Card {
     // After an enemy creature reaps, move 1A from Terrance Surefoot
@@ -11,7 +11,7 @@ class TerranceSurefoot extends Card {
                     event.card.type === 'creature' &&
                     event.card.controller !== context.source.controller
             },
-            effect: 'move 1 amber from {0} to the pool',
+            effect: '移动 1 琥珀从 {0} 到公共供应堆',
             gameAction: ability.actions.removeAmber({
                 amount: 1
             })

@@ -6,7 +6,7 @@ class ContractExecution extends Card {
     setupCardAbilities(ability) {
         this.play({
             effect:
-                'deal 2 damage to a creature after playing a creature for the remainder of the turn',
+                '在本回合的剩余时间内每打出1张生物，对1个生物造成2点伤害',
             gameAction: ability.actions.untilPlayerTurnEnd((context) => ({
                 when: {
                     onCardPlayed: (event) =>
@@ -19,7 +19,7 @@ class ContractExecution extends Card {
                     promptForSelect: {
                         cardType: 'creature',
                         controller: 'any',
-                        message: '{0} uses {1} to deal 2 damage to {2}',
+                        message: '{0} 使用 {1} 造成2点伤害对 {2}',
                         messageArgs: (card) => [context.player, context.source, card]
                     },
                     amount: 2

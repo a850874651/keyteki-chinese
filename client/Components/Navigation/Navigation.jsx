@@ -194,7 +194,6 @@ const Navigation = (props) => {
                     )}
                     {renderMenuItems(RightMenu)}
                     <ProfileDropdown menu={ProfileMenu} user={props.user} />
-                    <LanguageSelector />
                 </Nav>
             </Navbar.Collapse>
         </Navbar>

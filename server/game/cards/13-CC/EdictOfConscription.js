@@ -1,4 +1,4 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class EdictOfConscription extends Card {
     // Action: Destroy Edict of Conscription. For the remainder of the turn, each friendly creature belongs to house Saurian.
@@ -14,7 +14,7 @@ class EdictOfConscription extends Card {
                     target: context.player.creaturesInPlay
                 })),
                 effect:
-                    'make each friendly creature belong to house Saurian for the remainder of the turn'
+                    '在本回合剩余时间内，使每个友方生物都属于蜥族势力'
             }
         });
     }

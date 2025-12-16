@@ -1,10 +1,10 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class Infighting extends Card {
     // Play: Each creature deals damage equal to its power to its right neighbor.
     setupCardAbilities(ability) {
         this.play({
-            effect: 'make each creature deal damage to its right neighbor equal to its power',
+            effect: '每个生物对其右侧的相邻生物造成等同于其力量值的伤害',
             then: (context) => {
                 let actions = context.player.creaturesInPlay.slice(1).map((creature) =>
                     ability.actions.dealDamage({

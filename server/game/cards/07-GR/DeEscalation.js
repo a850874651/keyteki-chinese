@@ -1,16 +1,16 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class DeEscalation extends Card {
     // Play: Destroy each creature. Your opponent archives the top 3
     // cards of their deck.
     setupCardAbilities(ability) {
         this.play({
-            effect: 'destroy all creatures{1}',
+            effect: '摧毁所有生物{1}',
             effectArgs: (context) => [
                 context.player.opponent
-                    ? ' and have ' +
+                    ? ' 并使得 ' +
                       context.player.opponent.name +
-                      ' archive the top 3 cards of their deck'
+                      ' 归档其牌库顶的3张牌'
                     : ''
             ],
             gameAction: ability.actions.sequential([

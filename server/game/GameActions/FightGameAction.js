@@ -1,4 +1,4 @@
-const CardGameAction = require('./CardGameAction');
+﻿const CardGameAction = require('./CardGameAction');
 
 class FightGameAction extends CardGameAction {
     setDefaultProperties() {
@@ -10,7 +10,7 @@ class FightGameAction extends CardGameAction {
     setup() {
         this.name = 'fight';
         this.targetType = ['creature'];
-        this.effectMsg = 'fight with {0}';
+        this.effectMsg = '使 {0} 战斗';
     }
 
     canAffect(card, context) {

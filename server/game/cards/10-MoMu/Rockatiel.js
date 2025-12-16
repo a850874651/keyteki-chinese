@@ -1,8 +1,8 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class Rockatiel extends Card {
     // Play/After Reap: Choose up to 2 creatures. Shuffle each chosen
-    // creature into its owner’s deck.
+    // creature into its owner窶冱 deck.
     setupCardAbilities(ability) {
         this.play({
             reap: true,
@@ -13,7 +13,7 @@ class Rockatiel extends Card {
                 controller: 'any',
                 gameAction: ability.actions.returnToDeck({ shuffle: true })
             },
-            effect: "shuffle {1} into their owner's deck",
+            effect: "将 {1} 洗回其所有者的牌库",
             effectArgs: (context) => [context.target]
         });
     }

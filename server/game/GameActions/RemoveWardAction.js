@@ -1,10 +1,10 @@
-const CardGameAction = require('./CardGameAction');
+﻿const CardGameAction = require('./CardGameAction');
 
 class RemoveWardAction extends CardGameAction {
     setup() {
         this.name = 'removeWard';
         this.targetType = ['creature'];
-        this.effectMsg = 'remove the ward from {0}';
+        this.effectMsg = '移除界护从 {0}';
     }
 
     canAffect(card, context) {

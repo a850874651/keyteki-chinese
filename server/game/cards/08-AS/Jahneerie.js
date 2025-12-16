@@ -1,4 +1,4 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class Jahneerie extends Card {
     // Each friendly creature with A on it gains, “After Reap: Move 1A
@@ -7,7 +7,7 @@ class Jahneerie extends Card {
         this.persistentEffect({
             match: (card) => card.type === 'creature' && card.amber > 0,
             effect: ability.effects.gainAbility('reap', {
-                effect: 'move 1 amber from {0} to their pool',
+                effect: '移动1琥珀从 {0} 到其琥珀池',
                 gameAction: ability.actions.removeAmber(),
                 then: {
                     gameAction: ability.actions.gainAmber()

@@ -1,4 +1,4 @@
-const BaseStepWithPipeline = require('./basestepwithpipeline.js');
+﻿const BaseStepWithPipeline = require('./basestepwithpipeline.js');
 const SimpleStep = require('./simplestep.js');
 
 class Phase extends BaseStepWithPipeline {
@@ -25,7 +25,7 @@ class Phase extends BaseStepWithPipeline {
             if (this.name !== 'setup') {
                 this.game.addAlert(
                     'endofturn',
-                    '{0} phase - {1}',
+                    '{0} 阶段 - {1}',
                     this.name.charAt(0).toUpperCase() + this.name.slice(1),
                     this.game.activePlayer
                 );

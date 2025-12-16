@@ -1,4 +1,4 @@
-const _ = require('underscore');
+﻿const _ = require('underscore');
 const Card = require('../../Card.js');
 
 class CatchAndRelease extends Card {
@@ -8,7 +8,7 @@ class CatchAndRelease extends Card {
     setupCardAbilities(ability) {
         this.play({
             effect:
-                "return all creatures to their owner's hand and have eac player discard down to 6 cards",
+                "将所有生物返回其所有者手中，每位玩家随机弃牌直到手牌数少于6",
             gameAction: [
                 ability.actions.returnToHand((context) => ({
                     target: context.game.creaturesInPlay

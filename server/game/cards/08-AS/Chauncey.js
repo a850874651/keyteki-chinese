@@ -11,7 +11,7 @@ class Chauncey extends Card {
                         cardType: 'creature',
                         controller: 'self',
                         cardCondition: (c) => c !== context.source,
-                        message: '{0} uses {1} to destroy {2}',
+                        message: '{0} 使用 {1} 摧毁 {2}',
                         messageArgs: (card) => [context.player, context.source, card]
                     }
                 })),
@@ -19,12 +19,12 @@ class Chauncey extends Card {
                     target: context.source
                 }))
             ]),
-            effect: 'destroy {0}',
+            effect: '摧毁 {0}',
             then: {
                 condition: (context) =>
                     context.preThenEvents.filter((event) => !event.cancelled).length === 2,
                 gameAction: ability.actions.gainAmber({ amount: 3 }),
-                message: '{0} uses {1} to gain 3 amber'
+                message: '{0} 使用 {1} 获得3琥珀'
             }
         });
     }

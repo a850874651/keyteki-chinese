@@ -23,7 +23,7 @@ class GuardianDemon extends Card {
                         amount: context.preThenEvent.amount
                     }))
                 },
-                message: '{0} uses {1} to deal {3} damage to {2}',
+                message: '{0} 使用 {1} 造成了 {3} 点伤害对 {2}',
                 messageArgs: (context) => context.preThenEvent.amount
             })
         });

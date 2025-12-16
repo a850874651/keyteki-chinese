@@ -5,16 +5,6 @@ import { buildCard } from '../../archonMaker';
 
 import './CardImage.scss';
 
-/**
- * @typedef CardImageProps
- * @property {object} card // The card data to render an image for
- * @property {string} [cardBack] // The card back image to show if not showing the card image
- */
-
-/**
- *
- * @param {CardImageProps} props
- */
 const CardImage = ({ card, cardBack, size, halfSize, onMouseOver, onMouseOut }) => {
     let [cardImage, setCardImage] = useState(null);
     const { i18n } = useTranslation();
@@ -31,17 +21,43 @@ const CardImage = ({ card, cardBack, size, halfSize, onMouseOver, onMouseOut }) 
                 }
 
                 if (canvas) {
+                    // 构建当前语言的图片路径
+                    let imageUrl = `/img/cards/${halfSize ? 'halfSize/' : ''}${
+                        i18n.language === 'en' ? '' : i18n.language + '/'
+                    }${card.image.replace(/\*/g, '_')}.${halfSize ? 'jpg' : 'png'}`;
+
                     try {
+                        // 尝试加载当前语言的图片
                         fabricRef.current = await buildCard(canvas, {
                             ...card,
                             size,
                             halfSize,
-                            url: `/img/cards/${halfSize ? 'halfSize/' : ''}${
-                                i18n.language === 'en' ? '' : i18n.language
-                            }/${card.image.replace(/\*/g, '_')}.${halfSize ? 'jpg' : 'png'}`
+                            url: imageUrl
                         });
-                    } catch {
-                        fabricRef.current = null;
+                    } catch (error) {
+                        // 如果失败且不是英文，尝试加载英文图片
+                        if (i18n.language !== 'en') {
+                            console.log(`图片加载失败，使用英文图片: ${card.image}`);
+                            
+                            // 构建英文图片路径
+                            let fallbackUrl = `/img/cards/${halfSize ? 'halfSize/' : ''}${card.image.replace(
+                                /\*/g,
+                                '_'
+                            )}.${halfSize ? 'jpg' : 'png'}`;
+
+                            try {
+                                fabricRef.current = await buildCard(canvas, {
+                                    ...card,
+                                    size,
+                                    halfSize,
+                                    url: fallbackUrl
+                                });
+                            } catch {
+                                fabricRef.current = null;
+                            }
+                        } else {
+                            fabricRef.current = null;
+                        }
                     }
                 }
             }
@@ -76,7 +92,11 @@ const CardImage = ({ card, cardBack, size, halfSize, onMouseOver, onMouseOut }) 
             card.tokens && card.tokens.hatch,
             card.tokens && card.tokens.paint,
             card.tokens && card.tokens.trade,
-            card.stunned,
+            // We need the dep to be on tokens.stun rather than card.stunned
+            // because a card can have the stun token without being considered
+            // “stunned” (e.g. a stunned creature made into an artifact with
+            // De-Animator).
+            card.tokens && card.tokens.stun,
             card.pseudoDamage,
             card.wardBroken,
             i18n.language

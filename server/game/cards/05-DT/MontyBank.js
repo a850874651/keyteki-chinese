@@ -1,4 +1,4 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class MontyBank extends Card {
     // Play: You may exalt Monty Bank up to 2 times.
@@ -13,8 +13,8 @@ class MontyBank extends Card {
                     'Exalt twice': [ability.actions.exalt(), ability.actions.exalt()]
                 }
             },
-            effect: 'exalt {0}{1}',
-            effectArgs: (context) => (context.select === 'Exalt once' ? ' once' : ' twice')
+            effect: '褒奖 {0}{1}',
+            effectArgs: (context) => (context.select === 'Exalt once' ? ' 1次' : ' 2次')
         });
 
         this.action({

@@ -23,7 +23,7 @@ class DimensionDoor extends Card {
     onReap(event) {
         if (this.enabledForPlayers[event.card.controller.uuid]) {
             this.game.addMessage(
-                "{0} steals 1 amber instead of gaining it due to {1}'s effect",
+                "{0} 窃取了 1 琥珀替代了获得效果，通过 {1}的效果",
                 event.card.controller,
                 this
             );

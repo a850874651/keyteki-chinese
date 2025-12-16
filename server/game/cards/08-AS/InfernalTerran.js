@@ -18,7 +18,7 @@ class InfernalTerran extends Card {
                 })),
                 ability.actions.steal()
             ]),
-            effect: 'discard a card and steal an amber'
+            effect: '弃掉1张卡牌并窃取1琥珀'
         });
 
         this.scrap({
@@ -26,7 +26,7 @@ class InfernalTerran extends Card {
                 target: context.player.hand
             })),
             then: {
-                message: '{0} uses {1} to steal {3} amber',
+                message: '{0} 使用 {1} 窃取 {3} 琥珀',
                 messageArgs: (context) => {
                     const events = context.preThenEvents || [];
                     const cards = events.flatMap((e) =>

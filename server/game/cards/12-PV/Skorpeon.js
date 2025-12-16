@@ -1,4 +1,4 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class Skorpeon extends Card {
     // Enhance .
@@ -10,12 +10,12 @@ class Skorpeon extends Card {
                 numSteps: context.source.neighbors.filter((card) => card.hasHouse('dis')).length,
                 damageStep: 2
             })),
-            effect: 'deal 2 damage to an enemy creature {1} time{2}',
+            effect: '造成 2 点伤害对1个敌方生物 {1} 次{2}',
             effectArgs: (context) => [
                 context.source.neighbors.filter((card) => card.hasHouse('dis')).length,
                 context.source.neighbors.filter((card) => card.hasHouse('dis')).length === 1
                     ? ''
-                    : 's'
+                    : ''
             ]
         });
     }

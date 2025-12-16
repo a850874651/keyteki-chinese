@@ -1,4 +1,4 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class WalkThePlank extends Card {
     // Play: If your opponent has no A, deal 4D to a creature. Otherwise, steal 1A.
@@ -18,8 +18,8 @@ class WalkThePlank extends Card {
             effect: '{1}{2}',
             effectArgs: (context) =>
                 context.player.opponent && !context.player.opponent.amber
-                    ? ['deal 4 damage to ', context.target]
-                    : ['steal 1 amber from ', context.player.opponent]
+                    ? ['造成4点伤害对 ', context.target]
+                    : ['窃取1琥珀从 ', context.player.opponent]
         });
     }
 }

@@ -1,4 +1,4 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class SkreelSwarm extends Card {
     // Play: Deal 1D to each enemy creature.
@@ -6,7 +6,7 @@ class SkreelSwarm extends Card {
     // Scrap: You may archive Skreel Swarm from your discard pile.
     setupCardAbilities(ability) {
         this.play({
-            effect: 'deal 1 damage to each enemy creature',
+            effect: '对每个敌方生物造成1点伤害',
             gameAction: ability.actions.dealDamage((context) => ({
                 amount: 1,
                 target: context.game.creaturesInPlay.filter(

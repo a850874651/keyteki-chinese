@@ -16,9 +16,9 @@ class DealDamageAction extends CardGameAction {
         this.targetType = ['creature'];
         this.name = 'damage';
         this.effectMsg =
-            'deal ' +
+            '造成 ' +
             (this.amount ? this.amount + ' ' : '') +
-            'damage to {0}' +
+            '点伤害对 {0}' +
             (this.splash ? ' and ' + this.splash + ' to their neighbors' : '');
     }
 
@@ -108,7 +108,7 @@ class DealDamageAction extends CardGameAction {
         }
 
         context.game.addMessage(
-            "{0}'s ward token prevents the damage dealt by {1} and is discarded",
+            "{0}的界护效果防止了来自 {1} 的伤害，界护消失了",
             damageDealtEvent.card,
             sourceArg
         );

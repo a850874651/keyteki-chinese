@@ -1,4 +1,4 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class PirateChampion extends Card {
     // After Fight: You may move Pirate Champion to a flank.
@@ -6,7 +6,7 @@ class PirateChampion extends Card {
         this.fight({
             may: 'move this creature to a flank',
             gameAction: ability.actions.moveToFlank(),
-            effect: 'optionally move {0} to a flank'
+            effect: '可选择将 {0} 移动到侧翼'
         });
     }
 }

@@ -1,7 +1,7 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class Suzerain extends Card {
-    // After Reap: Purge the top card of a player’s deck. If you do,
+    // After Reap: Purge the top card of a player窶冱 deck. If you do,
     // make a Minion.
     setupCardAbilities(ability) {
         this.reap({
@@ -22,7 +22,7 @@ class Suzerain extends Card {
             then: {
                 condition: (context) => context.player.tokenCard.name === 'Minion',
                 gameAction: ability.actions.makeTokenCreature(),
-                message: '{0} uses {1} to make a Minion'
+                message: '{0} 使用 {1} 制造1个代标生物'
             }
         });
     }

@@ -1,4 +1,4 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class GonePearShaped extends Card {
     // Play: Each player discards their archives.
@@ -10,11 +10,11 @@ class GonePearShaped extends Card {
                     context.player.opponent ? context.player.opponent.archives : []
                 )
             })),
-            effect: 'make each player discard their archives'
+            effect: '每位玩家弃掉其档案',
         });
 
         this.fate({
-            effect: 'prevent creatures from reaping for the remainder of the turn',
+            effect: '在本回合剩余时间内生物无法收获',
             gameAction: ability.actions.untilPlayerTurnEnd({
                 targetController: 'opponent',
                 effect: ability.effects.cardCannot('reap')

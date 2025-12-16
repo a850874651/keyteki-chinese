@@ -14,7 +14,7 @@ class AVinda extends Card {
                     context.preThenEvent.destroyEvent.destroyedByDamageDealt &&
                     context.preThenEvent.destroyEvent.resolved,
                 gameAction: ability.actions.discardAtRandom(),
-                message: '{0} uses {1} to make {3} discard a card at random',
+                message: '{0} 使用 {1} 造成 {3} 随机弃掉1张卡牌',
                 messageArgs: (context) => context.player.opponent
             }
         });

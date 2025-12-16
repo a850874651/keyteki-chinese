@@ -39,7 +39,7 @@ class SoulLock extends Card {
                     }))
                 },
                 message:
-                    '{0} uses {1} to place under {2} and prevent {3} from using cards of the same house',
+                    '{0} 使用 {1} 把 {2} 放入下方，防止 {3} 使用与这张卡拥有相同势力的卡牌',
                 messageArgs: (context) => [
                     context.player,
                     context.source,

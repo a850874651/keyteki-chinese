@@ -1,4 +1,4 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class Atrocity extends Card {
     // At the start of your opponent's turn, that player discards
@@ -21,7 +21,7 @@ class Atrocity extends Card {
                     target: context.source
                 }))
             ],
-            effect: 'discard {1} from their deck and deal 1 damage to {0}',
+            effect: '弃掉 {1} 并造成1点伤害对 {0}',
             effectArgs: (context) => [
                 context.source.controller.opponent &&
                 context.source.controller.opponent.deck.length > 0

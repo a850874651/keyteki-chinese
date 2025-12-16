@@ -1,4 +1,4 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class Congregate extends Card {
     // Play: Choose a trait. if there are 2 or more friendly creatures with that trait, gain 2A.
@@ -7,7 +7,7 @@ class Congregate extends Card {
             target: {
                 mode: 'trait'
             },
-            effect: 'choose the {1} trait and gain {2} amber',
+            effect: '选择 {1} 特性并获得 {2} 琥珀',
             effectArgs: (context) => [
                 context.trait,
                 context.game.creaturesInPlay.filter(

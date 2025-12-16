@@ -1,7 +1,7 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class TyrannusAquilae extends Card {
-    // At the end of each player’s turn, Tyrannus Aquilae captures 1A.
+    // At the end of each player窶冱 turn, Tyrannus Aquilae captures 1A.
     // After Fight: Move 1A from Tyrannus Aquilae to your pool.
     setupCardAbilities(ability) {
         this.interrupt({
@@ -13,7 +13,7 @@ class TyrannusAquilae extends Card {
 
         this.fight({
             condition: (context) => context.source.amber > 0,
-            effect: 'move 1 amber from {0} to their pool',
+            effect: '移动 1 琥珀从 {0} 到其琥珀池中',
             gameAction: ability.actions.removeAmber(),
             then: {
                 gameAction: ability.actions.gainAmber((context) => ({

@@ -1,4 +1,4 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class Harlock extends Card {
     // After Fight: If the creature Harlock fought was destroyed, make
@@ -9,7 +9,7 @@ class Harlock extends Card {
                 context.event.destroyed &&
                 context.event.destroyed.includes(context.event.attackerTarget),
             gameAction: ability.actions.makeTokenCreature(),
-            effect: 'make a token creature'
+            effect: '制造1个代标生物'
         });
     }
 }

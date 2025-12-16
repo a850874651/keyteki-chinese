@@ -19,7 +19,7 @@ class EnviousVenomite extends Card {
                     poison: 1
                 })
             })),
-            message: '{0} uses {1} to give poison to enemy creatures for the remainder of the turn',
+            message: '{0} 使用 {1} 在本回合的剩余时间内给予每个敌方生物剧毒',
             messageArgs: (context) => [context.player, context.source]
         });
     }

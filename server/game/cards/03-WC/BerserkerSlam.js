@@ -18,7 +18,7 @@ class BerserkerSlam extends Card {
                     amount: 1,
                     target: context.preThenEvent.clone.controller
                 })),
-                message: '{0} uses {1} to cause {3} to lose {4} amber',
+                message: '{0} 使用 {1} 造成 {3} 失去 {4} 琥珀',
                 messageArgs: (context) => [
                     context.preThenEvent.clone.controller,
                     context.preThenEvent.clone.controller.amber === 0 ? 0 : 1

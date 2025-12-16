@@ -66,7 +66,7 @@ i18n
         resources,
         fallbackLng: 'en',
         debug: false, //(process.env.NODE_ENV !== 'production'),
-        //lng: 'en',
+        lng: 'zhhans',
         interpolation: {
             escapeValue: false
         },

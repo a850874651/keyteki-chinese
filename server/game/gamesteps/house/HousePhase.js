@@ -22,7 +22,7 @@ class HousePhase extends Phase {
                 choices: choices,
                 choiceHandler: (house) => {
                     this.game.addMessage(
-                        '{0} chooses {1} as their active house this turn',
+                        '{0} 选择了 {1} 作为这个回合的当前势力',
                         this.game.activePlayer,
                         house.text
                     );
@@ -35,7 +35,7 @@ class HousePhase extends Phase {
             });
         } else {
             this.game.addMessage(
-                '{0} has no legal choices for active house this turn, and so must play without an active house',
+                '{0} 这个回合没有合法的当前势力可供选择, 所以必须以无当前势力来进行',
                 this.game.activePlayer
             );
         }
@@ -71,7 +71,7 @@ class HousePhase extends Phase {
                     onMenuCommand: (player, arg) => {
                         if (arg === 'all') {
                             this.game.addMessage(
-                                '{0} moves all the cards{1} in their archives to their hand',
+                                '{0} 从档案中提取了所有卡牌{1} 加入手中',
                                 this.game.activePlayer,
                                 theyOwn
                             );
@@ -90,7 +90,7 @@ class HousePhase extends Phase {
                     onSelect: (player, cardParam) => {
                         if (cardParam) {
                             this.game.addMessage(
-                                '{0} moves cards{1} in their archives to their hand',
+                                '{0} 将档案中的卡牌{1} 加入手中',
                                 this.game.activePlayer,
                                 theyOwn
                             );
@@ -118,7 +118,7 @@ class HousePhase extends Phase {
                     handlers: [
                         () => {
                             this.game.addMessage(
-                                '{0} moves all the cards{1} in their archives to their hand',
+                                '{0} 从档案中提取了所有卡牌{1} 加入手中',
                                 this.game.activePlayer,
                                 theyOwn
                             );

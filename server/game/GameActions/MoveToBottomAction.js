@@ -1,4 +1,4 @@
-const CardGameAction = require('./CardGameAction');
+﻿const CardGameAction = require('./CardGameAction');
 
 class MoveToBottomAction extends CardGameAction {
     constructor(propertyFactory) {
@@ -10,7 +10,7 @@ class MoveToBottomAction extends CardGameAction {
     setup() {
         super.setup();
         this.name = 'moveToBottom';
-        this.effectMsg = 'put a card at the bottom of the deck';
+        this.effectMsg = '将1张卡牌放到牌库底';
     }
 
     getEvent(card, context) {

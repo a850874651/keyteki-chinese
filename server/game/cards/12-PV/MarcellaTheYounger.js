@@ -8,7 +8,7 @@ class MarcellaTheYounger extends Card {
             reap: true,
             gameAction: ability.actions.exalt(),
             then: {
-                message: '{0} uses {1} to draw 2 cards',
+                message: '{0} 使用 {1} 抽2张牌',
                 gameAction: ability.actions.draw({ amount: 2 })
             }
         });

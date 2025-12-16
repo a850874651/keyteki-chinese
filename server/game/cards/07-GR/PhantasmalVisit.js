@@ -14,7 +14,7 @@ class PhantasmalVisit extends Card {
             then: {
                 alwaysTriggers: true,
                 condition: (context) => context.player.isHaunted(),
-                message: '{0} uses {1} to archive {1}',
+                message: '{0} 使用 {1} 归档 {1}',
                 gameAction: ability.actions.archive((context) => ({
                     target: context.source
                 }))

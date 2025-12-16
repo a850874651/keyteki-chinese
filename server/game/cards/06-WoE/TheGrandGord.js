@@ -1,4 +1,4 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class TheGrandGord extends Card {
     // At the start of your turn, if you control the most powerful
@@ -23,7 +23,7 @@ class TheGrandGord extends Card {
                     return myMax === max;
                 }
             },
-            effect: 'make a token creature',
+            effect: '制造1个代标生物',
             gameAction: ability.actions.makeTokenCreature()
         });
     }

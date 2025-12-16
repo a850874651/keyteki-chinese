@@ -1,4 +1,4 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class QuintrinoWarp extends Card {
     // Play: Choose a friendly creature and an enemy creature. Destroy
@@ -26,7 +26,7 @@ class QuintrinoWarp extends Card {
                         ) && Object.values(context.targets).every((target) => target !== card)
                 )
             })),
-            effect: 'destroy {1} and gain 1 chain',
+            effect: '摧毁 {1} 并获得1枷锁',
             effectArgs: (context) => [
                 context.game.creaturesInPlay.filter(
                     (card) =>

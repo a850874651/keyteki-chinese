@@ -1,4 +1,4 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class MemroxTheRed extends Card {
     // Your opponent's cards cannot leave your archives.
@@ -12,7 +12,7 @@ class MemroxTheRed extends Card {
         });
 
         this.action({
-            effect: 'gain {1} amber for each card in their archives',
+            effect: '你每有1张牌在你的档案中，获得 {1} 琥珀',
             effectArgs: (context) => [context.player.archives.length],
             gameAction: ability.actions.gainAmber((context) => ({
                 amount: context.player.archives.length

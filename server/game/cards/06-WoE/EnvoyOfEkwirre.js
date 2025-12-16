@@ -1,4 +1,4 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class EnvoyOfEkwirre extends Card {
     // After Reap: Swap Envoy of Ekwirr with one of its neighbors. Also swap all , damage, counters, and upgrades on these creatures.
@@ -13,7 +13,7 @@ class EnvoyOfEkwirre extends Card {
                     swapUpgrades: true
                 })
             },
-            effect: 'swap its position, amber, damage, counters, and upgrades with {0}'
+            effect: '与 {0} 交换其位置、琥珀、伤害、指示物、升级'
         });
     }
 }

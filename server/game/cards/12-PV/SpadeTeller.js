@@ -9,7 +9,7 @@ class SpadeTeller extends Card {
             target: {
                 mode: 'house'
             },
-            effect: 'choose {1} and discard {2}',
+            effect: '选择 {1} 并弃掉 {2}',
             effectArgs: (context) => [context.house, context.player.deck[0]],
             gameAction: ability.actions.discard((context) => ({
                 target: context.player.deck.length ? context.player.deck[0] : []
@@ -19,7 +19,7 @@ class SpadeTeller extends Card {
                     !!context.preThenEvent.card &&
                     context.preThenEvent.card.hasHouse(preThenContext.house),
                 gameAction: ability.actions.gainAmber(),
-                message: '{0} uses {1} to gain 1 amber'
+                message: '{0} 使用 {1} 获得1琥珀'
             })
         });
     }

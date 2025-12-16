@@ -10,7 +10,7 @@ class Triumph extends Card {
                 target: context.player.creaturesInPlay
             })),
             then: {
-                message: '{0} uses {1} to forge a key at no cost',
+                message: '{0} 使用 {1} 无费用锻造1把钥匙',
                 condition: (context) => context.player.creaturesInPlay.length > 5,
                 gameAction: ability.actions.forgeKey({
                     atNoCost: true

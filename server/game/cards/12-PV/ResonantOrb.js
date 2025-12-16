@@ -20,7 +20,7 @@ class ResonantOrb extends Card {
                     cardType: 'creature',
                     controller: 'opponent'
                 },
-                message: '{0} uses {1} to destroy {3} and put {4} into play',
+                message: '{0} 使用 {1} 摧毁 {3} 并将 {4} 放置入场',
                 messageArgs: (context) => [
                     context.target,
                     context.preThenEvents[context.preThenEvents.length - 1].card
@@ -51,7 +51,7 @@ class ResonantOrb extends Card {
                             cardType: 'creature',
                             controller: 'opponent'
                         },
-                        message: '{0} uses {1} to destroy {3} and put {4} into play',
+                        message: '{0} 使用 {1} 摧毁 {3} 并将 {4} 放置入场',
                         messageArgs: (context) => [
                             context.target,
                             context.preThenEvents[context.preThenEvents.length - 1].card

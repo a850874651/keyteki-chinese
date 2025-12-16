@@ -1,4 +1,4 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class Molluscaller extends Card {
     // After Reap: For the remainder of the turn, each friendly
@@ -6,7 +6,7 @@ class Molluscaller extends Card {
     setupCardAbilities(ability) {
         this.reap({
             effect:
-                'cause all friendly Strange Shells to gain 3 power and lose their abilities for the remainder of the turn',
+                '在本回合的剩余时间内使所有友方奇怪的甲壳获得获得+3力量并失去其能力',
             gameAction: ability.actions.untilPlayerTurnEnd({
                 match: (card) => card.name === 'Strange Shell',
                 effect: [ability.effects.blank(), ability.effects.modifyPower(3)]

@@ -1,4 +1,4 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class Chronicler extends Card {
     // After Reap: Archive the top card of your deck.
@@ -7,7 +7,7 @@ class Chronicler extends Card {
             gameAction: ability.actions.archive((context) => ({
                 target: context.player.deck.slice(0, 1)
             })),
-            effect: 'archive the top card of their deck'
+            effect: '归档其牌库顶的卡牌'
         });
     }
 }

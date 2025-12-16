@@ -19,7 +19,7 @@ class Resurgence extends Card {
                     cardType: 'creature',
                     gameAction: ability.actions.returnToHand({ location: 'discard' })
                 },
-                message: '{0} uses {1} to return {2} to their hand'
+                message: '{0} 使用 {1} 将 {2} 返回手中'
             })
         });
     }

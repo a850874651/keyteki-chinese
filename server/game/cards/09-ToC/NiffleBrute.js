@@ -6,7 +6,7 @@ class NiffleBrute extends Card {
     // discard pile to your hand.
     setupCardAbilities(ability) {
         this.destroyed({
-            effect: 'to return a card from their discard pile to their hand',
+            effect: '将1张卡牌从弃牌堆返回其手中',
             gameAction: ability.actions.conditional({
                 condition: (context) =>
                     context.player.discard.some((c) => c.name === 'Niffle Sanctuary'),
@@ -18,7 +18,7 @@ class NiffleBrute extends Card {
                         cardType: 'artifact',
                         cardCondition: (card) => card.name === 'Niffle Sanctuary',
                         location: 'discard',
-                        message: '{0} uses {1} to return {2} to their hand',
+                        message: '{0} 使用 {1} 将 {2} 返回手中',
                         messageArgs: (cards) => [context.player, context.source, cards]
                     }
                 })),
@@ -29,7 +29,7 @@ class NiffleBrute extends Card {
                         controller: 'self',
                         cardCondition: (card) => card.hasTrait('niffle'),
                         location: 'discard',
-                        message: '{0} uses {1} to return {2} to their hand',
+                        message: '{0} 使用 {1} 将 {2} 返回手中',
                         messageArgs: (cards) => [context.player, context.source, cards]
                     }
                 }))

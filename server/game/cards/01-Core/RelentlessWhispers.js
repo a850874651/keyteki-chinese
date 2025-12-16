@@ -14,7 +14,7 @@ class RelentlessWhispers extends Card {
                     context.preThenEvent.destroyEvent.destroyedByDamageDealt &&
                     context.preThenEvent.destroyEvent.resolved,
                 gameAction: ability.actions.steal(),
-                message: '{0} uses {1} to steal 1 amber from {3}',
+                message: '{0} 使用 {1} 窃取了1琥珀从 {3}',
                 messageArgs: (context) => [context.player.opponent]
             }
         });

@@ -1,4 +1,4 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class RufusVergilius extends Card {
     // After Reap: A neighboring creature captures 1. Ward that creature.
@@ -9,7 +9,7 @@ class RufusVergilius extends Card {
                 cardCondition: (card, context) => context.source.neighbors.includes(card),
                 gameAction: [ability.actions.capture(), ability.actions.ward()]
             },
-            effect: 'capture 1 amber onto {1} and ward it',
+            effect: '抢占 1 琥珀到 {1} 上并界护它',
             effectArgs: (context) => [context.target]
         });
     }

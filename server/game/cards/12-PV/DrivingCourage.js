@@ -1,4 +1,4 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class DrivingCourage extends Card {
     // Play: Ready and use a friendly Mutant creature.
@@ -14,7 +14,7 @@ class DrivingCourage extends Card {
                     ability.actions.use()
                 ])
             },
-            effect: 'ready and use {0}'
+            effect: '重整并使用 {0}'
         });
 
         this.fate({
@@ -23,7 +23,7 @@ class DrivingCourage extends Card {
                     (card) => !card.hasTrait('mutant')
                 )
             })),
-            effect: 'exhaust each friendly non-Mutant creature'
+            effect: '横置每个友方非变异体生物'
         });
     }
 }

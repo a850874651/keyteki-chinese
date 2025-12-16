@@ -1,4 +1,4 @@
-const PlayerAction = require('./PlayerAction');
+﻿const PlayerAction = require('./PlayerAction');
 
 class FlipProphecyAction extends PlayerAction {
     setDefaultProperties() {
@@ -9,7 +9,7 @@ class FlipProphecyAction extends PlayerAction {
     setup() {
         super.setup();
         this.name = 'flipProphecy';
-        this.effectMsg = 'flip {1} to {2}';
+        this.effectMsg = '翻转 {1} 到 {2}';
         this.effectArgs = () => [
             this.prophecyCard,
             this.prophecyCard.controller.prophecyFlipSide(this.prophecyCard)

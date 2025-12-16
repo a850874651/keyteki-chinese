@@ -1,4 +1,4 @@
-const PlayerAction = require('./PlayerAction');
+﻿const PlayerAction = require('./PlayerAction');
 
 class ModifyChainsAction extends PlayerAction {
     setDefaultProperties() {
@@ -8,7 +8,7 @@ class ModifyChainsAction extends PlayerAction {
     setup() {
         super.setup();
         this.name = 'modifyChains';
-        this.effectMsg = 'increase their chains by ' + this.amount;
+        this.effectMsg = '增加其枷锁值 ' + this.amount;
     }
 
     canAffect(player, context) {

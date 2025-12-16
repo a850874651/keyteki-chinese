@@ -12,7 +12,7 @@ class AdministratorRivet extends Card {
                 gameAction: ability.actions.capture((context) => ({
                     target: context.player.creaturesInPlay.filter((c) => c.isToken())
                 })),
-                message: '{0} uses {1} to capture 1 amber onto each friendly token creature'
+                message: '{0} 使用 {1} 抢占1琥珀到每个友方代标生物上'
             }
         });
     }

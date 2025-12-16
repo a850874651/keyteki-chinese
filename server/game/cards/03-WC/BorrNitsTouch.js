@@ -28,7 +28,7 @@ class BorrNitsTouch extends Card {
                                 !preThenContext.select || preThenContext.select === 'Mine'
                                     ? preThenContext.player.deck.slice(0, 5)
                                     : preThenContext.player.opponent.deck.slice(0, 5),
-                            message: '{0} chooses to purge {2}'
+                            message: '{0} 选择清除 {2}'
                         }
                     }),
                     ability.actions.shuffleDeck(() => ({

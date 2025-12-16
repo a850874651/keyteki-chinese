@@ -1,4 +1,4 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class MakeItSo extends Card {
     // Play: Choose a house. Reveal the top card of your deck. If that card belongs to the chosen house, draw it and trigger this effect again.
@@ -7,7 +7,7 @@ class MakeItSo extends Card {
             target: {
                 mode: 'house'
             },
-            effect: 'choose {1} and reveal {2}',
+            effect: '选择 {1} 并展示 {2}',
             effectArgs: (context) => [context.house, context.player.deck[0]],
             gameAction: ability.actions.reveal((context) => ({
                 location: 'deck',
@@ -21,7 +21,7 @@ class MakeItSo extends Card {
                         ability: preThenContext.ability
                     })
                 ],
-                message: '{0} uses {1} to draw the card and resolve its effect again'
+                message: '{0} 使用 {1} 抽卡并再次结算其效果'
             })
         });
     }

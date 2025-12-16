@@ -32,16 +32,6 @@ const GameConfiguration = ({ optionSettings, onOptionSettingToggle }) => {
                                 onOptionSettingToggle('confirmOneClick', event.target.checked)
                             }
                         />
-                        <Form.Check
-                            id='useHalfSizedCards'
-                            name='gameOptions.useHalfSizedCards'
-                            label={t('Use half sized card images')}
-                            type='switch'
-                            checked={optionSettings.useHalfSizedCards}
-                            onChange={(event) =>
-                                onOptionSettingToggle('useHalfSizedCards', event.target.checked)
-                            }
-                        />
                     </Form.Row>
                 </Panel>
             </Form>

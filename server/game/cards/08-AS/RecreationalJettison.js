@@ -14,7 +14,7 @@ class RecreationalJettison extends Card {
                     ability.actions.resolveBonusIcons()
                 ])
             },
-            effect: 'discard {1} from their hand and resolve its bonus icons',
+            effect: '从其手中弃掉 {1} 并结算其奖励图标',
             effectArgs: (context) => [context.target],
             then: {
                 condition: (context) =>
@@ -30,7 +30,7 @@ class RecreationalJettison extends Card {
                     ])
                 },
                 message:
-                    '{0} uses {1} to repeat the preceding effect and discard {3} from their hand and resolve its bonus icons',
+                    '{0} 使用 {1} 重复之前的效果弃掉 {3} 并结算其奖励图标',
                 messageArgs: (context) => [context.target]
             }
         });

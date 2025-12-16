@@ -1,11 +1,11 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class Socraterosaurus extends Card {
     // After Reap: Draw 1 card. You may put a wisdom counter on
     // Platopelta.
     setupCardAbilities(ability) {
         this.reap({
-            effect: 'draw a card and optionally put a wisdom counter on Platopelta',
+            effect: '抽1张牌，可以放置1个指示物在 柏拉图胄龙 上',
             gameAction: ability.actions.draw(),
             then: {
                 alwaysTriggers: true,

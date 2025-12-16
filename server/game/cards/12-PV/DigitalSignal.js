@@ -1,10 +1,10 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class DigitalSignal extends Card {
     // Play: For each card in your opponent's archives, archive a card. Discard your opponent's archives.
     setupCardAbilities(ability) {
         this.play({
-            effect: "archive {1} cards and discard {2} from {3}'s archives",
+            effect: "归档 {1} 张卡牌并弃掉 {2} 从 {3} 的档案",
             effectArgs: (context) => [
                 context.player.opponent.archives.length,
                 context.player.opponent.archives,

@@ -1,7 +1,7 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class ElenyaTheCharming extends Card {
-    // Treachery. (This card enters play under your opponent’s control.)
+    // Treachery. (This card enters play under your opponent窶冱 control.)
     //
     // After you forge a key, give control of the most powerful
     // friendly creature to your opponent.
@@ -10,7 +10,7 @@ class ElenyaTheCharming extends Card {
             when: {
                 onForgeKey: (event, context) => event.player === context.source.controller
             },
-            effect: 'give control of {1} to {2}',
+            effect: '将 {1} 的控制权给与 {2}',
             effectArgs: (context) => [context.target, context.player.opponent],
             condition: (context) => !!context.player.opponent,
             target: {

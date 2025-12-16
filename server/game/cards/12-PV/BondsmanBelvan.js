@@ -1,4 +1,4 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class BondsmanBelvan extends Card {
     // After Fight/After Reap: Look at the top card of your opponent's deck. You may discard it.
@@ -6,7 +6,7 @@ class BondsmanBelvan extends Card {
     setupCardAbilities(ability) {
         this.fight({
             reap: true,
-            effect: "look at the top card of their opponent's deck and may discard it",
+            effect: "查看对手牌库顶的卡牌并可以弃掉它",
             condition: (context) =>
                 context.player.opponent && context.player.opponent.deck.length > 0,
             gameAction: ability.actions.discard((context) => ({

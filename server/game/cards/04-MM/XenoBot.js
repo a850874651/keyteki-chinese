@@ -29,7 +29,7 @@ class XenoBot extends Card {
                     promptWithHandlerMenu: {
                         activePromptTitle: 'Choose a card to move to bottom of deck',
                         cards: context.player.deck.slice(0, 2),
-                        message: '{0} adds a card to their hand and moves a card to bottom of deck'
+                        message: '{0} 添加1张卡到其手中并将1张卡放到其牌库底'
                     }
                 }))
             ])

@@ -1,4 +1,4 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class TheyTellNoTales extends Card {
     // Play: Choose a house. Destroy each creature of the chosen
@@ -8,7 +8,7 @@ class TheyTellNoTales extends Card {
             target: {
                 mode: 'house'
             },
-            effect: 'destroy all creatures of house {1} and gain 2 chains',
+            effect: '摧毁所有 {1} 势力的生物并获得2枷锁',
             effectArgs: (context) => [context.house],
             gameAction: [
                 ability.actions.destroy((context) => ({

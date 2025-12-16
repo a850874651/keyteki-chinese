@@ -1,4 +1,4 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class HandCannon extends Card {
     // This creature gains skirmish and, "Fight: Move 1A from the creature this creature fights to your pool."
@@ -14,7 +14,7 @@ class HandCannon extends Card {
                             target: context.event.card
                         })
                     }),
-                    effect: 'move 1 amber from {1} to their pool',
+                    effect: '移动 1 琥珀从 {1} 到其琥珀池中',
                     effectArgs: (context) => context.event.card
                 })
             ]

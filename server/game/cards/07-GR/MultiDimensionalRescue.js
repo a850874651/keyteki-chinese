@@ -1,4 +1,4 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class MultiDimensionalRescue extends Card {
     // Play: Return one card of each type (action, artifact, creature,
@@ -34,7 +34,7 @@ class MultiDimensionalRescue extends Card {
                 }
             },
             effect:
-                'return {1} to their hand, play one non-Star Alliance card this turn, and purge {0}',
+                '返回 {1} 到其手中, 本回合可以打出一张非星盟卡牌，并清除 {0}',
             effectArgs: (context) => [Object.values(context.targets)],
             then: {
                 alwaysTriggers: true,

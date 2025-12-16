@@ -1,4 +1,4 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class Rotfeast extends Card {
     // Play: For the remainder of the turn, gain 1 each time a
@@ -6,7 +6,7 @@ class Rotfeast extends Card {
     setupCardAbilities(ability) {
         this.play({
             effect:
-                'gain 1 amber each time a creature is dealt damage for the remainder of the turn',
+                '在本回合剩余时间内，每有生物受到伤害，获得1琥珀',
             gameAction: ability.actions.untilPlayerTurnEnd({
                 when: {
                     onDamageApplied: (event) => event.amount > 0

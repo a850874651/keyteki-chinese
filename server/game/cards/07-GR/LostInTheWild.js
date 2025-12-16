@@ -17,7 +17,7 @@ class LostInTheWild extends Card {
                     shuffle: true,
                     shufflePlayer: context.player.opponent
                 })),
-                message: '{0} uses {1} to repeat the preceding effect'
+                message: '{0} 使用 {1} 重复之前的效果'
             }
         });
     }

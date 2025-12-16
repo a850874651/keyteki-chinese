@@ -14,7 +14,7 @@ class Stratowise extends Card {
                 alwaysTriggers: true,
                 condition: (context) => context.player.isHaunted() && context.player.opponent,
                 gameAction: ability.actions.capture(),
-                message: '{0} uses {1} to capture 1 amber from {3}',
+                message: '{0} 使用 {1} 抢占1琥珀从 {3}',
                 messageArgs: (context) => [context.player.opponent]
             }
         });

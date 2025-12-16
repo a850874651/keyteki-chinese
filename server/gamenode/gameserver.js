@@ -161,7 +161,7 @@ class GameServer {
         Sentry.captureException(e);
         if (game) {
             game.addMessage(
-                'A Server error has occured processing your game state, apologies.  Your game may now be in an inconsistent state, or you may be able to continue.  The error has been logged.'
+                '抱歉，在处理您的游戏时服务器发生了错误. 您的游戏或许进入了不正常的状态, 也许您可以继续. 错误已被记录.'
             );
         }
     }
@@ -355,7 +355,7 @@ class GameServer {
 
         game.initialise();
         if (pendingGame.rematch) {
-            game.addAlert('info', 'The rematch is ready');
+            game.addAlert('info', '再次对局已就绪');
         }
     }
 
@@ -466,9 +466,9 @@ class GameServer {
         player.socket = socket;
 
         if (!game.isSpectator(player) && !player.disconnectedAt) {
-            game.addAlert('info', '{0} has connected to the game server', player);
+            game.addAlert('info', '{0} 已连接到游戏服务器', player);
         } else if (game.isSpectator(player) && player.disconnectedAt) {
-            game.addAlert('info', '{0} reconnected to the game as a spectator', player);
+            game.addAlert('info', '{0} 作为观战者已重连到游戏', player);
         }
 
         this.sendGameState(game);

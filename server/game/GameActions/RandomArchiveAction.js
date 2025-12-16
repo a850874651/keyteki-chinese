@@ -1,4 +1,4 @@
-const PlayerAction = require('./PlayerAction');
+﻿const PlayerAction = require('./PlayerAction');
 const _ = require('underscore');
 
 class RandomArchiveAction extends PlayerAction {
@@ -10,7 +10,7 @@ class RandomArchiveAction extends PlayerAction {
         super.setup();
         this.name = 'archive';
         this.effectMsg =
-            'archive ' + (this.amount === 1 ? 'a card' : this.amount + ' cards') + ' at random';
+            '随机归档了 ' + (this.amount === 1 ? '1张卡帕' : this.amount + ' 张卡牌') + '';
     }
 
     canAffect(player, context) {

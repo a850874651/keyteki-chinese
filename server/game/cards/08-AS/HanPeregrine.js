@@ -23,7 +23,7 @@ class HanPeregrine extends Card {
                         target: context.target
                     }))
                 ],
-                message: '{0} uses {1} to heal {3} fully and move it to a flank',
+                message: '{0} 使用 {1} 完全治疗 {3} 并将其移到侧翼',
                 messageArgs: (context) => [context.target]
             }
         });

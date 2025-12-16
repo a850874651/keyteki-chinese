@@ -1,4 +1,4 @@
-const CardListSelector = require('./CardListSelector');
+﻿const CardListSelector = require('./CardListSelector');
 const GameAction = require('./GameAction');
 
 class SequentialMakeTokenCreatureAction extends GameAction {
@@ -14,7 +14,7 @@ class SequentialMakeTokenCreatureAction extends GameAction {
             this.forEach = [this.forEach];
         }
 
-        this.effectMsg = 'make token creatures';
+        this.effectMsg = '制造代标生物';
     }
 
     hasLegalTarget(context) {

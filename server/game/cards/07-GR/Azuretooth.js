@@ -1,4 +1,4 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class Azuretooth extends Card {
     // After Fight/After Reap: Move each A from a friendly creature to
@@ -14,7 +14,7 @@ class Azuretooth extends Card {
                     recipient: context.player
                 }))
             },
-            effect: 'move all {2} amber from {0} to their pool and give control of {0} to {1}',
+            effect: '移动所有 {2} 琥珀从 {0} 到其琥珀池中并把 {0} 的控制权给 {1}',
             effectArgs: (context) => [context.player.opponent, context.target.tokens.amber || 0],
             then: (preThenContext) => ({
                 alwaysTriggers: true,

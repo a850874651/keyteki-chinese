@@ -1,4 +1,4 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class BattleFleet extends Card {
     // Play: Reveal any number of Mars cards from your hand. For each card revealed this way, draw 1 card.
@@ -15,7 +15,7 @@ class BattleFleet extends Card {
                     amount: context.target.length
                 }))
             },
-            effect: 'reveal {0} from their hand, and draw {1} cards',
+            effect: '从其手牌展示{0}, 并抽 {1} 张牌',
             effectArgs: (context) => (context.target.length ? context.target.length : 1)
         });
     }

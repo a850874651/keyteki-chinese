@@ -1,12 +1,12 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class TriangulatorNewsome extends Card {
     // After Reap: If you are haunted, move each from Triangulator
-    // Newsome’s neighbors to your pool.
+    // Newsome窶冱 neighbors to your pool.
     setupCardAbilities(ability) {
         this.reap({
             condition: (context) => context.player.isHaunted(),
-            effect: "move all {2} amber from {0}'s neighbors ({3}) to their pool",
+            effect: "移动所有 {2} 琥珀从 {0} 的相邻生物上 ({3}) 到其琥珀池中",
             effectArgs: (context) => [
                 context.source,
                 context.source.neighbors.reduce((total, card) => total + card.amber, 0),

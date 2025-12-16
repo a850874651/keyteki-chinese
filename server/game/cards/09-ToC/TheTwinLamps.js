@@ -11,7 +11,7 @@ class TheTwinLamps extends Card {
                 condition: (context) =>
                     context.player.opponent && context.player.amber > context.player.opponent.amber,
                 gameAction: ability.actions.makeTokenCreature(),
-                message: '{0} uses {1} to make a token creature'
+                message: '{0} 使用 {1} 制造1个代标生物'
             }
         });
     }

@@ -1,4 +1,4 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class CrepuscularRays extends Card {
     // Play: Choose a friendly creature. Move each A from that
@@ -16,7 +16,7 @@ class CrepuscularRays extends Card {
                     ability.actions.destroy()
                 ]
             },
-            effect: 'to move all {1} amber from {0} to their pool and destroy {0}',
+            effect: '移动所有 {1} 琥珀从 {0} 到其池中并摧毁 {0}',
             effectArgs: (context) => [context.target.tokens.amber || 0]
         });
     }

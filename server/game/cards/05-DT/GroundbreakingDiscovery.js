@@ -1,7 +1,7 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class GroundbreakingDiscovery extends Card {
-    // Play: If you control Dr. Verokter, Rooftop Laboratory, and Reckless Experimentation, destroy each card in play, unforge an opponent’s key, and purge Groundbreaking Discovery.
+    // Play: If you control Dr. Verokter, Rooftop Laboratory, and Reckless Experimentation, destroy each card in play, unforge an opponent窶冱 key, and purge Groundbreaking Discovery.
     setupCardAbilities(ability) {
         this.play({
             condition: (context) =>
@@ -20,7 +20,7 @@ class GroundbreakingDiscovery extends Card {
                 ability.actions.unforgeKey(),
                 ability.actions.purge()
             ]),
-            effect: "destroy each card in play, unforge an opponent's key and purge {0}"
+            effect: "摧毁场上的每张卡牌，熔毁对手的1把钥匙并清除{0}"
         });
     }
 }

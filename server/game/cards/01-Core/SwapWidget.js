@@ -19,7 +19,7 @@ class SwapWidget extends Card {
                         card.hasHouse('mars') && card.name !== preThenContext.target.name,
                     gameAction: ability.actions.putIntoPlay()
                 },
-                message: '{0} puts {2} into play using {1}, and readies it',
+                message: '{0} 将 {2} 放置入场，通过 {1}, 并重整了它',
                 then: (context) => ({
                     gameAction: ability.actions.ready({ target: context.target })
                 })

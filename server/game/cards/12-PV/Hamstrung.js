@@ -1,4 +1,4 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class Hamstrung extends Card {
     // Play: Discard the top card of a player's deck. If it is a creature, purge it.
@@ -11,19 +11,19 @@ class Hamstrung extends Card {
                     "Opponent's": (context) => context.player.opponent
                 }
             },
-            effect: "discard {1} from the top of {2}'s deck{3}",
+            effect: "弃掉 {1} 从 {2} 的牌库顶 {3}",
             effectArgs: (context) => [
                 context.select === 'Mine'
                     ? context.player.deck.length > 0
                         ? context.player.deck[0]
-                        : 'nothing'
+                        : '了空气'
                     : context.player.opponent.deck.length > 0
                     ? context.player.opponent.deck[0]
                     : 'nothing',
                 context.select === 'Mine' ? context.player : context.player.opponent,
                 context.select === 'Mine'
                     ? context.player.deck.length > 0 && context.player.deck[0].type === 'creature'
-                        ? ' and purge it'
+                        ? ' 并清除它'
                         : ''
                     : context.player.opponent.deck.length > 0 &&
                       context.player.opponent.deck[0].type === 'creature'

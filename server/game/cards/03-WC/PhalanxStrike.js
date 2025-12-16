@@ -20,7 +20,7 @@ class PhalanxStrike extends Card {
                     controller: 'self',
                     gameAction: ability.actions.exalt()
                 },
-                message: "{0} exalts {2} to repeat Phalanx Strike's effect",
+                message: "{0} 褒奖 {2} 来重复它的效果",
                 messageArgs: (context) => [context.target],
                 then: {
                     target: {
@@ -29,7 +29,7 @@ class PhalanxStrike extends Card {
                             amount: context.player.creaturesInPlay.length
                         }))
                     },
-                    message: '{0} uses {1} to deal {3} damage to {2}',
+                    message: '{0} 使用 {1} 造成 {3} 点伤害对 {2}',
                     messageArgs: (context) => [
                         context.player.creaturesInPlay.length,
                         context.target

@@ -1,4 +1,4 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class Hypothesize extends Card {
     // Play: Make a token creature. If there are three or more
@@ -21,12 +21,12 @@ class Hypothesize extends Card {
                             0
                         ) >= 3,
                     trueGameAction: ability.actions.archive((context) => ({
-                        effect: 'archive {1}',
+                        effect: '归档 {1}',
                         target: context.source
                     }))
                 })
             ]),
-            effect: 'make a token creature{1}{2}',
+            effect: '制造1个代标生物{1}{2}',
             effectArgs: (context) =>
                 context.game.cardsInPlay.reduce(
                     (total, card) =>
@@ -43,7 +43,7 @@ class Hypothesize extends Card {
                     context.player.deck.length > 0
                         ? 1
                         : 0)
-                    ? [' and archive ', context.source]
+                    ? [' 并归档 ', context.source]
                     : ['', '']
         });
     }

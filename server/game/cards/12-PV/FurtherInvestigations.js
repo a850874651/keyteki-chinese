@@ -22,7 +22,7 @@ class FurtherInvestigations extends Card {
                     location: 'hand',
                     gameAction: ability.actions.archive()
                 },
-                message: '{0} uses {1} to archive {3} cards',
+                message: '{0} 使用 {1} 归档 {3} 张卡牌',
                 messageArgs: (context) => [
                     context.player,
                     context.source,

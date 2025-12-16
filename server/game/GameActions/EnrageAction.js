@@ -1,10 +1,10 @@
-const CardGameAction = require('./CardGameAction');
+﻿const CardGameAction = require('./CardGameAction');
 
 class EnrageAction extends CardGameAction {
     setup() {
         this.name = 'enrage';
         this.targetType = ['creature'];
-        this.effectMsg = 'enrage {0}';
+        this.effectMsg = '激怒 {0}';
     }
 
     canAffect(card, context) {

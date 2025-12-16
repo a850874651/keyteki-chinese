@@ -11,13 +11,13 @@ class ExoticPivot extends Card {
             then: {
                 condition: (context) => !context.preThenEvent.card.hasHouse('logos'),
                 gameAction: ability.actions.steal({ amount: 3 }),
-                message: '{0} uses {1} to steal 3 amber from {3}',
+                message: '{0} 使用 {1} 窃取3琥珀从 {3}',
                 messageArgs: (context) => [context.player.opponent]
             }
         });
 
         this.fate({
-            effect: 'prevent creatures from being played this turn',
+            effect: '本回合无法再打出生物',
             gameAction: ability.actions.untilPlayerTurnEnd({
                 targetController: 'opponent',
                 effect: ability.effects.playerCannot(

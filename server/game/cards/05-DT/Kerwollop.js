@@ -18,7 +18,7 @@ class Kerwollop extends Card {
                     ).length
                 })),
                 message:
-                    '{0} uses {1} to gain 1 amber for each creature destroyed this way ({3}), gaining a total of {4} amber',
+                    '{0} 使用 {1} 获得1琥珀，通过每种被这个方式摧毁的生物 ({3}), 共获得 {4} 琥珀',
                 messageArgs: (context) => [
                     context.preThenEvents
                         .filter(

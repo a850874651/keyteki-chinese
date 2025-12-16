@@ -1,4 +1,4 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class MontyBankEvilTwin extends Card {
     // Elusive.
@@ -6,7 +6,7 @@ class MontyBankEvilTwin extends Card {
     // Action: Steal 1A for each A on Monty Bank.
     setupCardAbilities(ability) {
         this.play({
-            effect: 'exalt {0} twice',
+            effect: '褒奖 {0} 2次',
             gameAction: [ability.actions.exalt(), ability.actions.exalt()]
         });
 

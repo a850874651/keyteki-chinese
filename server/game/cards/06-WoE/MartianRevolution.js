@@ -1,4 +1,4 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class MartianRevolution extends Card {
     // Play: Destroy each friendly creature. For each creature
@@ -6,7 +6,7 @@ class MartianRevolution extends Card {
     setupCardAbilities(ability) {
         this.play({
             effect:
-                'destroy each friendly creature and make a token creature for each creature destroyed this way',
+                '摧毁每个友方生物，每有1个生物以此种方式被摧毁，制造1个代标生物',
             gameAction: ability.actions.destroy((context) => ({
                 target: context.player.creaturesInPlay
             })),

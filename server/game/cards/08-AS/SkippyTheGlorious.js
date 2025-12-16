@@ -1,13 +1,13 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class SkippyTheGlorious extends Card {
     // Play/After Reap: Archive the top card of your deck.
-    // Scrap: Use an opponent’s artifact as if it were yours. If you do, draw
+    // Scrap: Use an opponent窶冱 artifact as if it were yours. If you do, draw
     // a card.
     setupCardAbilities(ability) {
         this.play({
             reap: true,
-            effect: 'archive the top card of their deck',
+            effect: '归档其牌库顶的卡牌',
             gameAction: ability.actions.archive((context) => ({
                 target: context.player.deck.length > 0 ? context.player.deck[0] : []
             }))

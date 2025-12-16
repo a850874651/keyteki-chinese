@@ -15,7 +15,7 @@ class DroseraRelic extends Card {
             },
             then: {
                 gameAction: ability.actions.steal({ amount: 2 }),
-                message: '{0} uses {1} to steal 2 amber'
+                message: '{0} 使用 {1} 窃取2琥珀'
             }
         });
 
@@ -30,7 +30,7 @@ class DroseraRelic extends Card {
             },
             then: {
                 gameAction: ability.actions.transferAmber({ amount: 2 }),
-                message: '{0} uses {1} to get paid 2 amber from {3}',
+                message: '{0} 使用 {1} 获得了 {3} 支付的2琥珀',
                 messageArgs: (context) => [context.game.activePlayer]
             }
         });

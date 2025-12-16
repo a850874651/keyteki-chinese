@@ -25,7 +25,7 @@ class Tribute extends Card {
                         ability: context.ability,
                         secondResolution: true
                     }),
-                    message: '{0} exalts {3} to repeat the effect of {1}',
+                    message: '{0} 褒奖 {3} 重复 {1} 的效果',
                     messageArgs: context.target
                 }
             })

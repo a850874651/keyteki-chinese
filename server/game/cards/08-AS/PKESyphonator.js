@@ -1,12 +1,12 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class PKESyphonator extends Card {
-    // Play: Gain 1A for each card in your opponent’s archives. Your
+    // Play: Gain 1A for each card in your opponent窶冱 archives. Your
     // opponent discards each card in their archives.
     setupCardAbilities(ability) {
         this.play({
             condition: (context) => !!context.player.opponent,
-            effect: "gain {1} amber, and discard all cards in {2}'s archives",
+            effect: "获得 {1} 琥珀并弃掉 {2} 存档中的所有卡牌",
             effectArgs: (context) => [
                 context.player.opponent.archives.length,
                 context.player.opponent

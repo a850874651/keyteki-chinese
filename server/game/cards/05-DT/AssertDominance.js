@@ -1,4 +1,4 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class AssertDominance extends Card {
     // Play: For the remainder of the turn, a friendly creature gains skirmish. Ready and fight with that creature.
@@ -15,7 +15,7 @@ class AssertDominance extends Card {
                     }),
                     ability.actions.sequential([ability.actions.ready(), ability.actions.fight()])
                 ]),
-                effect: 'give skirmish to {0}, then ready and fight with it'
+                effect: '给与 {0} 游击, 然后重整并使其战斗'
             }
         });
     }

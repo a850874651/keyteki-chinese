@@ -1,4 +1,4 @@
-const PlayerAction = require('./PlayerAction');
+﻿const PlayerAction = require('./PlayerAction');
 
 class RearrangeCardsAction extends PlayerAction {
     setDefaultProperties() {
@@ -8,7 +8,7 @@ class RearrangeCardsAction extends PlayerAction {
     setup() {
         super.setup();
         this.name = 'rearrangeDeck';
-        this.effectMsg = `look at the top ${this.amount} cards of their deck and rearrange them in any order`;
+        this.effectMsg = `查看了其牌库顶的 ${this.amount} 张卡牌并以任意顺序放回`;
     }
 
     defaultTargets(context) {

@@ -39,7 +39,7 @@ class Decadence extends Card {
                     cardCondition: (card) => card !== preThenContext.targets['Move 1 amber'],
                     gameAction: ability.actions.placeAmber()
                 },
-                message: '{0} uses {1} to place 1 amber on {2}'
+                message: '{0} 使用 {1} 放置1琥珀在 {2} 上'
             })
         });
     }

@@ -1,4 +1,4 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class TreokTheWise extends Card {
     // After Reap: Choose a creature. Until the start of your next turn, that creature gains invulnerable.
@@ -11,7 +11,7 @@ class TreokTheWise extends Card {
                     effect: ability.effects.addKeyword({ invulnerable: 1 })
                 })
             },
-            effect: 'give {0} invulnerable until the start of their next turn'
+            effect: '给与 {0} 无敌效果直到你下回合开始'
         });
     }
 }

@@ -27,7 +27,7 @@ class CodeMonkey extends Card {
                     target: context.source.neighbors
                 }))
             ],
-            message: '{0} uses {1} to archive {2} and gain {3} amber',
+            message: '{0} 使用 {1} 归档 {2} 并获得 {3} 琥珀',
             messageArgs: (context) => [
                 context.player,
                 context.source,

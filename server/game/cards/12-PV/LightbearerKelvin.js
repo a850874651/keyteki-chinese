@@ -31,7 +31,7 @@ class LightbearerKelvin extends Card {
                     myControl: true,
                     target: context.preThenEvent ? context.preThenEvent.card : null
                 })),
-                message: '{0} uses {1} to put {3} into play under their control',
+                message: '{0} 使用 {1} 将 {3} 放置入场置于其控制下',
                 messageArgs: (context) => [
                     context.preThenEvent ? context.preThenEvent.card : 'nothing'
                 ]

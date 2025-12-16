@@ -1,10 +1,10 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class AemberStorm extends Card {
     // Play: For each A in your pool, deal 1 D to an enemy creature.
     setupCardAbilities(ability) {
         this.play({
-            effect: 'deal 1 damage to an enemy creature for each amber in their pool',
+            effect: '其琥珀池中每有1琥珀，对1个敌方生物造成1点伤害',
             condition: (context) => !!context.player.opponent,
             gameAction: ability.actions.allocateDamage((context) => ({
                 controller: 'opponent',

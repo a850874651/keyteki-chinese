@@ -1,4 +1,4 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class ReachAdvantage extends Card {
     // (T) Play: If the tide is high, a friendly creature captures 3A. Otherwise, raise the tide.
@@ -17,8 +17,8 @@ class ReachAdvantage extends Card {
             effect: '{1}{2}',
             effectArgs: (context) =>
                 context.player.isTideHigh()
-                    ? ['capture 3 amber on ', context.target]
-                    : ['raise the tide']
+                    ? ['抢占3琥珀在 ', context.target]
+                    : ['抬升潮位']
         });
     }
 }

@@ -1,4 +1,4 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class StrongerTogether extends Card {
     // Play: Ready each Star Alliance creature that has 2 non-Star
@@ -19,7 +19,7 @@ class StrongerTogether extends Card {
                 action: ability.actions.ready()
             })),
             effect:
-                'ready each Star Alliance creature that has 2 non-Star Alliance neighbors of different houses'
+                '重整每个拥有两个属于不同势力的非星盟相邻生物的星盟生物'
         });
     }
 }

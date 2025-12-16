@@ -1,4 +1,4 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class CountrysideCrusher extends Card {
     // After Fight: If your opponent is haunted, you may ready and
@@ -18,7 +18,7 @@ class CountrysideCrusher extends Card {
                     ability.actions.fight()
                 ])
             },
-            effect: 'ready and fight with {1}',
+            effect: '重整并使 {1} 战斗',
             effectArgs: (context) => [context.target]
         });
 

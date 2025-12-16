@@ -17,7 +17,7 @@ class AeroOFore extends Card {
                         amount: 2,
                         target: context.player.creaturesInPlay.filter((card) => card.isOnFlank())
                     })),
-                    message: '{0} uses {1} to capture 2 amber onto {3}',
+                    message: '{0} 使用 {1} 抢占2琥珀放在 {3} 上',
                     messageArgs: (context) => [
                         context.player.creaturesInPlay.filter((card) => card.isOnFlank())
                     ]

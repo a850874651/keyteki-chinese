@@ -1,10 +1,10 @@
-const CardGameAction = require('./CardGameAction');
+﻿const CardGameAction = require('./CardGameAction');
 
 class ExhaustAction extends CardGameAction {
     setup() {
         this.name = 'exhaust';
         this.targetType = ['creature', 'artifact'];
-        this.effectMsg = 'exhaust {0}';
+        this.effectMsg = '横置 {0}';
     }
 
     canAffect(card, context) {

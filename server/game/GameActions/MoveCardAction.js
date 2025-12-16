@@ -1,4 +1,4 @@
-const CardGameAction = require('./CardGameAction');
+﻿const CardGameAction = require('./CardGameAction');
 
 class MoveCardAction extends CardGameAction {
     setDefaultProperties() {
@@ -10,7 +10,7 @@ class MoveCardAction extends CardGameAction {
     setup() {
         super.setup();
         this.name = 'move';
-        this.effectMsg = 'move {0}';
+        this.effectMsg = '移动 {0}';
     }
 
     canAffect(card, context) {

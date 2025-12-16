@@ -1,9 +1,9 @@
-const GameAction = require('./GameAction');
+﻿const GameAction = require('./GameAction');
 
 class ConditionalAction extends GameAction {
     setup() {
         super.setup();
-        this.effectMsg = 'conditionally do something';
+        this.effectMsg = '有条件地做某事';
     }
 
     setDefaultTarget(func) {

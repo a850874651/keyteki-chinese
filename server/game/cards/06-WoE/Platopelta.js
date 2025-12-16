@@ -1,4 +1,4 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class Platopelta extends Card {
     // After Reap: If Platopelta has a wisdom counter, draw 1 card,
@@ -9,8 +9,8 @@ class Platopelta extends Card {
             effect: '{1}',
             effectArgs: () => [
                 this.hasToken('wisdom')
-                    ? 'draw a card, archive a card, and optionally put a wisdom counter on Aristotlmimus'
-                    : 'archive a card'
+                    ? '抽1张牌，归档1张牌，并可以把1个智慧指示物放在亚里士多德似龙上'
+                    : '归档1张牌'
             ],
             gameAction: ability.actions.conditional((context) => ({
                 condition: context.source.hasToken('wisdom'),

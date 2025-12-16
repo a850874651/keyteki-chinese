@@ -15,14 +15,14 @@ class SearchAction extends PlayerAction {
 
         this.name = 'search';
         this.effectMsg =
-            'search their ' +
-            this.location.join(' and ') +
-            ' for ' +
+            '检索他的 ' +
+            this.location.join(' 和 ') +
+            '  ' +
             (this.cardName
                 ? this.cardName
                 : !this.amount || this.amount === 1
-                ? 'a card'
-                : (this.exactly ? 'exactly ' : 'up to ') + this.amount + ' cards');
+                ? '1张卡牌'
+                : (this.exactly ? ' ' : '至多 ') + this.amount + ' 张卡牌');
     }
 
     canAffect(player, context) {
@@ -60,7 +60,7 @@ class SearchAction extends PlayerAction {
                             switch (this.destination) {
                                 case 'discard':
                                     context.game.addMessage(
-                                        `{0} discards ${cardMessageInfo}`,
+                                        `{0} 弃掉了 ${cardMessageInfo}`,
                                         player,
                                         cards,
                                         cards.length
@@ -68,7 +68,7 @@ class SearchAction extends PlayerAction {
                                     break;
                                 case 'archives':
                                     context.game.addMessage(
-                                        `{0} archives ${cardMessageInfo}`,
+                                        `{0} 归档了 ${cardMessageInfo}`,
                                         player,
                                         cards,
                                         cards.length
@@ -76,7 +76,7 @@ class SearchAction extends PlayerAction {
                                     break;
                                 case 'deck':
                                     context.game.addMessage(
-                                        `{0} puts ${cardMessageInfo} on top of their deck`,
+                                        `{0} 把 ${cardMessageInfo} 放到了其牌库顶`,
                                         player,
                                         cards,
                                         cards.length
@@ -84,7 +84,7 @@ class SearchAction extends PlayerAction {
                                     break;
                                 default:
                                     context.game.addMessage(
-                                        `{0} takes ${cardMessageInfo} into their hand`,
+                                        `{0} 将 ${cardMessageInfo} 置入手中`,
                                         player,
                                         cards,
                                         cards.length
@@ -113,7 +113,7 @@ class SearchAction extends PlayerAction {
                                 }
                             }
                         } else {
-                            context.game.addMessage("{0} doesn't take anything", player);
+                            context.game.addMessage("{0} 未拿取任何卡牌", player);
 
                             if (this.location.includes('deck')) {
                                 player.shuffleDeck();

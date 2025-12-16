@@ -29,7 +29,7 @@ class BumpInTheNight extends Card {
                         ability: preThenContext.ability,
                         secondResolution: true
                     }),
-                    message: '{0} uses {1} to repeat the preceding effect'
+                    message: '{0} 使用 {1} 重复之前的效果'
                 }
             })
         });

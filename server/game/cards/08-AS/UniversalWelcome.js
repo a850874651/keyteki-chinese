@@ -1,8 +1,8 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class UniversalWelcome extends Card {
     // Play: Take control of the enemy creature in the center of your
-    // opponent’s battleline.
+    // opponent窶冱 battleline.
     setupCardAbilities(ability) {
         this.play({
             condition: (context) => !!context.player.opponent,
@@ -11,7 +11,7 @@ class UniversalWelcome extends Card {
                 effect: ability.effects.takeControl(context.player),
                 target: context.player.opponent.creaturesInPlay.filter((c) => c.isInCenter())
             })),
-            effect: 'take control of {1}',
+            effect: '获得 {1} 的控制权',
             effectArgs: (context) =>
                 context.player.opponent.creaturesInPlay.filter((c) => c.isInCenter())
         });

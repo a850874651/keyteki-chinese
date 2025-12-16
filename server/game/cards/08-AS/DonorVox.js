@@ -1,4 +1,4 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class DonorVox extends Card {
     // Scrap: Give a friendly Mars creature two +1 power counters.
@@ -10,7 +10,7 @@ class DonorVox extends Card {
                 controller: 'self',
                 gameAction: ability.actions.addPowerCounter({ amount: 2 })
             },
-            effect: 'give {0} two +1 power counters'
+            effect: '给与 {0} 2个+1力量指示物'
         });
     }
 }

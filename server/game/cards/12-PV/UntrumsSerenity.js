@@ -1,4 +1,4 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class UntrumsSerenity extends Card {
     // Omega.
@@ -6,7 +6,7 @@ class UntrumsSerenity extends Card {
     setupCardAbilities(ability) {
         this.play({
             effect:
-                "destroy each creature and artifact, discard {1} from their archives and {2} from their hand, discard {3} from {4}'s archives and {5} from {4}'s hand, then refill hands",
+                "摧毁所有生物和神器,弃掉 {1} 从其档案并弃掉 {2} 从其手中, 弃掉 {3} 从 {4} 的档案并弃掉 {5} 从 {4} 的手中, 所有玩家抽满手牌",
             effectArgs: (context) => [
                 context.player.archives.length > 0 ? context.player.archives : 'nothing',
                 context.player.hand.length > 0 ? context.player.hand : 'nothing',

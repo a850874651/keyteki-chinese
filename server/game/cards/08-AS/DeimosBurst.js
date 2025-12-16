@@ -14,7 +14,7 @@ class DeimosBurst extends Card {
             then: {
                 alwaysTriggers: true,
                 message:
-                    '{0} uses {1} to destroy all of their artifacts and flank creatures and gain {3} amber',
+                    '{0} 使用 {1} 摧毁所有神器和侧翼生物并获得 {3} 琥珀',
                 messageArgs: (context) => [
                     context.preThenEvents.filter((event) => !event.cancelled).length
                 ],

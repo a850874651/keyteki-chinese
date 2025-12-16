@@ -40,15 +40,6 @@ const KeyforgeGameSettings = ({ formProps }) => {
                     onChange={formProps.handleChange}
                     onBlur={formProps.handleBlur}
                 />
-                <Form.Check
-                    id='useHalfSizedCards'
-                    name='gameOptions.useHalfSizedCards'
-                    label={t('Use half sized card images')}
-                    type='switch'
-                    checked={formProps.values.gameOptions.useHalfSizedCards}
-                    onChange={formProps.handleChange}
-                    onBlur={formProps.handleBlur}
-                />
             </Form.Row>
         </Panel>
     );

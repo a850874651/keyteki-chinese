@@ -29,7 +29,7 @@ class Phantasmaquid extends Card {
             condition: (context) =>
                 !context.player.opponent || context.player.opponent.creaturesInPlay.length === 0,
             gameAction: ability.actions.destroy(),
-            message: '{0} is destroyed as there are no enemy creatures in play',
+            message: '{0} 被摧毁了因为没有敌方生物',
             messageArgs: (context) => [context.source.name]
         });
     }

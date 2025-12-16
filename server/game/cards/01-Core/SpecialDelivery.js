@@ -25,7 +25,7 @@ class SpecialDelivery extends Card {
                     );
                 },
                 gameAction: ability.actions.purge({ target: preThenContext.target }),
-                message: '{0} uses {1} to purge {3}',
+                message: '{0} 使用 {1} 清除 {3}',
                 messageArgs: () => [preThenContext.target]
             })
         });

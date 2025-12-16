@@ -1,11 +1,11 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class IslandOfMisfitToys extends Card {
     // Action: Return each Geistoid card from your discard pile to
     // your hand. Purge Island of Misfit Toys.
     setupCardAbilities(ability) {
         this.action({
-            effect: 'return {1} to their hand and purge {0}',
+            effect: '将 {1} 返回其手中并清除 {0}',
             effectArgs: (context) => [
                 context.player.discard.filter((card) => card.hasHouse('geistoid'))
             ],

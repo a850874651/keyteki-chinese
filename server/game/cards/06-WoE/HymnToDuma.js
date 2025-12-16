@@ -15,7 +15,12 @@ class HymnToDuma extends Card {
                         cardType: 'creature',
                         controller: 'self',
                         gameAction: ability.actions.capture({ amount: 2 })
-                    }
+                    },
+                    message: '{0} 使用 {3} 来抢占 {4} 琥魄, 放置在 {2}',
+                    messageArgs: (context) => [
+                        this,
+                        context.player.opponent.amber >= 2 ? 2 : context.player.opponent.amber
+                    ]
                 }
             })
         });

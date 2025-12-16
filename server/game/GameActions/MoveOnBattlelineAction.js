@@ -1,4 +1,4 @@
-const CardGameAction = require('./CardGameAction');
+﻿const CardGameAction = require('./CardGameAction');
 
 class MoveOnBattlelineAction extends CardGameAction {
     setDefaultProperties() {
@@ -10,7 +10,7 @@ class MoveOnBattlelineAction extends CardGameAction {
     setup() {
         this.name = 'moveOnBattleline';
         this.targetType = ['creature'];
-        this.effectMsg = 'put {0} into play';
+        this.effectMsg = '将 {0} 放置入场';
     }
 
     canAffect(card, context) {

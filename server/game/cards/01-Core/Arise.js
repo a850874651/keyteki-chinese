@@ -7,7 +7,7 @@ class Arise extends Card {
             target: {
                 mode: 'house'
             },
-            effect: 'return {1} to their hand',
+            effect: '•Ô‰ñ {1} “ž‘´Žè”v',
             effectArgs: (context) => [
                 context.player.discard.filter(
                     (card) => card.type === 'creature' && card.hasHouse(context.house)

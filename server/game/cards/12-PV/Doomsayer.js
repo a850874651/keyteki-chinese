@@ -4,7 +4,7 @@ class Doomsayer extends Card {
     // After Reap: Move each A from a friendly creature to the common supply. For each A moved, deal 2D to a creature.
     setupCardAbilities(ability) {
         this.reap({
-            effect: 'move amber from friendly creatures to the common supply and deal damage',
+            effect: '移动琥珀从友方生物到公共供应堆，并造成伤害',
             target: {
                 controller: 'self',
                 location: 'play area',

@@ -11,7 +11,7 @@ class SuggestionBox extends Card {
                 gameAction: ability.actions.moveCard((context) => ({
                     promptWithHandlerMenu: {
                         activePromptTitle: 'Choose a card to add to hand (discarding the others)',
-                        message: '{0} uses {1} to add a card to hand',
+                        message: '{0} 使用 {1} 将1张卡牌加入手中',
                         messageArgs: (cards) => [context.player, context.source, cards[0]],
                         cards: context.player.deck.slice(0, 5)
                     },

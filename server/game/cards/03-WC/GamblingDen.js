@@ -18,7 +18,7 @@ class GamblingDen extends Card {
                 target: context.event.player.deck[0]
             })),
             then: (preThenContext) => ({
-                message: '{0} uses {1} to {3} 2 amber',
+                message: '{0} 使用 {1} 来 {3} 2琥珀',
                 messageArgs: (context) => [
                     context.preThenEvent.card.hasHouse(preThenContext.house) ? 'gain' : 'lose'
                 ],

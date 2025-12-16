@@ -1,10 +1,10 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class ThermalDepletion extends Card {
     // Play: Until the start of your next turn, creatures cannot ready.
     setupCardAbilities(ability) {
         this.play({
-            effect: 'prevent creatures from readying until the start of their next turn',
+            effect: '在你的下回合开始前，生物无法重整',
             gameAction: ability.actions.untilPlayerNextTurnStart({
                 targetController: 'any',
                 effect: ability.effects.cardCannot('ready')

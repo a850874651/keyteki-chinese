@@ -21,7 +21,7 @@ class RogueOperation extends Card {
                             .filter((card) => card.location === 'discard')
                     ).length
                 })),
-                message: '{0} uses {1} to steal {3} amber from {4}',
+                message: '{0} 使用 {1} 窃取 {3} 琥珀从 {4}',
                 messageArgs: (context) => [
                     context.game.getHousesInPlay(
                         context.preThenEvents

@@ -1,4 +1,4 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class PourTal extends Card {
     // (T) Play: If the tide is high, archive Pour-tal. Otherwise, raise the tide.
@@ -13,7 +13,7 @@ class PourTal extends Card {
             }),
             effect: '{1}',
             effectArgs: (context) =>
-                context.player.isTideHigh() ? 'archive itself' : 'raise the tide'
+                context.player.isTideHigh() ? '归档其自身' : '抬升潮位'
         });
     }
 }

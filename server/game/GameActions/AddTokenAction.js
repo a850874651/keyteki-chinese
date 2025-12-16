@@ -1,3 +1,4 @@
+const { EVENTS } = require('../Events/types');
 const CardGameAction = require('./CardGameAction');
 
 class AddTokenAction extends CardGameAction {
@@ -14,24 +15,24 @@ class AddTokenAction extends CardGameAction {
     setup() {
         this.name = 'addToken';
         this.targetType = ['creature', 'artifact', 'upgrade'];
-        let token = '+1 power counters';
+        let token = '+1 ?͗ʎw????';
         if (this.amount === 1) {
-            token = '+1 power counter';
+            token = '+1 ?͗ʎw????';
         }
 
         if (this.multiplier > 1) {
             this.effectMsg =
-                'multiply the number of ' +
+                '???ݠ{0} ?㓉' +
                 (this.type === 'power' ? token : this.type) +
-                ' on {0} by ' +
+                ' ???ʘ??Ƞ' +
                 this.multiplier;
         } else {
             this.effectMsg =
-                'place ' +
+                '???u ' +
                 this.amount +
-                ' ' +
+                '?? ' +
                 (this.type === 'power' ? token : this.type) +
-                ' on {0} ' +
+                ' ?ݠ{0} ?㧠+
                 (this.multiplier > 1 ? 'for each ' + token + ' on {0}' : '');
         }
     }
@@ -42,7 +43,7 @@ class AddTokenAction extends CardGameAction {
 
     getEvent(card, context) {
         return super.createEvent(
-            'onAddToken',
+            EVENTS.onAddToken,
             { card: card, context: context, amount: this.amount },
             () =>
                 card.addToken(

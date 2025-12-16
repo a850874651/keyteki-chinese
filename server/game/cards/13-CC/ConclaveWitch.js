@@ -1,11 +1,11 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class ConclaveWitch extends Card {
     // Enhance 1.
     // Action: Gain 1 amber for each friendly Untamed creature.
     setupCardAbilities(ability) {
         this.action({
-            effect: 'gain {1} amber, one for each friendly Untamed creature',
+            effect: '获得 {1} 琥珀, 根据友方狂兽生物的数量',
             effectArgs: (context) => [
                 context.player.creaturesInPlay.filter((card) => card.hasHouse('untamed')).length
             ],

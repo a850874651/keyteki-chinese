@@ -1,4 +1,4 @@
-const CardListSelector = require('./CardListSelector');
+﻿const CardListSelector = require('./CardListSelector');
 const GameAction = require('./GameAction');
 
 class SequentialFightAction extends GameAction {
@@ -14,7 +14,7 @@ class SequentialFightAction extends GameAction {
             this.forEach = [this.forEach];
         }
 
-        this.effectMsg = 'do several things';
+        this.effectMsg = '做多件事';
     }
 
     hasLegalTarget(context) {

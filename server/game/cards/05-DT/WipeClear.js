@@ -1,4 +1,4 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class WipeClear extends Card {
     // Play: Deal 1D to each creature. Destroy each upgrade.
@@ -12,7 +12,7 @@ class WipeClear extends Card {
                     target: context.game.creaturesInPlay.flatMap((card) => card.upgrades || [])
                 }))
             ]),
-            effect: 'deal 1D to each creature and destroy each upgrade'
+            effect: '对每个生物造成1点伤害并摧毁每个升级'
         });
     }
 }

@@ -21,7 +21,7 @@ class EeOnTheFringes extends Card {
             },
             then: () => ({
                 gameAction: ability.actions.steal(),
-                message: '{0} uses {1} to steal 1 amber'
+                message: '{0} 使用 {1} 窃取1琥珀'
             })
         });
     }

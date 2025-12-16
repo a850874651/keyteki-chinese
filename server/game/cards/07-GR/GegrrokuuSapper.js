@@ -1,4 +1,4 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class GegrrokuuSapper extends Card {
     // Play/After Fight: Take control of an enemy artifact. Give your
@@ -16,7 +16,7 @@ class GegrrokuuSapper extends Card {
                     effect: ability.effects.takeControl(context.player)
                 }))
             },
-            effect: 'take control of {0} and give control of {1}',
+            effect: '获得 {0} 的控制权并给与 {1} 的控制权',
             effectArgs: (context) => [context.source],
             then: {
                 alwaysTriggers: true,
@@ -41,7 +41,7 @@ class GegrrokuuSapper extends Card {
                     controller: 'opponent',
                     gameAction: ability.actions.destroy()
                 },
-                message: '{0} uses {1} to destroy {2}',
+                message: '{0} 使用 {1} 摧毁 {2}',
                 messageArgs: (context) => [context.player, context.source, context.target]
             }
         });

@@ -1,10 +1,10 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class TheCircleOfLife extends Card {
     // Each haunted player gains 2.
     setupCardAbilities(ability) {
         this.play({
-            effect: 'make {1} gain {2} amber and {3} gain {4} amber',
+            effect: '使 {1} 获得 {2} 琥珀并使 {3} 获得 {4} 琥珀',
             effectArgs: (context) => [
                 context.player,
                 context.player.isHaunted() ? 2 : 0,

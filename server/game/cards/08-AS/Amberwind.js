@@ -5,7 +5,7 @@ class Amberwind extends Card {
     // After Reap: Move 1A from Æmberwind to your pool.
     setupCardAbilities(ability) {
         this.play({
-            effect: 'exalt {0} 3 times',
+            effect: '褒奖 {0} 3 次',
             gameAction: [ability.actions.exalt(), ability.actions.exalt(), ability.actions.exalt()]
         });
 

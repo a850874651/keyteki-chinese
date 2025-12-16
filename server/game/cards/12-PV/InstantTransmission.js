@@ -5,7 +5,7 @@ class InstantTransmission extends Card {
     setupCardAbilities(ability) {
         this.omni({
             gameAction: [ability.actions.draw({ amount: 3 }), ability.actions.destroy()],
-            message: '{0} uses {1} to draw 3 cards and destroy it',
+            message: '{0} 使用 {1} 抽3张卡牌并摧毁它',
             messageArgs: (context) => [context.player, context.source]
         });
     }

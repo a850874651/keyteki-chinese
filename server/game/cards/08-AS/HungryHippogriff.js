@@ -1,4 +1,4 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class HungryHippogriff extends Card {
     // Each other friendly creature gains, “Destroyed: Move each A
@@ -8,7 +8,7 @@ class HungryHippogriff extends Card {
             match: (card, context) => card !== context.source && card.type === 'creature',
             effect: ability.effects.gainAbility('destroyed', {
                 gameAction: ability.actions.removeAmber({ all: true }),
-                effect: 'move all amber from {0} to their pool',
+                effect: '移动所有琥珀从 {0} 到其琥珀池中',
                 then: {
                     gameAction: ability.actions.gainAmber((context) => ({
                         amount: context.preThenEvent.amount

@@ -23,7 +23,7 @@ class ReallocationAccessory extends Card {
                         }
                     },
                     message:
-                        "{0} uses {1} to deal damage to a creature for each card in {3}'s archives",
+                        "{0} 使用 {1} 对1个生物造成伤害根据 {3} 档案内卡牌的数量",
                     messageArgs: (context) => [
                         !context.select || context.select === 'Mine'
                             ? context.player

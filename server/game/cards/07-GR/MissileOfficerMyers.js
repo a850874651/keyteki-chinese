@@ -1,4 +1,4 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class MissileOfficerMyers extends Card {
     // Play/After Reap: Resolve the play effect of a neighboring
@@ -20,7 +20,7 @@ class MissileOfficerMyers extends Card {
         });
 
         this.scrap({
-            effect: 'play 1 card that is not of the active house during their turn',
+            effect: '本回合可以打出1张非当前势力的卡牌',
             gameAction: ability.actions.untilPlayerTurnEnd((context) => ({
                 effect: ability.effects.canPlayNonHouse(context.player.activeHouse)
             }))

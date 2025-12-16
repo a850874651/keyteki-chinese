@@ -1,4 +1,4 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class AllTideUp extends Card {
     // (T) Play: If the tide is high, gain 1A. Otherwise, raise the tide.
@@ -11,7 +11,7 @@ class AllTideUp extends Card {
             }),
             effect: '{1}',
             effectArgs: (context) =>
-                context.player.isTideHigh() ? 'gain 1 amber' : 'raise the tide'
+                context.player.isTideHigh() ? '获得1琥珀' : '抬升潮位'
         });
     }
 }

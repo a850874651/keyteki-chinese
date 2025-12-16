@@ -17,7 +17,7 @@ class VendorHyertula extends Card {
                         effect: ability.effects.takeControl(context.player)
                     }))
                 },
-                message: '{0} uses {1} to take control of {3}',
+                message: '{0} 使用 {1} 获得 {3} 的控制权',
                 messageArgs: (context) => [context.target],
                 then: (context) => ({
                     gameAction: ability.actions.cardLastingEffect({

@@ -101,7 +101,7 @@ class AbilityTargetSelect extends AbilityTarget {
                 if (this.name === 'target') {
                     context.select = choice;
                 }
-                context.game.addMessage("{0} chooses option '{1}'", player, choice);
+                context.game.addMessage("{0} 选择了选项 '{1}'", player, choice);
             };
         });
 

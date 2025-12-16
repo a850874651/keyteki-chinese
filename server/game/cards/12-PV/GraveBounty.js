@@ -16,7 +16,7 @@ class GraveBounty extends Card {
                     target: context.player.opponent,
                     amount: 2
                 })),
-                message: '{0} uses {1} to make {3} lose 2 amber',
+                message: '{0} 使用 {1} 使 {3} 失去2琥珀',
                 messageArgs: (context) => [context.player.opponent]
             }
         });

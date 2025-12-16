@@ -1,3 +1,4 @@
+﻿const { EVENTS } = require('../Events/types');
 const GameAction = require('./GameAction');
 
 class ChangeActiveHouseAction extends GameAction {
@@ -9,9 +10,9 @@ class ChangeActiveHouseAction extends GameAction {
     setup() {
         super.setup();
         if (Array.isArray(this.house)) {
-            this.effectMsg = 'change their active house';
+            this.effectMsg = '改变其当前势力';
         } else {
-            this.effectMsg = 'change their active house to ' + this.house;
+            this.effectMsg = '改变其当前势力为 ' + this.house;
         }
     }
 
@@ -28,11 +29,11 @@ class ChangeActiveHouseAction extends GameAction {
             let choices = this.house.map((house) => ({ text: house, icon: house }));
             let handlers = this.house.map((house) => () => {
                 this.house = house;
-                this.effectMsg = 'change their active house to ' + house;
+                this.effectMsg = '改变其当前势力为 ' + house;
             });
 
             context.game.promptWithHandlerMenu(context.player, {
-                activePromptTitle: 'Choose a house',
+                activePromptTitle: '选择势力',
                 context: context,
                 choices: choices,
                 handlers: handlers
@@ -40,13 +41,13 @@ class ChangeActiveHouseAction extends GameAction {
         } else if (Array.isArray(this.house) && this.house.length === 1) {
             // If only one house in array, use it directly
             this.house = this.house[0];
-            this.effectMsg = 'change their active house to ' + this.house;
+            this.effectMsg = '改变其当前势力为 ' + this.house;
         }
     }
 
     getEventArray(context) {
         return [
-            super.createEvent('unnamedEvent', { house: this.house }, () => {
+            super.createEvent(EVENTS.unnamedEvent, { house: this.house }, () => {
                 if (this.player) {
                     this.player.activeHouse = this.house;
                 } else {

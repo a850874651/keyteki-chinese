@@ -1,8 +1,8 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class Plan10 extends Card {
     // At the end of each player's turn, return a card from under Plan
-    // 10 to its owner’s hand. If there are no cards under Plan 10, destroy
+    // 10 to its owner窶冱 hand. If there are no cards under Plan 10, destroy
     // Plan 10.
     //
     // Play: Put each non-Mars creature faceup under Plan 10.
@@ -29,7 +29,7 @@ class Plan10 extends Card {
             then: {
                 alwaysTriggers: true,
                 condition: (context) => context.source.childCards.length === 0,
-                message: '{0} is destroyed as there are no cards under it',
+                message: '{0} 被摧毁了因为没有卡牌在其下方',
                 gameAction: ability.actions.destroy()
             }
         });

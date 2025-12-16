@@ -14,7 +14,7 @@ class AwfulAtoll extends Card {
         this.persistentEffect({
             effect: ability.effects.terminalCondition({
                 condition: (context) => context.game.creaturesInPlay.length === 0,
-                message: '{0} is destroyed as there are no creatures in play',
+                message: '{0} 被摧毁了，因为没有生物在场',
                 gameAction: ability.actions.destroy()
             })
         });

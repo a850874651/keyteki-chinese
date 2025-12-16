@@ -1,4 +1,4 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class Incensed extends Card {
     // Play: For the remainder of the turn, each friendly creature
@@ -6,7 +6,7 @@ class Incensed extends Card {
     setupCardAbilities(ability) {
         this.play({
             effect:
-                "give each friendly creature 'After Fight: Gain 1 amber' for the remainder of the turn",
+                "在本回合剩余时间内给与每个友方生物 '战斗后：获得1琥珀' 的效果",
             gameAction: ability.actions.untilPlayerTurnEnd({
                 match: (card) => card.type === 'creature',
                 effect: ability.effects.gainAbility('fight', {

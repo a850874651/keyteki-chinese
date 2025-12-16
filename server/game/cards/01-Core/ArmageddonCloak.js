@@ -1,4 +1,4 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class ArmageddonCloak extends Card {
     // This creature gains hazardous 2 and, Destroyed: Fully heal this creature and destroy Armageddon Cloak instead.
@@ -7,7 +7,7 @@ class ArmageddonCloak extends Card {
             effect: [
                 ability.effects.addKeyword({ hazardous: 2 }),
                 ability.effects.gainAbility('destroyed', {
-                    effect: 'heal all damage from {0} and destroy {1} instead',
+                    effect: '治疗{0}所有伤害并摧毁{1}',
                     effectArgs: () => this,
                     gameAction: [
                         ability.actions.heal({ fully: true }),

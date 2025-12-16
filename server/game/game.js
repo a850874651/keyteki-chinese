@@ -385,11 +385,11 @@ class Game extends EventEmitter {
         if (!player.showDeck) {
             player.showDeck = true;
 
-            this.addMessage('{0} is looking at their deck', player);
+            this.addMessage('{0} 正在查看他的牌库', player);
         } else {
             player.showDeck = false;
 
-            this.addMessage('{0} stops looking at their deck', player);
+            this.addMessage('{0} 停止了查看牌库', player);
         }
     }
 
@@ -423,7 +423,7 @@ class Game extends EventEmitter {
 
         for (const player of this.getPlayers()) {
             if (player.amber >= 6) {
-                this.addAlert('success', '{0} forges a key after time', player);
+                this.addAlert('success', '{0} 在时间后造了1把钥匙', player);
 
                 player.amber -= 6;
                 player.keys[Object.keys(player.keys).find((key) => !player.keys[key])] = true;
@@ -479,7 +479,7 @@ class Game extends EventEmitter {
                 );
 
                 this.addMessage(
-                    '{0} chooses house {1} to break tie and collects {2} amber with cards: {3}',
+                    '{0} 选择了势力 {1} 进行破平并收集了 {2} 琥珀通过卡牌: {3}',
                     player,
                     player.tieBreakHouse,
                     amber,
@@ -496,7 +496,7 @@ class Game extends EventEmitter {
             if (potentialWinnersByHouse.length === 1) {
                 this.recordWinner(potentialWinnersByHouse[0], 'house after time');
             } else {
-                this.addMessage('tie-break condition not fulfilled, winner is the first player');
+                this.addMessage('破平条件未满足, 胜利者是先手玩家');
                 this.recordWinner(this.firstPlayer, 'first player after time');
             }
         }
@@ -533,7 +533,7 @@ class Game extends EventEmitter {
             return;
         }
 
-        this.addAlert('success', '{0} has won the game', winner);
+        this.addAlert('success', '{0} 赢得了游戏', winner);
         this.setWins(winner.name, winner.wins ? winner.wins + 1 : 1);
         this.winner = winner;
         this.finishedAt = new Date();
@@ -608,7 +608,7 @@ class Game extends EventEmitter {
         }
 
         if (showMessage) {
-            this.addMessage('{0} changed tide to {1}', player, Constants.Tide.toString(level));
+            this.addMessage('{0} 改变了潮位为 {1}', player, Constants.Tide.toString(level));
         }
     }
 
@@ -671,7 +671,7 @@ class Game extends EventEmitter {
             return;
         }
 
-        this.addAlert('info', '{0} concedes', player);
+        this.addAlert('info', '{0} 投降了', player);
 
         let otherPlayer = this.getOtherPlayer(player);
 
@@ -1107,7 +1107,7 @@ class Game extends EventEmitter {
         this.playersAndSpectators[user.username] = new Spectator(socketId, user);
         this.addAlert(
             'info',
-            '{0} has joined the game as a spectator',
+            '{0} 作为观战者加入了游戏',
             this.playersAndSpectators[user.username]
         );
 
@@ -1152,7 +1152,7 @@ class Game extends EventEmitter {
             return;
         }
 
-        this.addAlert('info', '{0} has left the game', player);
+        this.addAlert('info', '{0} 离开了游戏', player);
 
         this.jsonForUsers[player.name] = undefined;
 
@@ -1177,13 +1177,13 @@ class Game extends EventEmitter {
         this.jsonForUsers[player.name] = undefined;
 
         if (this.isSpectator(player)) {
-            this.addAlert('info', '{0} has disconnected.', player);
+            this.addAlert('info', '{0} 断线了.', player);
 
             delete this.playersAndSpectators[playerName];
         } else {
             this.addAlert(
                 'info',
-                '{0} has disconnected.  The game will wait up to 30 seconds for them to reconnect',
+                '{0} 断连了.  游戏将等待其重连',
                 player
             );
 
@@ -1225,7 +1225,7 @@ class Game extends EventEmitter {
         if (this.isSpectator(player) || !this.started) {
             delete this.playersAndSpectators[playerName];
         } else {
-            this.addAlert('warning', '{0} has failed to connect to the game', player);
+            this.addAlert('warning', '{0} 连接到游戏失败', player);
 
             player.disconnectedAt = new Date();
 
@@ -1247,7 +1247,7 @@ class Game extends EventEmitter {
 
         this.jsonForUsers[player.name] = undefined;
 
-        this.addAlert('info', '{0} has reconnected', player);
+        this.addAlert('info', '{0} 已重连', player);
     }
 
     checkGameState(hasChanged = false, modifiedByPlayer) {
@@ -1318,7 +1318,7 @@ class Game extends EventEmitter {
 
     endRound() {
         if (this.activePlayer.canForgeKey()) {
-            this.addAlert('success', '{0} declares Check!', this.activePlayer);
+            this.addAlert('success', '{0} 宣告了Check!', this.activePlayer);
         }
 
         this.activePlayer.endRound();
@@ -1344,7 +1344,7 @@ class Game extends EventEmitter {
             .map((player) => `${player.name}: ${player.amber} amber (${this.playerKeys(player)})`)
             .join(' ');
 
-        this.addAlert('endofturn', `End of turn ${this.round}`);
+        this.addAlert('endofturn', `回合 ${this.round} 结束`);
 
         if (
             !this.activePlayer.opponent ||
@@ -1354,7 +1354,7 @@ class Game extends EventEmitter {
         }
 
         this.addMessage(playerResources);
-        this.addAlert('startofturn', `Turn ${this.round} - {0}`, this.activePlayer);
+        this.addAlert('startofturn', `回合 ${this.round} - {0}`, this.activePlayer);
         this.checkForTimeExpired();
     }
 

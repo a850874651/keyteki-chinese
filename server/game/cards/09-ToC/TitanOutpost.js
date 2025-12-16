@@ -12,7 +12,7 @@ class TitanOutpost extends Card {
             },
             then: {
                 gameAction: ability.actions.makeTokenCreature(),
-                message: '{0} uses {1} to make a token creature',
+                message: '{0} 使用 {1} 制造1个代标生物',
                 then: {
                     alwaysTriggers: true,
                     target: {
@@ -20,7 +20,7 @@ class TitanOutpost extends Card {
                         controller: 'self',
                         gameAction: ability.actions.archive()
                     },
-                    message: '{0} uses {1} to archive a card'
+                    message: '{0} 使用 {1} 归档1张卡牌'
                 }
             }
         });

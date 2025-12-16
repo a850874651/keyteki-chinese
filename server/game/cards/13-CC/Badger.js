@@ -6,7 +6,7 @@ class Badger extends Card {
         this.play({
             reap: true,
             effect:
-                'deal 3 damage to an enemy creature after playing a Brobnar creature for the remainder of the turn',
+                '在本回合剩余时间内，每打出一个蛮族生物，对一个敌方生物造成3点伤害',
             gameAction: ability.actions.untilPlayerTurnEnd((context) => ({
                 when: {
                     onCardPlayed: (event) =>
@@ -19,7 +19,7 @@ class Badger extends Card {
                     promptForSelect: {
                         cardType: 'creature',
                         controller: 'opponent',
-                        message: '{0} uses {1} to deal 3 damage to {2}',
+                        message: '{0} 使用 {1} 造成了3点伤害对 {2}',
                         messageArgs: (card) => [context.player, context.source, card]
                     },
                     amount: 3

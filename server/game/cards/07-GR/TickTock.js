@@ -28,7 +28,7 @@ class TickTock extends Card {
                             location: ['discard', 'hand'],
                             gameAction: ability.actions.archive()
                         },
-                        message: '{0} uses {1} to archive {3}{4}',
+                        message: '{0} 使用 {1} 归档 {3}{4}',
                         messageArgs: (context) => [
                             context.target.length === 0
                                 ? 'nothing from discard'

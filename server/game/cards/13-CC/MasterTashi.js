@@ -1,4 +1,4 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class MasterTashi extends Card {
     // After Fight: Ready and reap with a neighboring creature.
@@ -14,7 +14,7 @@ class MasterTashi extends Card {
                     ability.actions.reap()
                 ])
             },
-            effect: 'ready and reap with a neighboring creature'
+            effect: '重整并使用一个相邻生物进行收获'
         });
 
         this.reap({
@@ -27,7 +27,7 @@ class MasterTashi extends Card {
                     ability.actions.fight()
                 ])
             },
-            effect: 'ready and fight with a neighboring creature'
+            effect: '重整并使用一个相邻生物进行战斗'
         });
     }
 }

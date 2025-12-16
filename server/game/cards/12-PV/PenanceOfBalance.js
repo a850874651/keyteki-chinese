@@ -29,7 +29,7 @@ class PenanceOfBalance extends Card {
                                 cardType: 'creature',
                                 controller: 'opponent',
                                 numCards: difference,
-                                message: '{0} uses {1} to destroy {2}',
+                                message: '{0} 使用 {1} 摧毁 {2}',
                                 messageArgs: (cards) => [context.player, this, cards]
                             },
                             effectMsg: 'destroy {1} enemy creatures',

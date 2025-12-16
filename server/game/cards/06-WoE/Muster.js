@@ -1,4 +1,4 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class Muster extends Card {
     // Play: Make a token creature. If your opponent has more A than you, archive Muster
@@ -13,10 +13,10 @@ class Muster extends Card {
                     trueGameAction: ability.actions.archive()
                 })
             ]),
-            effect: 'make a token creature{1}',
+            effect: '制造1个代标生物{1}',
             effectArgs: (context) =>
                 context.player.opponent && context.player.opponent.amber > context.player.amber
-                    ? ' and archive Muster'
+                    ? ' 并归档集结'
                     : ''
         });
     }

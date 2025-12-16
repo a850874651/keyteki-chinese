@@ -1,4 +1,4 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class PrecociousFragment extends Card {
     // After Reap: If you are haunted, gain 1. Otherwise, discard the
@@ -14,7 +14,7 @@ class PrecociousFragment extends Card {
             }),
             effect: '{1}',
             effectArgs: (context) => [
-                context.player.isHaunted() ? 'gain 1 amber' : 'discard the top card of their deck'
+                context.player.isHaunted() ? '获得1琥珀' : '弃掉其牌库顶的卡牌'
             ]
         });
     }

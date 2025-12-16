@@ -1,11 +1,11 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class Skollenbuzzz extends Card {
     // Play/After Reap: You may put a creature from your hand faceup
-    // under Skŏllĕnbŭzzz.
+    // under Skﾅ粛lﾄ貧bﾅｭzzz.
     //
-    // Destroyed: Put each creature under Skŏllĕnbŭzzz into play under your
-    // control. Put Skŏllĕnbŭzzz on the top of your deck.
+    // Destroyed: Put each creature under Skﾅ粛lﾄ貧bﾅｭzzz into play under your
+    // control. Put Skﾅ粛lﾄ貧bﾅｭzzz on the top of your deck.
     setupCardAbilities(ability) {
         this.play({
             reap: true,
@@ -26,7 +26,7 @@ class Skollenbuzzz extends Card {
                 controller: context.source.controller,
                 forEach: context.source.childCards
             })),
-            effect: 'put each creature under {0} into play, and put {0} on top of their deck',
+            effect: '将 {0} 下的每个生物放置入场, 并把 {0} 放到其牌库顶',
             then: {
                 alwaysTriggers: true,
                 gameAction: ability.actions.returnToDeck()
@@ -35,6 +35,6 @@ class Skollenbuzzz extends Card {
     }
 }
 
-Skollenbuzzz.id = 'skŏllĕnbŭzzz';
+Skollenbuzzz.id = 'skﾅ粛lﾄ貧bﾅｭzzz';
 
 module.exports = Skollenbuzzz;

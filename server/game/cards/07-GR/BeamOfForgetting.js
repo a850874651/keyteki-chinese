@@ -1,13 +1,13 @@
-const _ = require('underscore');
+﻿const _ = require('underscore');
 const Card = require('../../Card.js');
 
 class BeamOfForgetting extends Card {
-    // Play: Reveal a random card from your opponent’s hand. Put that
+    // Play: Reveal a random card from your opponent窶冱 hand. Put that
     // card on the bottom of their deck.
     setupCardAbilities(ability) {
         this.play({
             condition: (context) => context.player.opponent,
-            effect: "reveal a random card from {1}'s hand and put it on the bottom of their deck",
+            effect: "随机展示1张 {1} 的手牌并将其放到其牌库底",
             effectArgs: (context) => context.player.opponent,
             gameAction: ability.actions.reveal((context) => ({
                 location: 'hand',

@@ -20,7 +20,7 @@ class Tealnar extends Card {
                 target: context.game.creaturesInPlay.filter((card) => card.hasToken('damage'))
             })),
             then: {
-                message: '{0} uses {1} to give {0} {3} amber',
+                message: '{0} 使用 {1} 为 {0} 获得 {3} 琥珀',
                 messageArgs: (context) => {
                     let successfulEvents = context.preThenEvents.filter(
                         (event) => !event.cancelled && event.amount > 0

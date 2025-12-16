@@ -1,4 +1,4 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class MagistrateCrispus extends Card {
     // At the end of your turn, each player takes control of each
@@ -23,7 +23,7 @@ class MagistrateCrispus extends Card {
                     )
                     .map((card) => ability.effects.takeControl(card.owner))
             })),
-            effect: 'return control of each creature and artifact to their owners'
+            effect: '将每个生物和神器的控制权交还予其所有者'
         });
     }
 }

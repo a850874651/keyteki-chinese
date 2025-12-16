@@ -1,4 +1,4 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class HonoredBattlemaster extends Card {
     // Enhance . Action: Ready and fight with one of Honored Battlemaster's neighbors.
@@ -13,7 +13,7 @@ class HonoredBattlemaster extends Card {
                     ability.actions.fight()
                 ])
             },
-            effect: 'ready and fight with a neighboring creature'
+            effect: '重整并使一个相邻生物战斗'
         });
     }
 }

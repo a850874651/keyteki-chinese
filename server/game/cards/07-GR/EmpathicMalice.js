@@ -13,7 +13,7 @@ class EmpathicMalice extends Card {
             then: {
                 alwaysTriggers: true,
                 condition: (context) => context.player.isHaunted(),
-                message: '{0} uses {1} to put {1} on the bottom of their deck',
+                message: '{0} 使用 {1} 将 {1} 放到其牌库底',
                 gameAction: ability.actions.returnToDeck((context) => ({
                     target: context.source,
                     bottom: true

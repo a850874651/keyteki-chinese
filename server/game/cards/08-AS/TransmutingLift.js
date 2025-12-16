@@ -1,4 +1,4 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class TransmutingLift extends Card {
     // This creature gains, “After Reap: You may move this creature
@@ -10,7 +10,7 @@ class TransmutingLift extends Card {
                     target: context.source,
                     player: context.source.controller
                 })),
-                effect: 'move {1} anywhere in their battleline',
+                effect: '移动 {1} 到其战线的任意位置',
                 effectArgs: (context) => [context.source]
             })
         });

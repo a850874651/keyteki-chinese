@@ -1,4 +1,4 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class FiendishApprentice extends Card {
     // Play: For each friendly Dis creature, deal 3D to an enemy creature.
@@ -9,7 +9,7 @@ class FiendishApprentice extends Card {
                 damageStep: 3,
                 numSteps: context.player.creaturesInPlay.filter((c) => c.hasHouse('dis')).length
             })),
-            effect: 'to deal 3 damage to a creature for each friendly Dis creature'
+            effect: '每有1个友方冥府生物，对1个生物造成3点伤害'
         });
     }
 }

@@ -16,7 +16,7 @@ class FreshMarks extends Card {
                     controller: 'opponent',
                     gameAction: ability.actions.exalt({ amount: 1 })
                 },
-                message: '{0} uses {1} to exalt {2}'
+                message: '{0} 使用 {1} 褒奖 {2}'
             }
         });
     }

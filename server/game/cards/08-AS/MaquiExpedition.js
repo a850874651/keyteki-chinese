@@ -1,4 +1,4 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class MaquiExpedition extends Card {
     // Play: Gain control of an enemy flank creature.
@@ -13,7 +13,7 @@ class MaquiExpedition extends Card {
                     effect: ability.effects.takeControl(context.player)
                 }))
             },
-            effect: 'take control of {1}',
+            effect: '获得 {1} 的控制权',
             effectArgs: (context) => [context.target]
         });
     }

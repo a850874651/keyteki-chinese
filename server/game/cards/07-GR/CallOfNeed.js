@@ -1,10 +1,10 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class CallOfNeed extends Card {
     // Play: Search your deck for a card and discard it.
     setupCardAbilities(ability) {
         this.play({
-            effect: 'search deck for a card and discard it',
+            effect: '从你的牌库中查找1张牌并弃掉他',
             gameAction: ability.actions.search({
                 location: ['deck'],
                 amount: 1,

@@ -10,7 +10,7 @@ class CleansingWave extends Card {
                 target: context.game.creaturesInPlay.filter((card) => card.hasToken('damage'))
             })),
             then: {
-                message: '{1} heals {3}, gaining {0} {4} amber',
+                message: '{1} 治疗了 {3},  {0} 获得了 {4} 琥珀',
                 messageArgs: (context) => {
                     let successfulEvents = context.preThenEvents.filter(
                         (event) => !event.cancelled && event.amount > 0

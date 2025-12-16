@@ -23,7 +23,7 @@ class NeutronShark extends Card {
             then: (preThenContext) => ({
                 alwaysTriggers: true,
                 condition: (context) => context.player.deck.length > 0,
-                message: '{0} discards the top card of their deck due to {1}: {3}{4}{5}{6}',
+                message: '{0} 弃掉了牌库顶的卡牌，通过 {1}: {3}{4}{5}{6}',
                 messageArgs: (context) => {
                     let topCard = context.player.deck[0];
                     if (topCard) {

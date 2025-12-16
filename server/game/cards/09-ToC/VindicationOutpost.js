@@ -12,7 +12,7 @@ class VindicationOutpost extends Card {
             },
             then: {
                 gameAction: ability.actions.makeTokenCreature(),
-                message: '{0} uses {1} to make a token creature, and ready and fight with it',
+                message: '{0} 使用 {1} 制造1个代标生物并重整它使其战斗',
                 then: {
                     gameAction: ability.actions.sequential([
                         ability.actions.ready((context) => ({

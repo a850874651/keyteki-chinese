@@ -1,4 +1,4 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class Benny extends Card {
     // Elusive.
@@ -21,7 +21,7 @@ class Benny extends Card {
             gameAction: ability.actions.purge((context) => ({
                 target: context.source
             })),
-            effect: 'purge {0} because there are no other friendly Mars creatures'
+            effect: '清除 {0} 因为没有其他友方火星生物'
         });
     }
 }

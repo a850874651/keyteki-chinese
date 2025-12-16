@@ -18,7 +18,7 @@ class Stomp extends Card {
                     controller: 'self',
                     gameAction: ability.actions.exalt()
                 },
-                message: '{0} uses {1} to exalt {2}'
+                message: '{0} 使用 {1} 褒奖 {2}'
             }
         });
     }

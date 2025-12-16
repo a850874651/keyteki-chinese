@@ -10,7 +10,7 @@ class CityStateInterest extends Card {
             preferActionPromptMessage: true,
             then: {
                 alwaysTriggers: true,
-                message: '{0} uses {1} to capture 1 amber onto {3}',
+                message: '{0} 使用 {1} 抢占1琥珀到 {3}',
                 messageArgs: (context) => [
                     context.preThenEvents
                         .filter((event) => !event.cancelled && event.card)

@@ -13,7 +13,7 @@ class Mender extends Card {
             },
             then: {
                 alwaysTriggers: true,
-                message: '{0} uses {1} to heal and ward {3}',
+                message: '{0} 使用 {1} 治疗并界护 {3}',
                 messageArgs: (context) => [
                     context.game.creaturesInPlay.filter((c) => c.hasTrait('robot'))
                 ],

@@ -16,7 +16,7 @@ class LookOverThere extends Card {
                         !context.preThenEvent.destroyEvent.destroyedByDamageDealt ||
                         context.preThenEvent.destroyEvent.cancelled),
                 gameAction: ability.actions.steal(),
-                message: '{0} uses {1} to steal 1 amber'
+                message: '{0} 使用 {1} 窃取1琥珀'
             }
         });
     }

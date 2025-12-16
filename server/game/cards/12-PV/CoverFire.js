@@ -1,10 +1,10 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class CoverFire extends Card {
     // Play: Your opponent loses half of their A (rounding down). Steal 1A.
     setupCardAbilities(ability) {
         this.play({
-            effect: 'make {1} lose half their amber and steal 1 amber',
+            effect: '使 {1} 失去其一半的琥珀并窃取1琥珀',
             effectArgs: (context) => context.player.opponent,
             gameAction: ability.actions.sequential([
                 ability.actions.loseAmber((context) => ({

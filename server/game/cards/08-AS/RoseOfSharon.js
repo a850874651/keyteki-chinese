@@ -1,8 +1,8 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class RoseOfSharon extends Card {
-    // Action: Choose one of Rose of Sharon’s neighbors. Deal damage
-    // to an enemy creature equal to that neighbor’s power. If your
+    // Action: Choose one of Rose of Sharon窶冱 neighbors. Deal damage
+    // to an enemy creature equal to that neighbor窶冱 power. If your
     // red key is forged, repeat the preceding effect.
     setupCardAbilities(ability) {
         this.action({
@@ -41,7 +41,7 @@ class RoseOfSharon extends Card {
                         }))
                     }
                 },
-                message: '{0} uses {1} to repeat the preceding effect and deal {3} damage to {4}',
+                message: '{0} 使用 {1} 重复之前的效果造成 {3} 点伤害对 {4}',
                 messageArgs: (context) => [
                     context.targets.neighbor2 ? context.targets.neighbor2.getPower() : 0,
                     context.targets.enemy2

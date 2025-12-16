@@ -1,4 +1,4 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class Colossipede extends Card {
     // Each friendly creature with A on it gains, “After Fight: Move
@@ -9,7 +9,7 @@ class Colossipede extends Card {
             match: (card) => card.type === 'creature',
             effect: ability.effects.gainAbility('fight', {
                 gameAction: ability.actions.removeAmber({ all: true }),
-                effect: 'move all amber from {0} to their pool',
+                effect: '移动所有琥珀从 {0} 到其琥珀池中',
                 then: {
                     gameAction: ability.actions.gainAmber((context) => ({
                         amount: context.preThenEvent.amount

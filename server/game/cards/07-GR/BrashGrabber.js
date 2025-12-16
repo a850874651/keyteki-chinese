@@ -1,4 +1,4 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class BrashGrabber extends Card {
     // If you are not haunted, Brash Grabber enters play enraged.
@@ -22,7 +22,7 @@ class BrashGrabber extends Card {
                     recipient: context.player
                 }))
             },
-            effect: 'move 1 amber from {0} to their pool'
+            effect: '移动1琥珀从 {0} 到其琥珀池中'
         });
     }
 }

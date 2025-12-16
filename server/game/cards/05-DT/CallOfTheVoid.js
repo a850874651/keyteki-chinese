@@ -1,4 +1,4 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class CallOfTheVoid extends Card {
     // Play: Exhaust a creature. If it was already exhausted, destroy it instead and its controller loses 1A.
@@ -21,8 +21,8 @@ class CallOfTheVoid extends Card {
             effect: '{1}{0}{2}',
             effectArgs: (context) =>
                 !context.target.exhausted
-                    ? ['exhaust ', '']
-                    : ['destroy ', ' and make its controller lose 1 amber']
+                    ? ['横置 ', '']
+                    : ['摧毁 ', ' 并使其控制者失去1琥珀']
         });
     }
 }

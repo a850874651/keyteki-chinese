@@ -9,7 +9,7 @@ class DBGobber extends Card {
         });
 
         this.scrap({
-            message: '{0} uses {1} to make each player with 7 or more amber lose 2 amber',
+            message: '{0} 使用 {1} 使得所有拥有至少7琥珀的玩家失去2琥珀',
             messageArgs: (context) => [context.player, context.source],
             gameAction: [
                 ability.actions.conditional({

@@ -1,57 +1,13 @@
-import React from 'react';
+﻿import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useEffect } from 'react';
 import { NavDropdown } from 'react-bootstrap';
 
 const languages = [
     {
-        name: 'English',
-        value: 'en'
-    },
-    {
-        name: 'Español',
-        value: 'es'
-    },
-    {
-        name: 'Deutsch',
-        value: 'de'
-    },
-    {
-        name: 'Português',
-        value: 'pt'
-    },
-    {
-        name: 'Italiano',
-        value: 'it'
-    },
-    {
-        name: 'Français',
-        value: 'fr'
-    },
-    {
-        name: 'Polski',
-        value: 'pl'
-    },
-    {
-        name: 'ไทย',
-        value: 'th'
-    },
-    {
         name: '简体中文',
         value: 'zhhans'
     },
-    {
-        name: '繁體中文',
-        value: 'zhhant'
-    },
-    {
-        name: '한국어',
-        value: 'ko'
-    },
-    {
-        name: 'Tiếng Việt',
-        value: 'vi'
-    }
 ];
 
 const LanguageSelector = () => {

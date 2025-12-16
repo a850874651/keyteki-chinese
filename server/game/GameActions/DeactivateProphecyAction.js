@@ -8,7 +8,7 @@ class DeactivateProphecyAction extends PlayerAction {
     setup() {
         super.setup();
         this.name = 'deactivateProphecy';
-        this.effectMsg = 'deactivate {0}';
+        this.effectMsg = '反激活了 {0}';
         this.effectArgs = () => [this.prophecyCard];
     }
 
@@ -38,7 +38,7 @@ class DeactivateProphecyAction extends PlayerAction {
             event.player.deactivateProphecy(this.prophecyCard);
 
             context.game.addMessage(
-                '{0} deactivates their prophecy {1}',
+                '{0} 反激活了他的预言 {1}',
                 event.player,
                 this.prophecyCard
             );

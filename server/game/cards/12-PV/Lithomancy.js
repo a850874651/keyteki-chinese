@@ -4,7 +4,7 @@ class Lithomancy extends Card {
     // Action: Reveal the top card of your deck. If the revealed card belongs to the active house, discard it and gain 2 amber.
     setupCardAbilities(ability) {
         this.action({
-            effect: 'reveal {1}',
+            effect: '展示了 {1}',
             condition: (context) => context.player.deck.length > 0,
             effectArgs: (context) => context.player.deck[0],
             gameAction: ability.actions.reveal((context) => ({
@@ -23,7 +23,7 @@ class Lithomancy extends Card {
                     })),
                     ability.actions.gainAmber({ amount: 2 })
                 ],
-                message: '{0} uses {1} to discard {3} and gain 2 amber',
+                message: '{0} 使用 {1} 弃掉 {3} 并获得2琥珀',
                 messageArgs: (context) => [
                     context.player.deck.length > 0 ? context.player.deck[0] : 'nothing'
                 ]

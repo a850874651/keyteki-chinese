@@ -1,4 +1,4 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class SubmersivePrinciple extends Card {
     // (T) Play: Each player loses 1A. If the tide is high, each player loses half their A instead (rounding down the loss).
@@ -16,7 +16,7 @@ class SubmersivePrinciple extends Card {
                             : 1
                 }))
             ],
-            effect: 'make {1} lose {2} amber and {3} lose {4} amber',
+            effect: '使 {1} 失去 {2} 琥珀且 {3} 失去 {4} 琥珀',
             effectArgs: (context) => [
                 context.player,
                 context.player.isTideHigh()

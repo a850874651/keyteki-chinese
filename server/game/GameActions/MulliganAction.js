@@ -1,10 +1,10 @@
-const PlayerAction = require('./PlayerAction');
+﻿const PlayerAction = require('./PlayerAction');
 
 class MulliganAction extends PlayerAction {
     setup() {
         super.setup();
         this.name = 'mulligan';
-        this.effectMsg = 'take a mulligan';
+        this.effectMsg = '调度了手牌';
     }
 
     defaultTargets(context) {
@@ -13,7 +13,7 @@ class MulliganAction extends PlayerAction {
 
     getEvent(player, context) {
         return super.createEvent('unnamedEvent', { player: player, context: context }, (event) => {
-            context.game.addMessage('{0} mulligans their hand', this);
+            context.game.addMessage('{0} 调度了手牌', this);
             event.player.takeMulligan();
         });
     }

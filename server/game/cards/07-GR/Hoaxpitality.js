@@ -1,8 +1,8 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class Hoaxpitality extends Card {
     // Play: Choose an enemy creature and a friendly creature. Until
-    // the end of the turn, the friendly creature’s power is equal to
+    // the end of the turn, the friendly creature窶冱 power is equal to
     // the enemy creature's power.
     setupCardAbilities(ability) {
         this.play({
@@ -25,7 +25,7 @@ class Hoaxpitality extends Card {
                     }))
                 }
             },
-            effect: 'give {1} the power of {2} for the remainder of the turn',
+            effect: '在本回合剩余时间内使得 {1} 的力量等同于 {2} 的力量',
             effectArgs: (context) => [context.targets.friendly, context.targets.enemy]
         });
     }

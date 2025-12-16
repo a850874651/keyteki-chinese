@@ -22,7 +22,7 @@ class CosmicRecompense extends Card {
                     }))
                 ])
             },
-            effect: 'deal 3 damage to {0} and steal 1 amber from {1} if it is not destroyed',
+            effect: '造成3点伤害对 {0} 并窃取1琥珀从 {1} 如果它没有被摧毁',
             effectArgs: (context) => [context.player.opponent],
             then: {
                 alwaysTriggers: true,
@@ -42,13 +42,13 @@ class CosmicRecompense extends Card {
                     ])
                 },
                 message:
-                    '{0} uses {1} to deal 3 damage to {3} and steal 1 amber from {4} if it is not destroyed',
+                    '{0} 使用 {1} 造成3点伤害对 {3} 并窃取1琥珀从 {4} 如果其没有被摧毁',
                 messageArgs: (context) => [context.target, context.player.opponent]
             }
         });
 
         this.fate({
-            effect: 'prevent playing, using, or discarding cards for the remainder of the turn',
+            effect: '本回合剩余时间内无法打出，使用，弃掉卡牌',
             gameAction: ability.actions.untilPlayerTurnEnd({
                 targetController: 'opponent',
                 effect: [

@@ -18,7 +18,7 @@ class AngryMob extends Card {
                 let card = context.player.deck.find((card) => card.id === 'angry-mob');
                 if (card) {
                     return {
-                        message: '{0} takes {3} into their hand',
+                        message: '{0} 拿取 {3} 到其手中',
                         messageArgs: card,
                         gameAction: ability.actions.returnToHand({
                             target: card,

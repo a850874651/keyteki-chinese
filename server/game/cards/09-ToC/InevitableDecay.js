@@ -15,7 +15,7 @@ class InevitableDecay extends Card {
                 gameAction: ability.actions.makeTokenCreature((context) => ({
                     amount: context.preThenEvents.filter((event) => !event.cancelled).length
                 })),
-                message: '{0} uses {1} to make {3} token creatures',
+                message: '{0} 使用 {1} 制造 {3} 个代标生物',
                 messageArgs: (context) => [
                     Math.ceil(context.preThenEvents.filter((event) => !event.cancelled).length)
                 ]

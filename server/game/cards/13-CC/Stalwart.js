@@ -1,4 +1,4 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class Stalwart extends Card {
     // Deploy. Skirmish. Taunt.
@@ -10,7 +10,7 @@ class Stalwart extends Card {
                 target: context.source,
                 player: context.player
             })),
-            effect: 'move {0} anywhere in their battleline'
+            effect: '移动 {0} 到其战线的任意位置'
         });
     }
 }

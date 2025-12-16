@@ -1,4 +1,4 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class MightClub extends Card {
     //Action: Ready and enrage a creature.
@@ -11,7 +11,7 @@ class MightClub extends Card {
                     ability.actions.enrage()
                 ])
             },
-            effect: 'ready and enrage {0}'
+            effect: '重整并激怒 {0}'
         });
     }
 }

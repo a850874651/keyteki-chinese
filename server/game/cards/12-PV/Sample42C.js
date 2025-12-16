@@ -1,4 +1,4 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class Sample42C extends Card {
     // Action: Move 1A from your opponent’s pool to Sample 42-C.
@@ -7,7 +7,7 @@ class Sample42C extends Card {
     setupCardAbilities(ability) {
         this.action({
             condition: (context) => !!context.player.opponent,
-            effect: 'move 1 amber from {1} to {0}',
+            effect: '移动1琥珀从 {1} 到 {0}',
             effectArgs: (context) => [context.player.opponent],
             gameAction: [
                 ability.actions.loseAmber((context) => ({
@@ -19,7 +19,7 @@ class Sample42C extends Card {
             then: {
                 condition: (context) => context.source.amber >= 4,
                 gameAction: [ability.actions.forgeKey({ atNoCost: true }), ability.actions.purge()],
-                message: '{0} uses {1} to forge a key at no cost'
+                message: '{0} 使用 {1} 无费用锻造1把钥匙'
             }
         });
 

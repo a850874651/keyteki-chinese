@@ -12,7 +12,7 @@ class InspiringOration extends Card {
             },
             then: (preThenContext) => ({
                 alwaysTriggers: true,
-                message: '{0} uses {1} to make {3}{4}',
+                message: '{0} 使用 {1} 制造 {3}{4}',
                 messageArgs: () =>
                     preThenContext.target.amber === 1
                         ? ['a token creature', '']

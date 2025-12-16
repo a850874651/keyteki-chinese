@@ -1,4 +1,4 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class BellatoranRecruiter extends Card {
     // Enhance .
@@ -19,7 +19,7 @@ class BellatoranRecruiter extends Card {
                 ])
             },
             effect:
-                'give {0} +2 power and +2 armor for the remainder of the turn, then ready and fight with it'
+                '在本回合的剩余时间内给与 {0} +2力量和+2护甲, 重整并使其战斗'
         });
     }
 }

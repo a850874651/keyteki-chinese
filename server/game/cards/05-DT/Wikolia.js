@@ -1,10 +1,10 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class Wikolia extends Card {
     // Reap: Keys cost +2A during your opponent's next turn.
     setupCardAbilities(ability) {
         this.reap({
-            effect: "increase key cost by 2 during {1}'s next turn",
+            effect: "{1}的下个回合钥匙费用+2",
             effectArgs: (context) => context.player.opponent,
             gameAction: ability.actions.duringOpponentNextTurn({
                 targetController: 'any',

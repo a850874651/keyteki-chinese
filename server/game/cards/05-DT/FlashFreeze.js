@@ -13,7 +13,7 @@ class FlashFreeze extends Card {
                 gameAction: ability.actions.exhaust({
                     promptForSelect: {
                         cardType: 'creature',
-                        message: '{0} uses {1} to exhaust {2}',
+                        message: '{0} 使用 {1} 横置 {2}',
                         messageArgs: (card) => [context.player, context.source, card]
                     }
                 })

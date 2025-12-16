@@ -1,4 +1,4 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class CloneHome extends Card {
     // Play: Make a token creature. If there are more friendly
@@ -17,12 +17,12 @@ class CloneHome extends Card {
                     }))
                 })
             ]),
-            effect: 'make a token creature{1}{2}',
+            effect: '制造1个代标生物{1}{2}',
             effectArgs: (context) =>
                 !!context.player.opponent &&
                 context.player.creaturesInPlay.length >
                     context.player.opponent.creaturesInPlay.length
-                    ? [' and archive ', context.source]
+                    ? [' 并归档 ', context.source]
                     : ['', '']
         });
     }

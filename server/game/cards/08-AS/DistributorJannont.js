@@ -13,7 +13,7 @@ class DistributorJanoont extends Card {
             then: (preContext) => ({
                 gameAction: ability.actions.placeAmber({
                     promptForSelect: {
-                        message: '{0} uses {1} to place 1 amber on {2}',
+                        message: '{0} Žg—p {1} «1˜¢àæàß•úÝ {2} ã',
                         messageArgs: (card) => [preContext.player, preContext.source, card],
                         cardType: 'creature',
                         activePromptTitle: 'Choose another creature',

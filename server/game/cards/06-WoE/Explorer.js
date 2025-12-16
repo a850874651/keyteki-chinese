@@ -14,7 +14,7 @@ class Explorer extends Card {
                     handlers: [() => []]
                 }
             })),
-            message: 'Choose to keep or discard top of deck.'
+            message: '选择保持或弃掉牌库顶的牌'
         });
     }
 }

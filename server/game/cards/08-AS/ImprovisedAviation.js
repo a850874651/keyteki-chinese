@@ -1,12 +1,12 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class ImprovisedAviation extends Card {
     // Play: The next creature you play this turn enters play
-    // ready. Until the end of your turn it gains, ”After Fight:
-    // Shuffle an artifact from play into its owner’s deck.
+    // ready. Until the end of your turn it gains, 窶戡fter Fight:
+    // Shuffle an artifact from play into its owner窶冱 deck.
     setupCardAbilities(ability) {
         this.play({
-            effect: 'have the next friendly creature enter play ready and gain a fight effect',
+            effect: '使下个友方生物以重整状态入场并获得战斗后效果',
             gameAction: [
                 ability.actions.lastingEffect({
                     until: {

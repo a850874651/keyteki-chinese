@@ -1,4 +1,4 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 const EventRegistrar = require('../../eventregistrar.js');
 
 class ThePromisedBlade extends Card {
@@ -38,7 +38,7 @@ class ThePromisedBlade extends Card {
                     }
                 }
             },
-            effect: 'give control of {0} to {1}',
+            effect: '把 {0} 的控制权给 {1}',
             effectArgs: (context) => [
                 !!context.selects.select && context.selects.select.choice === 'Me'
                     ? context.game.activePlayer

@@ -1,4 +1,4 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class TheFirstScroll extends Card {
     // After a player forges a key, each creature they control captures 1A from its own side.
@@ -7,7 +7,7 @@ class TheFirstScroll extends Card {
             when: {
                 onForgeKey: () => true
             },
-            effect: 'make each friendly creature capture 1 amber from their side',
+            effect: '每个其控制的生物从其控制者处抢占1琥珀',
             gameAction: ability.actions.capture((context) => ({
                 target: context.game.activePlayer.creaturesInPlay,
                 player: context.game.activePlayer

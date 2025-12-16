@@ -1,3 +1,4 @@
+﻿const { EVENTS } = require('../Events/types');
 const CardGameAction = require('./CardGameAction');
 
 class ArchiveAction extends CardGameAction {
@@ -14,23 +15,23 @@ class ArchiveAction extends CardGameAction {
             this.reveal ||
             this.target.every((card) => ['play area', 'discard', 'purged'].includes(card.location))
         ) {
-            this.effectMsg = 'archive {0}';
+            this.effectMsg = '归档了 {0}';
         } else if (this.target.length === 1) {
-            this.effectMsg = 'archive a card';
+            this.effectMsg = '归档了1张卡牌';
         } else {
-            this.effectMsg = 'archive ' + this.target.length.toString() + ' cards';
+            this.effectMsg = '归档了 ' + this.target.length.toString() + ' 张卡牌';
         }
     }
 
     getEvent(card, context) {
-        return super.createEvent('onCardArchived', { card: card, context: context }, () => {
+        return super.createEvent(EVENTS.onCardArchived, { card: card, context: context }, () => {
             let player = this.owner
                 ? card.owner
                 : this.opponent
                 ? context.player.opponent
                 : context.player;
             if (card.location === 'play area') {
-                context.game.raiseEvent('onCardLeavesPlay', { card, context }, () =>
+                context.game.raiseEvent(EVENTS.onCardLeavesPlay, { card, context }, () =>
                     player.moveCard(card, 'archives')
                 );
             } else {

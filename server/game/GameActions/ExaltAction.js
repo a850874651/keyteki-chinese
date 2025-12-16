@@ -1,4 +1,4 @@
-const AddTokenAction = require('./AddTokenAction');
+﻿const AddTokenAction = require('./AddTokenAction');
 
 class ExaltAction extends AddTokenAction {
     setDefaultProperties() {
@@ -9,7 +9,7 @@ class ExaltAction extends AddTokenAction {
     setup() {
         this.targetType = ['creature'];
         this.name = 'exalt';
-        this.effectMsg = 'exalt {0}';
+        this.effectMsg = '褒奖 {0}';
     }
 
     canAffect(card, context) {

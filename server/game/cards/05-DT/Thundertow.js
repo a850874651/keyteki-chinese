@@ -16,7 +16,7 @@ class Thundertow extends Card {
                     target: context.game.creaturesInPlay.filter((card) => card.exhausted),
                     amount: 2
                 })),
-                message: '{0} uses {1} to deal damage to each exhausted creature'
+                message: '{0} 使用 {1} 对每个横置生物造成伤害'
             }
         });
     }

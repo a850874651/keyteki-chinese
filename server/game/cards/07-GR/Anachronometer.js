@@ -1,9 +1,9 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 function anachronometerAbility(ability) {
     return {
         effect:
-            'shuffle their discard into their deck, draw a card, and discard the top {1} cards of the deck',
+            '将其弃牌堆洗入其牌库，抽取1张牌，并弃掉其牌库顶的 {1} 张牌',
         effectArgs: (context) => [
             context.player.opponent ? context.player.opponent.discard.length : 0
         ],

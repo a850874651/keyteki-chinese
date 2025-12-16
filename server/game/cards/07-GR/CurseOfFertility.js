@@ -1,7 +1,7 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class CurseOfFertility extends Card {
-    // Treachery. (This card enters play under your opponent’s control.)
+    // Treachery. (This card enters play under your opponent窶冱 control.)
     //
     // At the end of your turn, if you did not play a creature this
     // turn, your opponent gains 1.
@@ -16,7 +16,7 @@ class CurseOfFertility extends Card {
             gameAction: ability.actions.gainAmber((context) => ({
                 target: context.player.opponent
             })),
-            effect: 'make {1} gain 1 amber',
+            effect: '使得 {1} 获得1琥珀',
             effectArgs: (context) => [context.player.opponent]
         });
     }

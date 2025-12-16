@@ -1,4 +1,4 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class HammerGram extends Card {
     // Play: Deal 3D to a creature and stun it.
@@ -11,7 +11,7 @@ class HammerGram extends Card {
                     ability.actions.stun()
                 ])
             },
-            effect: 'deal 3 damage and stun {0}'
+            effect: '造成3点伤害并击晕{0}'
         });
     }
 }

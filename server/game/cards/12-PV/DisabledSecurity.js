@@ -19,7 +19,7 @@ class DisabledSecurity extends Card {
                             .includes(card),
                     gameAction: ability.actions.playCard()
                 },
-                message: '{0} uses {1} to play {3}',
+                message: '{0} 使用 {1} 打出 {3}',
                 messageArgs: (context) => [context.target]
             }
         });

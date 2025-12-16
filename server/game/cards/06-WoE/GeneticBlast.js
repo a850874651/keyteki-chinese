@@ -1,4 +1,4 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class GeneticBlast extends Card {
     // Play: Deal 2Damage to a creature and each other creature with
@@ -8,7 +8,7 @@ class GeneticBlast extends Card {
             target: {
                 cardType: 'creature'
             },
-            effect: 'deal 2 damage to {1} and each other creature with the same name',
+            effect: '对 {1} 造成2点伤害，也对每个与其同名的生物造成2点伤害',
             effectArgs: (context) => [context.target],
             then: (preThenContext) => ({
                 alwaysTriggers: true,

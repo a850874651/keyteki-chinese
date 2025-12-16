@@ -10,7 +10,7 @@ class HealingBlast extends Card {
             },
             then: {
                 condition: (context) => context.preThenEvent.amount >= 4,
-                message: '{0} gains an additional 2 amber due to {1} healing 4 or more damage',
+                message: '{0} 获得了额外的2琥珀，通过 {1} 治疗至少4点伤害',
                 gameAction: ability.actions.gainAmber({ amount: 2 })
             }
         });

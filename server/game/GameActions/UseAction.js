@@ -1,4 +1,4 @@
-const CardGameAction = require('./CardGameAction');
+﻿const CardGameAction = require('./CardGameAction');
 
 class UseAction extends CardGameAction {
     setDefaultProperties() {
@@ -8,7 +8,7 @@ class UseAction extends CardGameAction {
     setup() {
         this.name = 'use';
         this.targetType = ['creature', 'artifact'];
-        this.effectMsg = 'use {0}';
+        this.effectMsg = '使用了 {0}';
     }
 
     canAffect(card, context) {

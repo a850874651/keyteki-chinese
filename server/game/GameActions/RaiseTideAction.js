@@ -1,4 +1,4 @@
-const Constants = require('../../constants');
+﻿const Constants = require('../../constants');
 const PlayerAction = require('./PlayerAction');
 
 class RaiseTideAction extends PlayerAction {
@@ -10,7 +10,7 @@ class RaiseTideAction extends PlayerAction {
     setup() {
         super.setup();
         this.name = 'raiseTide';
-        this.effectMsg = 'raise the tide';
+        this.effectMsg = '抬高潮位';
     }
 
     defaultTargets(context) {

@@ -10,7 +10,7 @@ class NifflePaw extends Card {
             gameAction: ability.actions.destroy((context) => ({ target: context.source.parent })),
             then: (preThenContext) => ({
                 alwaysTriggers: true,
-                message: '{0} uses {3} to move {1} to {2}',
+                message: '{0} 使用 {3} 移动 {1} 到 {2}',
                 messageArgs: preThenContext.event.card,
                 target: {
                     numCards: 1,

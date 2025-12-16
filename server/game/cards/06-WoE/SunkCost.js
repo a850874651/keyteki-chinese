@@ -1,4 +1,4 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class SunkCost extends Card {
     // Play: Choose a house. Your opponent discards a random card from
@@ -10,7 +10,7 @@ class SunkCost extends Card {
             target: {
                 mode: 'house'
             },
-            effect: 'make a token creature if {1} randomly discards a card matching {2}',
+            effect: '如果 {1} 随机弃掉的1张牌属于 {2} 制造1个代标生物',
             effectArgs: (context) => [context.player.opponent, context.house],
             gameAction: ability.actions.discardAtRandom(),
             then: (preThenContext) => ({

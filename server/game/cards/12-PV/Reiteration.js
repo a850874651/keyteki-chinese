@@ -26,10 +26,10 @@ class Reiteration extends Card {
                         bottom: true
                     })
                 ]),
-                message: '{0} uses {1} to return {3} card{4} to the bottom of their deck',
+                message: '{0} 使用 {1} 将 {3} 张卡牌 {4} 放到其牌库底',
                 messageArgs: (context) => [
-                    context.player.hand.length === 1 ? 'a' : '2',
-                    context.player.hand.length === 1 ? '' : 's'
+                    context.player.hand.length === 1 ? '1' : '2',
+                    context.player.hand.length === 1 ? '' : ''
                 ]
             }
         });

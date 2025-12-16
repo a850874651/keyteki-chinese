@@ -10,7 +10,7 @@ class NerveBlast extends Card {
                     cardType: 'creature',
                     gameAction: ability.actions.dealDamage({ amount: 2 })
                 },
-                message: '{0} uses {1} to deal 2 damage to {2}',
+                message: '{0} 使用 {1} 造成了2点伤害对 {2}',
                 messageArgs: (context) => {
                     return [context.player, context.source, context.target];
                 }

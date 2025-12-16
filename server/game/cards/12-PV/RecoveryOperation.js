@@ -21,7 +21,7 @@ class RecoveryOperation extends Card {
                                     .filter((e) => !!e.card && e.card.location === 'discard')
                                     .map((e) => e.card)
                                     .includes(card),
-                            message: '{0} uses {1} to put {2} on top of their deck',
+                            message: '{0} 使用 {1} 将 {2} 放到其牌库顶',
                             messageArgs: (cards) => [context.player, context.source, cards]
                         }
                     })

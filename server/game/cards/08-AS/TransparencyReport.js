@@ -16,7 +16,7 @@ class TransparencyReport extends Card {
                     target: context.player,
                     amount: 2
                 })),
-                message: '{0} uses {1} to gain 2 amber'
+                message: '{0} 使用 {1} 获得2琥珀'
             }
         });
     }

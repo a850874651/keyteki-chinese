@@ -18,7 +18,7 @@ class ReadyPhase extends Phase {
                             event.player.checkRestrictions('ready', event.context) &&
                             event.cards.length > 0
                         ) {
-                            game.addMessage('{0} readies their cards', event.player);
+                            game.addMessage('{0} 重整了他的卡牌', event.player);
                             game.actions.ready().resolve(event.cards, event.player);
                         }
                     }

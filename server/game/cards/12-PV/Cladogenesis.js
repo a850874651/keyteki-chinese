@@ -5,7 +5,7 @@ class Cladogenesis extends Card {
     setupCardAbilities(ability) {
         this.play({
             effect:
-                "discard {1}, reveal each player's hand, and discard cards belonging to each player's discarded card's house",
+                "弃掉 {1}, 展示每位玩家的手牌, 并弃掉与其被弃掉的卡牌属于同一势力的每张卡牌",
             effectArgs: (context) => {
                 let res = [];
                 let myTop = context.player.deck.length > 0 ? context.player.deck[0] : '';
@@ -66,7 +66,7 @@ class Cladogenesis extends Card {
                     target: context.game.getPlayers(),
                     refill: true
                 })),
-                message: '{0} uses {1} to have each player refill their hand'
+                message: '{0} 使用 {1} 使每位玩家重新抽满手牌'
             }
         });
     }

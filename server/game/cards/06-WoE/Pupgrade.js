@@ -1,4 +1,4 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class Pupgrade extends Card {
     // Pupgrade may be played as an upgrade instead of a creature,
@@ -27,7 +27,7 @@ class Pupgrade extends Card {
                             flank: 'Right'
                         }))
                     ],
-                    effect: 'put {1} into play ready on the right flank',
+                    effect: '将 {1} 放置到战线右翼并重整',
                     effectArgs: [this]
                 })
             ]

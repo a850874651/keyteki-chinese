@@ -9,7 +9,7 @@ class CincinnatusRex extends Card {
                 condition: (context) =>
                     !context.source.controller.opponent ||
                     context.source.controller.opponent.creaturesInPlay.length === 0,
-                message: '{0} is destroyed as there are no enemy creatures',
+                message: '{0} 被摧毁了，因为没有敌方生物',
                 gameAction: ability.actions.destroy()
             })
         });

@@ -12,7 +12,7 @@ class DecreeOfPrimus extends Card {
                 gameAction: ability.actions.placeAmber((context) => ({
                     amount: context.preThenEvent.amount,
                     promptForSelect: {
-                        message: '{0} uses {1} to move all amber from {2} to {3}',
+                        message: '{0} 使用 {1} 把所有的琥珀从 {2} 移动到 {3}',
                         messageArgs: (card) => [
                             context.player,
                             context.source,

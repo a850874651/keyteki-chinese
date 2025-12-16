@@ -4,7 +4,7 @@ class OracleZan extends Card {
     // After Reap: Move each amber from a friendly creature to the common supply. For each amber moved, heal 2 damage from a creature.
     setupCardAbilities(ability) {
         this.reap({
-            effect: 'move amber from {1} to the common supply and heal damage',
+            effect: '移动 {1} 上的琥珀到公共供应堆并治疗伤害',
             effectArgs: (context) => [context.target],
             target: {
                 controller: 'self',
@@ -22,7 +22,7 @@ class OracleZan extends Card {
                             activePromptTitle: 'Choose a creature to heal',
                             cardType: 'creature',
                             controller: 'any',
-                            message: '{0} uses {1} to heal {2} for 2 damage',
+                            message: '{0} 使用 {1} 治疗 {2} 2点伤害',
                             messageArgs: (cards) => [context.player, context.source, cards]
                         }
                     }))

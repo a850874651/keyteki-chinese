@@ -18,7 +18,7 @@ class AmbrosiaOutpost extends Card {
                 },
                 then: (preThenContext) => ({
                     gameAction: ability.actions.gainAmber(),
-                    message: '{0} uses {1} to move 1 amber from {3} to their pool',
+                    message: '{0} 使用 {1} 移动1琥珀从 {3} 到他的琥珀池中',
                     messageArgs: [preThenContext.target]
                 })
             }

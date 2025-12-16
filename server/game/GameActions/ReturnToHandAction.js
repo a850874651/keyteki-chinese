@@ -1,4 +1,4 @@
-const CardGameAction = require('./CardGameAction');
+﻿const CardGameAction = require('./CardGameAction');
 
 class ReturnToHandAction extends CardGameAction {
     setDefaultProperties() {
@@ -8,7 +8,7 @@ class ReturnToHandAction extends CardGameAction {
     setup() {
         super.setup();
         this.name = 'returnToHand';
-        this.effectMsg = 'return {0} to their hand';
+        this.effectMsg = '返还 {0} 到其手牌';
         this.cost = "returning {0} to their owner's hand";
 
         if (!Array.isArray(this.location)) {

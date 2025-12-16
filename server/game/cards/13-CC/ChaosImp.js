@@ -16,7 +16,7 @@ class ChaosImp extends Card {
                 gameAction: ability.actions.archive((context) => ({
                     target: context.source
                 })),
-                message: '{0} uses {1} to archive {1}'
+                message: '{0} 使用 {1} 归档 {1}'
             }
         });
     }

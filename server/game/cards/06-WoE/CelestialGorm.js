@@ -1,4 +1,4 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class CelestialGorm extends Card {
     //Omni: Destroy $this. Return each other artifact to its owner's hand.
@@ -14,7 +14,7 @@ class CelestialGorm extends Card {
                     )
                 }))
             ]),
-            effect: "destroy {0} and return each other artifact to its owner's hand"
+            effect: "摧毁 {0} 并将每个其他神器返回其所有者手中"
         });
     }
 }

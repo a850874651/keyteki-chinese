@@ -1,4 +1,4 @@
-const PlayerAction = require('./PlayerAction');
+﻿const PlayerAction = require('./PlayerAction');
 
 class UnforgeAction extends PlayerAction {
     setDefaultProperties() {
@@ -8,7 +8,7 @@ class UnforgeAction extends PlayerAction {
     setup() {
         super.setup();
         this.name = 'unforgeKey';
-        this.effectMsg = "unforge an opponent's key";
+        this.effectMsg = "熔毁了对手的1把钥匙";
     }
 
     checkEventCondition(event) {

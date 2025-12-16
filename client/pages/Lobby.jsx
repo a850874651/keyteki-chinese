@@ -82,7 +82,7 @@ const Lobby = () => {
     const banners = [
         {
             img: 'banner/mwkfco-banner-tco.jpg',
-            link: 'https://bestmidwestkeyforgeevents.com/'
+            link: 'https://mp.weixin.qq.com/s/K0SPe16OD21xVHPaAcf8Pw'
         }
     ];
 

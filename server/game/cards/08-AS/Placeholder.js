@@ -1,11 +1,11 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class Placeholder extends Card {
-    // Move a creature to a flank of its controller’s battleline and
+    // Move a creature to a flank of its controller窶冱 battleline and
     // deal 2D to it. If it is not destroyed, repeat the preceding effect.
     setupCardAbilities(ability) {
         this.play({
-            effect: 'move {1} to a flank and deal 2 damage to it',
+            effect: '移动 {1} 到侧翼并对其造成2点伤害',
             effectArgs: (context) => context.target,
             target: {
                 cardType: 'creature',
@@ -19,7 +19,7 @@ class Placeholder extends Card {
             then: (preThenContext) => ({
                 alwaysTriggers: true,
                 condition: () => preThenContext.target.location === 'play area',
-                message: '{0} uses {1} to move {3} to a flank and deal 2 damage to it',
+                message: '{0} 使用 {1} 移动 {3} 到侧翼并对其造成2点伤害',
                 messageArgs: (context) => context.target,
                 target: {
                     cardType: 'creature',

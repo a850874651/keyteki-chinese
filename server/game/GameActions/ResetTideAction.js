@@ -1,4 +1,4 @@
-const Constants = require('../../constants');
+﻿const Constants = require('../../constants');
 const PlayerAction = require('./PlayerAction');
 
 class ResetTideAction extends PlayerAction {
@@ -9,7 +9,7 @@ class ResetTideAction extends PlayerAction {
     setup() {
         super.setup();
         this.name = 'resetTide';
-        this.effectMsg = 'reset the tide';
+        this.effectMsg = '重置潮位';
     }
 
     defaultTargets(context) {

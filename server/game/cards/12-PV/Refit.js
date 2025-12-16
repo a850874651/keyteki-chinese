@@ -15,7 +15,7 @@ class Refit extends Card {
                         activePromptTitle: 'Choose a creature to move the upgrade to',
                         cardType: 'creature',
                         cardCondition: (card) => card !== context.target.parent,
-                        message: '{0} uses {1} move {2} to {3}',
+                        message: '{0} 使用 {1} 将 {2} 移动到 {3} 上',
                         messageArgs: (card) => [
                             context.player,
                             context.source,

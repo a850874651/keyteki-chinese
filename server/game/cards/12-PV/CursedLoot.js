@@ -15,7 +15,7 @@ class CursedLoot extends Card {
                 alwaysTriggers: true,
                 condition: (context) => context.player.hand.length === 0,
                 gameAction: ability.actions.destroy(),
-                message: '{0} uses {1} to destroy itself as {0} has no cards in hand'
+                message: '{0} 使用 {1} 摧毁它自己因为 {0} 没有手牌'
             }
         });
     }

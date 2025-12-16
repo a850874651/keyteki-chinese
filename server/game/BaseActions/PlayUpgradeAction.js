@@ -30,14 +30,14 @@ class PlayUpgradeAction extends BasePlayAction {
     displayMessage(context) {
         if (context.target) {
             context.game.addMessage(
-                '{0} plays {1} attaching it to {2}',
+                '{0} 打出了 {1} 将其附着在 {2}',
                 context.player,
                 context.source,
                 context.target
             );
         } else {
             context.game.addMessage(
-                '{0} plays {1} and it is discarded',
+                '{0} 打出了 {1} 它被弃掉了',
                 context.player,
                 context.source
             );

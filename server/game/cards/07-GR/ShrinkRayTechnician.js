@@ -1,4 +1,4 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class ShrinkRayTechnician extends Card {
     // After Reap: Choose an enemy creature. It gets -2 power until
@@ -15,7 +15,7 @@ class ShrinkRayTechnician extends Card {
                     effect: ability.effects.modifyPower(-2)
                 })
             },
-            effect: 'make {0} have -2 power for the remainder of the turn'
+            effect: '在本回合剩余时间内使 {0} 获得 -2 力量'
         });
 
         this.scrap({
@@ -29,7 +29,7 @@ class ShrinkRayTechnician extends Card {
                     effect: [ability.effects.setPower(1), ability.effects.setArmor(0)]
                 })
             },
-            effect: 'make {0} have 1 power and 0 armor for the remainder of the turn'
+            effect: '在本回合剩余时间内 {0} 具有1力量0护甲'
         });
     }
 }

@@ -1,4 +1,4 @@
-const CardGameAction = require('./CardGameAction');
+﻿const CardGameAction = require('./CardGameAction');
 
 class ReturnAmberAction extends CardGameAction {
     setDefaultProperties() {
@@ -11,13 +11,13 @@ class ReturnAmberAction extends CardGameAction {
     setup() {
         this.name = 'removeAmber';
         this.targetType = ['creature'];
-        this.effectMsg = `return ${this.all ? 'all' : this.amount} amber from {0} to ${
+        this.effectMsg = `返还 ${this.all ? '所有' : this.amount} 琥珀从 {0} 到 ${
             this.recipient
-                ? this.recipient.name + "'s"
+                ? this.recipient.name + "的"
                 : this.controllerRecipient
-                ? "their controller's"
-                : 'their'
-        } pool`;
+                ? "其控制者的"
+                : '他的'
+        } 琥珀池`;
     }
 
     canAffect(card, context) {

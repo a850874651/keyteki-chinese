@@ -1,4 +1,4 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class WasteNot extends Card {
     // Play: Destroy a friendly creature. Draw cards equal to half that creature's power (rounding up).
@@ -15,7 +15,7 @@ class WasteNot extends Card {
                     }))
                 ]
             },
-            effect: 'destroy {0} and draw {1} cards',
+            effect: '摧毁 {0} 并抽 {1} 张牌',
             effectArgs: (context) => (context.target ? Math.ceil(context.target.power * 0.5) : 0)
         });
     }

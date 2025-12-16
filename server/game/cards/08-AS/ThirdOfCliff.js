@@ -16,12 +16,12 @@ class ThirdOfCliff extends Card {
                         cardType: 'creature',
                         controller: 'opponent',
                         cardCondition: (card) => card.isOnFlank(),
-                        message: '{0} uses {1} to destroy {2}',
+                        message: '{0} 使用 {1} 摧毁 {2}',
                         messageArgs: (card) => [context.player, context.source, card]
                     }
                 })
             })),
-            effect: 'destroy {1}',
+            effect: '摧毁 {1}',
             effectArgs: (context) =>
                 context.player.keys.red
                     ? [context.player.opponent.creaturesInPlay.filter((c) => c.isOnFlank())]

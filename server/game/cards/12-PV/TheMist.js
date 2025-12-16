@@ -1,4 +1,4 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class TheMist extends Card {
     // Omni: Destroy The Mist. For the remainder of the turn, each creature gains the Mutant trait.
@@ -12,7 +12,7 @@ class TheMist extends Card {
                 })
             ],
             effect:
-                'destroy {0} and make each creature gain the Mutant trait for the remainder of the turn',
+                '摧毁 {0} 并使本回合剩余时间内每个生物获得变异体特性',
             effectArgs: (context) => context.source
         });
     }

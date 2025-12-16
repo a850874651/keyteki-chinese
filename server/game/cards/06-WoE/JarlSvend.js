@@ -1,4 +1,4 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class JarlSvend extends Card {
     // After an enemy creature is destroyed fighting Jarl Svend, make
@@ -10,7 +10,7 @@ class JarlSvend extends Card {
                     event.destroyedFighting && event.damageEvent.damageSource === context.source
             },
             gameAction: ability.actions.makeTokenCreature(),
-            effect: 'make a token creature'
+            effect: '制造1个代标生物'
         });
     }
 }

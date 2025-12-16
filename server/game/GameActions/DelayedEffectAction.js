@@ -1,4 +1,4 @@
-const CardGameAction = require('./CardGameAction');
+﻿const CardGameAction = require('./CardGameAction');
 
 class DelayedEffectAction extends CardGameAction {
     setDefaultProperties() {
@@ -11,7 +11,7 @@ class DelayedEffectAction extends CardGameAction {
     setup() {
         super.setup();
         this.name = 'applyDelayedEffect';
-        this.effectMsg = 'apply a delayed effect to {0}';
+        this.effectMsg = '生效了1个延迟效果对 {0}';
     }
 
     canAffect(card, context) {

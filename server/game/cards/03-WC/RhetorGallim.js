@@ -21,7 +21,7 @@ class RhetorGallim extends Card {
                     targetController: 'opponent',
                     effect: ability.effects.modifyKeyCost(3)
                 }),
-                message: "{0} uses {1} to increase {3}'s key cost by 3 during their next turn",
+                message: "{0} 使用 {1} 增加 {3}的钥匙锻造费用3，在其下回合中",
                 messageArgs: (context) => context.player.opponent
             }
         });

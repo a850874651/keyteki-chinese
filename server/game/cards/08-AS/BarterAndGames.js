@@ -1,4 +1,4 @@
-const _ = require('underscore');
+﻿const _ = require('underscore');
 const Card = require('../../Card.js');
 
 function amountForEvents(events, controller) {
@@ -60,7 +60,7 @@ class BarterAndGames extends Card {
                 chatMessage: true,
                 target: _.shuffle(zoneFromContext(context)).slice(0, 1)
             })),
-            effect: 'reveal a card',
+            effect: '展示1张卡牌',
             then: (preThenContext) => ({
                 alwaysTriggers: true,
                 target: {
@@ -118,7 +118,7 @@ class BarterAndGames extends Card {
                         }))
                     ]),
                     message:
-                        '{0} uses {1} to gain {3} amber, {4}destroy creatures sharing a house with the revealed cards, and discard the revealed cards',
+                        '{0} 使用 {1} 获得 {3} 琥珀, {4} 摧毁所有和被展示的卡牌拥有相同势力的生物, 并弃掉展示的卡牌',
                     messageArgs: (context) => [
                         amountForEvents(
                             context.preThenEvents.concat(preThenContext.preThenEvents),

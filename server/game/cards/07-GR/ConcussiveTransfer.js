@@ -17,7 +17,7 @@ class ConcussiveTransfer extends Card {
                     all: true,
                     target: context.game.creaturesInPlay
                 })),
-                message: '{0} uses {1} to redistribute the damage on all creatures',
+                message: '{0} 使用 {1} 重新分配所有伤害到所有生物',
                 then: {
                     alwaysTriggers: true,
                     gameAction: ability.actions.sequentialForEach((context) => ({

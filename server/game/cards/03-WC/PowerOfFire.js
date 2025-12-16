@@ -16,7 +16,7 @@ class PowerOfFire extends Card {
                 condition: (context) =>
                     context.preThenEvents &&
                     context.preThenEvents.every((event) => !event.cancelled),
-                message: '{0} uses {1} to cause each player to lose {3} amber',
+                message: '{0} 使用 {1} 使得每位玩家失去 {3} 琥珀',
                 messageArgs: (context) => [
                     Math.floor(context.preThenEvents[0].clone.modifiedPower / 2)
                 ],

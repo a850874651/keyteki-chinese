@@ -1,4 +1,4 @@
-const PlayerAction = require('./PlayerAction');
+﻿const PlayerAction = require('./PlayerAction');
 
 class LoseAmberAction extends PlayerAction {
     setDefaultProperties() {
@@ -8,7 +8,7 @@ class LoseAmberAction extends PlayerAction {
     setup() {
         super.setup();
         this.name = 'loseAmber';
-        this.effectMsg = 'make {0} lose ' + this.amount + ' amber';
+        this.effectMsg = '使 {0} 失去 ' + this.amount + ' 个琥珀';
     }
 
     canAffect(player, context) {

@@ -1,4 +1,4 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class TooLow extends Card {
     // Play: Choose an enemy creature. Destroy each creature with power less than the chosen creature's power.
@@ -14,7 +14,7 @@ class TooLow extends Card {
                     Object.values(context.targets).some((target) => card.power < target.power)
                 )
             })),
-            effect: 'destroy each creature with power less than {0}: {1}',
+            effect: '摧毁所有力量低于 {0} 的生物: {1}',
             effectArgs: (context) => [
                 context.game.creaturesInPlay.filter((card) =>
                     Object.values(context.targets).some((target) => card.power < target.power)
@@ -23,7 +23,7 @@ class TooLow extends Card {
         });
 
         this.fate({
-            effect: 'destroy each friendly creature with the lowest power: {1}',
+            effect: '摧毁每个力量最低的友方生物 {1}',
             effectArgs: (context) => {
                 if (context.game.activePlayer.creaturesInPlay.length === 0) {
                     return [];

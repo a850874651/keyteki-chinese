@@ -12,7 +12,7 @@ class SnagsMirror extends Card {
                 effect: ability.effects.stopHouseChoice(context.event.house)
             })),
             message:
-                '{0} uses {1} to prevent {2} from choosing {3} as their active house on their next turn',
+                '{0} 使用 {1} 防止 {2} 选择 {3} 作为其下回合的当前势力',
             messageArgs: (context) => [
                 context.player,
                 context.source,
@@ -30,7 +30,7 @@ class SnagsMirror extends Card {
                 effect: ability.effects.stopHouseChoice(context.event.house)
             })),
             message:
-                '{0} uses {1} to prevent {2} from choosing {3} as their active house on their next turn',
+                '{0} 使用 {1} 防止 {2} 选择 {3} 作为其下回合的当前势力',
             messageArgs: (context) => [
                 context.player.opponent,
                 context.source,

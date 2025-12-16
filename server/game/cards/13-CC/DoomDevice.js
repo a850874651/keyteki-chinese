@@ -19,7 +19,7 @@ class DoomDevice extends Card {
                     (card) => card.type === 'creature' || card.type === 'artifact'
                 )
             })),
-            message: '{0} uses {1} to destroy all creatures and artifacts',
+            message: '{0} 使用 {1} 摧毁所有生物和神器',
             messageArgs: (context) => [context.player, context.source]
         });
     }

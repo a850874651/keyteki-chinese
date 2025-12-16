@@ -17,7 +17,7 @@ class ReapTheWildWind extends Card {
                             : []
                     )
             })),
-            effect: "reveal a random card from each player's hand",
+            effect: "从每位玩家手中展示1张随机卡牌",
             then: (
                 preThenContext,
                 revealedCards = preThenContext.ability.gameAction[0].target
@@ -44,7 +44,7 @@ class ReapTheWildWind extends Card {
                             )
                     }))
                 ],
-                message: '{0} uses {1} to gain {3} amber, and {4} gains {5} amber',
+                message: '{0} 使用 {1} 获得 {3} 琥珀, 且 {4} 获得 {5} 琥珀',
                 messageArgs: (context) => [
                     revealedCards
                         .filter((card) => card.controller === context.player)

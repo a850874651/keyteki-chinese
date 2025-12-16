@@ -19,7 +19,7 @@ class AncestralTimekeeper extends Card {
                     target: context.source
                 })),
                 then: {
-                    message: '{0} uses {1} to take another turn after this one',
+                    message: '{0} 使用 {1} 获得额外的回合',
                     gameAction: ability.actions.untilPlayerTurnEnd({
                         effect: ability.effects.anotherTurn()
                     })

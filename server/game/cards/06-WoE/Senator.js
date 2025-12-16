@@ -1,10 +1,10 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class Senator extends Card {
     // Action: Keys cost +1A during your opponent's next turn.
     setupCardAbilities(ability) {
         this.action({
-            effect: "increase key cost by 1 during {1}'s next turn",
+            effect: "在 {1} 的下回合中，钥匙费用增加1",
             effectArgs: (context) => context.player.opponent,
             gameAction: ability.actions.duringOpponentNextTurn({
                 targetController: 'any',

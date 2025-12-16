@@ -1,7 +1,7 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class RootAccess extends Card {
-    // Play: Discard the bottom card of your opponent’s deck. Deal 2D
+    // Play: Discard the bottom card of your opponent窶冱 deck. Deal 2D
     // to each enemy creature that shares a house with the discarded
     // card.
     setupCardAbilities(ability) {
@@ -19,7 +19,7 @@ class RootAccess extends Card {
                     )
                 })),
                 message:
-                    '{0} uses {1} to deal 2 damage to enemy creatures that share a house with {3}',
+                    '{0} 使用 {1} 造成2点伤害对所有与 {3} 拥有相同势力的敌方生物',
                 messageArgs: (context) => [context.preThenEvent.card]
             }
         });

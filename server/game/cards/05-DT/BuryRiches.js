@@ -1,4 +1,4 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class BuryRiches extends Card {
     // (T) Play: If the tide is high, move 1A from each creature to its controller's pool. Otherwise, raise the tide.
@@ -31,8 +31,8 @@ class BuryRiches extends Card {
             effect: '{1}',
             effectArgs: (context) =>
                 !context.player.isTideHigh()
-                    ? 'raise the tide'
-                    : "move 1 amber from each creature to its controller's pool"
+                    ? '抬升潮位'
+                    : "从每个生物移动1琥珀到其控制者的琥珀池中"
         });
     }
 }

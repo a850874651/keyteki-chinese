@@ -1,4 +1,4 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class GemcoatVendor extends Card {
     //Action: Steal 1A. Deal 1D to $this.
@@ -10,7 +10,7 @@ class GemcoatVendor extends Card {
                     target: context.source
                 }))
             ]),
-            effect: 'Steal 1 amber and deal 1 damage to {0}'
+            effect: '窃取1琥珀并造成1点伤害对 {0}'
         });
     }
 }

@@ -41,9 +41,9 @@ class HarmonicPack extends Card {
                             target: context.preThenEvent.card
                         }))
                     ]),
-                    message: '{0} uses {1} to {3}discard {4}',
+                    message: '{0} 使用 {1} 来 {3} 弃置 {4}',
                     messageArgs: (context) => [
-                        preThenContext.targets.creature ? 'deal 3 more damage and ' : '',
+                        preThenContext.targets.creature ? '造成额外3点伤害并 ' : '',
                         context.preThenEvent.card
                     ]
                 }

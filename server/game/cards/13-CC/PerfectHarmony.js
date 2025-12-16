@@ -1,4 +1,4 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class PerfectHarmony extends Card {
     // Play: Draw 2 cards, gain 2A, and archive a card if you control creatures from 3 or more different houses.
@@ -10,7 +10,7 @@ class PerfectHarmony extends Card {
                 ability.actions.draw({ amount: 2 }),
                 ability.actions.gainAmber({ amount: 2 })
             ]),
-            effect: 'draw 2 cards, gain 2 amber, and archive a card',
+            effect: '抽2张牌，获得2琥珀，归档1张牌',
             then: {
                 target: {
                     controller: 'self',

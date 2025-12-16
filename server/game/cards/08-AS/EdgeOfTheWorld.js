@@ -1,10 +1,10 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class EdgeOfTheWorld extends Card {
-    // Play: Move a creature to a flank of its controller’s battleline. Steal 1A.
+    // Play: Move a creature to a flank of its controller窶冱 battleline. Steal 1A.
     setupCardAbilities(ability) {
         this.play({
-            effect: 'move {1} to a flank and steal 1 amber',
+            effect: '移动 {1} 到侧翼并窃取1琥珀',
             effectArgs: (context) => context.target,
             target: {
                 cardType: 'creature',

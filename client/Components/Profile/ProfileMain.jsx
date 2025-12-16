@@ -75,67 +75,6 @@ const ProfileMain = ({ user, formProps }) => {
                         {formProps.errors.email}
                     </Form.Control.Feedback>
                 </Form.Group>
-                <Form.Group as={Col} md='3'>
-                    <Form.Label>{t('Avatar')}</Form.Label>
-                    <div>
-                        {!formProps.errors.avatar && localAvatar ? (
-                            <img
-                                className='profile-avatar'
-                                src={localAvatar}
-                                alt={user?.username}
-                            />
-                        ) : (
-                            <Avatar imgPath={user?.avatar}></Avatar>
-                        )}
-                        <Button variant='secondary' onClick={onAvatarUploadClick}>
-                            {t('Change avatar')}
-                        </Button>
-                    </div>
-                    <Form.Control
-                        name='avatar'
-                        type='file'
-                        accept='image/*'
-                        onChange={(event) => {
-                            if (
-                                !event.currentTarget ||
-                                !event.currentTarget.files ||
-                                event.currentTarget.files.length === 0
-                            ) {
-                                return;
-                            }
-
-                            const file = event.currentTarget.files[0];
-                            setAvatar(URL.createObjectURL(file));
-                            formProps.setFieldValue('avatar', file);
-                        }}
-                        onBlur={formProps.handleBlur}
-                        hidden
-                        ref={inputFile}
-                        isInvalid={!!formProps.errors.avatar}
-                    ></Form.Control>
-                    <Form.Control.Feedback type='invalid'>
-                        {formProps.errors.avatar}
-                    </Form.Control.Feedback>
-                </Form.Group>
-                <Form.Group as={Col} md='3'>
-                    <Form.Label>{t('Patreon')}</Form.Label>
-                    <div>
-                        <img
-                            className='profile-patreon-icon'
-                            src={PatreonImage}
-                            alt={t('Patreon Logo')}
-                        />
-                        {!user?.patreon || user?.patreon === PatreonStatus.Unlinked ? (
-                            <Button variant='secondary' href={patreonUrl}>
-                                {t('Link Account')}
-                            </Button>
-                        ) : (
-                            <Button variant='secondary' onClick={() => dispatch(unlinkPatreon())}>
-                                {t('Unlink Account')}
-                            </Button>
-                        )}
-                    </div>
-                </Form.Group>
             </Form.Row>
             <Form.Row>
                 <Form.Group as={Col} md='6' controlId='formGridPassword'>
@@ -168,43 +107,6 @@ const ProfileMain = ({ user, formProps }) => {
                     />
                     <Form.Control.Feedback type='invalid'>
                         {formProps.errors.passwordAgain}
-                    </Form.Control.Feedback>
-                </Form.Group>
-            </Form.Row>
-            <Form.Row>
-                <Form.Group as={Col} md='6' controlId='formGridChallongeKey'>
-                    <Form.Label>{t('Challonge API Key')}</Form.Label>
-                    <Form.Control
-                        name='challongeApiKey'
-                        type='password'
-                        placeholder={t('Enter challonge API key')}
-                        value={formProps.values.challongeApiKey}
-                        onChange={formProps.handleChange}
-                        onBlur={formProps.handleBlur}
-                        isInvalid={
-                            formProps.touched.challongeApiKey && !!formProps.errors.challongeApiKey
-                        }
-                    />
-                    <Form.Control.Feedback type='invalid'>
-                        {formProps.errors.challongeApiKey}
-                    </Form.Control.Feedback>
-                </Form.Group>
-                <Form.Group as={Col} md='6' controlId='formGridChallongeDomain'>
-                    <Form.Label>{t('Challonge API Subdomain')}</Form.Label>
-                    <Form.Control
-                        name='challongeApiSubdomain'
-                        type='password'
-                        placeholder={t('Enter challonge API subdomain')}
-                        value={formProps.values.challongeApiSubdomain}
-                        onChange={formProps.handleChange}
-                        onBlur={formProps.handleBlur}
-                        isInvalid={
-                            formProps.touched.challongeApiSubdomain &&
-                            !!formProps.errors.challongeApiSubdomain
-                        }
-                    />
-                    <Form.Control.Feedback type='invalid'>
-                        {formProps.errors.challongeApiSubdomain}
                     </Form.Control.Feedback>
                 </Form.Group>
             </Form.Row>

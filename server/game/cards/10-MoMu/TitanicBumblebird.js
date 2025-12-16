@@ -29,7 +29,7 @@ class TitanicBumblebird extends GiganticCard {
                                 : 0
                     }))
                 },
-                message: '{0} uses {1} to give {3} power counter{4} to {5}',
+                message: '{0} 使用 {1} 给 {3} 1力量指示物{4} 到 {5}',
                 messageArgs: (context) => [
                     context.preThenEvents.length > 0 && context.preThenEvents[0].clone
                         ? context.preThenEvents[0].clone.modifiedPower

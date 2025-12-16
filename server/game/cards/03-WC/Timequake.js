@@ -13,7 +13,7 @@ class Timequake extends Card {
             })),
             then: {
                 alwaysTriggers: true,
-                message: '{0} uses {1} to draw {3} card',
+                message: '{0} 使用 {1} 抽 {3} 张牌',
                 messageArgs: (context) => [
                     context.preThenEvent
                         ? context.player.deck.length - context.preThenEvent.deckLength

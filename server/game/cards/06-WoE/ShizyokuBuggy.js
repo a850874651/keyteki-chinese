@@ -1,4 +1,4 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class ShizyokuBuggy extends Card {
     // Action: Reveal two cards from your hand. If they share a house,
@@ -26,17 +26,17 @@ class ShizyokuBuggy extends Card {
                     ]
                 })
             },
-            effect: 'reveal {1}{0} {2}',
+            effect: '展示 {1}{0} {2}',
             effectArgs: (context) => [
                 context.target &&
                 context.target.length == 2 &&
                 context.target[0].getHouses().some((house) => context.target[1].hasHouse(house))
-                    ? 'and discard '
+                    ? '并弃掉它们 '
                     : '',
                 context.target &&
                 context.target.length == 2 &&
                 context.target[0].getHouses().some((house) => context.target[1].hasHouse(house))
-                    ? 'to make a token creature'
+                    ? '制造1个代标生物'
                     : ''
             ]
         });

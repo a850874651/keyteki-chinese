@@ -17,7 +17,7 @@ class DissonantChord extends Card {
                 gameAction: ability.actions.stun((context) => ({
                     target: context.preThenEvent.clone.neighbors
                 })),
-                message: '{0} uses {1} to stun {3}',
+                message: '{0} 使用 {1} 击晕 {3}',
                 messageArgs: (context) => [context.preThenEvent.clone.neighbors]
             }
         });

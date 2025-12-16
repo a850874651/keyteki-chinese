@@ -14,8 +14,8 @@ class BetaForge extends Card {
             effect: '{1}',
             effectArgs: (context) => [
                 context.player.tokenCard && context.player.tokenCard.name === 'Alpha-Gamma'
-                    ? 'make an Alpha-Gamma'
-                    : 'make no token'
+                    ? '制造1个阿尔法伽马'
+                    : ''
             ],
             then: {
                 alwaysTriggers: true,
@@ -27,7 +27,7 @@ class BetaForge extends Card {
                     gameAction: ability.actions.purge((context) => ({
                         target: context.source
                     })),
-                    message: '{0} uses {1} to purge {1}'
+                    message: '{0} 使用 {1} 清除 {1}'
                 }
             }
         });

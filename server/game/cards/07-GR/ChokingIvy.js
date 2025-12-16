@@ -37,7 +37,7 @@ class ChokingIvy extends Card {
                         )
                     };
                 }),
-                message: '{0} uses {1} to destroy the lowest-powered creatures again'
+                message: '{0} 使用 {1} 再次摧毁力量最低的生物'
             }
         });
     }

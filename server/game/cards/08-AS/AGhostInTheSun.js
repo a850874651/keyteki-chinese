@@ -6,7 +6,7 @@ class AGhostInTheSun extends Card {
     setupCardAbilities(ability) {
         this.play({
             condition: (context) => !!context.player.opponent,
-            effect: 'put a creature into play from their discard for each key {1} has forged',
+            effect: '{1}每有1把已锻造的钥匙，从弃牌堆中放置1个生物入场',
             effectArgs: (context) => [context.player.opponent],
             gameAction: ability.actions.sequentialForEach((context) => ({
                 num: context.player.opponent ? context.player.opponent.getForgedKeys() : 0,
@@ -16,7 +16,7 @@ class AGhostInTheSun extends Card {
                         cardType: 'creature',
                         controller: 'self',
                         location: 'discard',
-                        message: '{0} uses {1} to put {2} into play',
+                        message: '{0} 使用 {1} 将 {2} 放置入场',
                         messageArgs: (cards) => [context.player, context.source, cards]
                     },
                     myControl: true

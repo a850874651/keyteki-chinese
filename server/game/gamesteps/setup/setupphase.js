@@ -39,10 +39,10 @@ class SetupPhase extends Phase {
                 !this.game.hideDeckLists
             ) {
                 this.game.addMessage(
-                    '{0} brings {1}{2} to The Crucible',
+                    '{0} 将 {1}{2} 带到了熔炉秘境',
                     player,
                     link,
-                    player.chains > 0 ? ` with ${player.chains} chains` : ''
+                    player.chains > 0 ? ` 以 ${player.chains} 枷锁` : ''
                 );
             }
         }

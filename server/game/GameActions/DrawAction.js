@@ -1,4 +1,4 @@
-const PlayerAction = require('./PlayerAction');
+﻿const PlayerAction = require('./PlayerAction');
 
 class DrawAction extends PlayerAction {
     setDefaultProperties() {
@@ -10,7 +10,7 @@ class DrawAction extends PlayerAction {
     setup() {
         super.setup();
         this.name = 'draw';
-        this.effectMsg = 'draw ' + this.amount + ' card' + (this.amount > 1 ? 's' : '');
+        this.effectMsg = '抽取 ' + this.amount + ' 张卡牌' + (this.amount > 1 ? '' : '');
     }
 
     canAffect(player, context) {
@@ -49,11 +49,11 @@ class DrawAction extends PlayerAction {
             (event) => {
                 if (!this.bonus && event.amount > 0) {
                     context.game.addMessage(
-                        '{0} draws {1} card{2}{3}',
+                        '{0} 抽取了 {1} 张卡牌{2}{3}',
                         player,
                         amount,
-                        amount > 1 ? 's' : '',
-                        refill ? ` to their maximum of ${player.maxHandSize}` : ''
+                        amount > 1 ? '' : '',
+                        refill ? ` 到上限 ${player.maxHandSize}` : ''
                     );
                 }
 
@@ -64,7 +64,7 @@ class DrawAction extends PlayerAction {
                 if (shedChains) {
                     event.player.modifyChains(-1);
                     context.game.addMessage(
-                        "{0}'s chains are reduced by 1 to {1}",
+                        "{0}的枷锁值减少1，变成了 {1}",
                         event.player,
                         event.player.chains
                     );

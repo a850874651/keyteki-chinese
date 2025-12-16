@@ -1,4 +1,4 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class WatchedClosely extends Card {
     // This creature gains, “After Reap: Your opponent makes a token creature.”
@@ -10,7 +10,7 @@ class WatchedClosely extends Card {
                     gameAction: ability.actions.makeTokenCreature((context) => ({
                         player: context.player.opponent
                     })),
-                    effect: 'have {1} make a token creature',
+                    effect: '使 {1} 制造1个代标生物',
                     effectArgs: (context) => [context.player.opponent]
                 })
             ]

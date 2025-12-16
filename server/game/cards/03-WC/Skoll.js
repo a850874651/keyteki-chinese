@@ -14,7 +14,7 @@ class Skoll extends Card {
             target: {
                 cardType: 'creature',
                 controller: 'self',
-                message: '{0} uses {1} to place +1 on {2}',
+                message: '{0} 使用 {1} 放置1力量指示物在 {2}上',
                 messageArgs: (context) => {
                     return [context.player, context.source, context.target];
                 },

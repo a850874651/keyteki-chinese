@@ -10,7 +10,7 @@ class Eyegor extends Card {
                 promptWithHandlerMenu: {
                     activePromptTitle: 'Choose a card to add to hand',
                     cards: context.player.deck.slice(0, 3),
-                    message: '{0} adds a card to their hand and discards the other 2'
+                    message: '{0} 添加了1张卡牌到其手中并弃掉了其他2张'
                 }
             })),
             then: {

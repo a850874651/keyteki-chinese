@@ -1,4 +1,4 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class UnityPrism extends Card {
     // Alpha.
@@ -7,7 +7,7 @@ class UnityPrism extends Card {
     // Scrap: Reveal your hand. Gain 1 amber for each house represented in it.
     setupCardAbilities(ability) {
         this.play({
-            effect: 'allow playing up to 4 cards from any house this turn',
+            effect: '本回合允许打出任意势力的4张牌',
             gameAction: ability.actions.untilPlayerTurnEnd({
                 effect: [
                     ability.effects.canPlay((context) => {
@@ -22,7 +22,7 @@ class UnityPrism extends Card {
 
         this.scrap({
             effect:
-                'reveal their hand ({1}) and gain 1 amber for each house represented in it, gaining a total of {2} amber',
+                '展示了其手牌 ({1}) 并根据每个展示的势力获得1琥珀, 一共获得了 {2} 琥珀',
             effectArgs: (context) => [
                 context.player.hand,
                 context.player.hand.reduce((houses, card) => {

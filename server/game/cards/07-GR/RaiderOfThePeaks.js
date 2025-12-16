@@ -1,4 +1,4 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class RaiderOfThePeaks extends Card {
     // At the start of your turn, the player who controls the most
@@ -23,7 +23,7 @@ class RaiderOfThePeaks extends Card {
                         ? context.target[0].controller.deck[0]
                         : null
             })),
-            effect: 'make {1} discard the top card of their deck',
+            effect: '使 {1} 弃掉了其牌库顶的卡牌',
             effectArgs: (context) => [
                 context.target && context.target.length > 0
                     ? context.target[0].controller

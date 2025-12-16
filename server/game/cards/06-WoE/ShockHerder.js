@@ -1,4 +1,4 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class ShockHerder extends Card {
     // Deploy. (This creature can enter play anywhere in your battleline.)
@@ -14,7 +14,7 @@ class ShockHerder extends Card {
                     ability.actions.fight()
                 ])
             },
-            effect: 'ready and fight with a neighboring creature'
+            effect: '重整并使一个相邻生物战斗'
         });
     }
 }

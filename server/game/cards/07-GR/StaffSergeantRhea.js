@@ -1,4 +1,4 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class StaffSergeantRhea extends Card {
     // Staff Sergeant Rhea's neighbors may be used as if they belonged
@@ -23,7 +23,7 @@ class StaffSergeantRhea extends Card {
                     ability.actions.use()
                 ])
             },
-            effect: 'ready and use {0}'
+            effect: '重整并使用{0}'
         });
     }
 }

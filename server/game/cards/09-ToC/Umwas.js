@@ -8,7 +8,7 @@ class Umwas extends Card {
             gameAction: ability.actions.makeTokenCreature(),
             then: {
                 alwaysTriggers: true,
-                message: '{0} uses {1} to add 1 power counter to each friendly token creature',
+                message: '{0} 使用 {1} 为每个友方代标生物增加1力量指示物',
                 gameAction: ability.actions.addPowerCounter((context) => ({
                     target: context.player.creaturesInPlay.filter((card) => card.isToken())
                 }))

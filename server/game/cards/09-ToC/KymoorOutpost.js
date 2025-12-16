@@ -12,7 +12,7 @@ class KymoorOutpost extends Card {
             },
             then: {
                 gameAction: [ability.actions.steal(), ability.actions.makeTokenCreature()],
-                message: '{0} uses {1} to steal 1 amber and make a token creature'
+                message: '{0} 使用 {1} 窃取1琥珀并制造1个代标生物'
             }
         });
     }

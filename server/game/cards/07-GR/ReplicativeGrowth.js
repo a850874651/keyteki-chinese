@@ -1,4 +1,4 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class ReplicativeGrowth extends Card {
     // Play: For the remainder of the turn, each friendly creature gains,
@@ -7,12 +7,12 @@ class ReplicativeGrowth extends Card {
     setupCardAbilities(ability) {
         this.play({
             effect:
-                "give each friendly creature 'Reap: Move 1 amber from this creature to your pool' for the remainder of the turn",
+                "在本回合剩余时间内给与每个友方生物 '收货后: 移动1琥珀从本生物到你的琥珀池中'",
             gameAction: ability.actions.untilPlayerTurnEnd({
                 match: (card) => card.type === 'creature',
                 effect: ability.effects.gainAbility('reap', {
                     gameAction: ability.actions.removeAmber(),
-                    effect: 'move 1 amber from {0} to their pool',
+                    effect: '移动1琥珀从 {0} 到其琥珀池中',
                     then: {
                         gameAction: ability.actions.gainAmber()
                     }

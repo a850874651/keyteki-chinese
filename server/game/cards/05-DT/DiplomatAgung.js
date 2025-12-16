@@ -1,4 +1,4 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class DiplomatAgung extends Card {
     // Play/Fight/Reap: For the remainder of the turn, a friendly creature belongs to the house of your choice in addition to its other houses.
@@ -19,7 +19,7 @@ class DiplomatAgung extends Card {
                     }))
                 }
             },
-            effect: 'make {1} belong to house {2} in addition to its other houses',
+            effect: '使得 {1} 额外属于势力 {2} ',
             effectArgs: (context) => [context.targets.card, context.houses.select.choice]
         });
     }

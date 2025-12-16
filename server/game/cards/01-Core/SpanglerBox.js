@@ -13,7 +13,7 @@ class SpanglerBox extends Card {
                 gameAction: ability.actions.sequentialPutIntoPlay((context) => ({
                     forEach: context.event.clone.clonedPurgedCards
                 })),
-                message: '{0} put into play all creatures purged by {1}',
+                message: '{0} 将所有被 {1} 清除的生物放置入场',
                 messageArgs: (context) => [context.game.activePlayer, context.source]
             })
         });

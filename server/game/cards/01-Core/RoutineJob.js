@@ -6,7 +6,7 @@ class RoutineJob extends Card {
         this.play({
             gameAction: ability.actions.steal(),
             then: (context) => ({
-                message: '{0} steals additional {3} amber with {1}',
+                message: '{0} 窃取了额外的 {3} 琥珀通过 {1}',
                 messageArgs: [
                     context.player.discard.filter((card) => card.name === 'Routine Job').length
                 ],

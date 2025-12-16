@@ -1,10 +1,10 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class Outflank extends Card {
     // Play: Each Sanctum flank creature captures 2 from its opponent.
     setupCardAbilities(ability) {
         this.play({
-            effect: 'cause each Sanctum flank creature to capture 2 amber from their opponent',
+            effect: '每个圣堂侧翼生物从其对手处抢占2琥珀',
             gameAction: [
                 ability.actions.capture((context) => ({
                     amount: 2,

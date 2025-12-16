@@ -1,7 +1,7 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class DirgeOfTheDeep extends Card {
-    // Play: Discard the bottom card of your opponent’s deck. Exhaust
+    // Play: Discard the bottom card of your opponent窶冱 deck. Exhaust
     // each creature that shares a house with that card.
     setupCardAbilities(ability) {
         this.play({
@@ -16,7 +16,7 @@ class DirgeOfTheDeep extends Card {
                         context.preThenEvent.card.getHouses().some((house) => card.hasHouse(house))
                     )
                 })),
-                message: '{0} uses {1} to exhaust creatures that share a house with {3}',
+                message: '{0} 使用 {1} 横置所有与 {3} 拥有共同势力的生物',
                 messageArgs: (context) => [context.preThenEvent.card]
             }
         });

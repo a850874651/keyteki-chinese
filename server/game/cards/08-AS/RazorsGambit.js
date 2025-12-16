@@ -14,7 +14,7 @@ class RazorsGambit extends Card {
                     ability.actions.fight()
                 ])
             },
-            effect: 'ready and fight with {0}',
+            effect: '重整并使 {0} 战斗',
             then: {
                 condition: (context) => context.player.keys.blue,
                 alwaysTriggers: true,
@@ -27,7 +27,7 @@ class RazorsGambit extends Card {
                         ability.actions.fight()
                     ])
                 },
-                message: '{0} uses {1} to repeat the preceding effect and ready and fight with {3}',
+                message: '{0} 使用 {1} 重复之前的效果重整并使 {3} 战斗',
                 messageArgs: (context) => [context.target]
             }
         });

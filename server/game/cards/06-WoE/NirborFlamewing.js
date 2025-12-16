@@ -27,7 +27,7 @@ class NirborFlamewing extends Card {
                 gameAction: ability.actions.destroy()
             },
             then: {
-                message: '{0} uses {1} to put {1} into play ready',
+                message: '{0} 使用 {1} 放置 {1} 入场并重整',
                 gameAction: ability.actions.putIntoPlay({
                     target: this,
                     ready: true
@@ -62,7 +62,7 @@ class NirborFlamewing extends Card {
                 gameAction: ability.actions.destroy()
             },
             then: (preThenContext) => ({
-                message: '{0} uses {1} to put {1} into play ready',
+                message: '{0} 使用 {1} 放置 {1} 入场并重整',
                 gameAction: ability.actions.putIntoPlay({
                     target: this,
                     ready: true

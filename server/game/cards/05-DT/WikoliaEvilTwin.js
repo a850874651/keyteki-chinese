@@ -1,4 +1,4 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class WikoliaEvilTwin extends Card {
     // Reap: Exalt Wikolia. Keys cost +4A during your opponent's next turn.
@@ -11,7 +11,7 @@ class WikoliaEvilTwin extends Card {
                     effect: ability.effects.modifyKeyCost(4)
                 })
             ],
-            effect: "exalt {0} and increase key cost by 4 during {1}'s next turn",
+            effect: "褒奖 {0} 并+4钥匙费用在 {1} 的下个回合",
             effectArgs: (context) => context.player.opponent
         });
     }

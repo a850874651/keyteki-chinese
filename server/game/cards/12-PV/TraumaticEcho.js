@@ -19,7 +19,7 @@ class TraumaticEcho extends Card {
                             innerContext.source.type === context.preThenEvent.card.type
                     )
                 })),
-                message: '{3} uses {4} to prevent {5} from playing {6} cards next turn',
+                message: '{3} 使用 {4} 防止 {5} 在下回合中打出 {6} 卡',
                 messageArgs: (context) => [
                     context.player,
                     context.source,

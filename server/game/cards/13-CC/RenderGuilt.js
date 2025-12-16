@@ -1,4 +1,4 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class RenderGuilt extends Card {
     // Play: A friendly creature captures 1A. For each A on that creature, deal 1D to a creature.
@@ -15,7 +15,7 @@ class RenderGuilt extends Card {
                 ])
             },
             effect:
-                'capture 1 amber onto {0} from the opponent and then deal 1 damage for each amber on {0} to a creature'
+                '从对手处抢占1琥珀到 {0} 上，并且 {0} 上每有1琥珀对一个生物造成1点伤害'
         });
     }
 }

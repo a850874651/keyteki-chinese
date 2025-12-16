@@ -13,7 +13,7 @@ class BridgeOfficerZaro extends Card {
                     cardCondition: (card) => !card.hasTrait('alien'),
                     gameAction: ability.actions.ready()
                 },
-                message: '{0} uses {1} to ready {2}'
+                message: '{0} 使用 {1} 重整 {2}'
             }
         });
     }

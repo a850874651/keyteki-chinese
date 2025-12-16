@@ -64,7 +64,7 @@ class AdaptiveDeckSelectionPrompt extends AllPlayerPrompt {
             };
 
             this.game.addMessage(
-                'Both players have selected {0}. Bidding will start at 0 chains by {1}',
+                '双方都选择了 {0}. 竞标将从0枷锁由 {1}开始',
                 link,
                 player1.owner
             );
@@ -80,7 +80,7 @@ class AdaptiveDeckSelectionPrompt extends AllPlayerPrompt {
                     argType: 'link',
                     label: deck.name
                 };
-                this.game.addMessage('{0} has selected {1} as their Archon', player.name, link);
+                this.game.addMessage('{0} 选择了作为 {1} 的统御者', player.name, link);
             });
             if (player1.owner !== player1.player) {
                 this.game.reInitialisePlayers(true);

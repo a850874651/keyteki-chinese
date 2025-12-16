@@ -1,4 +1,4 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class BlatantThievery extends Card {
     // Play: Enrage an enemy creature. Move all A from that creature to your pool.
@@ -9,7 +9,7 @@ class BlatantThievery extends Card {
                 controller: 'opponent',
                 gameAction: ability.actions.enrage()
             },
-            effect: 'enrage {1} and move all {2} amber from {1} to their pool',
+            effect: '激怒 {1} 并移动所有 {2} 琥珀从 {1} 到其琥珀池中',
             effectArgs: (context) => [context.target, context.target.tokens.amber || 0],
             then: {
                 alwaysTriggers: true,

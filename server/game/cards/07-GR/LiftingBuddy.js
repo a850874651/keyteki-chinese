@@ -21,7 +21,7 @@ class LiftingBuddy extends Card {
                         amount: 2
                     })
                 },
-                message: '{0} uses {1} to place 2 +1 power counters on {3}',
+                message: '{0} 使用 {1} 放置2个1力量指示物在 {3} 上',
                 messageArgs: (context) => [context.target]
             }
         });

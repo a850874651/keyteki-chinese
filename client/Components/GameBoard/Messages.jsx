@@ -1,6 +1,7 @@
 import classNames from 'classnames';
 import React from 'react';
 import { useSelector } from 'react-redux';
+import { useTranslation } from 'react-i18next';
 
 import AmberImage from '../../assets/img/amber.png';
 import CardBackImage from '../../assets/img/idbacks/cardback.jpg';
@@ -22,6 +23,8 @@ for (const colour of ['red', 'blue', 'yellow']) {
 import './Messages.scss';
 
 const Messages = ({ messages, onCardMouseOver, onCardMouseOut }) => {
+    const { i18n } = useTranslation();
+    
     const tokens = {
         amber: { className: 'icon-amber', imageSrc: AmberImage },
         card: { className: 'icon-card', imageSrc: CardBackImage },
@@ -151,6 +154,10 @@ const Messages = ({ messages, onCardMouseOver, onCardMouseOut }) => {
                     </a>
                 );
             } else if (fragment.image && fragment.label) {
+                // 获取当前语言并显示对应的卡牌名称
+                let locale = i18n.language;
+                const displayLabel = fragment.locale?.[locale]?.name || fragment.label;
+                
                 messages.push(
                     <span
                         key={index++}
@@ -161,7 +168,7 @@ const Messages = ({ messages, onCardMouseOver, onCardMouseOut }) => {
                         })}
                         onMouseOut={onCardMouseOut.bind(this)}
                     >
-                        {fragment.label}
+                        {displayLabel}
                     </span>
                 );
             } else if (fragment.name && fragment.argType === 'player') {

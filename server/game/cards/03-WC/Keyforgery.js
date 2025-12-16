@@ -21,7 +21,7 @@ class Keyforgery extends Card {
             })),
             then: (preThenContext) => ({
                 condition: (context) => !context.preThenEvent.card.hasHouse(preThenContext.house),
-                message: "{0} uses {1} to destroy itself and skip opponent's Forge Key step",
+                message: "{0} 使用 {1} 摧毁它自己并跳过对手的钥匙锻造阶段",
                 gameAction: [
                     ability.actions.destroy((context) => ({
                         target: context.source

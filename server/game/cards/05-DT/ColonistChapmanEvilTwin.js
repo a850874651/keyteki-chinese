@@ -1,4 +1,4 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class ColonistChapmanEvilTwin extends Card {
     // Elusive. (The first time this creature is attacked each turn, no damage is dealt.)
@@ -15,7 +15,7 @@ class ColonistChapmanEvilTwin extends Card {
                     amount: context.player.opponent ? context.player.opponent.amber : 0
                 }))
             ],
-            effect: 'capture all amber from each player'
+            effect: '抢占每位玩家的所有琥珀'
         });
     }
 }

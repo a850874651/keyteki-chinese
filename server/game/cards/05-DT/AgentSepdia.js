@@ -16,7 +16,7 @@ class AgentSepdia extends Card {
                     preThenContext.target.location === 'play area' &&
                     context.player.isTideHigh(),
                 gameAction: ability.actions.stun({ target: preThenContext.target }),
-                message: '{0} uses {1} to stun {3}',
+                message: '{0} 使用 {1} 击晕 {3}',
                 messageArgs: () => preThenContext.target
             })
         });

@@ -1,4 +1,4 @@
-const PlayerAction = require('./PlayerAction');
+﻿const PlayerAction = require('./PlayerAction');
 
 class DiscardTopOfDeckAction extends PlayerAction {
     setDefaultProperties() {
@@ -9,9 +9,9 @@ class DiscardTopOfDeckAction extends PlayerAction {
         super.setup();
         this.name = 'discard-top-of-deck';
         this.effectMsg =
-            'discard ' +
-            (this.amount === 1 ? 'a card' : this.amount + ' cards') +
-            " from the top of {0}'s deck";
+            '弃掉 ' +
+            (this.amount === 1 ? '1张卡牌' : this.amount + ' 张卡牌') +
+            " 从 {0}的牌库顶";
     }
 
     canAffect(player, context) {

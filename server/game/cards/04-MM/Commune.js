@@ -5,7 +5,7 @@ class Commune extends Card {
     // Play: Lose all of your A. Gain 4A.
     setupCardAbilities(ability) {
         this.play({
-            message: '{0} uses {1} to lose all {2} amber and gain 4 amber',
+            message: '{0} 使用 {1} 失去全部 {2} 琥珀并获得4琥珀',
             messageArgs: (context) => [context.player, context.source, context.player.amber],
             gameAction: ability.actions.sequential([
                 ability.actions.loseAmber((context) => ({

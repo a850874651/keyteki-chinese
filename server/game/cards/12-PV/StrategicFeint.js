@@ -30,7 +30,7 @@ class StrategicFeint extends Card {
                             innerContext.source.type === context.preThenEvent.card.type
                     )
                 })),
-                message: '{0} uses {1} to prevent playing {3} cards for the remainder of the turn',
+                message: '{0} 使用 {1} 防止在本回合的剩余时间内打出 {3} 卡',
                 messageArgs: (context) => [context.preThenEvent.card.type],
                 effectAlert: true
             }

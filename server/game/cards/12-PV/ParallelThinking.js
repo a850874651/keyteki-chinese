@@ -39,7 +39,7 @@ class ParallelThinking extends Card {
                     );
                 },
                 gameAction: ability.actions.steal({ amount: 2 }),
-                message: '{0} uses {1} to steal 2 amber from {3}',
+                message: '{0} 使用 {1} 窃取2琥珀从 {3}',
                 messageArgs: (context) => context.player.opponent
             }
         });

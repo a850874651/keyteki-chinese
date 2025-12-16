@@ -1,3 +1,4 @@
+﻿const { EVENTS } = require('../Events/types');
 const CardAction = require('./CardGameAction');
 
 class CaptureAction extends CardAction {
@@ -10,7 +11,7 @@ class CaptureAction extends CardAction {
     setup() {
         this.targetType = ['creature'];
         this.name = 'capture';
-        this.effectMsg = 'capture ' + this.amount + ' amber from {1}, placing it on {0}';
+        this.effectMsg = '抢占 ' + this.amount + ' 个琥珀从 {1}, 放置到 {0} 上';
         this.effectArgs = 'their opponent';
         if (this.player && this.target.length > 0) {
             this.effectArgs = this.player;
@@ -58,7 +59,7 @@ class CaptureAction extends CardAction {
             card: card,
             amount: Math.min(this.amount, player.amber)
         };
-        return super.createEvent('onCapture', params, (event) => {
+        return super.createEvent(EVENTS.onCapture, params, (event) => {
             let amount = event.amount;
             if (!player.anyEffect('captureFromPool')) {
                 if (amount > player.amber) {

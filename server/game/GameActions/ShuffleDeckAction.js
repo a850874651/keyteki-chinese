@@ -4,7 +4,7 @@ class ShuffleDeckAction extends PlayerAction {
     setup() {
         super.setup();
         this.name = 'shuffleDeck';
-        this.effectMsg = 'shuffle their deck';
+        this.effectMsg = '混洗其牌库';
     }
 
     defaultTargets(context) {
@@ -14,7 +14,7 @@ class ShuffleDeckAction extends PlayerAction {
     getEvent(player, context) {
         return super.createEvent('unnamedEvent', { player: player, context: context }, (event) => {
             event.player.shuffleDeck();
-            context.game.addMessage('{0} is shuffling their deck', player);
+            context.game.addMessage('{0} 正在混洗其牌库', player);
         });
     }
 }

@@ -1,4 +1,4 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class BrawlingGrounds extends Card {
     // Omni: For the remainder of the turn, each time a creature is
@@ -7,7 +7,7 @@ class BrawlingGrounds extends Card {
     setupCardAbilities(ability) {
         this.omni({
             effect:
-                'make the controller of each creature destroyed in a fight this turn discard a card at random for the remainder of the turn',
+                '在本回合剩余时间内，每有1个生物在战斗中被摧毁，其控制者随机弃掉1张手牌',
             gameAction: ability.actions.untilPlayerTurnEnd({
                 when: {
                     onCardDestroyed: (event) =>

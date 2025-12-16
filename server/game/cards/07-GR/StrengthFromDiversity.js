@@ -1,4 +1,4 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class StrengthFromDiversity extends Card {
     // Play: Each friendly non-Star Alliance creature captures 1.
@@ -7,7 +7,7 @@ class StrengthFromDiversity extends Card {
             gameAction: ability.actions.capture((context) => ({
                 target: context.player.creaturesInPlay.filter((c) => !c.hasHouse('staralliance'))
             })),
-            effect: 'make each friendly non-Star Alliance creature capture 1 amber'
+            effect: '使每个友方非星盟生物抢占1琥珀'
         });
     }
 }

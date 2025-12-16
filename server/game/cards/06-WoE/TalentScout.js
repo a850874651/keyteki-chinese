@@ -1,4 +1,4 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class TalentScout extends Card {
     // Talent Scout may be used as if it belonged to the active house.
@@ -18,7 +18,7 @@ class TalentScout extends Card {
                 location: 'hand',
                 gameAction: ability.actions.playCard(),
                 effect:
-                    "look at opponent's hand and play a creature, and give control of {1} to opponent",
+                    "查看对手的手牌并打出其中的1个生物，并把{1}的控制权给你的对手",
                 effectArgs: (context) => context.source
             },
             then: {

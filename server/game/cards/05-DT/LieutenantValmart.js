@@ -1,4 +1,4 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class LieutenantValmart extends Card {
     // (T) Play/Fight/Reap: If the tide is high, keys cost +3A during your opponent's next turn.
@@ -7,7 +7,7 @@ class LieutenantValmart extends Card {
             fight: true,
             reap: true,
             condition: (context) => context.player.isTideHigh(),
-            effect: "increase key cost by 3 during {1}'s next turn",
+            effect: "在 {1} 的下个回合，钥匙费用+3",
             effectArgs: (context) => context.player.opponent,
             gameAction: ability.actions.duringOpponentNextTurn({
                 targetController: 'any',

@@ -4,12 +4,12 @@ class ResolveFateAction extends CardGameAction {
     setup() {
         this.name = 'fate';
         this.targetType = ['creature', 'artifact', 'action', 'upgrade'];
-        this.effectMsg = 'resolve the fate effect of {0}';
+        this.effectMsg = '结算了 {0}的命运效果';
     }
 
     getEvent(card, context) {
         let fateEvent = super.createEvent('onFate', { card: card, context: context }, () => {
-            context.game.addMessage('{0} resolves the fate effect of {1}', context.player, card);
+            context.game.addMessage('{0} 结算了 {1}的命运效果', context.player, card);
         });
 
         fateEvent.addChildEvent(

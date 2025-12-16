@@ -1,4 +1,4 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class Aristotlmimus extends Card {
     // After Reap: If Aristotlmimus has a wisdom counter,
@@ -9,8 +9,8 @@ class Aristotlmimus extends Card {
             effect: '{1}',
             effectArgs: (context) =>
                 context.source.hasToken('wisdom')
-                    ? 'draw a card, archive a card, and play a card from archives'
-                    : 'optionally play a card from archives',
+                    ? '抽1张牌，归档1张牌，并从档案中打出1张牌'
+                    : '可以从档案中打出1张牌',
             gameAction: ability.actions.conditional((context) => ({
                 condition: context.source.hasToken('wisdom'),
                 trueGameAction: ability.actions.draw()

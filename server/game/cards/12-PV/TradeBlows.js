@@ -19,7 +19,7 @@ class TradeBlows extends Card {
                     controller: 'self',
                     gameAction: ability.actions.dealDamage({ amount: 1 })
                 },
-                message: '{0} uses {1} to deal 1 damage to {3}',
+                message: '{0} 使用 {1} 造成1点伤害对 {3}',
                 messageArgs: (context) => [context.target],
                 then: {
                     gameAction: ability.actions.resolveAbility({ ability: preThenContext.ability })

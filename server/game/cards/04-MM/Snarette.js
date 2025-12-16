@@ -13,7 +13,8 @@ class Snarette extends Card {
 
         this.action({
             condition: (context) => context.source.hasToken('amber'),
-            effect: 'move all amber from Snarette to the common pool',
+            effect: '移动 {1} 个琥魄从小诱捕魔到公共池',
+            effectArgs: (context) => context.source.amber,
             gameAction: ability.actions.removeAmber({
                 all: true
             })

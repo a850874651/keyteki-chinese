@@ -1,3 +1,4 @@
+﻿const { EVENTS } = require('../Events/types');
 const CardGameAction = require('./CardGameAction');
 
 class ApplyDamageAction extends CardGameAction {
@@ -12,7 +13,7 @@ class ApplyDamageAction extends CardGameAction {
     setup() {
         this.targetType = ['creature'];
         this.name = 'damage';
-        this.effectMsg = `apply ${this.amount} damage to {0}`;
+        this.effectMsg = `造成 ${this.amount} 点伤害对 {0}`;
     }
 
     canAffect(card, context) {
@@ -32,7 +33,7 @@ class ApplyDamageAction extends CardGameAction {
             destroyEvent: null
         };
 
-        return super.createEvent('onDamageApplied', params, (event) => {
+        return super.createEvent(EVENTS.onDamageApplied, params, (event) => {
             event.noGameStateCheck = true;
 
             event.card.addToken('damage', event.amount);

@@ -1,4 +1,4 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class SkulkingSaboteurs extends Card {
     // After Reap: If your red key is forged, destroy an enemy
@@ -8,7 +8,7 @@ class SkulkingSaboteurs extends Card {
         this.reap({
             condition: (context) => context.player.opponent,
             effect:
-                'destroy an anemy creature if their red key is forged, destroy an enemy artifact if their yellow key is forged, and destroy an enemy upgrade if their blue key is forged',
+                '如果其红色钥匙已锻造摧毁1个敌方生物, 如果其黄色钥匙已锻造摧毁1个敌方神器, 如果其蓝色钥匙已锻造摧毁1个敌方升级',
             gameAction: ability.actions.sequential([
                 ability.actions.conditional((context) => ({
                     condition: context.player.opponent && context.player.keys.red,
@@ -17,7 +17,7 @@ class SkulkingSaboteurs extends Card {
                             activePromptTitle: 'Choose a creature to destroy',
                             cardType: 'creature',
                             controller: 'opponent',
-                            message: '{0} uses {1} to destroy {2}',
+                            message: '{0} 使用 {1} 摧毁 {2}',
                             messageArgs: (card) => [context.player, context.source, card]
                         }
                     })
@@ -29,7 +29,7 @@ class SkulkingSaboteurs extends Card {
                             activePromptTitle: 'Choose an artifact to destroy',
                             cardType: 'artifact',
                             controller: 'opponent',
-                            message: '{0} uses {1} to destroy {2}',
+                            message: '{0} 使用 {1} 摧毁 {2}',
                             messageArgs: (card) => [context.player, context.source, card]
                         }
                     })
@@ -41,7 +41,7 @@ class SkulkingSaboteurs extends Card {
                             activePromptTitle: 'Choose an upgrade to destroy',
                             cardType: 'upgrade',
                             controller: 'opponent',
-                            message: '{0} uses {1} to destroy {2}',
+                            message: '{0} 使用 {1} 摧毁 {2}',
                             messageArgs: (card) => [context.player, context.source, card]
                         }
                     })

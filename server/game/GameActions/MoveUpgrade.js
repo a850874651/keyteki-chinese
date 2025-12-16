@@ -1,4 +1,4 @@
-const CardGameAction = require('./CardGameAction');
+﻿const CardGameAction = require('./CardGameAction');
 
 class MoveUpgrade extends CardGameAction {
     setDefaultProperties() {
@@ -9,7 +9,7 @@ class MoveUpgrade extends CardGameAction {
     setup() {
         this.name = 'moveUpgrade';
         this.targetType = ['creature'];
-        this.effectMsg = 'move {1} to {0}';
+        this.effectMsg = '移动 {1} 到 {0}';
         this.effectArgs = () => {
             return this.upgrades;
         };

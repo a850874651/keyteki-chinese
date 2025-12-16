@@ -20,7 +20,7 @@ class Turnkey extends Card {
                             target: context.player.opponent,
                             atNoCost: true
                         }),
-                        message: '{0} forges a key at no cost due to {1} leaving play'
+                        message: '{0} 无费用锻造1把钥匙，由于 {1} 离场'
                     })
                 }))
             }

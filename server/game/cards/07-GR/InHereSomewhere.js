@@ -1,4 +1,4 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class InHereSomewhere extends Card {
     // Play: If you are haunted, archive 2 cards from your discard pile.
@@ -13,7 +13,7 @@ class InHereSomewhere extends Card {
                         location: 'discard',
                         numCards: 2,
                         mode: 'exactly',
-                        message: '{0} uses {1} to archive {2}',
+                        message: '{0} 使用 {1} 归档 {2}',
                         messageArgs: (cards) => [context.player, context.source.name, cards]
                     }
                 })),
@@ -24,8 +24,8 @@ class InHereSomewhere extends Card {
             effect: '{1}',
             effectArgs: (context) => [
                 context.player.isHaunted()
-                    ? 'archive 2 cards from their discard pile'
-                    : 'discard the top 5 cards of their deck'
+                    ? '从其弃牌堆归档2张卡牌'
+                    : '弃掉其牌库顶的5张卡牌'
             ]
         });
     }

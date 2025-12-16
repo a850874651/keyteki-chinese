@@ -1,4 +1,4 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class CulturalExchange extends Card {
     // Play: Your opponent puts each card from their archives into their hand.
@@ -6,7 +6,7 @@ class CulturalExchange extends Card {
         this.play({
             condition: (context) =>
                 !!context.player.opponent && context.player.opponent.archives.length > 0,
-            effect: "return all the cards in {1}'s archives to their hand",
+            effect: "将 {1}的档案中的每张牌返回到其手中",
             effectArgs: (context) => [context.player.opponent],
             gameAction: ability.actions.sequentialForEach((context) => ({
                 forEach: context.player.opponent.archives,

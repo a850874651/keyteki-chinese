@@ -1,4 +1,4 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class ExtrematodeInfection extends Card {
     //Play: Put 3 hatch counters on Extrematode Infection.
@@ -6,7 +6,7 @@ class ExtrematodeInfection extends Card {
     // Then if it has no hatch counters, destroy this creature and make 3 token creatures.
     setupCardAbilities(ability) {
         this.play({
-            effect: 'put 3 hatch counters on {0}',
+            effect: '放置3个孵化指示物在 {0} 上',
             gameAction: ability.actions.addHatchCounter(() => ({
                 amount: 3,
                 target: this

@@ -15,7 +15,7 @@ class EffigyOfMelerukh extends Card {
             then: {
                 condition: (context) =>
                     context.source.hasToken('awakening') && context.source.tokens.awakening >= 6,
-                message: '{1} has 6 counters and moves to flank.',
+                message: '{1} 拥有6个指示物，移动到侧翼',
                 messageArgs: (context) => [context.source],
                 gameAction: ability.actions.sequential([
                     ability.actions.cardLastingEffect((context) => ({

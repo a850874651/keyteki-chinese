@@ -30,7 +30,7 @@ class KeyPhase extends Phase {
             }
         } else {
             this.game.addMessage(
-                '{0} does not forge a key.  They have {1} amber.  The current cost is {2} amber ',
+                '{0} 未锻造钥匙.  他有 {1} 琥珀.  他的当前钥匙锻造费用为 {2} 琥珀',
                 this.game.activePlayer,
                 this.game.activePlayer.amber,
                 this.game.activePlayer.getCurrentKeyCost()

@@ -18,7 +18,7 @@ class DemonicShelf extends Card {
                     damageStep: 3,
                     numSteps: context.source.childCards.length
                 })),
-                message: '{0} uses {1} to deal 3 damage to a creature for each card under {1}'
+                message: '{0} 使用 {1} 每有1张卡在下方 {1} 对1个生物造成3点伤害'
             }
         });
     }

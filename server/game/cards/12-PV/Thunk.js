@@ -1,4 +1,4 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class Thunk extends Card {
     // Play: Deal 2 to an enemy creature and exhaust it.
@@ -10,11 +10,11 @@ class Thunk extends Card {
                 controller: 'opponent',
                 gameAction: [ability.actions.dealDamage({ amount: 2 }), ability.actions.exhaust()]
             },
-            effect: 'deal 2 damage to {0} and exhaust it'
+            effect: '对 {0} 造成2点伤害并横置它'
         });
 
         this.fate({
-            effect: 'destroy each exhausted creature',
+            effect: '摧毁每个横置的生物',
             gameAction: ability.actions.destroy((context) => ({
                 target: context.game.creaturesInPlay.filter((card) => card.exhausted)
             }))

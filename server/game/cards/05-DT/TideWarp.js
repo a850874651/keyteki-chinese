@@ -1,4 +1,4 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class TideWarp extends Card {
     // (T) At the start of your turn, if the tide is high, your opponent raises the tide. Otherwise, you raise the tide.
@@ -10,7 +10,7 @@ class TideWarp extends Card {
             gameAction: ability.actions.raiseTide((context) => ({
                 target: context.player.isTideHigh() ? context.player.opponent : context.player
             })),
-            effect: 'raise the tide for {1}',
+            effect: '为 {1} 抬升潮位',
             effectArgs: (context) =>
                 context.player.isTideHigh() ? context.player.opponent : context.player
         });

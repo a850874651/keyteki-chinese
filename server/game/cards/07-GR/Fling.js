@@ -1,8 +1,8 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class Fling extends Card {
     // Play: Destroy a friendly creature. If you do, deal damage to an
-    // enemy creature equal to the destroyed creature’s power with 3
+    // enemy creature equal to the destroyed creature窶冱 power with 3
     // splash.
     setupCardAbilities(ability) {
         this.play({
@@ -20,7 +20,7 @@ class Fling extends Card {
                         splash: 3
                     }))
                 },
-                message: '{0} uses {1} to deal {3} damage to {4} with 3 splash',
+                message: '{0} 使用 {1} 造成 {3} 点伤害对 {4} 并溅射3',
                 messageArgs: (context) => [
                     context.preThenEvents[0].clone.modifiedPower,
                     context.target

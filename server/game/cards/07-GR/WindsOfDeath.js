@@ -19,7 +19,7 @@ class WindsOfDeath extends Card {
                 gameAction: ability.actions.destroy((context) => ({
                     target: context.game.creaturesInPlay
                 })),
-                message: '{0} uses {1} to destroy each creature'
+                message: '{0} 使用 {1} 摧毁每个生物'
             }
         });
     }

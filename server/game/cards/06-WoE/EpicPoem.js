@@ -1,4 +1,4 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 class EpicPoem extends Card {
     // Play: Exalt a friendly creature. Gain 1 amber for each  on that creature.
     setupCardAbilities(ability) {
@@ -15,7 +15,7 @@ class EpicPoem extends Card {
                     }))
                 ])
             },
-            effect: 'exalt {0} and gain {1} amber',
+            effect: '褒奖 {0} 并获得 {1} 琥珀',
             effectArgs: (context) => [context.target.amber + 1]
         });
     }

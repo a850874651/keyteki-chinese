@@ -14,7 +14,7 @@ class Tormax extends GiganticCard {
         this.play({
             fight: true,
             reap: true,
-            effect: 'discard {1}',
+            effect: 'œP’u {1}',
             effectArgs: (context) => [context.player.hand],
             gameAction: ability.actions.sequential([
                 ability.actions.discard((context) => ({

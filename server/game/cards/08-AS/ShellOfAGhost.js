@@ -6,7 +6,7 @@ class ShellOfAGhost extends Card {
     // control. Gain 2 chains.
     setupCardAbilities(ability) {
         this.play({
-            effect: 'destroy each creature not on a flank',
+            effect: '摧毁每个不在侧翼的生物',
             gameAction: ability.actions.destroy((context) => ({
                 target: context.game.creaturesInPlay.filter((card) => !card.isOnFlank())
             })),
@@ -20,12 +20,12 @@ class ShellOfAGhost extends Card {
                         myControl: true
                     })
                 },
-                message: '{0} uses {1} to put {3} into play',
+                message: '{0} 使用 {1} 将 {3} 放置入场',
                 messageArgs: (context) => [context.target ? context.target : 'nothing'],
                 then: {
                     alwaysTriggers: true,
                     gameAction: ability.actions.gainChains({ amount: 2 }),
-                    message: '{0} uses {1} to gain 2 chains'
+                    message: '{0} 使用 {1} 获得2枷锁'
                 }
             }
         });

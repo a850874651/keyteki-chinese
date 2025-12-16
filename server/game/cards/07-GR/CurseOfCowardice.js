@@ -24,7 +24,7 @@ class CurseOfCowardice extends Card {
                 alwaysTriggers: true,
                 condition: (context) => context.player.creaturesInPlay.length === 0,
                 gameAction: ability.actions.destroy(),
-                message: '{1} is destroyed as there are no friendly creatures in play'
+                message: '{1} 被摧毁了，因为没有友方生物'
             }
         });
     }

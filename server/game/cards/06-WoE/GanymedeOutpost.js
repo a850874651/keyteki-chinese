@@ -20,7 +20,7 @@ class GanymedeOutpost extends Card {
                         gameAction: ability.actions.archive()
                     }
                 },
-                message: '{0} uses {1} to archive 2 cards'
+                message: '{0} 使用 {1} 归档2张卡牌'
             }
         });
     }

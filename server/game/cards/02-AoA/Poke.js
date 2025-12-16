@@ -14,7 +14,7 @@ class Poke extends Card {
                     context.preThenEvent.destroyEvent &&
                     context.preThenEvent.destroyEvent.destroyedByDamageDealt &&
                     context.preThenEvent.destroyEvent.resolved,
-                message: '{0} uses {1} to draw a card',
+                message: '{0} 使用 {1} 抽1张牌',
                 gameAction: ability.actions.draw()
             }
         });

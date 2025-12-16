@@ -22,7 +22,7 @@ class AutoVac5150 extends Card {
                     falseGameAction: ability.actions.archive()
                 })
             },
-            message: '{0} uses {1} to {2}',
+            message: '{0} 使用 {1} 对 {2}',
             messageArgs: (context) => [
                 context.player,
                 context.source,

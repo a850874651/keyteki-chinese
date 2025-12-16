@@ -10,7 +10,7 @@ class HuggerMugger extends Card {
                 condition: (context) =>
                     context.player.opponent &&
                     context.player.opponent.getForgedKeys() > context.player.getForgedKeys(),
-                message: '{0} uses {1} to steal 1 amber',
+                message: '{0} 使用 {1} 窃取1琥珀',
                 gameAction: ability.actions.steal()
             }
         });

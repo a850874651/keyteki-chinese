@@ -9,7 +9,7 @@ class CaptainNemo extends Card {
                     promptForSelect: {
                         activePromptTitle: 'Choose an artifact to destroy',
                         cardType: 'artifact',
-                        message: '{0} uses {1} to destroy {2}',
+                        message: '{0} 使用 {1} 摧毁 {2}',
                         messageArgs: (card) => [context.player, context.source, card]
                     }
                 })),
@@ -17,12 +17,12 @@ class CaptainNemo extends Card {
                     promptForSelect: {
                         activePromptTitle: 'Choose a creature to destroy',
                         cardType: 'creature',
-                        message: '{0} uses {1} to destroy {2}',
+                        message: '{0} 使用 {1} 摧毁 {2}',
                         messageArgs: (card) => [context.player, context.source, card]
                     }
                 }))
             ],
-            effect: 'to destroy an artifact and a creature'
+            effect: '摧毁1个神器和1个生物'
         });
     }
 }

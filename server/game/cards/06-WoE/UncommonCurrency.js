@@ -1,4 +1,4 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class UncommonCurrency extends Card {
     // Action: Swap control of Uncommon Currency and an enemy artifact.
@@ -22,7 +22,7 @@ class UncommonCurrency extends Card {
                     }))
                 ]
             },
-            effect: 'swap control of {0} and {1}',
+            effect: '交换 {0} 和 {1} 的控制权',
             effectArgs: (context) => [context.source]
         });
     }

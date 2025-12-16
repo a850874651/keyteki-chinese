@@ -21,7 +21,7 @@ class Aurascope extends Card {
                     cardCondition: (card) => card.type === preThenContext.target[0].type,
                     gameAction: ability.actions.purge()
                 },
-                message: '{0} uses {1} to purge {3}',
+                message: '{0} 使用 {1} 清除 {3}',
                 messageArgs: (context) => [context.target]
             })
         });

@@ -74,7 +74,7 @@ class CardAction extends CardAbility {
      */
     resolveTargets(context) {
         if (!this.condition(context)) {
-            context.game.addMessage('{0} uses {1} without effect', context.player, context.source);
+            context.game.addMessage('{0} 使用 {1} 但无效果', context.player, context.source);
             return {
                 cancelled: true,
                 payCostsFirst: false,

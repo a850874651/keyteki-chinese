@@ -1,4 +1,4 @@
-const PlayerAction = require('./PlayerAction');
+﻿const PlayerAction = require('./PlayerAction');
 const _ = require('underscore');
 
 class RandomPlayCardAction extends PlayerAction {
@@ -12,9 +12,9 @@ class RandomPlayCardAction extends PlayerAction {
         super.setup();
         this.name = 'play';
         this.effectMsg =
-            'play ' +
-            (this.amount === 1 ? 'a card' : `${this.amount} cards`) +
-            ` at random from {0}'s ${this.location}`;
+            '随机打出了 ' +
+            (this.amount === 1 ? '1张卡牌' : `${this.amount} 张卡牌`) +
+            ` 从 {0}的 ${this.location}`;
     }
 
     canAffect(player, context) {

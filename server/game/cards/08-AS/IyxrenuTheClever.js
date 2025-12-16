@@ -4,7 +4,7 @@ class IyxrenuTheClever extends Card {
     // Action: Lose 1A. If you do, move all A from a creature to your pool.
     setupCardAbilities(ability) {
         this.action({
-            message: '{0} uses {1} to lose {2} amber',
+            message: '{0} 使用 {1} 失去 {2} 琥珀',
             messageArgs: (context) => [
                 context.player,
                 context.source,
@@ -14,7 +14,7 @@ class IyxrenuTheClever extends Card {
                 target: context.player
             })),
             then: {
-                message: '{0} uses {1} to move all {3} amber from {2} to their pool',
+                message: '{0} 使用 {1} 把所有 {3} 琥珀从 {2} 移至琥珀池',
                 messageArgs: (context) => [context.target.tokens.amber || 0],
                 target: {
                     cardType: 'creature',

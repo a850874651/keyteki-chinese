@@ -10,7 +10,7 @@ class Mindfire extends Card {
                 condition: (context) =>
                     context.preThenEvent.cards.length > 0 &&
                     context.preThenEvent.cards[0].bonusIcons.length > 0,
-                message: '{0} uses {1} to steal {3} amber',
+                message: '{0} 使用 {1} 窃取 {3} 琥珀',
                 messageArgs: (context) =>
                     context.preThenEvent.cards.length > 0
                         ? context.preThenEvent.cards[0].bonusIcons.length

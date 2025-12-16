@@ -1,4 +1,4 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class LictorJustinian extends Card {
     // After your opponent plays a card, deal 1D to each enemy creature.
@@ -7,7 +7,7 @@ class LictorJustinian extends Card {
             when: {
                 onCardPlayed: (event, context) => event.player === context.player.opponent
             },
-            effect: 'deal 1 damage to each enemy creature',
+            effect: '对每个敌方生物造成 1 点伤害',
             gameAction: ability.actions.dealDamage((context) => ({
                 target: context.player.opponent.creaturesInPlay,
                 amount: 1

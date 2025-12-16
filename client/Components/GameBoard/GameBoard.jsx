@@ -249,14 +249,37 @@ export class GameBoard extends React.Component {
     renderToken(player) {
         if (player.tokenCard) {
             let locale = this.props.i18n.language;
-            let img = `/img/cards/${locale === 'en' ? '' : locale}/${player.tokenCard.image}.png`;
+            // ✅ 修改：添加 '/' 到路径中
+            let img = `/img/cards/${locale === 'en' ? '' : locale + '/'}${player.tokenCard.image}.png`;
+            // ✅ 新增：fallback 图片路径
+            let fallbackImg = `/img/cards/${player.tokenCard.image}.png`;
+            
             return (
                 <img
                     className={`img-fluid normal reference-card`}
                     src={img}
+                    // ✅ 新增：图片加载失败时使用英文图片
+                    onError={(e) => {
+                        if (e.target.src !== fallbackImg) {
+                            e.target.src = fallbackImg;
+                            e.target.onerror = null;
+                        }
+                    }}
                     onMouseOver={() => {
                         this.onMouseOver({
-                            image: <img src={img} className='card-zoom normal' />,
+                            // ✅ 修复：zoom 图片也添加 fallback
+                            image: (
+                                <img 
+                                    src={img} 
+                                    className='card-zoom normal'
+                                    onError={(e) => {
+                                        if (e.target.src !== fallbackImg) {
+                                            e.target.src = fallbackImg;
+                                            e.target.onerror = null;
+                                        }
+                                    }}
+                                />
+                            ),
                             size: 'normal'
                         });
                     }}
@@ -285,14 +308,19 @@ export class GameBoard extends React.Component {
                             {pair.map((card) => {
                                 // Handle both face-up and face-down prophecy cards
                                 let img;
+                                let fallbackImg; // ✅ 新增：fallback 图片变量
+                                
                                 if (card.facedown) {
                                     // Non-controlling player sees face-down card
                                     img = Constants.DefaultCard;
                                 } else {
                                     // Controlling player sees face-up card
-                                    img = `/img/cards/${locale === 'en' ? '' : locale}/${
+                                    // ✅ 修改：添加 '/' 到路径中
+                                    img = `/img/cards/${locale === 'en' ? '' : locale + '/'}${
                                         card.image
                                     }.png`;
+                                    // ✅ 新增：构建 fallback 路径
+                                    fallbackImg = `/img/cards/${card.image}.png`;
                                 }
 
                                 // Only the prophecy controller can click prophecies
@@ -312,6 +340,13 @@ export class GameBoard extends React.Component {
                                         <img
                                             className={className}
                                             src={img}
+                                            // ✅ 新增：图片加载失败时使用英文图片
+                                            onError={(e) => {
+                                                if (!card.facedown && fallbackImg && e.target.src !== fallbackImg) {
+                                                    e.target.src = fallbackImg;
+                                                    e.target.onerror = null;
+                                                }
+                                            }}
                                             onClick={
                                                 card.selectable
                                                     ? () => this.onCardClick(card)
@@ -344,6 +379,12 @@ export class GameBoard extends React.Component {
                                                         <img
                                                             src={img}
                                                             className='card-zoom normal'
+                                                            onError={(e) => {
+                                                                if (!card.facedown && fallbackImg && e.target.src !== fallbackImg) {
+                                                                    e.target.src = fallbackImg;
+                                                                    e.target.onerror = null;
+                                                                }
+                                                            }}
                                                         />
                                                     ),
                                                     size: 'normal'
@@ -387,14 +428,23 @@ export class GameBoard extends React.Component {
                                                         }}
                                                         onMouseOver={() => {
                                                             if (isController) {
+                                                                // ✅ 修改：添加 '/' 到路径中
                                                                 const faceUpImg = `/img/cards/${
-                                                                    locale === 'en' ? '' : locale
-                                                                }/${childCard.image}.png`;
+                                                                    locale === 'en' ? '' : locale + '/'
+                                                                }${childCard.image}.png`;
+                                                                const childFallbackImg = `/img/cards/${childCard.image}.png`;
+                                                                
                                                                 this.onMouseOver({
                                                                     image: (
                                                                         <img
                                                                             src={faceUpImg}
                                                                             className='card-zoom normal'
+                                                                            onError={(e) => {
+                                                                                if (e.target.src !== childFallbackImg) {
+                                                                                    e.target.src = childFallbackImg;
+                                                                                    e.target.onerror = null;
+                                                                                }
+                                                                            }}
                                                                         />
                                                                     ),
                                                                     size: 'normal'
@@ -432,6 +482,7 @@ export class GameBoard extends React.Component {
     renderTide(thisPlayer, otherPlayer) {
         if (thisPlayer.stats.tideRequired || (otherPlayer && otherPlayer.stats.tideRequired)) {
             let locale = this.props.i18n.language;
+            // ✅ 这个已经有 fallback 了，无需修改
             let img = Constants.TideImages.card[locale]
                 ? Constants.TideImages.card[locale]
                 : Constants.TideImages.card['en'];

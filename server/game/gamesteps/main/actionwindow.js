@@ -104,7 +104,7 @@ class ActionWindow extends UiPrompt {
 
         if (this.game.omegaCard) {
             this.game.addMessage(
-                '{0} played {1} which has Omega, ending this step',
+                '{0} 打出了 {1} 具有终末效果, 结束这个阶段',
                 this.game.activePlayer,
                 this.game.omegaCard
             );
@@ -141,7 +141,7 @@ class ActionWindow extends UiPrompt {
                 controller: 'self',
                 cardCondition: (card) => !card.facedown,
                 onSelect: (player, card) => {
-                    this.game.addMessage("{0} uses {1}'s ability", player, card);
+                    this.game.addMessage("{0} 使用 {1}的能力", player, card);
                     return true;
                 }
             });

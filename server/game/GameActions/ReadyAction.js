@@ -1,10 +1,10 @@
-const CardGameAction = require('./CardGameAction');
+﻿const CardGameAction = require('./CardGameAction');
 
 class ReadyAction extends CardGameAction {
     setup() {
         this.name = 'ready';
         this.targetType = ['creature', 'artifact'];
-        this.effectMsg = 'ready {0}';
+        this.effectMsg = '重整 {0}';
     }
 
     canAffect(card, context) {

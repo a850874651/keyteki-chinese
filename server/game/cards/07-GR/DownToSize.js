@@ -1,11 +1,11 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class DownToSize extends Card {
     // Play: Choose an enemy creature. Until the end of the turn, that
     // creature is considered to have 1 power and 0 armor.
     setupCardAbilities(ability) {
         this.play({
-            effect: 'make {0} have 1 power and 0 amor until the end of the turn',
+            effect: '使得 {0} 具有1力量0护甲直到本回合结束',
             effectArgs: (context) => context.target,
             target: {
                 cardType: 'creature',

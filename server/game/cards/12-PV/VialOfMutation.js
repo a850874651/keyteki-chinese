@@ -1,4 +1,4 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class VialOfMutation extends Card {
     // Play: Put a Mutation counter on 2 creatures. While those creatures have a mutation counter, they gain the Mutant trait.
@@ -24,7 +24,7 @@ class VialOfMutation extends Card {
                     }))
                 ])
             },
-            effect: 'put a mutation counter on {0}, making them gain the Mutant trait'
+            effect: '放置了变异体指示物到 {0} 上, 使其获得了变异体特性'
         });
     }
 }

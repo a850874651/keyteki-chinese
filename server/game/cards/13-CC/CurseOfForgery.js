@@ -1,4 +1,4 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class CurseOfForgery extends Card {
     // Treachery. (This card enters play under your opponent's control.)
@@ -9,7 +9,7 @@ class CurseOfForgery extends Card {
                 onForgeKey: (event, context) =>
                     context.source.controller === context.game.activePlayer
             },
-            effect: 'purge {0} and skip the Forge Key step',
+            effect: '清除 {0} 并跳过锻造钥匙阶段',
             gameAction: [
                 ability.actions.purge((context) => ({
                     target: context.source

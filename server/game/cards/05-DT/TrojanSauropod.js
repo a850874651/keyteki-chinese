@@ -1,7 +1,7 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class TrojanSauropod extends Card {
-    // Trojan Sauropod enters play under your opponent’s control.
+    // Trojan Sauropod enters play under your opponent窶冱 control.
     // Omni: Gain 3A. Your opponent reveals their hand and puts each creature from it into play ready, then refills their hand as if it were their "draw cards" step. Destroy Trojan Sauropod.
     setupCardAbilities(ability) {
         this.persistentEffect({
@@ -11,7 +11,7 @@ class TrojanSauropod extends Card {
 
         this.omni({
             effect:
-                "gain 3 amber, revel their opponent's hand as {1} and play each of their creature",
+                "获得3琥珀, 展示对手的手牌 {1} 并打出其中的每个生物",
             effectArgs: (context) =>
                 context.player.opponent ? [context.player.opponent.hand] : [],
             gameAction: ability.actions.gainAmber({ amount: 3 }),

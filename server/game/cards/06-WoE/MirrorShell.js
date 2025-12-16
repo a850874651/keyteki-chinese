@@ -1,4 +1,4 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class MirrorShell extends Card {
     // Play: Make a token creature.
@@ -14,7 +14,7 @@ class MirrorShell extends Card {
         this.whileAttached({
             effect: ability.effects.gainAbility('fight', {
                 reap: true,
-                effect: 'make all friendly token creatures a copy of {0}',
+                effect: '在本回合剩余时间内，使所有友方代标生物变成 {0} 的复制',
                 gameAction: ability.actions.untilPlayerTurnEnd((context) => ({
                     controller: 'self',
                     match: (card) => card.isToken(),

@@ -1,4 +1,4 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class Necromorph extends Card {
     // Destroyed: If Necromorph has a non-Star Alliance neighbor,
@@ -11,7 +11,7 @@ class Necromorph extends Card {
                 cardCondition: (card, context) =>
                     context.source.neighbors.includes(card) && !card.hasHouse('staralliance')
             },
-            effect: 'heal all damage from {1} and destroy {0} instead',
+            effect: '改为完全治疗 {1} 并摧毁 {0} ',
             effectArgs: () => this,
             gameAction: [
                 ability.actions.heal({ fully: true }),

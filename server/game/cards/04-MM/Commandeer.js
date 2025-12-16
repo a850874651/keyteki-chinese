@@ -16,7 +16,7 @@ class Commandeer extends Card {
                         cardType: 'creature',
                         controller: 'self',
                         message:
-                            '{0} uses {1} to capture amber from their opponent and place on {2}',
+                            '{0} 使用 {1} 从对手抢占琥珀并放在 {2} 上',
                         messageArgs: (card) => [context.player, context.source, card]
                     }
                 })

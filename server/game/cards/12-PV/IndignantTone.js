@@ -16,7 +16,7 @@ class IndignantTone extends Card {
                 gameAction: ability.actions.enrage((context) => ({
                     target: context.preThenEvent.clone.neighbors
                 })),
-                message: '{0} uses {1} to enrage {3}',
+                message: '{0} 使用 {1} 激怒 {3}',
                 messageArgs: (context) => [context.preThenEvent.clone.neighbors]
             }
         });

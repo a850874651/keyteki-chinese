@@ -1,4 +1,4 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class ShardOfCourage extends Card {
     // Action: For each friendly Shard, ready and fight with a
@@ -35,7 +35,7 @@ class ShardOfCourage extends Card {
                     })
                 ])
             })),
-            effect: 'ready and fight with a creature for each friendly shard'
+            effect: '每有1个友方碎片，重整并使1个友方生物战斗'
         });
     }
 }

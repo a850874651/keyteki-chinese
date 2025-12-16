@@ -10,7 +10,7 @@ class AllHandsOnDeck extends Card {
                 trueGameAction: ability.actions.destroy((context) => ({
                     promptForSelect: {
                         cardType: 'creature',
-                        message: '{0} uses {1} to destroy {2}',
+                        message: '{0} 使用 {1} 摧毁 {2}',
                         messageArgs: (cards) => [context.player, context.source.name, cards]
                     }
                 })),
@@ -18,14 +18,14 @@ class AllHandsOnDeck extends Card {
                     amount: 3,
                     promptForSelect: {
                         cardType: 'creature',
-                        message: '{0} uses {1} to deal 3 damage to {2}',
+                        message: '{0} 使用 {1} 造成3点伤害对 {2}',
                         messageArgs: (cards) => [context.player, context.source.name, cards]
                     }
                 }))
             }),
             effect: '{1}',
             effectArgs: (context) => [
-                context.player.isHaunted() ? 'destroy a creature' : 'deal 3 damage to a creature'
+                context.player.isHaunted() ? '摧毁1个生物' : '对1个生物造成3点伤害'
             ]
         });
     }

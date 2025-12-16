@@ -1,8 +1,8 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class PlowSword extends Card {
     // Action: Put a creature in a discard pile on the bottom of its
-    // owner’s deck. If you do, deal 3 to a creature.
+    // owner窶冱 deck. If you do, deal 3 to a creature.
     setupCardAbilities(ability) {
         this.action({
             target: {
@@ -19,7 +19,7 @@ class PlowSword extends Card {
                         amount: 3
                     })
                 },
-                message: '{0} uses {1} to deal 3 damage to {2}',
+                message: '{0} 使用 {1} 造成3点伤害对 {2}',
                 messageArgs: (context) => [context.source]
             }
         });

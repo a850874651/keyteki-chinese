@@ -1,4 +1,4 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class FieryJark extends Card {
     // Play: Destroy an enemy creature and a friendly creature. You
@@ -18,7 +18,7 @@ class FieryJark extends Card {
                     gameAction: ability.actions.destroy()
                 }
             },
-            effect: 'destroy {1}',
+            effect: '摧毁 {1}',
             effectArgs: (context) => [Object.values(context.targets)],
             then: (context) => ({
                 condition: () =>

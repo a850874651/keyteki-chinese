@@ -1,10 +1,10 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class TheAmberRoad extends Card {
     // Omni: Put 1 trade counter on The Æmber Road, then gain 1 Aember for each trade counter on it. Give control of The Æmber Road to your opponent.
     setupCardAbilities(ability) {
         this.omni({
-            effect: 'to put a trade counter on {0}, gain {1} amber, and give control to {2}',
+            effect: '放置1个贸易指示物在 {0} 上, 获得 {1} 琥珀, 并将其控制权交给 {2}',
             effectArgs: (context) => [
                 context.source.tokens.trade ? context.source.tokens.trade + 1 : 1,
                 context.player.opponent

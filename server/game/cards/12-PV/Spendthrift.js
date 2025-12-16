@@ -1,4 +1,4 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class Spendthrift extends Card {
     // Play: Move each A from a creature to the common supply. Exalt that creature.
@@ -9,12 +9,12 @@ class Spendthrift extends Card {
                 cardType: 'creature',
                 gameAction: [ability.actions.removeAmber({ all: true }), ability.actions.exalt()]
             },
-            effect: 'move all {2} amber from {0} to the common supply and exalt {0}',
+            effect: '移动 所有 {2} 琥珀从 {0} 身上到公共供应堆并褒奖 {0}',
             effectArgs: (context) => [context.target, context.target.tokens.amber || 0]
         });
 
         this.fate({
-            effect: "move all {1} amber from enemy creatures to their opponent's pool",
+            effect: "将所有 {1} 琥珀从敌方生物身上移动到到敌方琥珀池中",
             effectArgs: (context) => [
                 context.game.activePlayer.opponent.creaturesInPlay.reduce(
                     (total, card) => total + card.amber,

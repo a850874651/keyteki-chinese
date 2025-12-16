@@ -1,11 +1,11 @@
-const CardGameAction = require('./CardGameAction');
+﻿const CardGameAction = require('./CardGameAction');
 const RemoveTokenAction = require('./RemoveTokenAction');
 
 class RemoveAllTokensAction extends CardGameAction {
     setup() {
         this.name = 'removeAllTokens';
         this.targetType = ['creature'];
-        this.effectMsg = 'remove all counters from {0}';
+        this.effectMsg = '移除所有指示物从 {0}';
     }
 
     checkEventCondition(event) {

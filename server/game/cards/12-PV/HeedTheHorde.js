@@ -1,4 +1,4 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class HeedTheHorde extends Card {
     // Play: For each friendly Mutant creature, your opponent loses 1.
@@ -18,7 +18,7 @@ class HeedTheHorde extends Card {
                     card.hasTrait('mutant')
                 )
             })),
-            effect: 'capture 1 amber from their pool onto {1}',
+            effect: '抢占 1 琥珀到 {1} 上',
             effectArgs: (context) => [
                 context.game.activePlayer.opponent.creaturesInPlay.filter((card) =>
                     card.hasTrait('mutant')

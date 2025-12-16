@@ -9,7 +9,7 @@ class RevealAction extends CardGameAction {
     setup() {
         super.setup();
         this.name = 'reveal';
-        this.effectMsg = 'reveal {0}';
+        this.effectMsg = '展示了 {0}';
 
         if (!Array.isArray(this.location)) {
             this.location = [this.location];
@@ -23,7 +23,7 @@ class RevealAction extends CardGameAction {
     getEvent(card, context) {
         return super.createEvent('onRevealCards', { card, context }, () => {
             if (this.chatMessage) {
-                context.game.addMessage('{0} reveals {1}', context.source, card);
+                context.game.addMessage('{0} 展示了 {1}', context.source, card);
             }
         });
     }

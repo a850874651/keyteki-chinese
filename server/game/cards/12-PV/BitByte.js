@@ -1,4 +1,4 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class BitByte extends Card {
     // Skirmish.
@@ -20,7 +20,7 @@ class BitByte extends Card {
                           ]
                         : null
             })),
-            effect: "archive the bottom card of {1}'s deck",
+            effect: "归档{1}牌库底的卡牌",
             effectArgs: (context) => context.game.activePlayer.opponent
         });
     }

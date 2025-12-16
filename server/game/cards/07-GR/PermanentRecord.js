@@ -12,7 +12,7 @@ class PermanentRecord extends Card {
             then: {
                 condition: (context) => context.player.opponent,
                 gameAction: ability.actions.steal({ amount: 2 }),
-                message: '{0} uses {1} to steal 2 amber'
+                message: '{0} 使用 {1} 窃取2琥珀'
             }
         });
     }

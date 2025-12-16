@@ -1,4 +1,4 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class MembershipDrive extends Card {
     // Play: Make a token creature. Gain 1A for each friendly token creature
@@ -10,10 +10,10 @@ class MembershipDrive extends Card {
                     amount: context.player.creaturesInPlay.filter((c) => c.isToken()).length
                 }))
             ]),
-            effect: 'make a token creature',
+            effect: '制造1个代标生物',
             then: {
                 message:
-                    '{0} uses {1} to gain 1 amber for each friendly token creature, gaining a total of {3} amber',
+                    '{0} 使用 {1} 获得1琥珀，通过每个代标生物，共获得 {3} 琥珀',
                 messageArgs: (context) => [
                     context.player.creaturesInPlay.filter((c) => c.isToken()).length
                 ]

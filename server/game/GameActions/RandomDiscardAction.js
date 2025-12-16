@@ -1,4 +1,4 @@
-const PlayerAction = require('./PlayerAction');
+﻿const PlayerAction = require('./PlayerAction');
 const _ = require('underscore');
 
 class RandomDiscardAction extends PlayerAction {
@@ -12,9 +12,9 @@ class RandomDiscardAction extends PlayerAction {
         super.setup();
         this.name = 'discard';
         this.effectMsg =
-            'discard ' +
-            (this.amount === 1 ? 'a card' : `${this.amount} cards`) +
-            ` at random from {0}'s ${this.location}`;
+            '随机弃掉 ' +
+            (this.amount === 1 ? '1张卡牌' : `${this.amount} 张卡牌`) +
+            ` 从 {0}的 ${this.location}`;
     }
 
     canAffect(player, context) {
@@ -49,7 +49,7 @@ class RandomDiscardAction extends PlayerAction {
                         event.cards = cardsToDiscard;
                         if (cardsToDiscard.length > 0) {
                             context.game.addMessage(
-                                '{0} discards {1} at random',
+                                '{0} 随机弃掉了 {1} ',
                                 player,
                                 event.cards
                             );
@@ -63,7 +63,7 @@ class RandomDiscardAction extends PlayerAction {
                         event.cards = cardsToDiscard;
                         if (cardsToDiscard.length > 0) {
                             context.game.addMessage(
-                                '{0} discards {1} at random',
+                                '{0} 随机弃掉了 {1} ',
                                 player,
                                 event.cards
                             );

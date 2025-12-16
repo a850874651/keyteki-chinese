@@ -18,7 +18,7 @@ class UrxymTheDiplomat extends Card {
                             cardType: 'creature',
                             controller: 'opponent',
                             cardCondition: (card) => !card.hasHouse('mars'),
-                            message: '{0} uses {1} to destroy {2}',
+                            message: '{0} 使用 {1} 摧毁 {2}',
                             messageArgs: (cards) => [context.player, context.source, cards]
                         }
                     }))

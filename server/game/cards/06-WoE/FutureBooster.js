@@ -1,4 +1,4 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class FutureBooster extends Card {
     // Omni: Look at the top card of your deck. You may put it on the
@@ -15,7 +15,7 @@ class FutureBooster extends Card {
                     handlers: [() => []]
                 }
             })),
-            effect: 'choose to keep top of deck or move to bottom of deck.'
+            effect: '选择保持留着牌库顶或放到牌库底.'
         });
     }
 }

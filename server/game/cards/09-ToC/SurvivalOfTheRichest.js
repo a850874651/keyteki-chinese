@@ -11,10 +11,10 @@ class SurvivalOfTheRichest extends Card {
                 condition: (context) =>
                     context.player.opponent && context.player.amber > context.player.opponent.amber,
                 gameAction: ability.actions.archive((context) => ({
-                    effect: 'archive {1}',
+                    effect: '归档 {1}',
                     target: context.source
                 })),
-                message: '{0} uses {1} to archive {3}',
+                message: '{0} 使用 {1} 归档 {3}',
                 messageArgs: (context) => [context.source]
             }
         });

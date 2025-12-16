@@ -12,7 +12,7 @@ class Hoodwink extends Card {
                 gameAction: ability.actions.steal((context) => ({
                     amount: context.player.hand.filter((card) => !card.hasHouse('shadows')).length
                 })),
-                message: '{0} uses {1} to steal {3} amber',
+                message: '{0} 使用 {1} 窃取 {3} 琥珀',
                 messageArgs: (context) => [
                     Math.min(
                         context.player.opponent ? context.player.opponent.amber : 0,
@@ -22,7 +22,7 @@ class Hoodwink extends Card {
                 then: {
                     alwaysTriggers: true,
                     gameAction: ability.actions.purge(),
-                    message: '{0} uses {1} to purge {1}'
+                    message: '{0} 使用 {1} 清除 {1}'
                 }
             }
         });

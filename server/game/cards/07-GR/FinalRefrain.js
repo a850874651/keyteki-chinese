@@ -33,7 +33,7 @@ class FinalRefrain extends Card {
                     })
                 ]),
                 message:
-                    '{0} uses {1} to put {3} into play ready, fight with each one, and destroy each one',
+                    '{0} 使用 {1} 将 {3} 放置入场并重整, 逐一战斗，摧毁这些生物',
                 messageArgs: () => [this.zombies]
             }
         });

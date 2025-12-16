@@ -34,7 +34,7 @@ class AGiftOfAmber extends Card {
                         )
                     }))
                 ],
-                message: '{0} uses {1} to gain {3} amber, and {4} gains {5} amber',
+                message: '{0} 使用 {1} 获得 {3} 琥珀, 且 {4} 获得 {5} 琥珀',
                 messageArgs: (context) => [
                     Math.ceil(
                         context.preThenEvents.filter(

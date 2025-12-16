@@ -24,7 +24,7 @@ class OfferingToKiligog extends Card {
                         facedown: true
                     })
                 },
-                message: '{0} uses {1} to place {3} under {1}',
+                message: '{0} 使用 {1} 放置 {3} 到 {1} 下方',
                 messageArgs: (context) => [context.target]
             }
         });

@@ -1,4 +1,4 @@
-const CardGameAction = require('./CardGameAction');
+﻿const CardGameAction = require('./CardGameAction');
 
 class SwapDiscardWithHandAction extends CardGameAction {
     setDefaultProperties() {
@@ -16,7 +16,7 @@ class SwapDiscardWithHandAction extends CardGameAction {
 
     setup() {
         this.name = 'swapDiscardWithHand';
-        this.effectMsg = 'swap {0} from hand with {1} from the discard';
+        this.effectMsg = '交换了手牌中的 {0} 和弃牌堆中的 {1} ';
         this.effectArgs = this.discardCard;
         super.setup();
     }

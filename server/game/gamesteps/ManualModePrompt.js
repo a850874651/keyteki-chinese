@@ -1,4 +1,4 @@
-const AllPlayerPrompt = require('./allplayerprompt');
+﻿const AllPlayerPrompt = require('./allplayerprompt');
 
 class ManualModePrompt extends AllPlayerPrompt {
     constructor(game, requestingPlayer) {
@@ -34,10 +34,10 @@ class ManualModePrompt extends AllPlayerPrompt {
 
     onMenuCommand(player, arg) {
         if (arg === 'yes') {
-            this.game.addAlert('info', '{0} allows enabling manual mode', player);
+            this.game.addAlert('info', '{0} 允许开启手动模式', player);
             this.completedPlayers.add(player);
         } else {
-            this.game.addAlert('info', '{0} disallows enabling manual mode', player);
+            this.game.addAlert('info', '{0} 不允许开启手动模式', player);
             this.cancelled = true;
         }
 
@@ -51,7 +51,7 @@ class ManualModePrompt extends AllPlayerPrompt {
             return;
         }
 
-        this.game.addAlert('danger', '{0} switches manual mode on', this.requestingPlayer);
+        this.game.addAlert('danger', '{0} 开启了手动模式', this.requestingPlayer);
         this.game.manualMode = true;
         this.game.lastManualMode = null;
     }

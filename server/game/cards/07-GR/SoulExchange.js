@@ -1,4 +1,4 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 function firstCreatureInDiscard(context) {
     const player =
@@ -8,7 +8,7 @@ function firstCreatureInDiscard(context) {
 
 class SoulExchange extends Card {
     // Play: Choose a player. Return the topmost creature from that
-    // player’s discard pile to their hand. Destroy a creature
+    // player窶冱 discard pile to their hand. Destroy a creature
     // controlled by that player.
     setupCardAbilities(ability) {
         this.play({
@@ -27,7 +27,7 @@ class SoulExchange extends Card {
                     target: firstCreatureInDiscard(context)
                 })
             })),
-            effect: "return {1} to {2}'s hand",
+            effect: "将 {1} 返回到 {2} 的手中",
             effectArgs: (context) => [
                 firstCreatureInDiscard(context) ? firstCreatureInDiscard(context) : 'no creature',
                 !context.select || context.select === 'Mine'
@@ -44,7 +44,7 @@ class SoulExchange extends Card {
                     cardType: 'creature',
                     gameAction: ability.actions.destroy()
                 },
-                message: '{0} uses {1} to destroy {3}',
+                message: '{0} 使用 {1} 摧毁 {3}',
                 messageArgs: (context) => [context.target]
             })
         });

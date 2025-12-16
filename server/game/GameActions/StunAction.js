@@ -1,10 +1,10 @@
-const CardGameAction = require('./CardGameAction');
+﻿const CardGameAction = require('./CardGameAction');
 
 class StunAction extends CardGameAction {
     setup() {
         this.name = 'stun';
         this.targetType = ['creature'];
-        this.effectMsg = 'stun {0}';
+        this.effectMsg = '击晕了 {0}';
     }
 
     canAffect(card, context) {

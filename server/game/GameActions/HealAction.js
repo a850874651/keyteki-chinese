@@ -1,4 +1,4 @@
-const CardGameAction = require('./CardGameAction');
+﻿const CardGameAction = require('./CardGameAction');
 
 class HealAction extends CardGameAction {
     setDefaultProperties() {
@@ -11,8 +11,8 @@ class HealAction extends CardGameAction {
         this.name = 'heal';
         this.targetType = ['creature'];
         this.effectMsg =
-            'heal {0} ' +
-            (this.fully ? 'fully' : 'for ' + (this.upTo ? 'up to ' : '') + this.amount + ' damage');
+            '治疗 {0} ' +
+            (this.fully ? '完全地' : ' ' + (this.upTo ? '至多 ' : '') + this.amount + ' 点伤害');
     }
 
     canAffect(card, context) {
@@ -41,7 +41,7 @@ class HealAction extends CardGameAction {
                     choiceHandler: (choice) => {
                         event.amount = parseInt(choice);
                         context.game.addMessage(
-                            "{0} heals {1} for {2} damage using {3}'s ability",
+                            "{0} 治疗了 {1}  {2} 点伤害，通过 {3}的能力",
                             context.player,
                             event.card,
                             choice,

@@ -1,3 +1,4 @@
+const { EVENTS } = require('../Events/types');
 const PlayerAction = require('./PlayerAction');
 
 class ChosenDiscardAction extends PlayerAction {
@@ -8,7 +9,7 @@ class ChosenDiscardAction extends PlayerAction {
     setup() {
         super.setup();
         this.name = 'discard';
-        this.effectMsg = 'discard ' + this.amount + ' cards';
+        this.effectMsg = '弃掉 ' + this.amount + ' 张卡牌';
         this.cards = {};
     }
 
@@ -21,7 +22,7 @@ class ChosenDiscardAction extends PlayerAction {
     }
 
     getEvent(player, context) {
-        return super.createEvent('unnamedEvent', {}, () => {
+        return super.createEvent(EVENTS.unnamedEvent, {}, () => {
             if (player.hand.length > 0) {
                 let amount = Math.min(player.hand.length, this.amount);
                 if (amount > 0) {
@@ -39,7 +40,7 @@ class ChosenDiscardAction extends PlayerAction {
                         location: 'hand',
                         controller: player === context.player ? 'self' : 'opponent',
                         onSelect: (player, cards) => {
-                            context.game.addMessage('{0} discards {1}', player, cards);
+                            context.game.addMessage('{0} 弃置了 {1}', player, cards);
                             context.game.actions
                                 .discard({ chatMessage: false })
                                 .resolve(cards, context);

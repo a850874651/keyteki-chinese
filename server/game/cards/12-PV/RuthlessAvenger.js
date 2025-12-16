@@ -15,7 +15,7 @@ class RuthlessAvenger extends Card {
                     shuffle: true,
                     shuffleDiscardIntoDeck: true
                 })),
-                message: '{0} uses {1} to make {3} shuffle their discard pile into their deck',
+                message: '{0} 使用 {1} 使 {3} 混洗其弃牌堆到其牌库',
                 messageArgs: (context) => context.game.activePlayer,
                 effectAlert: true
             }

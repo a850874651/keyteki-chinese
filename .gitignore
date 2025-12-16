@@ -23,3 +23,5 @@ server/game/generatedcards
 *.bak
 *-org.*
 *.orig
+config/default.json5
+/config

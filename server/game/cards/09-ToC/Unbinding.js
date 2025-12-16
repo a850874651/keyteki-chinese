@@ -1,4 +1,4 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 const EventRegistrar = require('../../eventregistrar.js');
 
 class Unbinding extends Card {
@@ -16,15 +16,15 @@ class Unbinding extends Card {
                     condition: (context) =>
                         this.creatureDestroyedControllerUuid[context.source.controller.uuid],
                     trueGameAction: ability.actions.archive((context) => ({
-                        effect: 'archive {1}',
+                        effect: '归档 {1}',
                         target: context.source
                     }))
                 })
             ]),
-            effect: 'make a token creature{1}{2}',
+            effect: '制造1个代标生物{1}{2}',
             effectArgs: (context) =>
                 this.creatureDestroyedControllerUuid[context.source.controller.uuid]
-                    ? [' and archive ', context.source]
+                    ? [' 并归档 ', context.source]
                     : ['', '']
         });
     }

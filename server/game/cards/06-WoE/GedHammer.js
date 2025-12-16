@@ -1,4 +1,4 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class GedHammer extends Card {
     //Destroyed: Ready and enrage each other friendly Brobnar creature.
@@ -24,7 +24,7 @@ class GedHammer extends Card {
                     )
                 }))
             ]),
-            effect: 'ready and enrage each other friendly Brobnar creature'
+            effect: '重整并激怒每个其他友方蛮族生物'
         });
     }
 }

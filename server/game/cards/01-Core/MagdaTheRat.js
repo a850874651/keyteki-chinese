@@ -15,7 +15,7 @@ class MagdaTheRat extends Card {
                         onCardLeavesPlay: (event, context) => event.card === context.source
                     },
                     gameAction: ability.actions.steal({ target: context.player, amount: 2 }),
-                    message: '{0} steals 2 amber due to {1} leaving play',
+                    message: '{0} 窃取 2 琥珀，通过 {1} 离场',
                     messageArgs: (context) => [context.player, context.source]
                 }))
             ]

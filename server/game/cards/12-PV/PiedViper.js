@@ -1,4 +1,4 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class PiedViper extends Card {
     // Elusive.
@@ -12,7 +12,7 @@ class PiedViper extends Card {
                     context.player.opponent.creaturesInPlay.length >
                         context.player.creaturesInPlay.length
             },
-            effect: 'gain control of {1}',
+            effect: '获得 {1} 的控制权',
             effectArgs: (context) => context.event.card,
             gameAction: ability.actions.cardLastingEffect((context) => ({
                 duration: 'lastingEffect',

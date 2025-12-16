@@ -1,4 +1,4 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class ChancellorDexterus extends Card {
     // After Reap: You may exalt Chancellor Dexterus's right
@@ -22,7 +22,7 @@ class ChancellorDexterus extends Card {
                 }))
             ],
             effect:
-                'exalt its right neighbor and make it house Saurian for the remainder of the turn'
+                '褒奖其右侧相邻生物并使其在本回合属于蜥族势力'
         });
     }
 }

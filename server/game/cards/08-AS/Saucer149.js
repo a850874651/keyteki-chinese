@@ -1,11 +1,11 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class Saucer149 extends Card {
     // Play: Exalt Saucer 149 four times.
     // Action: Move 2A from Saucer 149 to an enemy creature.
     setupCardAbilities(ability) {
         this.play({
-            effect: 'exalt {0} four times',
+            effect: '褒奖 {0} 4次',
             gameAction: [
                 ability.actions.exalt(),
                 ability.actions.exalt(),
@@ -23,7 +23,7 @@ class Saucer149 extends Card {
                     amount: context.source.amber > 1 ? 2 : context.source.amber
                 }))
             },
-            effect: 'move {1} amber from {2} to {0}',
+            effect: '移动 {1} 琥珀从 {2} 到 {0}',
             effectArgs: (context) => [
                 context.source.amber > 1 ? 2 : context.source.amber,
                 context.source

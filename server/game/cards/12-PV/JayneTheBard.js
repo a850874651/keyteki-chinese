@@ -25,7 +25,7 @@ class JayneTheBard extends Card {
                     controller: 'opponent',
                     gameAction: ability.actions.dealDamage({ amount: 2 })
                 },
-                message: '{0} uses {1} to repeat the preceding effect and deal 2 damage to {3}',
+                message: '{0} 使用 {1} 重复之前的效果并造成2点伤害对 {3}',
                 messageArgs: (context) => [context.target]
             })
         });

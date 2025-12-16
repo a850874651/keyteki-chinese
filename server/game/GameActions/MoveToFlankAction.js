@@ -1,4 +1,4 @@
-const CardGameAction = require('./CardGameAction');
+﻿const CardGameAction = require('./CardGameAction');
 
 class MoveToFlankAction extends CardGameAction {
     setDefaultProperties() {
@@ -18,7 +18,7 @@ class MoveToFlankAction extends CardGameAction {
     setup() {
         this.name = 'moveToFlank';
         this.targetType = ['creature'];
-        this.effectMsg = 'move {0} to a flank';
+        this.effectMsg = '移动 {0} 到侧翼';
     }
 
     canAffect(card, context) {

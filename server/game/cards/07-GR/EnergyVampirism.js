@@ -1,4 +1,4 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class EnergyVampirism extends Card {
     // Play: A creature captures 1 A from its own side. For each A on
@@ -19,7 +19,7 @@ class EnergyVampirism extends Card {
                 ])
             },
             effect:
-                'capture 1 amber onto {0} from its own side and then deal 1 D for each amber on {0} to a creature'
+                '从其控制方抢占1琥珀到 {0} 上，每有1个琥珀在 {0} 上，对1个生物造成1点伤害'
         });
     }
 }

@@ -1,4 +1,4 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class DarkMemento extends Card {
     // At the start of your turn, if you are not haunted, discard
@@ -31,7 +31,7 @@ class DarkMemento extends Card {
                     "Opponent's": (context) => !!context.player.opponent
                 }
             },
-            effect: "discard the top cards of {1}'s deck and repeat if they are not haunted",
+            effect: "弃掉 {1} 牌库顶的牌，直到其着魔",
             effectArgs: (context) => [
                 !context.select || context.select === 'Mine'
                     ? context.player

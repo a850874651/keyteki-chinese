@@ -10,7 +10,7 @@ class FinishingBlow extends Card {
                 gameAction: ability.actions.destroy()
             },
             then: {
-                message: '{0} uses {1} to steal 1 amber from {3}',
+                message: '{0} 使用 {1} 从 {3} 窃取了1琥珀',
                 messageArgs: (context) => [context.player.opponent],
                 gameAction: ability.actions.steal()
             }

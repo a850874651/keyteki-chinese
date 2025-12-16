@@ -17,7 +17,7 @@ class AmbassadorLiu extends Card {
                     context.preThenEvent.card.hasHouse('untamed') ||
                     context.preThenEvent.card.hasHouse('sanctum') ||
                     context.preThenEvent.card.hasHouse('saurian'),
-                message: '{0} uses {1} to {3}',
+                message: '{0} 使用 {1} 对 {3}',
                 messageArgs: (context) => [
                     context.preThenEvent.card.hasHouse('dis') ||
                     context.preThenEvent.card.hasHouse('shadows')

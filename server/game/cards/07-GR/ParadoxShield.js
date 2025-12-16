@@ -1,4 +1,4 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class ParadoxShield extends Card {
     // This creature gains “Destroyed: Discard cards from the top of
@@ -9,7 +9,7 @@ class ParadoxShield extends Card {
             effect: [
                 ability.effects.gainAbility('destroyed', {
                     effect:
-                        'discard {2} cards from their deck to heal all damage from {0} and destroy {1} instead',
+                        '改为弃掉 {2} 张牌从其牌库以治疗 {0} 的所有伤害并摧毁 {1}',
                     effectArgs: (context) => [this, context.source.power],
                     gameAction: ability.actions.discard((context) => ({
                         target: context.source.controller.deck.slice(0, context.source.power)

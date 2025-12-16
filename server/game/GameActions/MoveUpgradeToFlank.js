@@ -1,4 +1,4 @@
-const CardGameAction = require('./CardGameAction');
+﻿const CardGameAction = require('./CardGameAction');
 
 class MoveUpgradeToFlankAction extends CardGameAction {
     setDefaultProperties() {
@@ -19,7 +19,7 @@ class MoveUpgradeToFlankAction extends CardGameAction {
     setup() {
         this.name = 'moveUpgradeToFlank';
         this.targetType = ['upgrade'];
-        this.effectMsg = 'move {0} to a flank';
+        this.effectMsg = '移动 {0} 到侧翼';
     }
 
     canAffect(card, context) {

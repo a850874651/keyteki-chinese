@@ -1,4 +1,4 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class HeavyweightMorik extends Card {
     // Scrap: Deal 2 to a friendly creature and 2 to an enemy
@@ -21,7 +21,7 @@ class HeavyweightMorik extends Card {
                     gameAction: ability.actions.dealDamage({ amount: 2 })
                 }
             },
-            effect: 'deal 2 damage to {1}',
+            effect: '造成2点伤害对 {1}',
             effectArgs: (context) => [Object.values(context.targets)]
         });
     }

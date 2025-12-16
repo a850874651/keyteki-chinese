@@ -13,13 +13,13 @@ class NiffleSanctuary extends Card {
             effect: '{1}',
             effectArgs: (context) => [
                 context.player.tokenCard && context.player.tokenCard.name === 'Niffle Brute'
-                    ? 'make a token creature'
-                    : 'do nothing'
+                    ? '制造1个代标生物'
+                    : ''
             ],
             then: {
                 alwaysTriggers: true,
                 message:
-                    '{0} uses {1} to make each friendly Niffle Brute gain "After Fight: Gain 1 amber" for the rest of the turn',
+                    '{0} 使用 {1} 使得本回合内友方代标生物拥有战斗后获得1琥珀的效果',
                 gameAction: ability.actions.untilPlayerTurnEnd({
                     targetController: 'current',
                     match: (card) => card.name === 'Niffle Brute',

@@ -1,4 +1,4 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class NoviceGelard extends Card {
     // Play: Ready and reap with a neighboring Sanctum creature.
@@ -14,7 +14,7 @@ class NoviceGelard extends Card {
                     ability.actions.reap()
                 ])
             },
-            effect: 'ready and reap with a neighboring Sanctum creature'
+            effect: '重整并使用一个相邻圣堂生物进行收获'
         });
     }
 }

@@ -1,4 +1,4 @@
-const CardGameAction = require('./CardGameAction');
+﻿const CardGameAction = require('./CardGameAction');
 
 class MakeTokenCreatureAction extends CardGameAction {
     setDefaultProperties() {
@@ -11,7 +11,7 @@ class MakeTokenCreatureAction extends CardGameAction {
         super.setup();
         this.name = 'makeToken';
         this.effectMsg =
-            'make ' + (this.amount === 1 ? 'a token creature' : `${this.amount} token creatures`);
+            '制造 ' + (this.amount === 1 ? '1个代标生物' : `${this.amount} 个代标生物`);
     }
 
     targetPlayer(context) {

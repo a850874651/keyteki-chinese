@@ -22,7 +22,7 @@ class InfinityStrop extends Card {
                     amount: 4
                 })),
                 message:
-                    '{0} uses {1} to deal 4 damage to each creature that shares a house with {3}',
+                    '{0} 使用 {1} 造成4点伤害对每个与 {3} 拥有相同势力的生物',
                 messageArgs: (context) => [context.preThenEvent.clone]
             }
         });

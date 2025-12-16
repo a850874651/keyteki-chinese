@@ -19,7 +19,7 @@ class EventHorizon extends Card {
                 let card = context.player.deck.find((card) => card.getType() === 'action');
                 if (card) {
                     return {
-                        message: '{0} plays {3}',
+                        message: '{0} 打出了 {3}',
                         messageArgs: card,
                         gameAction: ability.actions.playCard({
                             target: card

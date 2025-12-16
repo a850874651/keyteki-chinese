@@ -1,4 +1,4 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class DarkDiscovery extends Card {
     // Play: Name 2 cards. Discard the bottom 2 cards of your opponent's deck. If they are the named cards, purge Dark Discovery and forge a key at no cost.
@@ -15,7 +15,7 @@ class DarkDiscovery extends Card {
                     activePromptTitle: 'Name the second card'
                 }
             },
-            effect: 'name {1} and {2} and discard {3}',
+            effect: '宣言 {1} 和 {2} ，实际上弃掉了 {3}',
             effectArgs: (context) => [
                 context.targets.firstCard,
                 context.targets.secondCard,
@@ -40,7 +40,7 @@ class DarkDiscovery extends Card {
                             discardedCardNames[0] === preThenContext.targets.secondCard)
                     );
                 },
-                message: '{0} purges {1} and forges a key at no cost',
+                message: '{0} 清除 {1} 并无费用锻造1把钥匙',
                 gameAction: [
                     ability.actions.forgeKey({
                         atNoCost: true

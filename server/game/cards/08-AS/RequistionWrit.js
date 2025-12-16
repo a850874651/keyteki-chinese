@@ -1,7 +1,7 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class RequisitionWrit extends Card {
-    // This creature gains, “After Reap: Pay your opponent 1A. If you
+    // This creature gains, 窶廣fter Reap: Pay your opponent 1A. If you
     // do, take control of an enemy creature."
     setupCardAbilities(ability) {
         this.whileAttached({
@@ -19,7 +19,7 @@ class RequisitionWrit extends Card {
                             effect: ability.effects.takeControl(context.player)
                         }))
                     },
-                    message: '{0} uses {1} to take control of {3}',
+                    message: '{0} 使用 {1} 获得 {3} 的控制权',
                     messageArgs: (context) => [context.target]
                 }
             })

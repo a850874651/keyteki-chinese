@@ -1,4 +1,4 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class Ruination extends Card {
     // Play: Choose a card. Destroy that card and each card with the same name.
@@ -17,7 +17,7 @@ class Ruination extends Card {
                         )
                 }))
             },
-            effect: 'destroy {1} and each card with the same name',
+            effect: '摧毁 {1} 以及所有与其同名的卡牌',
             effectArgs: (context) => [context.target]
         });
     }

@@ -1,4 +1,4 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class WashedAway extends Card {
     // (T) Play: If the tide is high, destroy each artifact. Otherwise, raise the tide.
@@ -13,7 +13,7 @@ class WashedAway extends Card {
             }),
             effect: '{1}',
             effectArgs: (context) =>
-                context.player.isTideHigh() ? 'destroy each artifact' : 'raise the tide'
+                context.player.isTideHigh() ? '摧毁每个神器' : '抬升潮位'
         });
     }
 }

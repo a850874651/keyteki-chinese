@@ -1,4 +1,4 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class GruntWork extends Card {
     // Play: Look at the top 3 cards of your deck and put them back in
@@ -6,7 +6,7 @@ class GruntWork extends Card {
     setupCardAbilities(ability) {
         this.play({
             effect:
-                'look at the top 3 cards of their deck, rearrange them in any order, and make a token creature',
+                '查看你牌库顶的3张牌，并按任意顺序放回，制造1个代标生物',
             gameAction: ability.actions.sequential([
                 ability.actions.rearrangeCards({ amount: 3 }),
                 ability.actions.makeTokenCreature()

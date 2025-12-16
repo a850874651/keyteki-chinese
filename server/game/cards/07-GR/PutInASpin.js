@@ -1,8 +1,8 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class PutInASpin extends Card {
     // Play: Lose 1A. If you do, choose a house and discard the top
-    // card of your opponent’s deck. If that card belongs to the named
+    // card of your opponent窶冱 deck. If that card belongs to the named
     // house, gain 4A.
     setupCardAbilities(ability) {
         this.play({
@@ -21,7 +21,7 @@ class PutInASpin extends Card {
                 then: (preThenContext) => ({
                     condition: (context) =>
                         context.preThenEvent.card.hasHouse(preThenContext.house),
-                    message: '{0} uses {1} to discard {3} and make {0} gain 4 amber',
+                    message: '{0} 使用 {1} 弃掉 {3} 并使 {0} 获得4琥珀',
                     messageArgs: (context) => [context.preThenEvent.card],
                     gameAction: ability.actions.gainAmber((context) => ({
                         amount: 4,

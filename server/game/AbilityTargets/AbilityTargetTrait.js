@@ -68,7 +68,7 @@ class AbilityTargetTrait extends AbilityTarget {
 
     selectTraitName(context, player, traitName) {
         context.trait = traitName;
-        context.game.addMessage('{0} chooses trait {1}', player, traitName);
+        context.game.addMessage('{0} 选择了特性 {1}', player, traitName);
         return true;
     }
 }

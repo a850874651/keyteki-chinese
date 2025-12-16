@@ -1,10 +1,10 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class SeekerMissiles extends Card {
     // Play: Deal 2D to a creature for each Skyborn flank creature.
     setupCardAbilities(ability) {
         this.play({
-            effect: 'deal 2 damage to a creature for each Skyborn flank creature',
+            effect: '每有1个侧翼天裔生物对1个生物造成2点伤害',
             gameAction: ability.actions.allocateDamage((context) => ({
                 damageStep: 2,
                 numSteps: context.game.creaturesInPlay.filter(

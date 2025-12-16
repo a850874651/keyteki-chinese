@@ -1,10 +1,10 @@
-const CardGameAction = require('./CardGameAction');
+﻿const CardGameAction = require('./CardGameAction');
 
 class RemoveStunAction extends CardGameAction {
     setup() {
         this.name = 'removeStun';
         this.targetType = ['creature'];
-        this.effectMsg = 'remove the stun from {0}';
+        this.effectMsg = '移除了击晕从 {0}';
     }
 
     canAffect(card, context) {

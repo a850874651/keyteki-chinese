@@ -1,8 +1,8 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class Savant extends Card {
     // Action: You may choose a card in your archives and put it into
-    // its owner’s hand. Otherwise, archive a card.
+    // its owner窶冱 hand. Otherwise, archive a card.
     setupCardAbilities(ability) {
         this.action({
             target: {
@@ -17,8 +17,8 @@ class Savant extends Card {
                     falseGameAction: ability.actions.archive()
                 })
             },
-            effect: 'put a card into their {1}',
-            effectArgs: (context) => [context.target.location === 'archives' ? 'hand' : 'archives']
+            effect: '将1张卡牌放到他的 {1}',
+            effectArgs: (context) => [context.target.location === 'archives' ? '手牌' : '档案']
         });
     }
 }

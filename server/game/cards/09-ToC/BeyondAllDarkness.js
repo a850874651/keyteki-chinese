@@ -1,4 +1,4 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class BeyondAllDarkness extends Card {
     // Play: For the remainder of the turn, after a creature is
@@ -6,7 +6,7 @@ class BeyondAllDarkness extends Card {
     setupCardAbilities(ability) {
         this.play({
             effect:
-                'make a token creature when a creature is destroyed for the remained of the turn',
+                '在本回合的剩余时间内，每当1个生物被摧毁，制造1个代标生物',
             gameAction: ability.actions.untilPlayerTurnEnd({
                 when: {
                     onCardDestroyed: (event) => event.clone.type === 'creature'

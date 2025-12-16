@@ -1,4 +1,4 @@
-const Card = require('../../Card.js');
+﻿const Card = require('../../Card.js');
 
 class SpaceInvaders extends Card {
     // Play: Reveal any number of creatures from your hand. Make each
@@ -14,7 +14,7 @@ class SpaceInvaders extends Card {
                 cardType: 'creature',
                 gameAction: ability.actions.makeTokenCreature()
             },
-            effect: 'reveal and tokenize {0}'
+            effect: '展示并将 {0} 作为代标生物放置入场'
         });
     }
 }
