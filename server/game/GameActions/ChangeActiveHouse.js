@@ -1,4 +1,4 @@
-﻿const { EVENTS } = require('../Events/types');
+const { EVENTS } = require('../Events/types');
 const GameAction = require('./GameAction');
 
 class ChangeActiveHouseAction extends GameAction {

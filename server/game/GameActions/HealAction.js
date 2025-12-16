@@ -1,4 +1,5 @@
-﻿const CardGameAction = require('./CardGameAction');
+const { EVENTS } = require('../Events/types');
+const CardGameAction = require('./CardGameAction');
 
 class HealAction extends CardGameAction {
     setDefaultProperties() {
@@ -29,7 +30,7 @@ class HealAction extends CardGameAction {
 
     getEvent(card, context) {
         let amount = Math.min(card.tokens.damage || 0, this.amount);
-        return super.createEvent('onHeal', { amount, card, context }, (event) => {
+        return super.createEvent(EVENTS.onHeal, { amount, card, context }, (event) => {
             if (this.fully) {
                 event.amount = card.tokens.damage;
                 card.removeToken('damage');
@@ -41,7 +42,7 @@ class HealAction extends CardGameAction {
                     choiceHandler: (choice) => {
                         event.amount = parseInt(choice);
                         context.game.addMessage(
-                            "{0} 治疗了 {1}  {2} 点伤害，通过 {3}的能力",
+                            '{0} 治疗了 {1}  {2} 点伤害，通过 {3}的能力',
                             context.player,
                             event.card,
                             choice,

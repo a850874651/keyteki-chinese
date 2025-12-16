@@ -1,4 +1,5 @@
-﻿const CardGameAction = require('./CardGameAction');
+const { EVENTS } = require('../Events/types');
+const CardGameAction = require('./CardGameAction');
 
 class ReturnToDeckAction extends CardGameAction {
     setDefaultProperties() {
@@ -19,11 +20,11 @@ class ReturnToDeckAction extends CardGameAction {
                     ['play area', 'discard', 'purged'].includes(card.location)
                 )
             ) {
-                this.effectMsg = "返还 {0} 到其所有者的牌库";
+                this.effectMsg = '返还 {0} 到其所有者的牌库';
             } else if (this.target.length === 1) {
-                this.effectMsg = "返还1张卡牌到其所有者的牌库";
+                this.effectMsg = '返还1张卡牌到其所有者的牌库';
             } else {
-                this.effectMsg = "返还卡牌到其所有者的牌库";
+                this.effectMsg = '返还卡牌到其所有者的牌库';
             }
         } else {
             if (
@@ -32,20 +33,11 @@ class ReturnToDeckAction extends CardGameAction {
                     ['play area', 'discard', 'purged'].includes(card.location)
                 )
             ) {
-                this.effectMsg =
-                    '返还 {0} 到其所有者的牌库' +
-                    (this.bottom ? '底' : '顶') +
-                    " ";
+                this.effectMsg = '返还 {0} 到其所有者的牌库' + (this.bottom ? '底' : '顶') + ' ';
             } else if (this.target.length === 1) {
-                this.effectMsg =
-                    '返还1张卡牌到其所有者的牌库' +
-                    (this.bottom ? '底' : '顶') +
-                    " ";
+                this.effectMsg = '返还1张卡牌到其所有者的牌库' + (this.bottom ? '底' : '顶') + ' ';
             } else {
-                this.effectMsg =
-                    '返还卡牌到其所有者的牌库' +
-                    (this.bottom ? '底' : '顶') +
-                    " ";
+                this.effectMsg = '返还卡牌到其所有者的牌库' + (this.bottom ? '底' : '顶') + ' ';
             }
         }
     }
@@ -98,7 +90,7 @@ class ReturnToDeckAction extends CardGameAction {
     }
 
     getEvent(card, context) {
-        let eventName = card.location === 'play area' ? 'onCardLeavesPlay' : 'onMoveCard';
+        let eventName = card.location === 'play area' ? EVENTS.onCardLeavesPlay : EVENTS.onMoveCard;
         let deckLength = card.owner.getSourceList('deck').length;
 
         return super.createEvent(

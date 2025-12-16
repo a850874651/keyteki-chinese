@@ -1,4 +1,5 @@
-﻿const moment = require('moment');
+const moment = require('moment');
+const { EVENTS } = require('./Events/types');
 
 class TimeLimit {
     constructor(game) {
@@ -14,7 +15,7 @@ class TimeLimit {
         this.timeLimitStartType = timeLimitStartType;
         this.timeLimitInMinutes = timeLimitInMinutes;
         if (timeLimitStartType === 'whenSetupFinished') {
-            this.game.on('onGameStarted', () => this.startTimer());
+            this.game.on(EVENTS.onGameStarted, () => this.startTimer());
         }
     }
 
@@ -34,10 +35,7 @@ class TimeLimit {
                 moment().diff(this.timeLimitStartedAt)
             );
             if (differenceBetweenStartOfTimerAndNow.asSeconds() / 60 >= this.timeLimitInMinutes) {
-                this.game.addAlert(
-                    'warning',
-                    '时间到.  游戏将在当前回合结束时结束'
-                );
+                this.game.addAlert('warning', '时间到.  游戏将在当前回合结束时结束');
                 this.isTimeLimitReached = true;
                 this.timeLimitStarted = false;
                 this.game.timeExpired();

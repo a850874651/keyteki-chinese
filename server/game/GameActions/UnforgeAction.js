@@ -1,4 +1,5 @@
-﻿const PlayerAction = require('./PlayerAction');
+const { EVENTS } = require('../Events/types');
+const PlayerAction = require('./PlayerAction');
 
 class UnforgeAction extends PlayerAction {
     setDefaultProperties() {
@@ -8,7 +9,7 @@ class UnforgeAction extends PlayerAction {
     setup() {
         super.setup();
         this.name = 'unforgeKey';
-        this.effectMsg = "熔毁了对手的1把钥匙";
+        this.effectMsg = '熔毁了对手的1把钥匙';
     }
 
     checkEventCondition(event) {
@@ -16,8 +17,10 @@ class UnforgeAction extends PlayerAction {
     }
 
     getEvent(player, context) {
-        return super.createEvent('onUnforgeKey', { player, choices: this.choices, context }, () =>
-            player.unforgeKey(this.choices)
+        return super.createEvent(
+            EVENTS.onUnforgeKey,
+            { player, choices: this.choices, context },
+            () => player.unforgeKey(this.choices)
         );
     }
 }

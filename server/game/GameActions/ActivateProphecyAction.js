@@ -1,4 +1,4 @@
-﻿const { EVENTS } = require('../Events/types');
+const { EVENTS } = require('../Events/types');
 const PlayerAction = require('./PlayerAction');
 
 class ActivateProphecyAction extends PlayerAction {

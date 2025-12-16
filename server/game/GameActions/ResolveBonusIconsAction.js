@@ -1,10 +1,11 @@
+const { EVENTS } = require('../Events/types');
 const CardGameAction = require('./CardGameAction');
 
 class ResolveBonusIconsAction extends CardGameAction {
     setup() {
         super.setup();
         this.name = 'resolveBonusIcons';
-        this.effectMsg = "结算了 {0}的奖励图标";
+        this.effectMsg = '结算了 {0}的奖励图标';
     }
 
     resolveIcon(context, event, icon) {
@@ -14,7 +15,7 @@ class ResolveBonusIconsAction extends CardGameAction {
                     .gainAmber({ bonus: true })
                     .resolve(context.player, context.game.getFrameworkContext(context.player));
                 context.game.addMessage(
-                    "{0} 获得了1个琥珀，通过 {1}的奖励图标",
+                    '{0} 获得了1个琥珀，通过 {1}的奖励图标',
                     context.player,
                     event.card
                 );
@@ -24,7 +25,7 @@ class ResolveBonusIconsAction extends CardGameAction {
                     .draw({ bonus: true })
                     .resolve(context.player, context.game.getFrameworkContext(context.player));
                 context.game.addMessage(
-                    "{0} 抽取了1张卡牌，通过 {1}的奖励图标",
+                    '{0} 抽取了1张卡牌，通过 {1}的奖励图标',
                     context.player,
                     event.card
                 );
@@ -38,7 +39,7 @@ class ResolveBonusIconsAction extends CardGameAction {
                             context.game.getFrameworkContext(context.player)
                         );
                     context.game.addMessage(
-                        "{0} 窃取了1个琥珀，通过 {1}的奖励图标",
+                        '{0} 窃取了1个琥珀，通过 {1}的奖励图标',
                         context.player,
                         event.card
                     );
@@ -60,7 +61,7 @@ class ResolveBonusIconsAction extends CardGameAction {
                                 .capture({ bonus: true })
                                 .resolve(card, context.game.getFrameworkContext(player));
                             context.game.addMessage(
-                                "{0} 抢占了1个琥珀到 {1} 上，通过 {2}的奖励图标",
+                                '{0} 抢占了1个琥珀到 {1} 上，通过 {2}的奖励图标',
                                 player,
                                 card,
                                 event.card
@@ -81,7 +82,7 @@ class ResolveBonusIconsAction extends CardGameAction {
                                 .dealDamage({ bonus: true })
                                 .resolve(card, context.game.getFrameworkContext(player));
                             context.game.addMessage(
-                                "{0} 对 {1} 造成了1点伤害，通过 {2}的奖励图标",
+                                '{0} 对 {1} 造成了1点伤害，通过 {2}的奖励图标',
                                 player,
                                 card,
                                 event.card
@@ -103,7 +104,7 @@ class ResolveBonusIconsAction extends CardGameAction {
                                 .discard({ chatMessage: false })
                                 .resolve(card, context.game.getFrameworkContext(player));
                             context.game.addMessage(
-                                "{0} 弃掉了 {1} ，通过 {2}的奖励图标",
+                                '{0} 弃掉了 {1} ，通过 {2}的奖励图标',
                                 player,
                                 card,
                                 event.card
@@ -122,7 +123,7 @@ class ResolveBonusIconsAction extends CardGameAction {
                             context.game.getFrameworkContext(context.player)
                         );
                     context.game.addMessage(
-                        "{0} 制造了一个代标生物，通过 {1}的奖励图标",
+                        '{0} 制造了一个代标生物，通过 {1}的奖励图标',
                         context.player,
                         event.card
                     );
@@ -133,7 +134,7 @@ class ResolveBonusIconsAction extends CardGameAction {
 
     getEvent(card, context) {
         return super.createEvent(
-            'onResolveBonusIcons',
+            EVENTS.onResolveBonusIcons,
             { card: card, context: context },
             (event) => {
                 for (let icon of event.card.bonusIcons) {

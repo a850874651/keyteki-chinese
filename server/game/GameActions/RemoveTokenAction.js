@@ -1,4 +1,5 @@
-﻿const CardGameAction = require('./CardGameAction');
+const { EVENTS } = require('../Events/types');
+const CardGameAction = require('./CardGameAction');
 
 class RemoveTokenAction extends CardGameAction {
     constructor(propertyFactory, type = 'power') {
@@ -42,7 +43,7 @@ class RemoveTokenAction extends CardGameAction {
 
     getEvent(card, context) {
         return super.createEvent(
-            'onRemoveToken',
+            EVENTS.onRemoveToken,
             {
                 type: this.type,
                 card: card,
@@ -58,7 +59,7 @@ class RemoveTokenAction extends CardGameAction {
                         choiceHandler: (choice) => {
                             event.amount = parseInt(choice);
                             context.game.addMessage(
-                                "{0} 移除了 {1} 的指示物 {2} 个，通过 {3}的能力",
+                                '{0} 移除了 {1} 的指示物 {2} 个，通过 {3}的能力',
                                 context.player,
                                 event.card,
                                 choice,

@@ -1,4 +1,5 @@
-﻿const CardGameAction = require('./CardGameAction');
+const { EVENTS } = require('../Events/types');
+const CardGameAction = require('./CardGameAction');
 
 class PlayCardAction extends CardGameAction {
     setDefaultProperties() {
@@ -52,7 +53,7 @@ class PlayCardAction extends CardGameAction {
             );
 
         return super.createEvent(
-            'playCardEvent',
+            EVENTS.playCardEvent,
             { card: card, context: context, player: context.player },
             (event) => {
                 if (playActions.length > 1) {
@@ -69,10 +70,7 @@ class PlayCardAction extends CardGameAction {
                 } else {
                     event.illegalTarget = true;
                     if (this.revealOnIllegalTarget) {
-                        context.game.addMessage(
-                            '{0} 无法被打出所以它回到了它原来的位置',
-                            card
-                        );
+                        context.game.addMessage('{0} 无法被打出所以它回到了它原来的位置', card);
                     }
                 }
             }

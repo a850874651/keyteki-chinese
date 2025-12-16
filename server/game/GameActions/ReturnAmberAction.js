@@ -1,4 +1,5 @@
-﻿const CardGameAction = require('./CardGameAction');
+const { EVENTS } = require('../Events/types');
+const CardGameAction = require('./CardGameAction');
 
 class ReturnAmberAction extends CardGameAction {
     setDefaultProperties() {
@@ -13,9 +14,9 @@ class ReturnAmberAction extends CardGameAction {
         this.targetType = ['creature'];
         this.effectMsg = `返还 ${this.all ? '所有' : this.amount} 琥珀从 {0} 到 ${
             this.recipient
-                ? this.recipient.name + "的"
+                ? this.recipient.name + '的'
                 : this.controllerRecipient
-                ? "其控制者的"
+                ? '其控制者的'
                 : '他的'
         } 琥珀池`;
     }
@@ -45,7 +46,7 @@ class ReturnAmberAction extends CardGameAction {
             amount: this.all ? card.amber : Math.min(this.amount, card.amber),
             recipient: this.recipientForCard(card)
         };
-        return super.createEvent('onReturnAmber', params, (event) => {
+        return super.createEvent(EVENTS.onReturnAmber, params, (event) => {
             event.card.removeToken('amber', event.amount);
             context.game.actions
                 .gainAmber({

@@ -1,3 +1,4 @@
+const { EVENTS } = require('../Events/types');
 const CardGameAction = require('./CardGameAction');
 
 class PlayUpgradeOnParentAction extends CardGameAction {
@@ -61,17 +62,14 @@ class PlayUpgradeOnParentAction extends CardGameAction {
             );
 
         return super.createEvent(
-            'unnamedEvent',
+            EVENTS.unnamedEvent,
             { card: card, context: context, player: context.player },
             () => {
                 if (playActions.length >= 1 && playActions[0].newWithParent) {
                     this.resolveAction(context, playActions[0].newWithParent(this.parent));
                 } else {
                     if (this.revealOnIllegalTarget) {
-                        context.game.addMessage(
-                            '{0} 无法被打出所以它回到了它原来的位置',
-                            card
-                        );
+                        context.game.addMessage('{0} 无法被打出所以它回到了它原来的位置', card);
                     }
                 }
             }

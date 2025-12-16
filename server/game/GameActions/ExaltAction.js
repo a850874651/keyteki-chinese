@@ -1,4 +1,5 @@
-﻿const AddTokenAction = require('./AddTokenAction');
+const { EVENTS } = require('../Events/types');
+const AddTokenAction = require('./AddTokenAction');
 
 class ExaltAction extends AddTokenAction {
     setDefaultProperties() {
@@ -19,7 +20,7 @@ class ExaltAction extends AddTokenAction {
     getEvent(card, context) {
         let player = this.player || context.player;
         return super.createEvent(
-            'onExalt',
+            EVENTS.onExalt,
             { card: card, context: context, amount: this.amount },
             () => {
                 let extra = 0;

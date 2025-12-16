@@ -1,4 +1,5 @@
-﻿const PlayerAction = require('./PlayerAction');
+const { EVENTS } = require('../Events/types');
+const PlayerAction = require('./PlayerAction');
 
 class ModifyAmberAction extends PlayerAction {
     setDefaultProperties() {
@@ -9,7 +10,8 @@ class ModifyAmberAction extends PlayerAction {
     setup() {
         super.setup();
         this.name = this.amount >= 0 ? 'gainAmber' : 'spendAmber';
-        this.effectMsg = (this.amount >= 0 ? '获得 ' : '失去 ') + this.amount.toString() + ' 个琥珀';
+        this.effectMsg =
+            (this.amount >= 0 ? '获得 ' : '失去 ') + this.amount.toString() + ' 个琥珀';
     }
 
     canAffect(player, context) {
@@ -23,7 +25,7 @@ class ModifyAmberAction extends PlayerAction {
     getEvent(player, context) {
         let params = { player: player, amount: this.amount, reap: this.reap, context: context };
 
-        return super.createEvent('onModifyAmber', params, (event) => {
+        return super.createEvent(EVENTS.onModifyAmber, params, (event) => {
             event.player.modifyAmber(event.amount);
         });
     }

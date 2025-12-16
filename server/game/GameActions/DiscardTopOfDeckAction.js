@@ -1,4 +1,5 @@
-﻿const PlayerAction = require('./PlayerAction');
+const { EVENTS } = require('../Events/types');
+const PlayerAction = require('./PlayerAction');
 
 class DiscardTopOfDeckAction extends PlayerAction {
     setDefaultProperties() {
@@ -9,9 +10,7 @@ class DiscardTopOfDeckAction extends PlayerAction {
         super.setup();
         this.name = 'discard-top-of-deck';
         this.effectMsg =
-            '弃掉 ' +
-            (this.amount === 1 ? '1张卡牌' : this.amount + ' 张卡牌') +
-            " 从 {0}的牌库顶";
+            '弃掉 ' + (this.amount === 1 ? '1张卡牌' : this.amount + ' 张卡牌') + ' 从 {0}的牌库顶';
     }
 
     canAffect(player, context) {
@@ -20,7 +19,7 @@ class DiscardTopOfDeckAction extends PlayerAction {
 
     getEvent(player, context) {
         let amount = Math.min(this.amount, player.deck.length);
-        return super.createEvent('unnamedEvent', { player, context, amount }, (event) => {
+        return super.createEvent(EVENTS.unnamedEvent, { player, context, amount }, (event) => {
             let cards = player.deck.slice(0, event.amount);
             context.game.actions.discard({ chatMessage: false }).resolve(cards, context);
         });

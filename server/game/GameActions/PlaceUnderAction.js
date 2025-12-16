@@ -1,4 +1,5 @@
-﻿const CardGameAction = require('./CardGameAction');
+const { EVENTS } = require('../Events/types');
+const CardGameAction = require('./CardGameAction');
 
 class PlaceUnderAction extends CardGameAction {
     constructor(propertyFactory, isGraft = false) {
@@ -44,11 +45,11 @@ class PlaceUnderAction extends CardGameAction {
 
     getEvent(card, context) {
         return super.createEvent(
-            this.isGraft ? 'onCardGrafted' : 'onPlaceUnder',
+            this.isGraft ? EVENTS.onCardGrafted : EVENTS.onPlaceUnder,
             { card, context },
             () => {
                 if (card.location === 'play area') {
-                    context.game.raiseEvent('onCardLeavesPlay', { card, context }, () =>
+                    context.game.raiseEvent(EVENTS.onCardLeavesPlay, { card, context }, () =>
                         this.placeUnder(card)
                     );
                 } else {

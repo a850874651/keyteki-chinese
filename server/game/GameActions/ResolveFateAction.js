@@ -1,3 +1,4 @@
+const { EVENTS } = require('../Events/types');
 const CardGameAction = require('./CardGameAction');
 
 class ResolveFateAction extends CardGameAction {
@@ -8,7 +9,7 @@ class ResolveFateAction extends CardGameAction {
     }
 
     getEvent(card, context) {
-        let fateEvent = super.createEvent('onFate', { card: card, context: context }, () => {
+        let fateEvent = super.createEvent(EVENTS.onFate, { card: card, context: context }, () => {
             context.game.addMessage('{0} 结算了 {1}的命运效果', context.player, card);
         });
 

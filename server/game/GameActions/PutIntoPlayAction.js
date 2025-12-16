@@ -1,4 +1,5 @@
-﻿const CardGameAction = require('./CardGameAction');
+const { EVENTS } = require('../Events/types');
+const CardGameAction = require('./CardGameAction');
 
 class PutIntoPlayAction extends CardGameAction {
     setDefaultProperties() {
@@ -174,7 +175,7 @@ class PutIntoPlayAction extends CardGameAction {
 
     getEvent(card, context) {
         return super.createEvent(
-            'onCardEntersPlay',
+            EVENTS.onCardEntersPlay,
             {
                 card: card,
                 context: context

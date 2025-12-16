@@ -1,4 +1,5 @@
-﻿const PlayerAction = require('./PlayerAction');
+const { EVENTS } = require('../Events/types');
+const PlayerAction = require('./PlayerAction');
 
 class DrawAction extends PlayerAction {
     setDefaultProperties() {
@@ -38,7 +39,7 @@ class DrawAction extends PlayerAction {
 
     getEventWithAmount(player, context, amount, refill, shedChains) {
         return super.createEvent(
-            'onDrawCards',
+            EVENTS.onDrawCards,
             {
                 player: player,
                 amount: amount,
@@ -64,7 +65,7 @@ class DrawAction extends PlayerAction {
                 if (shedChains) {
                     event.player.modifyChains(-1);
                     context.game.addMessage(
-                        "{0}的枷锁值减少1，变成了 {1}",
+                        '{0}的枷锁值减少1，变成了 {1}',
                         event.player,
                         event.player.chains
                     );

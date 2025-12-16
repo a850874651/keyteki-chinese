@@ -1,4 +1,5 @@
-﻿const PlayerAction = require('./PlayerAction');
+const { EVENTS } = require('../Events/types');
+const PlayerAction = require('./PlayerAction');
 const _ = require('underscore');
 
 class RandomDiscardAction extends PlayerAction {
@@ -36,7 +37,7 @@ class RandomDiscardAction extends PlayerAction {
 
     getEvent(player, context) {
         return super.createEvent(
-            'unnamedEvent',
+            EVENTS.unnamedEvent,
             { player, context, amount: this.amount },
             (event) => {
                 const cardsToDiscard = [];
@@ -48,11 +49,7 @@ class RandomDiscardAction extends PlayerAction {
                         // All cards discarded, finish the event
                         event.cards = cardsToDiscard;
                         if (cardsToDiscard.length > 0) {
-                            context.game.addMessage(
-                                '{0} 随机弃掉了 {1} ',
-                                player,
-                                event.cards
-                            );
+                            context.game.addMessage('{0} 随机弃掉了 {1} ', player, event.cards);
                         }
                         return;
                     }
@@ -62,11 +59,7 @@ class RandomDiscardAction extends PlayerAction {
                         // No more cards to discard, finish the event
                         event.cards = cardsToDiscard;
                         if (cardsToDiscard.length > 0) {
-                            context.game.addMessage(
-                                '{0} 随机弃掉了 {1} ',
-                                player,
-                                event.cards
-                            );
+                            context.game.addMessage('{0} 随机弃掉了 {1} ', player, event.cards);
                         }
                         return;
                     }

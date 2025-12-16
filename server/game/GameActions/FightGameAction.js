@@ -1,4 +1,5 @@
-﻿const CardGameAction = require('./CardGameAction');
+const { EVENTS } = require('../Events/types');
+const CardGameAction = require('./CardGameAction');
 
 class FightGameAction extends CardGameAction {
     setDefaultProperties() {
@@ -39,7 +40,7 @@ class FightGameAction extends CardGameAction {
     }
 
     getEvent(card, context) {
-        return super.createEvent('onInitiateFight', { card, context }, () => {
+        return super.createEvent(EVENTS.onInitiateFight, { card, context }, () => {
             let newContext;
             if (card.stunned) {
                 let removeStunAction = card

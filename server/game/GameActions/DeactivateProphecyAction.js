@@ -1,3 +1,4 @@
+const { EVENTS } = require('../Events/types');
 const PlayerAction = require('./PlayerAction');
 
 class DeactivateProphecyAction extends PlayerAction {
@@ -27,7 +28,7 @@ class DeactivateProphecyAction extends PlayerAction {
     }
 
     getEvent(player, context) {
-        return super.createEvent('onDeactivateProphecy', { player, context }, (event) => {
+        return super.createEvent(EVENTS.onDeactivateProphecy, { player, context }, (event) => {
             // Discard any cards under the prophecy
             if (this.prophecyCard.childCards && this.prophecyCard.childCards.length > 0) {
                 let childCard = this.prophecyCard.childCards[0];
@@ -37,11 +38,7 @@ class DeactivateProphecyAction extends PlayerAction {
             // Deactivate the prophecy
             event.player.deactivateProphecy(this.prophecyCard);
 
-            context.game.addMessage(
-                '{0} 反激活了他的预言 {1}',
-                event.player,
-                this.prophecyCard
-            );
+            context.game.addMessage('{0} 反激活了他的预言 {1}', event.player, this.prophecyCard);
         });
     }
 }

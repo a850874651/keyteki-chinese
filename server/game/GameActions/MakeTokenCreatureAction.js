@@ -1,4 +1,5 @@
-﻿const CardGameAction = require('./CardGameAction');
+const { EVENTS } = require('../Events/types');
+const CardGameAction = require('./CardGameAction');
 
 class MakeTokenCreatureAction extends CardGameAction {
     setDefaultProperties() {
@@ -41,7 +42,7 @@ class MakeTokenCreatureAction extends CardGameAction {
 
     getEvent(card, context) {
         return super.createEvent(
-            'onMakeToken',
+            EVENTS.onMakeToken,
             { card, context, player: this.targetPlayer(context) },
             (event) => {
                 context.game.actions

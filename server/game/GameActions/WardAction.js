@@ -1,4 +1,5 @@
-﻿const CardGameAction = require('./CardGameAction');
+const { EVENTS } = require('../Events/types');
+const CardGameAction = require('./CardGameAction');
 
 class WardAction extends CardGameAction {
     setup() {
@@ -12,7 +13,9 @@ class WardAction extends CardGameAction {
     }
 
     getEvent(card, context) {
-        return super.createEvent('onWard', { card: card, context: context }, () => card.ward());
+        return super.createEvent(EVENTS.onWard, { card: card, context: context }, () =>
+            card.ward()
+        );
     }
 }
 

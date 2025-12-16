@@ -1,4 +1,5 @@
-﻿const PlayerAction = require('./PlayerAction');
+const { EVENTS } = require('../Events/types');
+const PlayerAction = require('./PlayerAction');
 
 class LoseAmberAction extends PlayerAction {
     setDefaultProperties() {
@@ -21,7 +22,7 @@ class LoseAmberAction extends PlayerAction {
 
     getEvent(player, context) {
         return super.createEvent(
-            'onModifyAmber',
+            EVENTS.onModifyAmber,
             {
                 player: player,
                 amount: Math.min(player.amber, this.amount),

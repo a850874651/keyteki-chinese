@@ -1,4 +1,5 @@
-﻿const CardGameAction = require('./CardGameAction');
+const { EVENTS } = require('../Events/types');
+const CardGameAction = require('./CardGameAction');
 
 class RemoveStunAction extends CardGameAction {
     setup() {
@@ -16,7 +17,7 @@ class RemoveStunAction extends CardGameAction {
     }
 
     getEvent(card, context) {
-        return super.createEvent('onRemoveStun', { card: card, context: context }, () =>
+        return super.createEvent(EVENTS.onRemoveStun, { card: card, context: context }, () =>
             card.unstun()
         );
     }

@@ -1,4 +1,4 @@
-﻿const { EVENTS } = require('../Events/types');
+const { EVENTS } = require('../Events/types');
 const CardAction = require('./CardGameAction');
 
 class CaptureAction extends CardAction {

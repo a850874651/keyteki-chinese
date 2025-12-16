@@ -1,4 +1,5 @@
-﻿const CardGameAction = require('./CardGameAction');
+const { EVENTS } = require('../Events/types');
+const CardGameAction = require('./CardGameAction');
 
 class MoveCardAction extends CardGameAction {
     setDefaultProperties() {
@@ -22,7 +23,7 @@ class MoveCardAction extends CardGameAction {
     }
 
     getEvent(card, context) {
-        return super.createEvent('onMoveCard', { card: card, context: context }, () => {
+        return super.createEvent(EVENTS.onMoveCard, { card: card, context: context }, () => {
             context.player.moveCard(card, this.destination);
             if (
                 this.shuffle &&

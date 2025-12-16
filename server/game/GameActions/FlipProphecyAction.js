@@ -1,4 +1,5 @@
-﻿const PlayerAction = require('./PlayerAction');
+const { EVENTS } = require('../Events/types');
+const PlayerAction = require('./PlayerAction');
 
 class FlipProphecyAction extends PlayerAction {
     setDefaultProperties() {
@@ -30,7 +31,7 @@ class FlipProphecyAction extends PlayerAction {
     }
 
     getEvent(player, context) {
-        return super.createEvent('onFlipProphecy', { player, context }, (event) => {
+        return super.createEvent(EVENTS.onFlipProphecy, { player, context }, (event) => {
             event.player.flipProphecy(context, this.prophecyCard);
         });
     }

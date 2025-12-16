@@ -1,4 +1,5 @@
-﻿const CardGameAction = require('./CardGameAction');
+const { EVENTS } = require('../Events/types');
+const CardGameAction = require('./CardGameAction');
 
 class ReduceArmorAction extends CardGameAction {
     setDefaultProperties() {
@@ -9,7 +10,7 @@ class ReduceArmorAction extends CardGameAction {
     setup() {
         this.name = 'reduceArmor';
         this.targetType = ['creature'];
-        this.effectMsg = "减少了 {0}的护甲";
+        this.effectMsg = '减少了 {0}的护甲';
     }
 
     canAffect(card, context) {
@@ -18,7 +19,7 @@ class ReduceArmorAction extends CardGameAction {
 
     getEvent(card, context, amount = this.amount || this.amountForCard(card, context)) {
         return super.createEvent(
-            'onReduceArmor',
+            EVENTS.onReduceArmor,
             { card: card, context: context, amount: amount },
             (event) => {
                 let amount = event.amount;

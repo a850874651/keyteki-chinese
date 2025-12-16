@@ -1,3 +1,4 @@
+const { EVENTS } = require('../Events/types');
 const PlayerAction = require('./PlayerAction');
 
 class SearchAction extends PlayerAction {
@@ -35,7 +36,7 @@ class SearchAction extends PlayerAction {
 
     getEvent(player, context) {
         return super.createEvent(
-            'onSearch',
+            EVENTS.onSearch,
             { player: player, context: context, location: this.location },
             (event) => {
                 context.game.promptForSelect(context.game.activePlayer, {
@@ -113,7 +114,7 @@ class SearchAction extends PlayerAction {
                                 }
                             }
                         } else {
-                            context.game.addMessage("{0} 未拿取任何卡牌", player);
+                            context.game.addMessage('{0} 未拿取任何卡牌', player);
 
                             if (this.location.includes('deck')) {
                                 player.shuffleDeck();

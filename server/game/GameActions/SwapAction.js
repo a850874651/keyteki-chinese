@@ -1,4 +1,5 @@
-﻿const CardGameAction = require('./CardGameAction');
+const { EVENTS } = require('../Events/types');
+const CardGameAction = require('./CardGameAction');
 
 class SwapAction extends CardGameAction {
     constructor(propertyFactory, swapTokens = false, swapUpgrades = false) {
@@ -32,7 +33,7 @@ class SwapAction extends CardGameAction {
     }
 
     getEvent(card, context) {
-        return super.createEvent('onSwap', { card: card, context: context }, () => {
+        return super.createEvent(EVENTS.onSwap, { card: card, context: context }, () => {
             let originIndex = this.origin.controller.cardsInPlay.indexOf(this.origin);
             let cardIndex = card.controller.cardsInPlay.indexOf(card);
             if (originIndex >= 0 && cardIndex >= 0) {
