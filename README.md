@@ -1,3 +1,16 @@
+# Keyteki 中文版
+
+> 🇨🇳 **本项目是 [Keyteki](https://github.com/keyteki/keyteki) 的中文汉化版本**
+> 
+> - **原项目：** [keyteki/keyteki](https://github.com/keyteki/keyteki)
+> - **汉化维护：** [@TCO雀匙友趣团队](https://github.com/a850874651)
+> - **汉化内容：** 游戏界面、提示信息、卡牌说明等
+> - **同步状态：** 持续跟进上游更新
+> 
+> 感谢 Keyteki 原项目团队的辛勤工作！🎉
+
+---
+
 # Keyteki
 
 Web based implementation of Keyforge: the Unique Deck Game
@@ -38,6 +51,24 @@ See this document for features I have planned and a link to the currently implem
 
 Check out the [About page](https://thecrucible.online/about) of Keyteki live deployment.
 
+## 中文版说明
+
+### 汉化范围
+
+本中文版汉化了以下内容：
+- ✅ 游戏界面文本
+- ✅ 菜单和按钮
+- ✅ 提示信息
+- ✅ 游戏动作描述
+- ✅ 错误提示
+
+
+### 反馈问题
+
+如果发现汉化问题或建议，欢迎提交 Issue 或 Pull Request！
+
+---
+
 ## Development
 
 ### Docker
@@ -51,10 +82,10 @@ Desktop](https://docs.docker.com/desktop/setup/install/mac-install/), which
 includes the `docker` command line tool and the `docker-compose` plugin.
 
 Install [nvm](https://github.com/nvm-sh/nvm), [asdf](https://asdf-vm.com/), or
-another tool to manage your Node versions. **Follow your tool’s steps to
+another tool to manage your Node versions. **Follow your tool's steps to
 download and install Node v16.20.2.**
 
-(If you’re using `asdf`, add `legacy_version_file = yes` to your `$HOME/.asdfrc`
+(If you're using `asdf`, add `legacy_version_file = yes` to your `$HOME/.asdfrc`
 to automatically read the `.node-version` file in this repo.)
 
 Clone the repository, then run the following commands:
@@ -80,7 +111,7 @@ In another terminal, run the following command:
 docker compose exec lobby node server/scripts/fetchdata
 ```
 
-It is normal to see “Failed to add card” log errors about duplicates at the
+It is normal to see "Failed to add card" log errors about duplicates at the
 beginning.
 
 Fetchdata takes a while to run, and some images may error out due to API rate
@@ -280,3 +311,14 @@ If you are making any game engine changes, these will not be accepted without un
 ### Discord Discusson
 
 [Keyteki Discord Server](https://discord.gg/NncEXAs)
+
+---
+
+## 📝 License
+
+This project follows the original Keyteki project's license.
+
+## 🙏 Credits
+
+- **Original Project:** [Keyteki](https://github.com/keyteki/keyteki)
+- **Chinese Localization:** [@TCO雀匙友趣团队](https://github.com/a850874651)
