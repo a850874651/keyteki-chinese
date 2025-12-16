@@ -1,0 +1,12 @@
+{
+    dbHost: 'localhost',
+    mqHost: 'localhost',
+
+    lobby: {
+        port: 4000
+    },
+
+    gameNode: {
+        hostname: 'localhost'
+    }
+}

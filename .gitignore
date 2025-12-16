@@ -25,3 +25,5 @@ server/game/generatedcards
 *.orig
 config/default.json5
 /config
+keyteki-json-data
+*.bat
