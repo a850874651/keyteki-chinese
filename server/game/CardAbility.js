@@ -45,7 +45,7 @@ class CardAbility extends ThenAbility {
     ) {
         let messageArgs = previousMessageArgs || [
             context.player,
-            context.source.type === 'event' ? ' plays ' : ' uses ',
+            context.source.type === 'event' ? ' 打出 ' : ' 使用 ',
             context.source
         ];
 
@@ -60,11 +60,11 @@ class CardAbility extends ThenAbility {
             }
 
             // to
-            if (messageArgs.indexOf(' to ') === -1) {
-                messageArgs.push(' to ');
+            if (messageArgs.indexOf(' 来 ') === -1) {
+                messageArgs.push(' 来 ');
             } else {
                 // appending a message
-                messageArgs.push(last ? '; and ' : '; ');
+                messageArgs.push(last ? '; 和 ' : '; ');
             }
 
             // discard Stoic Gunso
