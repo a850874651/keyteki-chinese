@@ -15,8 +15,7 @@ class KelpingHands extends Card {
                     })
                 })
             ]),
-            effect:
-                '摧毁 {0}. 在本回合的剩余时间内，每个友方生物具有剧毒',
+            effect:'摧毁 {0}. 在本回合的剩余时间内，每个友方生物具有剧毒',
             effectAlert: true
         });
     }

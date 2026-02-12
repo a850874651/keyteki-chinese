@@ -20,7 +20,8 @@ class Turnkey extends Card {
                             target: context.player.opponent,
                             atNoCost: true
                         }),
-                        message: '{0} 无费用锻造1把钥匙，由于 {1} 离场'
+                        message: '{0} 无费用锻造1把钥匙，由于 {1} 离场',
+                        messageArgs: (context) => [context.player.opponent, context.source]
                     })
                 }))
             }

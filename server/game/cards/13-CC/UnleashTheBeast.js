@@ -18,10 +18,7 @@ class UnleashTheBeast extends Card {
                     }))
                 },
                 message: '{0} 使用 {1} 造成 {3} 点伤害对 {4}',
-                messageArgs: (context) => [
-                    context.preThenEvents[0].clone.getPower(),
-                    context.target
-                ]
+                messageArgs: (context) => [context.preThenEvents[0].clone.power, context.target]
             }
         });
     }

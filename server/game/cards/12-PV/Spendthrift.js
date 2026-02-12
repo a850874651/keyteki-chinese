@@ -10,7 +10,7 @@ class Spendthrift extends Card {
                 gameAction: [ability.actions.removeAmber({ all: true }), ability.actions.exalt()]
             },
             effect: '移动 所有 {2} 琥珀从 {0} 身上到公共供应堆并褒奖 {0}',
-            effectArgs: (context) => [context.target, context.target.tokens.amber || 0]
+            effectArgs: (context) => [context.target, context.target.amber]
         });
 
         this.fate({

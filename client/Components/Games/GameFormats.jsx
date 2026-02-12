@@ -1,6 +1,6 @@
 import React from 'react';
 import { Trans, useTranslation } from 'react-i18next';
-import { Form, Col } from 'react-bootstrap';
+import { Col, Form, Row } from 'react-bootstrap';
 
 import './GameFormats.scss';
 
@@ -24,12 +24,20 @@ const GameFormats = ({ formProps }) => {
         { name: 'dt', label: t('Dark Tidings') },
         { name: 'woe', label: t('Winds of Exchange') },
         { name: 'gr', label: t('Grim Reminders') },
-        { name: 'as', label: t('Amber Skies') }
+        { name: 'as', label: t('Æmber Skies') },
+        { name: 'toc', label: t('Tokens of Change') },
+        { name: 'momu', label: t('More Mutation') },
+        { name: 'disc', label: t('Discovery') },
+        { name: 'vm2023', label: t('Vault Masters 2023') },
+        { name: 'vm2024', label: t('Vault Masters 2024') },
+        { name: 'vm2025', label: t('Vault Masters 2025') },
+        { name: 'pv', label: t('Prophetic Visions') },
+        { name: 'cc', label: t('Crucible Clash') }
     ];
 
     return (
         <>
-            <Form.Row>
+            <Row>
                 <Col xs={12} className='font-weight-bold'>
                     <Trans>Format</Trans>
                 </Col>
@@ -51,28 +59,25 @@ const GameFormats = ({ formProps }) => {
                         {formProps.errors.gameFormat}
                     </Form.Control.Feedback>
                 </Form.Group>
-            </Form.Row>
+            </Row>
             {formProps.values.gameFormat === 'sealed' && (
-                <Form.Row>
+                <Row>
                     <Form.Group className='game-formats' as={Col}>
                         {expansions.map((expansion) => {
                             return (
-                                <>
-                                    <Form.Check
-                                        key={expansion.name}
-                                        type='switch'
-                                        id={expansion.name}
-                                        label={expansion.label}
-                                        inline
-                                        onChange={formProps.handleChange}
-                                        value='true'
-                                        checked={formProps.values[expansion.name]}
-                                    ></Form.Check>
-                                </>
+                                <Form.Check
+                                    key={expansion.name}
+                                    type='switch'
+                                    id={expansion.name}
+                                    label={expansion.label}
+                                    onChange={formProps.handleChange}
+                                    value='true'
+                                    checked={formProps.values[expansion.name]}
+                                ></Form.Check>
                             );
                         })}
                     </Form.Group>
-                </Form.Row>
+                </Row>
             )}
         </>
     );

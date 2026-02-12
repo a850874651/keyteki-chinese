@@ -2,10 +2,12 @@ import React, { useState } from 'react';
 import { Col, Row } from 'react-bootstrap';
 import { sortBy } from 'underscore';
 import { useTranslation, Trans } from 'react-i18next';
+import { useSelector } from 'react-redux';
 
 import { Constants } from '../../constants';
 import CardBack from './CardBack';
 import CardImage from '../GameBoard/CardImage';
+import { useUpdateAccoladeShownMutation } from '../../redux/api';
 
 import AmberImage from '../../assets/img/enhancements/amberui.png';
 import CaptureImage from '../../assets/img/enhancements/captureui.png';
@@ -17,12 +19,29 @@ import './DeckSummary.scss';
 
 const DeckSummary = ({ deck }) => {
     const { t, i18n } = useTranslation();
+    const [triggerUpdateAccoladeShown] = useUpdateAccoladeShownMutation();
+    const user = useSelector((state) => state.account.user);
+    const showAccolades = user?.settings?.optionSettings?.showAccolades ?? true;
     let [zoomCard, setZoomCard] = useState(null);
     let [mousePos, setMousePosition] = useState({ x: 0, y: 0 });
     const cardsByHouse = {};
     const enhancements = {};
 
-    for (const house of deck.houses.sort()) {
+    const handleAccoladeClick = (accolade) => {
+        if (!accolade.shown) {
+            const shownCount = deck.accolades.filter((a) => a.shown).length;
+            if (shownCount >= 3) {
+                return;
+            }
+        }
+        triggerUpdateAccoladeShown({
+            deckId: deck.id,
+            accoladeId: accolade.id,
+            shown: !accolade.shown
+        });
+    };
+
+    for (const house of [...deck.houses].sort()) {
         cardsByHouse[house] = [];
         const filteredCards = sortBy(
             deck.cards.filter((c) => c.card.house === house && !c.isNonDeck),
@@ -204,6 +223,28 @@ const DeckSummary = ({ deck }) => {
                     ) : null}
                 </Col>
             </Row>
+            {showAccolades && deck.accolades && deck.accolades.length > 0 && (
+                <Row className='deck-accolades'>
+                    {deck.accolades.map((accolade, index) => {
+                        const shownCount = deck.accolades.filter((a) => a.shown).length;
+                        const canSelect = accolade.shown || shownCount < 3;
+                        const className = `deck-accolade-image ${
+                            accolade.shown ? 'selected' : ''
+                        } ${!canSelect ? 'disabled' : ''}`;
+                        return (
+                            <img
+                                key={index}
+                                src={accolade.image}
+                                alt={accolade.name}
+                                title={accolade.name}
+                                className={className}
+                                onClick={() => canSelect && handleAccoladeClick(accolade)}
+                                style={{ cursor: canSelect ? 'pointer' : 'not-allowed' }}
+                            />
+                        );
+                    })}
+                </Row>
+            )}
             <Row className='deck-houses'>
                 {deck.houses.map((house) => {
                     return (

@@ -9,7 +9,27 @@ class FiendishApprentice extends Card {
                 damageStep: 3,
                 numSteps: context.player.creaturesInPlay.filter((c) => c.hasHouse('dis')).length
             })),
-            effect: '每有1个友方冥府生物，对1个生物造成3点伤害'
+            effect: '每有1个友方冥府生物，对1个生物造成3点伤害 ({1})',
+            effectArgs: (context) => [
+                context.player.creaturesInPlay.filter((c) => c.hasHouse('dis')).map((c) => c.name)
+            ],
+            then: {
+                alwaysTriggers: true,
+                condition: (context) => {
+                    context.preThenEvents
+                        .filter((event) => !event.cancelled && event.amount > 0)
+                        .forEach((event) => {
+                            context.game.addMessage(
+                                '{0} 使用 {1} 来造成 {2} 伤害对 {3}',
+                                context.player,
+                                context.source,
+                                event.amount,
+                                event.card
+                            );
+                        });
+                    return false;
+                }
+            }
         });
     }
 }

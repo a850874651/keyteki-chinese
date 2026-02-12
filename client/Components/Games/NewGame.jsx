@@ -10,8 +10,9 @@ import AlertPanel from '../Site/AlertPanel';
 import GameOptions from './GameOptions';
 import GameFormats from './GameFormats';
 import GameTypes from './GameTypes';
-import { getStandardControlProps } from '../../util';
-import { cancelNewGame, sendSocketMessage } from '../../redux/actions';
+import { getStandardControlProps } from '../../util.jsx';
+import { lobbyActions } from '../../redux/slices/lobbySlice';
+import { lobbySendMessage } from '../../redux/socketActions';
 
 import './NewGame.scss';
 
@@ -73,7 +74,7 @@ const NewGame = ({
         useGameTimeLimit: !!defaultTimeLimit,
         gameTimeLimit: defaultTimeLimit || 45,
         gamePrivate: defaultPrivate,
-        as: true
+        pv: true
     };
 
     if (!lobbySocket) {
@@ -95,7 +96,7 @@ const NewGame = ({
                     if (tournament) {
                         for (let match of matches) {
                             dispatch(
-                                sendSocketMessage('newgame', {
+                                lobbySendMessage('newgame', {
                                     ...values,
                                     expansions: {
                                         aoa: values.aoa,
@@ -105,7 +106,15 @@ const NewGame = ({
                                         dt: values.dt,
                                         woe: values.woe,
                                         gr: values.gr,
-                                        as: values.as
+                                        as: values.as,
+                                        toc: values.toc,
+                                        momu: values.momu,
+                                        disc: values.disc,
+                                        vm2023: values.vm2023,
+                                        vm2024: values.vm2024,
+                                        vm2025: values.vm2025,
+                                        pv: values.pv,
+                                        cc: values.cc
                                     },
                                     name: `${getParticipantName(
                                         match.player1_id
@@ -126,11 +135,19 @@ const NewGame = ({
                             dt: values.dt,
                             woe: values.woe,
                             gr: values.gr,
-                            as: values.as
+                            as: values.as,
+                            toc: values.toc,
+                            momu: values.momu,
+                            disc: values.disc,
+                            vm2023: values.vm2023,
+                            vm2024: values.vm2024,
+                            vm2025: values.vm2025,
+                            pv: values.pv,
+                            cc: values.cc
                         };
                         values.quickJoin = quickJoin;
 
-                        dispatch(sendSocketMessage('newgame', values));
+                        dispatch(lobbySendMessage('newgame', values));
                     }
                 }}
                 initialValues={initialValues}
@@ -149,7 +166,15 @@ const NewGame = ({
                                 !formProps.values.dt &&
                                 !formProps.values.woe &&
                                 !formProps.values.gr &&
-                                !formProps.values.as
+                                !formProps.values.as &&
+                                !formProps.values.toc &&
+                                !formProps.values.momu &&
+                                !formProps.values.disc &&
+                                !formProps.values.vm2023 &&
+                                !formProps.values.vm2024 &&
+                                !formProps.values.vm2025 &&
+                                !formProps.values.pv &&
+                                !formProps.values.cc
                             ) {
                                 formProps.setFieldError(
                                     'gameFormat',
@@ -173,7 +198,7 @@ const NewGame = ({
                         {!quickJoin && (
                             <>
                                 {!tournament && (
-                                    <Form.Row>
+                                    <Row>
                                         <Form.Group as={Col} lg='8' controlId='formGridGameName'>
                                             <Form.Label>{t('Name')}</Form.Label>
                                             <Form.Label className='float-right'>
@@ -189,7 +214,7 @@ const NewGame = ({
                                                 {formProps.errors.name}
                                             </Form.Control.Feedback>
                                         </Form.Group>
-                                    </Form.Row>
+                                    </Row>
                                 )}
                                 <GameOptions formProps={formProps} />
                             </>
@@ -215,7 +240,7 @@ const NewGame = ({
                             <Button
                                 variant='primary'
                                 onClick={() => {
-                                    dispatch(cancelNewGame());
+                                    dispatch(lobbyActions.cancelNewGame());
                                     if (onClosed) {
                                         onClosed(false);
                                     }

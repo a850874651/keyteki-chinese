@@ -5,8 +5,7 @@ class GruntWork extends Card {
     // any order. Make a token creature.
     setupCardAbilities(ability) {
         this.play({
-            effect:
-                '查看你牌库顶的3张牌，并按任意顺序放回，制造1个代标生物',
+            effect:'查看你牌库顶的3张牌，并按任意顺序放回，制造1个代标生物',
             gameAction: ability.actions.sequential([
                 ability.actions.rearrangeCards({ amount: 3 }),
                 ability.actions.makeTokenCreature()

@@ -1,18 +1,17 @@
 import React from 'react';
-import Panel from '../Site/Panel';
-import { Form } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
+import { Form, Row } from 'react-bootstrap';
+
+import Panel from '../Site/Panel';
 
 /**
  * @typedef { import('./Profile').ProfileDetails } ProfileDetails
  */
-
 /**
  * @typedef KeyforgeGameSettingsProps
  * @property {import('formik').FormikProps<ProfileDetails>} formProps
  * @property {User} user
  */
-
 /**
  * @param {KeyforgeGameSettingsProps} props
  */
@@ -21,7 +20,7 @@ const KeyforgeGameSettings = ({ formProps }) => {
 
     return (
         <Panel title={t('Game Settings')}>
-            <Form.Row>
+            <Row>
                 <Form.Check
                     id='orderForcedAbilities'
                     name='gameOptions.orderForcedAbilities'
@@ -31,6 +30,8 @@ const KeyforgeGameSettings = ({ formProps }) => {
                     onChange={formProps.handleChange}
                     onBlur={formProps.handleBlur}
                 />
+            </Row>
+            <Row>
                 <Form.Check
                     id='confirmOneClick'
                     name='gameOptions.confirmOneClick'
@@ -40,7 +41,29 @@ const KeyforgeGameSettings = ({ formProps }) => {
                     onChange={formProps.handleChange}
                     onBlur={formProps.handleBlur}
                 />
-            </Form.Row>
+            </Row>
+            <Row>
+                <Form.Check
+                    id='useHalfSizedCards'
+                    name='gameOptions.useHalfSizedCards'
+                    label={t('Use half sized card images')}
+                    type='switch'
+                    checked={formProps.values.gameOptions.useHalfSizedCards}
+                    onChange={formProps.handleChange}
+                    onBlur={formProps.handleBlur}
+                />
+            </Row>
+            <Row>
+                <Form.Check
+                    id='showAccolades'
+                    name='gameOptions.showAccolades'
+                    label={t('Show deck accolades')}
+                    type='switch'
+                    checked={formProps.values.gameOptions.showAccolades}
+                    onChange={formProps.handleChange}
+                    onBlur={formProps.handleBlur}
+                />
+            </Row>
         </Panel>
     );
 };

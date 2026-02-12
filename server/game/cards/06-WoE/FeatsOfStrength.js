@@ -5,8 +5,7 @@ class FeatsOfStrength extends Card {
     // creature is destroyed in a fight, make a token creature.
     setupCardAbilities(ability) {
         this.play({
-            effect:
-                '本回合剩余时间内，每有1个敌方生物在战斗中被摧毁，制造1个代标生物',
+            effect:'本回合剩余时间内，每有1个敌方生物在战斗中被摧毁，制造1个代标生物',
             gameAction: ability.actions.untilPlayerTurnEnd((context) => ({
                 when: {
                     onCardDestroyed: (event) =>

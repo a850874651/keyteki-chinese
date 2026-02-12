@@ -22,15 +22,10 @@ class UnityPrism extends Card {
 
         this.scrap({
             effect:
-                '展示了其手牌 ({1}) 并根据每个展示的势力获得1琥珀, 一共获得了 {2} 琥珀',
+                '展示了其手牌 ({0}) 并根据每个展示的势力获得1琥珀, 一共获得了 {1} 琥珀',
             effectArgs: (context) => [
                 context.player.hand,
-                context.player.hand.reduce((houses, card) => {
-                    if (!houses.includes(card.printedHouse)) {
-                        houses.push(card.printedHouse);
-                    }
-                    return houses;
-                }, []).length
+                context.game.getHousesInPlay(context.player.hand).length
             ],
             gameAction: ability.actions.gainAmber((context) => ({
                 amount: context.game.getHousesInPlay(context.player.hand).length

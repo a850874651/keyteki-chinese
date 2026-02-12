@@ -9,13 +9,13 @@ class Webstur extends Card {
         this.fight({
             condition: (context) => {
                 this.discards = 0;
-                return this.discards < context.source.tokens.damage;
+                return this.discards < context.source.damage;
             },
             effect:
                 "每有1点伤害在{0}上，可以选择弃掉每位玩家牌库顶的1张牌 ",
             then: {
                 alwaysTriggers: true,
-                condition: (context) => this.discards < context.source.tokens.damage,
+                condition: (context) => this.discards < context.source.damage,
                 may: "discard the top card from each player's deck",
                 gameAction: ability.actions.discard((context) => ({
                     target: context.player.deck

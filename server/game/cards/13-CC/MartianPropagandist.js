@@ -5,9 +5,10 @@ class MartianPropagandist extends Card {
     setupCardAbilities(ability) {
         this.play({
             reap: true,
-            gameAction: ability.actions.cardLastingEffect((context) => ({
-                effect: ability.effects.changeHouse('mars'),
-                target: context.source.neighbors
+            gameAction: ability.actions.untilPlayerTurnEnd((context) => ({
+                targetController: 'any',
+                match: (card) => context.source.neighbors.includes(card),
+                effect: ability.effects.changeHouse('mars')
             })),
             effect: '使其相邻生物在本回合剩余时间中属于火星势力'
         });

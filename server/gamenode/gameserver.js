@@ -155,10 +155,10 @@ class GameServer {
             }
         }
 
-        Sentry.configureScope((scope) => {
+        Sentry.withScope((scope) => {
             scope.setExtra('extra', debugData);
+            Sentry.captureException(e);
         });
-        Sentry.captureException(e);
         if (game) {
             game.addMessage(
                 '抱歉，在处理您的游戏时服务器发生了错误. 您的游戏或许进入了不正常的状态, 也许您可以继续. 错误已被记录.'
@@ -464,6 +464,7 @@ class GameServer {
         socket.joinChannel(game.id);
 
         player.socket = socket;
+        game.jsonForUsers[player.name] = undefined;
 
         if (!game.isSpectator(player) && !player.disconnectedAt) {
             game.addAlert('info', '{0} 已连接到游戏服务器', player);

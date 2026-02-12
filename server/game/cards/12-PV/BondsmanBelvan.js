@@ -17,7 +17,12 @@ class BondsmanBelvan extends Card {
                     handlers: [() => []],
                     cards: [context.player.opponent ? context.player.opponent.deck[0] : undefined]
                 }
-            }))
+            })),
+            then: {
+                alwaysTriggers: true,
+                condition: (context) => !context.preThenEvent || context.preThenEvent.cancelled,
+                message: "{0} uses {1} to leave it on top of their opponent's deck"
+            }
         });
 
         this.fate({

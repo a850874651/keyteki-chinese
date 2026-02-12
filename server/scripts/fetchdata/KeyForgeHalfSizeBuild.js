@@ -1,10 +1,12 @@
-const fabric = require('fabric').fabric;
+const { fabric } = require('fabric');
+const { registerFont } = require('canvas');
 const fs = require('fs');
 const path = require('path');
 const mkdirp = require('mkdirp');
-const loadImage = (imgPath) => {
-    return new Promise((resolve) => fabric.Image.fromURL(imgPath, (image) => resolve(image)));
-};
+const loadImage = (imgPath) =>
+    new Promise((resolve) => {
+        fabric.Image.fromURL(imgPath, (image) => resolve(image));
+    });
 const parameters = {
     action: { top: 0, height: 250, width: 297.5 },
     artifact: { top: 0, height: 250, width: 297.5 },
@@ -24,44 +26,45 @@ const shadowProps = {
 };
 const assetsPath = path.join(__dirname, './assets');
 
-fabric.nodeCanvas.registerFont(path.join(__dirname, './fonts/TeutonNormal-Bold.otf'), {
+registerFont(path.join(__dirname, './fonts/TeutonNormal-Bold.otf'), {
     family: 'TeutonFett',
     weight: 'bold',
     style: 'normal'
 });
-fabric.nodeCanvas.registerFont(path.join(__dirname, './fonts/Bombardier.ttf'), {
+registerFont(path.join(__dirname, './fonts/Bombardier.ttf'), {
     family: 'Bombardier',
     weight: 'regular',
     style: 'normal'
 });
-fabric.nodeCanvas.registerFont(path.join(__dirname, './fonts/ZCOOL-Regular.ttf'), {
+registerFont(path.join(__dirname, './fonts/ZCOOL-Regular.ttf'), {
     family: 'TeutonFett',
     weight: 'regular',
     style: 'normal'
 });
-fabric.nodeCanvas.registerFont(path.join(__dirname, './fonts/Kanit-Regular.ttf'), {
+registerFont(path.join(__dirname, './fonts/Kanit-Regular.ttf'), {
     family: 'TeutonFett',
     weight: 'regular',
     style: 'normal'
 });
-fabric.nodeCanvas.registerFont(path.join(__dirname, './fonts/Kanit-Bold.ttf'), {
+registerFont(path.join(__dirname, './fonts/Kanit-Bold.ttf'), {
     family: 'TeutonFett',
     weight: 'bold',
     style: 'normal'
 });
 
 const buildHalfSize = async (card, imgPath, filename, language) => {
-    // 严格检查：如果没有指定语言的数据，直接跳过，不生成图片
     if (!card.locale || !card.locale[language] || !card.locale[language].name) {
-        console.warn(`跳过卡牌 ${card.id || card.name || 'unknown'}: 没有 ${language} 语言数据`);
-        return;  // 直接返回，不处理这张卡
+        console.warn(`跳过卡牌 ${card.name || 'Unknown'}: 跳过卡牌 ${language}语言数据`);
+        return;
     }
 
     const canvas = new fabric.StaticCanvas(null, {
         width: parameters[card.type].width,
         height: parameters[card.type].height
     });
+    canvas.renderOnAddRemove = false;
     const canvasFinal = new fabric.StaticCanvas(null, { width: 300, height: 262.5 });
+    canvasFinal.renderOnAddRemove = false;
     let framePath = assetsPath + `/${card.house}_Frame`;
     if (card.type === 'upgrade') framePath += '_b';
     else if (card.type.includes('creature')) framePath += '_c';
@@ -88,6 +91,13 @@ const buildHalfSize = async (card, imgPath, filename, language) => {
     if (card.type === 'upgrade') finalArt.set({ top: 19 });
     canvasFinal.add(finalArt);
     canvasFinal.add(frame);
+    canvasFinal.add(frame);
+    const localizedName =
+        (card.locale && card.locale[language] && card.locale[language].name) ||
+        (card.locale && card.locale.en && card.locale.en.name) ||
+        card.name ||
+        'Unknown';
+
     let bar;
     let barCanvas;
     let Power;
@@ -159,7 +169,7 @@ const buildHalfSize = async (card, imgPath, filename, language) => {
                 left: 150
             });
             barCanvas.scaleToWidth(270);
-            Name = getCircularText(card.locale[language].name, 1200);
+            Name = getCircularText(localizedName, 1200);
             cardType.set({ originX: 'center', originY: 'center', left: 150, top: 242.5 });
             Power = new fabric.Text(card.power ? card.power.toString() : '0', {
                 fill: '#fdfbfa',
@@ -171,7 +181,7 @@ const buildHalfSize = async (card, imgPath, filename, language) => {
                 stroke: 'black',
                 strokeWidth: 1
             });
-            Armor = new fabric.Text(card.armor > 0 ? card.armor.toString() : '~', {
+            Armor = new fabric.Text(card.armorTotal > 0 ? card.armor.toString() : '~', {
                 fill: '#fdfbfa',
                 fontSize: 37.5,
                 shadow: new fabric.Shadow(shadowProps),
@@ -187,7 +197,7 @@ const buildHalfSize = async (card, imgPath, filename, language) => {
                 originX: 'center',
                 originY: 'center',
                 left: 262,
-                top: card.armor > 0 ? 231.25 : 241.25
+                top: card.armorTotal > 0 ? 231.25 : 241.25
             });
             canvasFinal.add(barCanvas, Name, Power, Armor, cardType);
             if (card.rarity === 'Evil Twin') {
@@ -203,7 +213,7 @@ const buildHalfSize = async (card, imgPath, filename, language) => {
             }
             break;
         case 'artifact':
-            Name = getCircularText(card.locale[language].name, 1200);
+            Name = getCircularText(localizedName, 1200);
             bar = await loadImage(`file://${assetsPath + `/${card.house}_Upgrade.png`}`);
             if (card.house === 'untamed') {
                 barCanvas = new fabric.Image(bar.toCanvasElement()).set({
@@ -280,7 +290,7 @@ const buildHalfSize = async (card, imgPath, filename, language) => {
         out.write(chunk);
     });
     stream.on('end', () => {
-        console.log('Built Half Sized image for ' + card.name + ': ' + card.locale[language].name);
+        console.log(`Built Half Sized image for ${card.name || 'Unknown'}: ${localizedName}`);
         canvasFinal.dispose();
     });
 };

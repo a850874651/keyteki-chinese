@@ -15,8 +15,8 @@ const keyImages = {};
 
 for (const colour of ['red', 'blue', 'yellow']) {
     keyImages[colour] = {
-        forged: require(`../../assets/img/forgedkey${colour}.png`),
-        unforged: require(`../../assets/img/unforgedkey${colour}.png`)
+        forged: new URL(`../../assets/img/forgedkey${colour}.png`, import.meta.url).href,
+        unforged: new URL(`../../assets/img/unforgedkey${colour}.png`, import.meta.url).href
     };
 }
 
@@ -149,7 +149,7 @@ const Messages = ({ messages, onCardMouseOver, onCardMouseOut }) => {
                 messages.push(formatMessageText(fragment.message));
             } else if (fragment.link && fragment.label) {
                 messages.push(
-                    <a href={fragment.link} target='_blank' rel='noopener noreferrer'>
+                    <a key={index++} href={fragment.link} target='_blank' rel='noopener noreferrer'>
                         {fragment.label}
                     </a>
                 );
@@ -194,7 +194,11 @@ const Messages = ({ messages, onCardMouseOver, onCardMouseOut }) => {
                 );
             } else {
                 let messageFragment = processKeywords(fragment.toString());
-                messages.push(<span className='message-fragment'>{messageFragment}</span>);
+                messages.push(
+                    <span key={index++} className='message-fragment'>
+                        {messageFragment}
+                    </span>
+                );
             }
         }
 

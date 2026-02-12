@@ -35,7 +35,13 @@ class TimeLimit {
                 moment().diff(this.timeLimitStartedAt)
             );
             if (differenceBetweenStartOfTimerAndNow.asSeconds() / 60 >= this.timeLimitInMinutes) {
-                this.game.addAlert('warning', '时间到.  游戏将在当前回合结束时结束');
+                this.game.addAlert(
+                    '警告',
+                    '时间到.  {0} 完成他的回合后, {1} 进行一个回合, 然后 {0} 进行最后一个造钥匙阶段. 如果没有玩家造三把钥匙，破平规则生效按顺序结算: 每个玩家使用6个琥珀制造钥匙 , 最多钥匙玩家胜利, 最多琥珀玩家胜利, 最少枷锁玩家胜利,最多友方生物玩家胜利, 否则先手玩家 -{2} - 获胜.',
+                    this.game.activePlayer,
+                    this.game.activePlayer.opponent ? this.game.activePlayer.opponent : null,
+                    this.game.firstPlayer
+                );
                 this.isTimeLimitReached = true;
                 this.timeLimitStarted = false;
                 this.game.timeExpired();

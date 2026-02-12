@@ -13,8 +13,7 @@ class Kaboom extends Card {
                 })),
                 ability.actions.gainChains({ amount: 3 })
             ]),
-            effect:
-                "将每个火星生物放如其所有者的档案，摧毁每个生物，并获得3枷锁."
+            effect:"将每个火星生物放如其所有者的档案，摧毁每个生物，并获得3枷锁."
         });
     }
 }

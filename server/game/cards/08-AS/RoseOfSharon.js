@@ -17,7 +17,7 @@ class RoseOfSharon extends Card {
                     cardType: 'creature',
                     controller: 'opponent',
                     gameAction: ability.actions.dealDamage((context) => ({
-                        amount: context.targets.neighbor ? context.targets.neighbor.getPower() : 0
+                        amount: context.targets.neighbor ? context.targets.neighbor.power : 0
                     }))
                 }
             },
@@ -35,15 +35,13 @@ class RoseOfSharon extends Card {
                         cardType: 'creature',
                         controller: 'opponent',
                         gameAction: ability.actions.dealDamage((context) => ({
-                            amount: context.targets.neighbor2
-                                ? context.targets.neighbor2.getPower()
-                                : 0
+                            amount: context.targets.neighbor2 ? context.targets.neighbor2.power : 0
                         }))
                     }
                 },
                 message: '{0} 使用 {1} 重复之前的效果造成 {3} 点伤害对 {4}',
                 messageArgs: (context) => [
-                    context.targets.neighbor2 ? context.targets.neighbor2.getPower() : 0,
+                    context.targets.neighbor2 ? context.targets.neighbor2.power : 0,
                     context.targets.enemy2
                 ]
             }

@@ -11,7 +11,8 @@ class SpanglerBox extends Card {
                     onCardLeavesPlay: (event, context) => event.card === context.source
                 },
                 gameAction: ability.actions.sequentialPutIntoPlay((context) => ({
-                    forEach: context.event.clone.clonedPurgedCards
+                    forEach: context.event.clone.clonedPurgedCards,
+                    numPlayAllowances: context.event.clone.clonedPurgedCards.length
                 })),
                 message: '{0} 将所有被 {1} 清除的生物放置入场',
                 messageArgs: (context) => [context.game.activePlayer, context.source]

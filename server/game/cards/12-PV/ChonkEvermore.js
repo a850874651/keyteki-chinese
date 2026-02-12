@@ -5,20 +5,34 @@ class ChonkEvermore extends Card {
     // Fate: Give each enemy creature two +1 power counters.
     setupCardAbilities(ability) {
         this.play({
-            target: {
-                cardType: 'creature',
-                mode: 'upTo',
-                numCards: 2,
-                gameAction: ability.actions.addPowerCounter()
+            targets: {
+                select: {
+                    mode: 'select',
+                    activePromptTitle:
+                        'Give two creatures a +1 power counter before doubling power counters?',
+                    choices: {
+                        'Add power counters': () => true,
+                        Continue: () => true
+                    }
+                },
+                'Add power counters': {
+                    cardType: 'creature',
+                    dependsOn: 'select',
+                    gameAction: ability.actions.addPowerCounter(),
+                    mode: 'exactly',
+                    numCards: 2
+                }
             },
             then: {
                 alwaysTriggers: true,
                 gameAction: ability.actions.addPowerCounter((context) => ({
-                    target: context.game.creaturesInPlay.filter((card) => !!card.tokens.power),
+                    target: context.game.creaturesInPlay.filter((card) => card.powerCounters),
                     multiplier: 2
                 })),
-                message: '{0} 使用 {1} 翻倍了每个生物上的+1力量指示物数量',
-                messageArgs: (context) => [context.player, context.source]
+                message: '{0} 使用 {1} 翻倍了每个生物上的+1力量指示物数量在 {3}上',
+                messageArgs: (context) => [
+                    context.game.creaturesInPlay.filter((card) => card.powerCounters)
+                ]
             }
         });
 

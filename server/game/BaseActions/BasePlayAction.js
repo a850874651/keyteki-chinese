@@ -19,7 +19,7 @@ class BasePlayAction extends BaseAbility {
         context.game.addMessage('{0} 打出了 {1}', context.player, context.source);
     }
 
-    meetsRequirements(context = this.createContext(), ignoredRequirements = []) {
+    meetsRequirements(context = this.createContext(), ignoredRequirements) {
         if (
             !ignoredRequirements.includes('location') &&
             !context.player.isCardInPlayableLocation(context.source, 'play')
@@ -33,7 +33,7 @@ class BasePlayAction extends BaseAbility {
             return 'cannotTrigger';
         }
 
-        return super.meetsRequirements(context);
+        return super.meetsRequirements(context, ignoredRequirements);
     }
 
     createContext(player = this.card.controller) {

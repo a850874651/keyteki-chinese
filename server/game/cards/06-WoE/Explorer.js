@@ -8,13 +8,18 @@ class Explorer extends Card {
             gameAction: ability.actions.discard((context) => ({
                 promptWithHandlerMenu: {
                     optional: true,
-                    activePromptTitle: 'Select card to discard',
+                    activePromptTitle: 'Select a card to discard',
                     cards: [context.player.deck[0]],
                     choices: ['Leave on top of deck'],
                     handlers: [() => []]
                 }
             })),
-            message: '选择保持或弃掉牌库顶的牌'
+            effect: '查看牌库顶的牌',
+            then: {
+                alwaysTriggers: true,
+                condition: (context) => !context.preThenEvent || context.preThenEvent.cancelled,
+                message: '{0} 使用 {1} 来保持牌在牌库顶'
+            }
         });
     }
 }

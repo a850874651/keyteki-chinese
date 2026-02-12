@@ -7,12 +7,17 @@ class Knightapult extends Card {
             effect: '本回合下1个入场的友方生物可以从战线的任意位置入场，并重整',
             gameAction: [
                 ability.actions.lastingEffect({
+                    target: {
+                        cardType: 'creature',
+                        controller: 'self'
+                    },
                     until: {
                         onCardEntersPlay: (event) =>
                             event.card.type === 'creature' &&
                             event.context.game.activePlayer === event.card.controller,
                         onTurnEnd: () => true
                     },
+                    match: (card) => card.type === 'creature',
                     multipleTrigger: false,
                     effect: [ability.effects.enterPlayAnywhere(), ability.effects.entersPlayReady()]
                 })

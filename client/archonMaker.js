@@ -1,7 +1,15 @@
-import { fabric } from 'fabric';
+import * as fabricModule from 'fabric';
+
+const fabric = fabricModule.fabric ?? fabricModule.default ?? fabricModule;
 import QRCode from 'qrcode';
 
 import { Constants } from './constants';
+
+const imageAssets = import.meta.glob('./assets/img/**/*.{png,jpg,jpeg,svg}', {
+    eager: true,
+    import: 'default'
+});
+const imageUrl = (path) => imageAssets[`./assets/img/${path}`];
 
 const EnhancementBaseImages = {};
 const HouseIcons = {};
@@ -14,6 +22,7 @@ const DeckCards = { halfSize: {}, cards: {} };
 const MaverickHouseImages = {};
 const MaverickHouseAmberImages = {};
 const EnhancementPipImages = {};
+const AccoladeImages = {};
 let AnomalyIcon;
 let DeckListIcon;
 let MaverickIcon;
@@ -22,6 +31,7 @@ let DefaultCard;
 let MaverickCornerImage;
 let Tokens = {};
 let cacheLoaded = false;
+let cachePromise;
 let Rarities = {};
 
 const imgOptions = {
@@ -30,7 +40,7 @@ const imgOptions = {
     hasBorders: false,
     hasRotatingPoint: false,
     noScaleCache: false,
-    objectCaching: false
+    objectCaching: true
 };
 const fontProps = {
     fontWeight: 600,
@@ -38,7 +48,7 @@ const fontProps = {
     textAlign: 'left',
     fontSize: 10,
     enableRetinaScaling: true,
-    objectCaching: false,
+    objectCaching: true,
     noScaleCache: false,
     selectable: false,
     hasControls: false,
@@ -71,11 +81,46 @@ const gigantic2s = [
     'horizon-saber2'
 ];
 
+const skybeasts = [
+    'akugyo',
+    'alien-puffer',
+    'anvil-crawler',
+    'beehemoth',
+    'blue-æmberdrake',
+    'colossipede',
+    'falcron',
+    'grinder-swarm',
+    'grizzled-wyvern',
+    'hungry-hippogriff',
+    'icarus-20',
+    'impzilla',
+    'lancet',
+    'malifi-dragon',
+    'naja',
+    'red-æmberdrake',
+    'rorqual',
+    'screeyan',
+    'sentient-cloud',
+    'titanarpon',
+    'tyrannus-aquilae',
+    'volax',
+    'yellow-æmberdrake'
+];
+
 // The MV API doesn't provide proper per-house images for these cards.
-const houselessCards = ['build-your-champion', 'digging-up-the-monster', 'tomes-gigantic'];
+const houselessCards = [
+    'build-your-champion',
+    'digging-up-the-monster',
+    'tomes-gigantica',
+    ...skybeasts
+];
 
 export const loadImage = (url) => {
     return new Promise((resolve) => {
+        if (!url) {
+            resolve(new fabric.Image());
+            return;
+        }
         fabric.util.loadImage(url, async (image) => {
             if (image) {
                 resolve(new fabric.Image(image, imgOptions));
@@ -98,67 +143,90 @@ export const loadImage = (url) => {
     });
 };
 
+const initCanvas = (canvas) => {
+    canvas.renderOnAddRemove = false;
+};
+
 async function cacheImages() {
-    for (let [house, path] of Object.entries(Constants.HouseIconPaths)) {
-        await loadImage(path).then((image) => {
-            HouseIcons[house] = image;
-        });
+    if (cacheLoaded) {
+        return;
     }
 
-    for (let [type, path] of Object.entries(Constants.CardTypesPaths)) {
-        await loadImage(path).then((image) => {
-            CardTypesIcons[type] = image;
-        });
+    if (cachePromise) {
+        return cachePromise;
     }
 
-    for (let [house, path] of Object.entries(Constants.IdBackHousePaths)) {
-        await loadImage(path).then((image) => {
-            IdBackHouseIcons[house] = image;
-        });
-    }
+    const loadEntries = async (entries, target) =>
+        Promise.all(
+            entries.map(async ([key, path]) => {
+                target[key] = await loadImage(path);
+            })
+        );
 
-    for (let [x, path] of Object.entries(Constants.IdBackBlanksPaths)) {
-        await loadImage(path).then((image) => {
-            IdBackBlanksIcons[x] = image;
-        });
-    }
+    cachePromise = (async () => {
+        await Promise.all([
+            loadEntries(Object.entries(Constants.HouseIconPaths), HouseIcons),
+            loadEntries(Object.entries(Constants.CardTypesPaths), CardTypesIcons),
+            loadEntries(Object.entries(Constants.IdBackHousePaths), IdBackHouseIcons),
+            loadEntries(Object.entries(Constants.IdBackBlanksPaths), IdBackBlanksIcons),
+            loadEntries(Object.entries(Constants.SetIconPaths), SetIcons),
+            loadEntries(Object.entries(Constants.EnhancementBaseImages), EnhancementBaseImages),
+            loadEntries(Object.entries(Constants.EnhancementPips), EnhancementPipImages)
+        ]);
 
-    for (let [key, path] of Object.entries(Constants.SetIconPaths)) {
-        await loadImage(path).then((image) => {
-            SetIcons[key] = image;
-        });
-    }
+        const [
+            tcoIcon,
+            deckListIcon,
+            rarityCommon,
+            rarityRare,
+            raritySpecial,
+            rarityUncommon,
+            rarityEvilTwin,
+            rarityTide,
+            maverickIcon,
+            anomalyIcon,
+            defaultCard,
+            modifiedPowerToken,
+            armorToken,
+            cardBackDecalImage
+        ] = await Promise.all([
+            loadImage(imageUrl('idbacks/tco.png')),
+            loadImage(imageUrl('idbacks/decklist-h.png')),
+            loadImage(imageUrl('idbacks/Common.png')),
+            loadImage(imageUrl('idbacks/Rare.png')),
+            loadImage(imageUrl('idbacks/Special.png')),
+            loadImage(imageUrl('idbacks/Uncommon.png')),
+            loadImage(imageUrl('idbacks/evil-twin.png')),
+            loadImage(imageUrl('idbacks/tide.png')),
+            loadImage(Constants.MaverickIcon),
+            loadImage(Constants.AnomalyIcon),
+            loadImage(Constants.DefaultCard),
+            loadImage(Constants.Tokens.ModifiedPower),
+            loadImage(Constants.Tokens.Armor),
+            cardBackDecal ? loadImage(Constants.IdBackDecals[cardBackDecal]) : undefined
+        ]);
 
-    for (let [key, path] of Object.entries(Constants.EnhancementBaseImages)) {
-        await loadImage(path).then((image) => {
-            EnhancementBaseImages[key] = image;
-        });
-    }
+        if (cardBackDecal && cardBackDecalImage) {
+            IdBackDecals[cardBackDecal] = cardBackDecalImage;
+        }
 
-    for (let [key, path] of Object.entries(Constants.EnhancementPips)) {
-        await loadImage(path).then((image) => {
-            EnhancementPipImages[key] = image;
-        });
-    }
+        TCOIcon = tcoIcon;
+        DeckListIcon = deckListIcon;
+        Rarities.Common = rarityCommon;
+        Rarities.Token = Rarities.Rare = rarityRare;
+        Rarities.Special = raritySpecial;
+        Rarities.Uncommon = rarityUncommon;
+        Rarities['Evil Twin'] = rarityEvilTwin;
+        Rarities['The Tide'] = rarityTide;
+        MaverickIcon = maverickIcon;
+        AnomalyIcon = anomalyIcon;
+        DefaultCard = defaultCard;
+        Tokens.ModifiedPower = modifiedPowerToken;
+        Tokens.armor = armorToken;
+        cacheLoaded = true;
+    })();
 
-    if (cardBackDecal) {
-        IdBackDecals[cardBackDecal] = await loadImage(Constants.IdBackDecals[cardBackDecal]);
-    }
-
-    TCOIcon = await loadImage(require('./assets/img/idbacks/tco.png'));
-    DeckListIcon = await loadImage(require('./assets/img/idbacks/decklist-h.png'));
-    Rarities.Common = await loadImage(require('./assets/img/idbacks/Common.png'));
-    Rarities.Token = Rarities.Rare = await loadImage(require('./assets/img/idbacks/Rare.png'));
-    Rarities.Special = await loadImage(require('./assets/img/idbacks/Special.png'));
-    Rarities.Uncommon = await loadImage(require('./assets/img/idbacks/Uncommon.png'));
-    Rarities['Evil Twin'] = await loadImage(require('./assets/img/idbacks/evil-twin.png'));
-    Rarities['The Tide'] = await loadImage(require('./assets/img/idbacks/tide.png'));
-    MaverickIcon = await loadImage(Constants.MaverickIcon);
-    AnomalyIcon = await loadImage(Constants.AnomalyIcon);
-    DefaultCard = await loadImage(Constants.DefaultCard);
-    Tokens.ModifiedPower = await loadImage(Constants.Tokens.ModifiedPower);
-    Tokens.armor = await loadImage(Constants.Tokens.Armor);
-    cacheLoaded = true;
+    return cachePromise;
 }
 
 const cardData = {
@@ -285,10 +353,18 @@ const placeCardCompact = (canvas, card, language, x, y) => {
     canvas.add(number, title, rarity, typeIcon);
 };
 
-export const buildDeckList = async (canvas, deck, language, translate, size) => {
+export const buildDeckList = async (
+    canvas,
+    deck,
+    language,
+    translate,
+    size,
+    showAccolades = true
+) => {
     if (!cacheLoaded) {
         await cacheImages();
     }
+    initCanvas(canvas);
     const width = 840;
     const order = ['action', 'artifact', 'creature', 'upgrade'];
 
@@ -375,6 +451,20 @@ export const buildDeckList = async (canvas, deck, language, translate, size) => 
     text.set({ left: 210, top: 72 });
     canvas.add(DeckListIcon, line1, line2, line3, QRCodeIcon, expansion, text, TCO);
 
+    const accoladePromises = [];
+    if (showAccolades && deck.accolades?.length > 0) {
+        const shownAccolades = deck.accolades.filter((a) => a.shown);
+        for (const accolade of shownAccolades) {
+            if (!AccoladeImages[accolade.image]) {
+                accoladePromises.push(
+                    loadImage(accolade.image).then((img) => {
+                        AccoladeImages[accolade.image] = img;
+                    })
+                );
+            }
+        }
+    }
+
     let name;
     try {
         name = new fabric.Textbox(deck.name, {
@@ -395,7 +485,7 @@ export const buildDeckList = async (canvas, deck, language, translate, size) => 
         canvas.add(name);
     }
 
-    for (const [index, house] of deck.houses.sort().entries()) {
+    for (const [index, house] of [...deck.houses].sort().entries()) {
         const houseImage = new fabric.Image(HouseIcons[house].toCanvasElement(), imgOptions);
         houseImage
             .set({
@@ -440,7 +530,10 @@ export const buildDeckList = async (canvas, deck, language, translate, size) => 
     cardList
         .sort((a, b) => +a.number - +b.number)
         .sort((a, b) => order.indexOf(a.type) - order.indexOf(b.type))
-        .sort((a, b) => deck.houses.sort().indexOf(a.house) - deck.houses.sort().indexOf(b.house));
+        .sort(
+            (a, b) =>
+                [...deck.houses].sort().indexOf(a.house) - [...deck.houses].sort().indexOf(b.house)
+        );
     for (const [index, card] of cardList.entries()) {
         let x = cardData.start.x,
             y = cardData.start.y + index * 28;
@@ -460,6 +553,50 @@ export const buildDeckList = async (canvas, deck, language, translate, size) => 
         canvas.renderAll();
     }
 
+    if (showAccolades && deck.accolades?.length > 0) {
+        const shownAccolades = deck.accolades.filter((a) => a.shown);
+        if (shownAccolades.length === 0) {
+            applyFilters(canvas, size, width);
+            return;
+        }
+
+        const accoladeSize = 50;
+        const accoladesToShow = shownAccolades.slice(0, 4);
+        const spacing = 8;
+        const startX = 450;
+        const accoladeY = 35;
+
+        const promisesToWait = [];
+        for (const accolade of accoladesToShow) {
+            if (!AccoladeImages[accolade.image]) {
+                promisesToWait.push(
+                    loadImage(accolade.image).then((img) => {
+                        AccoladeImages[accolade.image] = img;
+                    })
+                );
+            }
+        }
+
+        if (promisesToWait.length > 0) {
+            await Promise.all(promisesToWait);
+        }
+
+        for (const [index, accolade] of accoladesToShow.entries()) {
+            const accoladeImage = new fabric.Image(
+                AccoladeImages[accolade.image].toCanvasElement(),
+                imgOptions
+            );
+            accoladeImage.scaleToWidth(accoladeSize);
+            accoladeImage.scaleToHeight(accoladeSize);
+            accoladeImage.set({
+                left: startX + index * (accoladeSize + spacing),
+                top: accoladeY,
+                shadow: new fabric.Shadow(shadowProps)
+            });
+            canvas.add(accoladeImage);
+        }
+    }
+
     applyFilters(canvas, size, width);
 };
 
@@ -473,6 +610,7 @@ export const buildCardBack = async (canvas, deck, size, showDeckName) => {
     if (!cacheLoaded) {
         await cacheImages();
     }
+    initCanvas(canvas);
     const width = 300;
     const height = 420;
 
@@ -564,12 +702,14 @@ export const buildCard = async (
         halfSize,
         modifiedPower,
         tokens = {},
+        showAccolades = true,
         ...card
     }
 ) => {
     if (!cacheLoaded) {
         await cacheImages();
     }
+    initCanvas(canvas);
     const tokenFontProps = {
         ...fontProps,
         fill: '#fdfbfa',
@@ -670,11 +810,49 @@ export const buildCard = async (
             canvas.add(pipImage);
         }
     }
+    if (showAccolades && card.accolades?.length > 0 && !halfSize && card.location === 'zoom') {
+        const shownAccolades = card.accolades.filter((a) => a.shown);
+        if (shownAccolades.length === 0) {
+            return canvas;
+        }
+
+        const accoladeSize = 40;
+        const accoladesToShow = shownAccolades.slice(0, 3);
+        const spacing = 55;
+
+        let accoladeX = 235;
+        let startY = 65;
+        if (card.type === 'prophecy') {
+            accoladeX = 255;
+            startY = 10;
+        } else if (card.type === 'creature' || card.type === 'action') {
+            startY = 25;
+        } else if (card.type === 'upgrade') {
+            startY = 200;
+        }
+
+        for (const [index, accolade] of accoladesToShow.entries()) {
+            if (!AccoladeImages[accolade.image]) {
+                AccoladeImages[accolade.image] = await loadImage(accolade.image);
+            }
+            const accoladeImage = new fabric.Image(
+                AccoladeImages[accolade.image].toCanvasElement(),
+                imgOptions
+            );
+            accoladeImage.scaleToWidth(accoladeSize);
+            accoladeImage.set({
+                left: accoladeX,
+                top: startY + index * spacing,
+                shadow: new fabric.Shadow(shadowProps)
+            });
+            canvas.add(accoladeImage);
+        }
+    }
     if (card.location === 'play area') {
         if (card.type === 'creature') {
             //dynamic power overlay
             let totalPower = modifiedPower - (tokens.power ? tokens.power : 0);
-            if (modifiedPower && totalPower !== card.printedPower) {
+            if (modifiedPower && totalPower !== card.powerPrinted) {
                 const modifiedPowerToken = new fabric.Image(
                     Tokens.ModifiedPower.toCanvasElement(),
                     imgOptions
@@ -703,7 +881,7 @@ export const buildCard = async (
                 canvas.add(powerText);
             }
             //armor overlay
-            if (tokens.armor || card.printedArmor) {
+            if (tokens.armor || card.armorPrinted) {
                 const modifiedArmorToken = new fabric.Image(
                     Tokens.armor.toCanvasElement(),
                     imgOptions
@@ -740,7 +918,7 @@ export const buildCard = async (
         if (tokens) {
             for (const [index, { name, count, fade, showValue }] of printTokens.entries()) {
                 if (!Tokens[name]) {
-                    Tokens[name] = await loadImage(require(`./assets/img/${name}.png`));
+                    Tokens[name] = await loadImage(imageUrl(`${name}.png`));
                 }
 
                 const TokenImage = new fabric.Image(Tokens[name].toCanvasElement(), imgOptions);
@@ -784,6 +962,7 @@ const applyFilters = (canvas, size, width) => {
     canvas.renderAll();
     const scale = size ? (defaultCardWidth * getCardSizeMultiplier(size)) / width : 1;
     const finalImage = new fabric.Image(canvas.toCanvasElement(), imgOptions);
+    canvas.clear();
     finalImage.filters.push(
         new fabric.Image.filters.Resize({
             resizeType: 'lanczos',
@@ -792,7 +971,6 @@ const applyFilters = (canvas, size, width) => {
             scaleY: scale
         })
     );
-    canvas.clear();
     finalImage.applyFilters();
     finalImage.scaleToWidth(width);
     canvas.add(finalImage);

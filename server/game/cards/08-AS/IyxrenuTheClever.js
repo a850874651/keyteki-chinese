@@ -15,7 +15,7 @@ class IyxrenuTheClever extends Card {
             })),
             then: {
                 message: '{0} 使用 {1} 把所有 {3} 琥珀从 {2} 移至琥珀池',
-                messageArgs: (context) => [context.target.tokens.amber || 0],
+                messageArgs: (context) => [context.target.amber],
                 target: {
                     cardType: 'creature',
                     gameAction: ability.actions.returnAmber((context) => ({

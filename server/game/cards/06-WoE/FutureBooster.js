@@ -15,7 +15,16 @@ class FutureBooster extends Card {
                     handlers: [() => []]
                 }
             })),
-            effect: '选择保持留着牌库顶或放到牌库底.'
+            effect: '查看牌库顶的牌',
+            then: {
+                alwaysTriggers: true,
+                message: '{0} 使用 {1} 来将 {3}',
+                messageArgs: (context) => [
+                    context.preThenEvent && !context.preThenEvent.cancelled
+                        ? '移动到牌库底'
+                        : '保留在牌库顶'
+                ]
+            }
         });
     }
 }

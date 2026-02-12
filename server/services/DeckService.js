@@ -223,6 +223,38 @@ class DeckService {
             dbExpansions.push(800);
         }
 
+        if (expansions.toc) {
+            dbExpansions.push(855);
+        }
+
+        if (expansions.momu) {
+            dbExpansions.push(874);
+        }
+
+        if (expansions.disc) {
+            dbExpansions.push(907);
+        }
+
+        if (expansions.vm2023) {
+            dbExpansions.push(609);
+        }
+
+        if (expansions.vm2024) {
+            dbExpansions.push(737);
+        }
+
+        if (expansions.vm2025) {
+            dbExpansions.push(939);
+        }
+
+        if (expansions.pv) {
+            dbExpansions.push(886);
+        }
+
+        if (expansions.cc) {
+            dbExpansions.push(918);
+        }
+
         let deck;
         let expansionStr = dbExpansions.join(',');
         try {
@@ -246,11 +278,14 @@ class DeckService {
         return retDeck;
     }
 
-    async getNumDecksForUser(user, options) {
+    async getNumDecksForUser(
+        user,
+        options = { page: 1, pageSize: 10, sort: 'lastUpdated', sortDir: 'desc', filter: [] }
+    ) {
         let ret;
         let params = [user.id];
         let index = 2;
-        const filter = this.processFilter(index, params, options.filter);
+        const filter = this.processFilter(index, params, options?.filter);
 
         try {
             ret = await db.query(
@@ -285,16 +320,30 @@ class DeckService {
     }
 
     processFilter(index, params, filterOptions) {
+        if (typeof filterOptions === 'string') {
+            try {
+                filterOptions = JSON.parse(filterOptions);
+            } catch (error) {
+                filterOptions = [];
+            }
+        }
         let filter = '';
 
         for (let filterObject of filterOptions || []) {
             if (filterObject.name === 'expansion') {
+                if (!filterObject.value || filterObject.value.length === 0) {
+                    continue;
+                }
                 filter += `AND ${this.mapColumn(filterObject.name)} IN ${expand(
                     1,
                     filterObject.value.length,
                     index
                 )} `;
-                params.push(...filterObject.value.map((v) => v.value));
+                params.push(
+                    ...filterObject.value.map((v) =>
+                        typeof v === 'object' && v !== null ? v.value : v
+                    )
+                );
                 index += filterObject.value.length;
             } else if (filterObject.name === 'isAlliance') {
                 filter += `AND ${this.mapColumn(filterObject.name)} = $${index++} `;
@@ -462,6 +511,19 @@ class DeckService {
             [deck.id]
         );
         deck.houses = houses.map((house) => house.Code);
+
+        if (!standalone) {
+            let accolades = await db.query(
+                'SELECT * FROM "DeckAccolades" WHERE "DeckId" = $1 ORDER BY "Id"',
+                [deck.id]
+            );
+            deck.accolades = accolades.map((a) => ({
+                id: a.AccoladeId,
+                name: a.Name,
+                image: a.ImageUrl,
+                shown: a.Shown
+            }));
+        }
 
         deck.isStandalone = standalone;
     }
@@ -671,7 +733,7 @@ class DeckService {
                         deck.uuid,
                         deck.identity,
                         deck.name,
-                        false,
+                        !deck.isAlliance,
                         deck.lastUpdated,
                         deck.expansion,
                         deck.isAlliance
@@ -747,6 +809,22 @@ class DeckService {
                     '($1, (SELECT "Id" FROM "Houses" WHERE "Code" = $3)), ($1, (SELECT "Id" FROM "Houses" WHERE "Code" = $4))',
                 flatten([deck.id, deck.houses])
             );
+
+            if (user && deck.accolades && deck.accolades.length > 0) {
+                let accoladeParams = [];
+                for (let i = 0; i < deck.accolades.length; i++) {
+                    const accolade = deck.accolades[i];
+                    const shown = i < 3;
+                    accoladeParams.push(deck.id, accolade.id, accolade.name, accolade.image, shown);
+                }
+                await db.query(
+                    `INSERT INTO "DeckAccolades" ("DeckId", "AccoladeId", "Name", "ImageUrl", "Shown") VALUES ${expand(
+                        deck.accolades.length,
+                        5
+                    )}`,
+                    accoladeParams
+                );
+            }
 
             await db.query('COMMIT');
         } catch (err) {
@@ -895,7 +973,7 @@ class DeckService {
                 'dark-æmber-vault': true,
                 'build-your-champion': true,
                 'digging-up-the-monster': true,
-                'tomes-gigantic': true
+                'tomes-gigantica': true
             },
             886: {
                 'avenging-aura': true,
@@ -1076,6 +1154,10 @@ class DeckService {
             return undefined;
         }
 
+        const accolades = (deckResponse._linked.accolades || [])
+            .filter((a) => a.visible)
+            .map((a) => ({ id: a.id, name: a.name, image: a.image }));
+
         return {
             expansion: deckResponse.data.expansion,
             username: username,
@@ -1090,8 +1172,120 @@ class DeckService {
                 house.replace(' ', '').toLowerCase()
             ),
             cards: cards,
+            accolades: accolades,
             lastUpdated: new Date()
         };
+    }
+
+    async refreshAccolades(deckId, user) {
+        const deck = await this.getById(deckId);
+        if (!deck) {
+            throw new Error('Deck not found');
+        }
+
+        if (deck.username !== user.username) {
+            throw new Error('Unauthorized');
+        }
+
+        let deckResponse;
+        try {
+            let response = await util.httpRequest(
+                `https://www.keyforgegame.com/api/decks/${deck.uuid}/?links=cards`
+            );
+
+            if (response[0] === '<') {
+                logger.error('Failed to refresh accolades: %s %s', deck.uuid, response);
+                throw new Error('Invalid response from API. Please try again later.');
+            }
+
+            deckResponse = JSON.parse(response);
+        } catch (error) {
+            logger.error(`Unable to refresh accolades for deck ${deck.uuid}`, error);
+            throw new Error('Invalid response from API. Please try again later.');
+        }
+
+        if (!deckResponse || !deckResponse._linked || !deckResponse.data) {
+            throw new Error('Invalid response from API. Please try again later.');
+        }
+
+        const accolades = (deckResponse._linked.accolades || [])
+            .filter((a) => a.visible)
+            .map((a) => ({ id: a.id, name: a.name, image: a.image }));
+
+        const existingAccolades = await db.query(
+            'SELECT "AccoladeId", "Shown" FROM "DeckAccolades" WHERE "DeckId" = $1',
+            [deckId]
+        );
+        const shownMap = {};
+        for (const existing of existingAccolades) {
+            shownMap[existing.AccoladeId] = existing.Shown;
+        }
+
+        const resultShownMap = {};
+        await db.query('BEGIN');
+        try {
+            await db.query('DELETE FROM "DeckAccolades" WHERE "DeckId" = $1', [deckId]);
+
+            if (accolades.length > 0) {
+                let shownCount = 0;
+                let accoladeParams = [];
+                for (const accolade of accolades) {
+                    let shown = shownMap[accolade.id];
+                    if (shown === undefined) {
+                        shown = shownCount < 3;
+                        if (shown) {
+                            shownCount++;
+                        }
+                    }
+                    resultShownMap[accolade.id] = shown;
+                    accoladeParams.push(deckId, accolade.id, accolade.name, accolade.image, shown);
+                }
+                await db.query(
+                    `INSERT INTO "DeckAccolades" ("DeckId", "AccoladeId", "Name", "ImageUrl", "Shown") VALUES ${expand(
+                        accolades.length,
+                        5
+                    )}`,
+                    accoladeParams
+                );
+            }
+
+            await db.query('COMMIT');
+        } catch (err) {
+            await db.query('ROLLBACK');
+            logger.error('Failed to refresh accolades', err);
+            throw new Error('Failed to update accolades in database');
+        }
+
+        return accolades.map((a) => ({
+            ...a,
+            shown: resultShownMap[a.id] || false
+        }));
+    }
+
+    async updateAccoladeShown(deckId, accoladeId, shown, user) {
+        const deck = await this.getById(deckId);
+        if (!deck) {
+            throw new Error('Deck not found');
+        }
+
+        if (deck.username !== user.username) {
+            throw new Error('Unauthorized');
+        }
+
+        if (shown) {
+            const shownCount = await db.query(
+                'SELECT COUNT(*) as count FROM "DeckAccolades" WHERE "DeckId" = $1 AND "Shown" = true',
+                [deckId]
+            );
+            if (shownCount[0].count >= 3) {
+                throw new Error('Maximum of 3 accolades can be shown');
+            }
+        }
+
+        await db.query(
+            'UPDATE "DeckAccolades" SET "Shown" = $1 WHERE "DeckId" = $2 AND "AccoladeId" = $3',
+            [shown, deckId, accoladeId]
+        );
     }
 
     mapDeck(deck) {

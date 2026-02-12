@@ -10,7 +10,7 @@ class ForgeAction extends PlayerAction {
     setup() {
         super.setup();
         this.name = 'forgeKey';
-        if (this.keyColor !== '') {
+        if (this.keyColor) {
             this.effectMsg = '锻造了 ' + this.keyColor + ' 钥匙';
         } else {
             this.effectMsg = '锻造了1把钥匙';

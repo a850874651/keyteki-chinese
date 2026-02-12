@@ -5,32 +5,30 @@ class UntrumsSerenity extends Card {
     // Play: Destroy each creature and artifact. Each player discards their archives and their hand, then refills their hand as if it were their "draw cards" step.
     setupCardAbilities(ability) {
         this.play({
-            effect:
-                "摧毁所有生物和神器,弃掉 {1} 从其档案并弃掉 {2} 从其手中, 弃掉 {3} 从 {4} 的档案并弃掉 {5} 从 {4} 的手中, 所有玩家抽满手牌",
+            effect: "摧毁 {1}的生物 ({2}) 和神器 ({3}), 并 摧毁 {4}的生物 ({5}) 和 神器 ({6})",
             effectArgs: (context) => [
-                context.player.archives.length > 0 ? context.player.archives : 'nothing',
-                context.player.hand.length > 0 ? context.player.hand : 'nothing',
-                context.player.opponent && context.player.opponent.archives.length > 0
-                    ? context.player.opponent.archives
-                    : 'nothing',
+                context.player,
+                context.player.creaturesInPlay ? context.player.creaturesInPlay : 'none',
+                context.player.artifactsInPlay ? context.player.artifactsInPlay : 'none',
                 context.player.opponent,
-                context.player.opponent && context.player.opponent.hand.length > 0
-                    ? context.player.opponent.hand
-                    : 'nothing'
+                context.player.opponent.creaturesInPlay
+                    ? context.player.opponent.creaturesInPlay
+                    : 'none',
+                context.player.opponent.artifactsInPlay
+                    ? context.player.opponent.artifactsInPlay
+                    : 'none'
             ],
             gameAction: [
                 ability.actions.destroy((context) => ({
                     target: context.game.cardsInPlay
                 })),
-                ability.actions.discard((context) => ({
-                    target: context.player.archives.concat(
-                        context.player.opponent ? context.player.opponent.archives : []
-                    )
+                ability.actions.discardEntireLocation((context) => ({
+                    location: 'archives',
+                    target: [context.player, context.player.opponent]
                 })),
-                ability.actions.discard((context) => ({
-                    target: context.player.hand.concat(
-                        context.player.opponent ? context.player.opponent.hand : []
-                    )
+                ability.actions.discardEntireLocation((context) => ({
+                    location: 'hand',
+                    target: [context.player, context.player.opponent]
                 }))
             ],
             then: {

@@ -15,12 +15,8 @@ class DarkDiscovery extends Card {
                     activePromptTitle: 'Name the second card'
                 }
             },
-            effect: '宣言 {1} 和 {2} ，实际上弃掉了 {3}',
-            effectArgs: (context) => [
-                context.targets.firstCard,
-                context.targets.secondCard,
-                context.player.opponent.deck.slice(context.player.opponent.deck.length - 2)
-            ],
+            effect: '宣言 {1} 和 {2}',
+            effectArgs: (context) => [context.targets.firstCard, context.targets.secondCard],
             gameAction: ability.actions.discard((context) => ({
                 target: context.player.opponent.deck.slice(context.player.opponent.deck.length - 2)
             })),

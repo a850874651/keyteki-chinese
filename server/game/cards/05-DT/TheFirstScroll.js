@@ -8,10 +8,15 @@ class TheFirstScroll extends Card {
                 onForgeKey: () => true
             },
             effect: '每个其控制的生物从其控制者处抢占1琥珀',
+            preferActionPromptMessage: true,
             gameAction: ability.actions.capture((context) => ({
-                target: context.game.activePlayer.creaturesInPlay,
-                player: context.game.activePlayer
-            }))
+                target: context.event.player.creaturesInPlay,
+                player: context.event.player
+            })),
+            then: {
+                message: '{0} uses {1} to make {3} capture 1 amber from their side',
+                messageArgs: (context) => [context.preThenEvents.map((e) => e.card)]
+            }
         });
     }
 }

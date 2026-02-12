@@ -21,8 +21,7 @@ class ChancellorDexterus extends Card {
                     target: context.target
                 }))
             ],
-            effect:
-                '褒奖其右侧相邻生物并使其在本回合属于蜥族势力'
+            effect:'褒奖其右侧相邻生物并使其在本回合属于蜥族势力'
         });
     }
 }

@@ -7,8 +7,7 @@ class CornerTheMarket extends Card {
     setupCardAbilities(ability) {
         this.play({
             condition: (context) => !!context.player.opponent,
-            effect:
-                '下回合，{1} 无法打出卡牌， 每当 {1} 弃掉1张牌，可以归档那张牌',
+            effect:'下回合，{1} 无法打出卡牌， 每当 {1} 弃掉1张牌，可以归档那张牌',
             effectArgs: (context) => context.player.opponent,
             effectAlert: true,
             gameAction: [

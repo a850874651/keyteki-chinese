@@ -10,20 +10,23 @@ class TrojanSauropod extends Card {
         });
 
         this.omni({
-            effect:
-                "获得3琥珀, 展示对手的手牌 {1} 并打出其中的每个生物",
+            effect: "获得3琥珀, 展示对手的手牌 {1} 并打出其中的每个生物",
             effectArgs: (context) =>
                 context.player.opponent ? [context.player.opponent.hand] : [],
             gameAction: ability.actions.gainAmber({ amount: 3 }),
             then: {
                 condition: (context) => context.player.opponent,
-                gameAction: ability.actions.sequentialPutIntoPlay((context) => ({
-                    revealList: context.player.opponent.hand,
-                    forEach: context.player.opponent.hand.filter(
+                gameAction: ability.actions.sequentialPutIntoPlay((context) => {
+                    const creatures = context.player.opponent.hand.filter(
                         (card) => card.type === 'creature'
-                    ),
-                    ready: true
-                })),
+                    );
+                    return {
+                        revealList: context.player.opponent.hand,
+                        forEach: creatures,
+                        ready: true,
+                        numPlayAllowances: creatures.length
+                    };
+                }),
                 then: {
                     alwaysTriggers: true,
                     gameAction: [

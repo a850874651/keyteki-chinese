@@ -15,7 +15,7 @@ class Azuretooth extends Card {
                 }))
             },
             effect: '移动所有 {2} 琥珀从 {0} 到其琥珀池中并把 {0} 的控制权给 {1}',
-            effectArgs: (context) => [context.player.opponent, context.target.tokens.amber || 0],
+            effectArgs: (context) => [context.player.opponent, context.target.amber],
             then: (preThenContext) => ({
                 alwaysTriggers: true,
                 condition: (context) => !!context.player.opponent,

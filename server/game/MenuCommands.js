@@ -75,7 +75,7 @@ class MenuCommands {
                 card.removeToken('amber', 1);
                 break;
             case 'stun':
-                if (card.tokens.stun) {
+                if (card.stunned) {
                     game.addAlert('danger', '{0} 移除了 {1} 的击晕', player, card);
                     card.unstun();
                 } else {
@@ -84,7 +84,7 @@ class MenuCommands {
                 }
                 break;
             case 'enrage':
-                if (!card.tokens.enrage) {
+                if (!card.enraged) {
                     game.addAlert('danger', '{0} 给 {1} 添加了激怒', player, card);
                     card.addToken('enrage', 1);
                 } else {
@@ -93,11 +93,11 @@ class MenuCommands {
                 }
                 break;
             case 'ward':
-                if (!card.tokens.ward) {
-                    game.addAlert('danger', '{0} 给 {1} 添加了界户', player, card);
+                if (!card.warded) {
+                    game.addAlert('danger', '{0} 给 {1} 添加了界护', player, card);
                     card.addToken('ward', 1);
                 } else {
-                    game.addAlert('danger', '{0} 移除了 {1} 的界户', player, card);
+                    game.addAlert('danger', '{0} 移除了 {1} 的界护', player, card);
                     card.removeToken('ward', 1);
                 }
                 break;

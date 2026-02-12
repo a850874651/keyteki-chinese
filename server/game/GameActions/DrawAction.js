@@ -6,12 +6,29 @@ class DrawAction extends PlayerAction {
         this.amount = 1;
         this.refill = false;
         this.bonus = false;
+        this.effectMsg = null;
     }
 
     setup() {
         super.setup();
         this.name = 'draw';
-        this.effectMsg = '抽取 ' + this.amount + ' 张卡牌' + (this.amount > 1 ? '' : '');
+        this.customEffectMsg = this.effectMsg;
+        // Default effectMsg set here, may be updated in update() based on target
+        this.effectMsg = `抽取 ${this.amount} 张卡牌${this.amount > 1 ? 's' : ''}`;
+    }
+
+    update(context) {
+        this.effectMsg = null;
+        super.update(context);
+        // After target is set, update effectMsg based on whether target is opponent
+        if (!this.customEffectMsg && this.target.length > 0) {
+            const isOpponent = this.target.some((t) => t !== context.player);
+            if (isOpponent) {
+                this.effectMsg = `使 {0} 抽取 ${this.amount} 张卡牌${this.amount > 1 ? 's' : ''}`;
+            }
+        } else if (this.customEffectMsg) {
+            this.effectMsg = this.customEffectMsg;
+        }
     }
 
     canAffect(player, context) {
@@ -48,18 +65,12 @@ class DrawAction extends PlayerAction {
                 context: context
             },
             (event) => {
-                if (!this.bonus && event.amount > 0) {
-                    context.game.addMessage(
-                        '{0} 抽取了 {1} 张卡牌{2}{3}',
-                        player,
-                        amount,
-                        amount > 1 ? '' : '',
-                        refill ? ` 到上限 ${player.maxHandSize}` : ''
-                    );
-                }
-
                 if (event.amount > 0) {
-                    event.player.drawCardsToHand(amount);
+                    const logDraw = !this.bonus;
+                    const refillSuffix = refill
+                        ? ` 来补满手牌到 ${player.hand.length + amount} 张卡牌`
+                        : '';
+                    event.player.drawCardsToHand(amount, { logDraw, refillSuffix });
                 }
 
                 if (shedChains) {

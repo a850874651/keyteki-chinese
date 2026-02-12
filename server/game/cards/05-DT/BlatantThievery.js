@@ -10,7 +10,7 @@ class BlatantThievery extends Card {
                 gameAction: ability.actions.enrage()
             },
             effect: '激怒 {1} 并移动所有 {2} 琥珀从 {1} 到其琥珀池中',
-            effectArgs: (context) => [context.target, context.target.tokens.amber || 0],
+            effectArgs: (context) => [context.target, context.target.amber],
             then: {
                 alwaysTriggers: true,
                 gameAction: ability.actions.removeAmber((context) => ({
