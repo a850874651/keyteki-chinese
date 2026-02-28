@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useRef } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import * as fabricModule from 'fabric';
@@ -6,8 +6,16 @@ import * as fabricModule from 'fabric';
 const fabric = fabricModule.fabric ?? fabricModule.default ?? fabricModule;
 import { buildCard } from '../../archonMaker';
 
-import './CardImage.scss';
+/**
+ * @typedef CardImageProps
+ * @property {object} card // The card data to render an image for
+ * @property {string} [cardBack] // The card back image to show if not showing the card image
+ */
 
+/**
+ *
+ * @param {CardImageProps} props
+ */
 const CardImage = ({ card, cardBack, size, halfSize, onMouseOver, onMouseOut }) => {
     const { i18n } = useTranslation();
     const fabricRef = useRef();

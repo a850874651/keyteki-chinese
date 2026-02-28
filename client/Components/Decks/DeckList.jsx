@@ -280,7 +280,7 @@ const DeckList = ({
                 </div>
             ) : null}
 
-            <div className='min-h-0 flex-1'>
+            <div className='min-h-0 flex-1 min-h-[200px]'>
                 <ReactTable
                     buttons={tableButtons}
                     fillHeight

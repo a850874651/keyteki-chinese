@@ -1325,7 +1325,7 @@ pre {
 
 .reference-card-pane .prophecy-player-section {
   display: flex;
-  flex-direction: column;
+  /* flex-direction: column; */ /*卡牌*/
   align-items: center;
   margin-bottom: 20px;
 }
