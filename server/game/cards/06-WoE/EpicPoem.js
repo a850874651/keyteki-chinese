@@ -16,7 +16,7 @@ class EpicPoem extends Card {
                 ])
             },
             effect: '褒奖 {0} 并获得 {1} 琥珀',
-            effectArgs: (context) => [context.target.amber + 1]
+            effectArgs: (context) => [context.target ? context.target.amber + 1 : 0]
         });
     }
 }

@@ -27,6 +27,7 @@ import { Constants } from '../../constants';
  */
 const DeckList = ({
     deckFilter,
+    hideActionButtons = false,
     onDeckSelected,
     onDeleteDecks,
     onImportDeck,
@@ -60,14 +61,14 @@ const DeckList = ({
     );
     const nameFilterValue = useRef('');
 
-    const { decks, selectedDeck } = useSelector((state) => ({
-        decks: standaloneDecks ? state.cards.standaloneDecks : state.cards.decks,
-        selectedDeck: standaloneDecks ? null : state.cards.selectedDeck
-    }));
-    const { authToken, refreshToken } = useSelector((state) => ({
-        authToken: state.auth.token,
-        refreshToken: state.auth.refreshToken
-    }));
+    const decks = useSelector((state) =>
+        standaloneDecks ? state.cards.standaloneDecks : state.cards.decks
+    );
+    const selectedDeck = useSelector((state) =>
+        standaloneDecks ? null : state.cards.selectedDeck
+    );
+    const authToken = useSelector((state) => state.auth.token);
+    const refreshToken = useSelector((state) => state.auth.refreshToken);
     const hasAuth = Boolean(authToken || refreshToken);
     const shouldUseRemoteDecks = !standaloneDecks && hasAuth;
     const useDecksQuery = (queryArgs) =>
@@ -82,10 +83,22 @@ const DeckList = ({
                 filters.push({ name: 'name', value: nameValue });
             }
 
-            if (expansionValues) {
+            const selectedExpansionValues = Array.isArray(expansionValues)
+                ? expansionValues.map((expansion) => expansion.value)
+                : [];
+            const allExpansionValues = Array.isArray(expansions)
+                ? expansions.map((expansion) => expansion.value)
+                : [];
+            const hasPartialExpansionFilter =
+                selectedExpansionValues.length > 0 &&
+                selectedExpansionValues.length < allExpansionValues.length;
+            const hasNoExpansionSelection =
+                Array.isArray(expansionValues) && expansionValues.length === 0;
+
+            if (hasPartialExpansionFilter || hasNoExpansionSelection) {
                 filters.push({
                     name: 'expansion',
-                    value: expansionValues.map((expansion) => expansion.value)
+                    value: selectedExpansionValues
                 });
             }
 
@@ -95,7 +108,7 @@ const DeckList = ({
 
             return filters;
         },
-        [deckFilter, normalizeFilterEntry]
+        [deckFilter, expansions, normalizeFilterEntry]
     );
 
     const updateFilters = useMemo(
@@ -217,8 +230,44 @@ const DeckList = ({
         return baseColumns;
     }, [selectedDeck, standaloneDecks, t]);
 
+    const filteredDecks = useMemo(() => {
+        const localDecks = Array.isArray(decks) ? decks : [];
+
+        if (shouldUseRemoteDecks) {
+            return localDecks;
+        }
+
+        const filters = activeFilters || [];
+        if (filters.length === 0) {
+            return localDecks;
+        }
+
+        return localDecks.filter((deck) =>
+            filters.every((filter) => {
+                if (filter.name === 'expansion') {
+                    return (
+                        Array.isArray(filter.value) &&
+                        filter.value.map(String).includes(String(deck.expansion))
+                    );
+                }
+
+                if (filter.name === 'isAlliance') {
+                    return Boolean(deck.isAlliance) === Boolean(filter.value);
+                }
+
+                if (filter.name === 'name') {
+                    const deckName = (deck.name || '').toLowerCase();
+                    const expected = String(filter.value || '').toLowerCase();
+                    return deckName.includes(expected);
+                }
+
+                return true;
+            })
+        );
+    }, [activeFilters, decks, shouldUseRemoteDecks]);
+
     const tableButtons = useMemo(() => {
-        if (standaloneDecks) {
+        if (standaloneDecks || hideActionButtons) {
             return [];
         }
 
@@ -249,6 +298,7 @@ const DeckList = ({
         onImportDeck,
         onNavigateAllianceDeck,
         selectedDeckCount,
+        hideActionButtons,
         standaloneDecks,
         t
     ]);
@@ -285,7 +335,7 @@ const DeckList = ({
                     buttons={tableButtons}
                     fillHeight
                     columns={columns}
-                    data={decks}
+                    data={filteredDecks}
                     dataLoadFn={useDecksQuery}
                     dataLoadArg={
                         shouldUseRemoteDecks

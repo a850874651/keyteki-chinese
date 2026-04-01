@@ -2,7 +2,7 @@ const Card = require('../../Card.js');
 
 class CosmicRecompense extends Card {
     // Play: Deal 3D to an enemy creature. If it is not destroyed, steal 1A. Repeat the preceding effect.
-    // Fate: You cannot play, use, or discard cards for the remainder of the turn.
+    // Fate: You cannot play cards for the remainder of the turn.
     setupCardAbilities(ability) {
         this.play({
             condition: (context) =>
@@ -48,14 +48,10 @@ class CosmicRecompense extends Card {
         });
 
         this.fate({
-            effect: '本回合剩余时间内无法打出，使用，弃掉卡牌',
+            effect: '本回合剩余时间内无法打出卡牌',
             gameAction: ability.actions.untilPlayerTurnEnd({
                 targetController: 'opponent',
-                effect: [
-                    ability.effects.playerCannot('play'),
-                    ability.effects.playerCannot('use'),
-                    ability.effects.playerCannot('discard')
-                ]
+                effect: ability.effects.playerCannot('play')
             })
         });
     }
