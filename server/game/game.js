@@ -75,6 +75,7 @@ class Game extends EventEmitter {
         this.savedGameId = details.savedGameId;
         this.showHand = details.showHand;
         this.started = false;
+        this.errorHandling = false;
         this.swap = details.swap;
         this.timeLimit = new TimeLimit(this);
         this.useGameTimeLimit = details.useGameTimeLimit;
@@ -1400,6 +1401,10 @@ class Game extends EventEmitter {
     playerKeys(player) {
         const length = Object.values(player.keys).filter((forged) => forged).length;
         return length === 1 ? '1 key' : `${length} keys`;
+    }
+
+    isKeyForged(color) {
+        return this.getPlayers().some((player) => player.keys[color]);
     }
 
     get cardsInPlay() {

@@ -17,9 +17,7 @@ class RedSkies extends Card {
             effect: '移动 {1} 到侧翼并重整它',
             effectArgs: (context) => [context.target],
             then: {
-                condition: (context) =>
-                    context.player.keys.red ||
-                    (context.player.opponent && context.player.opponent.keys.red),
+                condition: (context) => context.game.isKeyForged('red'),
                 alwaysTriggers: true,
                 target: {
                     controller: 'self',

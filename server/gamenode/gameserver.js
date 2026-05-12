@@ -159,33 +159,54 @@ class GameServer {
      * @param {Error} e
      */
     handleError(game, e) {
-        logger.error(e);
-
-        let gameState = game.getState();
-        let debugData = {};
-
-        if (e.message.includes('Maximum call stack')) {
-            debugData.badSerializaton = detectBinary(gameState);
-        } else {
-            debugData.game = gameState;
-            debugData.game.players = undefined;
-
-            debugData.messages = game.getPlainTextLog();
-            debugData.game.messages = undefined;
-
-            for (const player of game.getPlayers()) {
-                debugData[player.name] = player.getState(player);
-            }
+        if (game.errorHandling) {
+            logger.error('Error during error handling, suppressing to avoid loop:', e);
+            return;
         }
 
-        Sentry.withScope((scope) => {
-            scope.setExtra('extra', debugData);
-            Sentry.captureException(e);
-        });
-        if (game) {
-            game.addMessage(
-                '抱歉，在处理您的游戏时服务器发生了错误. 您的游戏或许进入了不正常的状态, 也许您可以继续. 错误已被记录.'
-            );
+        game.errorHandling = true;
+
+        try {
+            logger.error(e);
+
+            let debugData = /** @type {Record<string, any>} */ ({});
+
+            try {
+                let gameState = game.getState();
+
+                if (e.message.includes('Maximum call stack')) {
+                    debugData.badSerializaton = detectBinary(gameState);
+                } else {
+                    debugData.game = gameState;
+                    debugData.game.players = undefined;
+
+                    debugData.messages = game.getPlainTextLog();
+                    debugData.game.messages = undefined;
+
+                    for (const player of game.getPlayers()) {
+                        debugData[player.name] = player.getState(player);
+                    }
+                }
+            } catch (diagnosticError) {
+                logger.error('Failed to collect diagnostic data:', diagnosticError);
+            }
+
+            Sentry.withScope((scope) => {
+                scope.setExtra('extra', debugData);
+                Sentry.captureException(e);
+            });
+
+            try {
+                if (game) {
+                    game.addMessage(
+                        '抱歉，在处理您的游戏时服务器发生了错误. 您的游戏或许进入了不正常的状态, 也许您可以继续. 错误已被记录.'
+                    );
+                }
+            } catch (messageError) {
+                logger.error('Failed to add error message to game:', messageError);
+            }
+        } finally {
+            game.errorHandling = false;
         }
     }
 
@@ -232,7 +253,11 @@ class GameServer {
         } catch (e) {
             this.handleError(game, e);
 
-            this.sendGameState(game);
+            try {
+                this.sendGameState(game);
+            } catch (sendError) {
+                logger.error('Failed to send game state after error:', sendError);
+            }
         }
     }
 

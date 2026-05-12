@@ -12,7 +12,7 @@ class SecurityDetail extends Card {
                 }))
             },
             effect: '抢占 1 琥珀到 {1} 上',
-            effectArgs: (context) => [context.target.neighbors.concat(context.target)]
+            effectArgs: (context) => [context.target?.neighbors.concat(context.target) ?? []]
         });
     }
 }

@@ -9,6 +9,7 @@
     "scripts": {
         "mongod": "mongod --dbpath=/data --port 27017\n",
         "start": "node .",
+        "dev:db": "docker-compose up -d redis postgres",
         "dev:lobby": "NODE_APP_INSTANCE=node nodemon --inspect=0.0.0.0:9229 .",
         "dev:gamenode": "NODE_APP_INSTANCE=node nodemon --inspect=0.0.0.0:9229 server/gamenode",
         "fetchdata": "node server/scripts/fetchdata",
@@ -142,13 +143,13 @@
         "eslint": "^7.1.0",
         "eslint-plugin-react": "^7.20.0",
         "eslint-plugin-react-hooks": "^4.0.4",
-        "handlebars": "^4.7.6",
+        "handlebars": "^4.7.9",
         "nodemon": "^3.1.13",
         "nunjucks": "^3.2.2",
         "pegjs": "^0.10.0",
         "precss": "^4.0.0",
         "typescript": "^5.4.5",
-        "vite": "^7.3.1",
+        "vite": "^7.3.2",
         "vitest": "4.0.18"
     }
 }

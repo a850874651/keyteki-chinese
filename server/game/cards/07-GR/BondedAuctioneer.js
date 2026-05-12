@@ -7,7 +7,7 @@ class BondedAuctioneer extends Card {
     setupCardAbilities(ability) {
         this.reap({
             effect: '摧毁 {0} 并使 {1} 获得1琥珀',
-            effectArgs: (context) => [context.target.controller],
+            effectArgs: (context) => [context.target?.controller],
             target: {
                 cardType: 'artifact',
                 location: 'play area',

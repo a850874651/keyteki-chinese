@@ -17,9 +17,7 @@ class RecreationalJettison extends Card {
             effect: '从其手中弃掉 {1} 并结算其奖励图标',
             effectArgs: (context) => [context.target],
             then: {
-                condition: (context) =>
-                    context.player.keys.yellow ||
-                    (context.player.opponent && context.player.opponent.keys.yellow),
+                condition: (context) => context.game.isKeyForged('yellow'),
                 alwaysTriggers: true,
                 target: {
                     controller: 'self',

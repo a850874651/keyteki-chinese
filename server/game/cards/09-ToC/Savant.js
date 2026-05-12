@@ -18,7 +18,7 @@ class Savant extends Card {
                 })
             },
             effect: '将1张卡牌放到他的 {1}',
-            effectArgs: (context) => [context.target.location === 'archives' ? '手牌' : '档案']
+            effectArgs: (context) => [context.target?.location === 'archives' ? '手牌' : '档案']
         });
     }
 }

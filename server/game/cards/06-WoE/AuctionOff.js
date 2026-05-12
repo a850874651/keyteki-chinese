@@ -5,7 +5,7 @@ class AuctionOff extends Card {
     setupCardAbilities(ability) {
         this.play({
             effect: '清除 {0} 并使 {1} 获得1琥珀',
-            effectArgs: (context) => [context.target.controller],
+            effectArgs: (context) => [context.target?.controller],
             target: {
                 cardType: 'artifact',
                 location: 'play area',

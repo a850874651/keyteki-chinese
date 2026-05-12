@@ -9,8 +9,10 @@ class DiscardTopOfDeckAction extends PlayerAction {
     setup() {
         super.setup();
         this.name = 'discard-top-of-deck';
-        this.effectMsg =
-            '弃掉 ' + (this.amount === 1 ? '1张卡牌' : this.amount + ' 张卡牌') + ' 从 {0}的牌库顶';
+        const player = this.target[0];
+        const cards = player ? player.deck.slice(0, Math.min(this.amount, player.deck.length)) : [];
+        this.effectMsg = "弃掉 {1} 从 {0} 的牌库顶";
+        this.effectArgs = [cards.length > 0 ? cards : 'nothing'];
     }
 
     canAffect(player, context) {

@@ -30,3 +30,8 @@ keyteki-json-data
 *.bat
 # Sentry Config File
 .env.sentry-build-plugin
+
+bin/
+obj/
+.env.development
+tmp/

@@ -17,7 +17,7 @@ class CrepuscularRays extends Card {
                 ]
             },
             effect: '移动所有 {1} 琥珀从 {0} 到其池中并摧毁 {0}',
-            effectArgs: (context) => [context.target.amber]
+            effectArgs: (context) => [context.target?.amber ?? 0]
         });
     }
 }

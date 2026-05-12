@@ -20,34 +20,52 @@ class HarmonicPack extends Card {
                     }
                 }
             },
-            then: (preThenContext) => ({
-                alwaysTriggers: true,
-                gameAction: ability.actions.reveal((context) => ({
-                    target: _.shuffle(
-                        preThenContext.selects.player.choice === 'Mine'
-                            ? context.player.archives
-                            : context.player.opponent.archives
-                    )[0],
-                    chatMessage: true,
-                    location: 'archives'
-                })),
-                then: {
-                    gameAction: ability.actions.sequential([
-                        ability.actions.dealDamage({
-                            target: preThenContext.targets.creature,
-                            amount: 3
-                        }),
-                        ability.actions.discard((context) => ({
-                            target: context.preThenEvent.card
-                        }))
-                    ]),
-                    message: '{0} 使用 {1} 来 {3} 弃置 {4}',
-                    messageArgs: (context) => [
-                        preThenContext.targets.creature ? '造成额外3点伤害并 ' : '',
-                        context.preThenEvent.card
-                    ]
-                }
-            })
+            then: (preThenContext) => {
+                let damageEvents = [];
+                const dealtFullDamage = () =>
+                    damageEvents.some(
+                        (event) =>
+                            event.name === 'onDamageDealt' &&
+                            !event.cancelled &&
+                            event.amountApplied >= 2
+                    );
+                return {
+                    alwaysTriggers: true,
+                    gameAction: ability.actions.reveal((context) => {
+                        damageEvents = context.preThenEvents || [];
+                        return {
+                            target: _.shuffle(
+                                preThenContext.selects.player.choice === 'Mine'
+                                    ? context.player.archives
+                                    : context.player.opponent.archives
+                            )[0],
+                            chatMessage: true,
+                            location: 'archives'
+                        };
+                    }),
+                    then: {
+                        // Inner then only fires when the reveal succeeded (a card was revealed
+                        // from archives). The revealed card is always discarded; the additional
+                        // 3 damage is only dealt if the initial 2 damage was fully applied.
+                        gameAction: ability.actions.sequential([
+                            ability.actions.dealDamage(() => ({
+                                target: preThenContext.targets.creature,
+                                amount: dealtFullDamage() ? 3 : 0
+                            })),
+                            ability.actions.discard((context) => ({
+                                target: context.preThenEvent.card
+                            }))
+                        ]),
+                        message: '{0} 使用 {1} 来 {3} 弃置 {4}',
+                        messageArgs: (context) => [
+                            preThenContext.targets.creature && dealtFullDamage()
+                                ? `对 ${preThenContext.targets.creature.name} 造成额外3点伤害并 `
+                                : '',
+                            context.preThenEvent.card
+                        ]
+                    }
+                };
+            }
         });
     }
 }

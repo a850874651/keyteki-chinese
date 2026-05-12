@@ -8,12 +8,36 @@ class ResolveBonusIconsAction extends CardGameAction {
         this.effectMsg = '结算了 {0}的奖励图标';
     }
 
+    /**
+     * Build the AbilityContext used to resolve a single bonus icon.
+     *
+     * The source is a BonusIconSource (not a Card), so card-cannot rules
+     * that test the source's traits/type will not consider the bonus icon
+     * to be "dealt by" the card on which it appears.  The source's `name`
+     * still produces a useful chat label, and `controller` delegates to the
+     * underlying card so any consumer of context.source.controller works.
+     *
+     * AbilityContext and BonusIconSource are lazy-required here to avoid a
+     * load-time circular dependency between this file (loaded via
+     * GameActions/index) and GameObject (which requires GameActions).
+     */
+    bonusIconContext(context, card, icon, player) {
+        const AbilityContext = require('../AbilityContext');
+        const BonusIconSource = require('../BonusIconSource');
+
+        return new AbilityContext({
+            game: context.game,
+            player: player || context.player,
+            source: new BonusIconSource(context.game, card, icon)
+        });
+    }
+
     resolveIcon(context, event, icon) {
         switch (icon) {
             case 'amber':
                 context.game.actions
                     .gainAmber({ bonus: true })
-                    .resolve(context.player, context.game.getFrameworkContext(context.player));
+                    .resolve(context.player, this.bonusIconContext(context, event.card, icon));
                 context.game.addMessage(
                     '{0} 获得了1个琥珀，通过 {1}的奖励图标',
                     context.player,
@@ -23,7 +47,7 @@ class ResolveBonusIconsAction extends CardGameAction {
             case 'draw':
                 context.game.actions
                     .draw({ bonus: true })
-                    .resolve(context.player, context.game.getFrameworkContext(context.player));
+                    .resolve(context.player, this.bonusIconContext(context, event.card, icon));
                 context.game.addMessage(
                     '{0} 抽取了1张卡牌，通过 {1}的奖励图标',
                     context.player,
@@ -36,7 +60,7 @@ class ResolveBonusIconsAction extends CardGameAction {
                         .steal()
                         .resolve(
                             context.player.opponent,
-                            context.game.getFrameworkContext(context.player)
+                            this.bonusIconContext(context, event.card, icon)
                         );
                     context.game.addMessage(
                         '{0} 窃取了1个琥珀，通过 {1}的奖励图标',
@@ -59,7 +83,10 @@ class ResolveBonusIconsAction extends CardGameAction {
                         onSelect: (player, card) => {
                             context.game.actions
                                 .capture({ bonus: true })
-                                .resolve(card, context.game.getFrameworkContext(player));
+                                .resolve(
+                                    card,
+                                    this.bonusIconContext(context, event.card, icon, player)
+                                );
                             context.game.addMessage(
                                 '{0} 抢占了1个琥珀到 {1} 上，通过 {2}的奖励图标',
                                 player,
@@ -80,7 +107,10 @@ class ResolveBonusIconsAction extends CardGameAction {
                         onSelect: (player, card) => {
                             context.game.actions
                                 .dealDamage({ bonus: true })
-                                .resolve(card, context.game.getFrameworkContext(player));
+                                .resolve(
+                                    card,
+                                    this.bonusIconContext(context, event.card, icon, player)
+                                );
                             context.game.addMessage(
                                 '{0} 对 {1} 造成了1点伤害，通过 {2}的奖励图标',
                                 player,
@@ -102,9 +132,37 @@ class ResolveBonusIconsAction extends CardGameAction {
                         onSelect: (player, card) => {
                             context.game.actions
                                 .discard({ chatMessage: false })
-                                .resolve(card, context.game.getFrameworkContext(player));
+                                .resolve(
+                                    card,
+                                    this.bonusIconContext(context, event.card, icon, player)
+                                );
                             context.game.addMessage(
                                 '{0} 弃掉了 {1} ，通过 {2}的奖励图标',
+                                player,
+                                card,
+                                event.card
+                            );
+                            return true;
+                        }
+                    });
+                }
+                break;
+            case 'power':
+                if (context.game.creaturesInPlay.length > 0) {
+                    context.game.promptForSelect(context.game.activePlayer, {
+                        activePromptTitle:
+                            'Choose a creature to add a +1 power counter to due to bonus icon',
+                        source: event.card,
+                        cardType: 'creature',
+                        onSelect: (player, card) => {
+                            context.game.actions
+                                .addPowerCounter({ amount: 1 })
+                                .resolve(
+                                    card,
+                                    this.bonusIconContext(context, event.card, icon, player)
+                                );
+                            context.game.addMessage(
+                                "{0} adds a +1 power counter to {1} due to {2}'s bonus icon",
                                 player,
                                 card,
                                 event.card
@@ -120,7 +178,7 @@ class ResolveBonusIconsAction extends CardGameAction {
                         .makeTokenCreature()
                         .resolve(
                             context.player.deck[0],
-                            context.game.getFrameworkContext(context.player)
+                            this.bonusIconContext(context, event.card, icon)
                         );
                     context.game.addMessage(
                         '{0} 制造了一个代标生物，通过 {1}的奖励图标',

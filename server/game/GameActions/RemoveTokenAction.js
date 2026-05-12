@@ -58,12 +58,22 @@ class RemoveTokenAction extends CardGameAction {
                         choices: Array.from(Array(event.amount + 1), (x, i) => i.toString()),
                         choiceHandler: (choice) => {
                             event.amount = parseInt(choice);
+                            let tokenLabel;
+                            if (this.type === 'amber') {
+                                tokenLabel = 'amber';
+                            } else if (this.type === 'power') {
+                                tokenLabel =
+                                    event.amount === 1 ? '+1 power counter' : '+1 power counters';
+                            } else {
+                                tokenLabel = event.amount === 1 ? this.type : `${this.type}s`;
+                            }
                             context.game.addMessage(
-                                '{0} 移除了 {1} 的指示物 {2} 个，通过 {3}的能力',
+                                '{0} 使用 {1} 来移除 {2} {3} 从 {4}',
                                 context.player,
-                                event.card,
+                                context.source,
                                 choice,
-                                context.source
+                                tokenLabel,
+                                event.card
                             );
                             card.removeToken(event.type, event.amount);
                         }
