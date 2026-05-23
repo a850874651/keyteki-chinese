@@ -11,12 +11,15 @@ class SwapWidget extends Card {
                 gameAction: ability.actions.returnToHand()
             },
             then: (preThenContext) => ({
+                condition: () => !!preThenContext.target,
                 target: {
                     cardType: 'creature',
                     controller: 'self',
                     location: 'hand',
                     cardCondition: (card) =>
-                        card.hasHouse('mars') && card.name !== preThenContext.target.name,
+                        card.hasHouse('mars') &&
+                        preThenContext.target &&
+                        card.name !== preThenContext.target.name,
                     gameAction: ability.actions.putIntoPlay()
                 },
                 message: '{0} 将 {2} 放置入场，通过 {1}, 并重整了它',

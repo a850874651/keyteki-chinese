@@ -17,12 +17,15 @@ class EddyOfDis extends Card {
         });
 
         this.fate({
+            condition: (context) => !!context.game.activePlayer.opponent,
             effect: "将 {1}的弃牌堆洗入其牌库并使其抽1张牌",
             effectArgs: (context) => [context.game.activePlayer.opponent],
             gameAction: ability.actions.sequential([
                 ability.actions.returnToDeck((context) => ({
                     shuffle: true,
-                    target: context.game.activePlayer.opponent.discard
+                    target: context.game.activePlayer.opponent
+                        ? context.game.activePlayer.opponent.discard
+                        : []
                 })),
                 ability.actions.draw((context) => ({
                     target: context.game.activePlayer.opponent

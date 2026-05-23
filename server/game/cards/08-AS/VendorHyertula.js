@@ -19,15 +19,11 @@ class VendorHyertula extends Card {
                 },
                 message: '{0} 使用 {1} 获得 {3} 的控制权',
                 messageArgs: (context) => [context.target],
-                then: (context) => ({
+                then: (preThenContext) => ({
                     gameAction: ability.actions.cardLastingEffect({
-                        target: context.target,
+                        target: preThenContext.target,
                         duration: 'lastingEffect',
-                        until: {
-                            onTakeControl: (event) =>
-                                event.card === context.target &&
-                                event.player === context.player.opponent
-                        },
+                        condition: () => preThenContext.target.controller === preThenContext.player,
                         effect: ability.effects.changeHouse('ekwidon')
                     })
                 })
