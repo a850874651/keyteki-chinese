@@ -81,12 +81,7 @@ const Lobby = () => {
         ? 'Enter a message...'
         : 'You must be logged in to send lobby chat messages';
 
-    const banners = [
-        {
-            img: 'banner/uncharted-lands.png',
-            link: 'https://sites.google.com/view/unchartedlands-kf/home'
-        }
-    ];
+    const banners = [];
 
     const containerClass = 'mx-auto w-full max-w-[86%] lg:max-w-[70%] 2xl:max-w-6xl';
     const announcements = [
