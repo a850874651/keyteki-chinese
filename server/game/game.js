@@ -1,4 +1,3 @@
-const _ = require('underscore');
 const EventEmitter = require('events');
 const moment = require('moment');
 
@@ -105,21 +104,21 @@ class Game extends EventEmitter {
 
         this.cardVisibility = new CardVisibility(this);
 
-        _.each(details.players, (player) => {
+        for (const player of Object.values(details.players)) {
             this.playersAndSpectators[player.user.username] = new Player(
                 player.id,
                 player.user,
                 this.owner === player.user.username,
                 this
             );
-        });
+        }
 
-        _.each(details.spectators, (spectator) => {
+        for (const spectator of Object.values(details.spectators || {})) {
             this.playersAndSpectators[spectator.user.username] = new Spectator(
                 spectator.id,
                 spectator.user
             );
-        });
+        }
 
         this.setMaxListeners(0);
 
@@ -337,17 +336,13 @@ class Game extends EventEmitter {
      * @returns Card
      */
     findAnyCardInPlayByUuid(cardId) {
-        return _.reduce(
-            this.getPlayers(),
-            (card, player) => {
-                if (card) {
-                    return card;
-                }
+        return this.getPlayers().reduce((card, player) => {
+            if (card) {
+                return card;
+            }
 
-                return player.cardsInPlay.find((card) => card.uuid === cardId);
-            },
-            null
-        );
+            return player.cardsInPlay.find((card) => card.uuid === cardId);
+        }, null);
     }
 
     /**
@@ -383,9 +378,9 @@ class Game extends EventEmitter {
     findAnyCardsInPlay(predicate) {
         let foundCards = [];
 
-        _.each(this.getPlayers(), (player) => {
+        for (const player of this.getPlayers()) {
             foundCards = foundCards.concat(player.cardsInPlay.filter(predicate));
-        });
+        }
 
         return foundCards;
     }
@@ -399,7 +394,9 @@ class Game extends EventEmitter {
     }
 
     stopClocks() {
-        _.each(this.getPlayers(), (player) => player.stopClock());
+        for (const player of this.getPlayers()) {
+            player.stopClock();
+        }
     }
 
     /**
@@ -923,11 +920,11 @@ class Game extends EventEmitter {
     initialise() {
         let players = {};
 
-        _.each(this.playersAndSpectators, (player) => {
+        for (const player of Object.values(this.playersAndSpectators)) {
             if (!player.left) {
                 players[player.name] = player;
             }
-        });
+        }
 
         this.playersAndSpectators = players;
 
@@ -941,13 +938,9 @@ class Game extends EventEmitter {
             player.initialise();
         }
 
-        this.allCards = _.reduce(
-            this.getPlayers(),
-            (cards, player) => {
-                return cards.concat(player.deck);
-            },
-            []
-        );
+        this.allCards = this.getPlayers().reduce((cards, player) => {
+            return cards.concat(player.deck);
+        }, []);
 
         this.pipeline.initialise([
             new SetupPhase(this),
@@ -983,13 +976,9 @@ class Game extends EventEmitter {
             player.initialise();
         }
 
-        this.allCards = _.reduce(
-            this.getPlayers(),
-            (cards, player) => {
-                return cards.concat(player.deck);
-            },
-            []
-        );
+        this.allCards = this.getPlayers().reduce((cards, player) => {
+            return cards.concat(player.deck);
+        }, []);
     }
 
     checkForTimeExpired() {
@@ -1105,7 +1094,9 @@ class Game extends EventEmitter {
 
     openSimultaneousEffectWindow(choices) {
         let window = new SimultaneousEffectWindow(this);
-        _.each(choices, (choice) => window.addChoice(choice));
+        for (const choice of choices) {
+            window.addChoice(choice);
+        }
         this.queueStep(window);
     }
 
@@ -1150,7 +1141,7 @@ class Game extends EventEmitter {
      * @returns {EventWindow}
      */
     openEventWindow(event) {
-        if (_.isArray(event)) {
+        if (Array.isArray(event)) {
             if (event.length === 0) {
                 return;
             } else if (event.length > 1) {

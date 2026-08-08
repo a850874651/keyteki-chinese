@@ -1,4 +1,3 @@
-const _ = require('underscore');
 const Phase = require('../phase.js');
 const SimpleStep = require('../simplestep.js');
 const MulliganPrompt = require('./mulliganprompt.js');
@@ -77,12 +76,12 @@ class SetupPhase extends Phase {
     }
 
     drawStartingHands() {
-        _.each(this.game.getPlayers(), (player) => {
+        for (const player of this.game.getPlayers()) {
             this.game.actions.shuffleDeck().resolve(player, this.game.getFrameworkContext());
             this.game.actions
                 .draw({ refill: true })
                 .resolve(player, this.game.getFrameworkContext());
-        });
+        }
         this.game.startingHandsDrawn = true;
     }
 
@@ -110,9 +109,9 @@ class SetupPhase extends Phase {
     }
 
     startGame() {
-        _.each(this.game.getPlayers(), (player) => {
+        for (const player of this.game.getPlayers()) {
             player.readyToStart = true;
-        });
+        }
         this.game.raiseEvent(EVENTS.onGameStarted);
     }
 }
