@@ -5,9 +5,7 @@ class StealerOfSouls extends Card {
     setupCardAbilities(ability) {
         this.reaction({
             message: '{0} 使用 {1} 清除 {2} 并获得1琥珀',
-            messageArgs: (context) => {
-                return [context.player, context.source, context.target];
-            },
+            messageArgs: (context) => [context.player, context.source, context.event.card],
             when: {
                 onCardDestroyed: (event, context) =>
                     event.destroyedFighting && event.damageEvent.damageSource === context.source

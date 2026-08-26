@@ -6,21 +6,18 @@ class NeotechnicGopher extends Card {
     setupCardAbilities(ability) {
         this.play({
             reap: true,
+            preferActionPromptMessage: true,
             target: {
                 activePromptTitle: '选择1张牌弃置',
                 location: 'hand',
                 controller: 'self',
                 gameAction: ability.actions.discard()
             },
-            effect: '弃置 {1}{2}',
-            effectArgs: (context) => [
-                context.target ? context.target.name : '了空气',
-                context.player.hand.length <= 1 ? ' 并获得1琥珀' : ''
-            ],
             then: {
                 alwaysTriggers: true,
                 condition: (context) => context.player.hand.length === 0,
-                gameAction: ability.actions.gainAmber()
+                gameAction: ability.actions.gainAmber(),
+                message: '{0} uses {1} to gain 1 amber'
             }
         });
 

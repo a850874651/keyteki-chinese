@@ -16,12 +16,12 @@ class ÜberkingTablets extends Card {
                     dependsOn: 'action',
                     cardType: 'creature',
                     gameAction: ability.actions.conditional((context) => ({
-                        condition: context.selects.action.choice === '重整生物',
+                        condition: context.selects?.action?.choice === '重整生物',
                         trueGameAction: ability.actions.ready({
-                            target: context.targets.creature
+                            target: context.targets?.creature
                         }),
                         falseGameAction: ability.actions.exhaust({
-                            target: context.targets.creature
+                            target: context.targets?.creature
                         })
                     }))
                 }

@@ -9,21 +9,29 @@ class AFairGame extends Card {
                 "弃置 {1}牌库顶的1张卡牌:{2} 并展示其手牌: {3}, 获取 {4} 个琥魄. 然后 {1} 弃置{5}牌库顶的1张卡牌: {6} 并展示其手牌:{7}, 获取 {8} 个琥魄",
             effectArgs: (context) => {
                 let oppTop =
-                    context.player.opponent.deck.length > 0 ? context.player.opponent.deck[0] : '';
+                    context.player.opponent.deck.length > 0
+                        ? context.player.opponent.deck[0]
+                        : null;
                 let oppHand = context.player.opponent.hand.map((card) => card).sort();
-                let myTop = context.player.deck.length > 0 ? context.player.deck[0] : '';
+                let myTop = context.player.deck.length > 0 ? context.player.deck[0] : null;
                 let myHand = context.player.hand.map((card) => card).sort();
                 return [
                     context.player.opponent,
-                    oppTop,
+                    oppTop || 'nothing',
                     oppHand,
                     oppTop
-                        ? oppHand.filter((card) => card.hasHouse(oppTop.printedHouse)).length
+                        ? oppHand.filter((card) =>
+                              oppTop.getHouses().some((house) => card.hasHouse(house))
+                          ).length
                         : 0,
                     context.player,
-                    myTop,
+                    myTop || 'nothing',
                     myHand,
-                    myTop ? myHand.filter((card) => card.hasHouse(myTop.printedHouse)).length : 0
+                    myTop
+                        ? myHand.filter((card) =>
+                              myTop.getHouses().some((house) => card.hasHouse(house))
+                          ).length
+                        : 0
                 ];
             },
             gameAction: [
@@ -41,7 +49,7 @@ class AFairGame extends Card {
                     if (oppTop) {
                         return {
                             amount: context.player.opponent.hand.filter((card) =>
-                                card.hasHouse(oppTop.printedHouse)
+                                oppTop.getHouses().some((house) => card.hasHouse(house))
                             ).length
                         };
                     }
@@ -54,7 +62,7 @@ class AFairGame extends Card {
                         return {
                             target: context.player.opponent,
                             amount: context.player.hand.filter((card) =>
-                                card.hasHouse(myTop.printedHouse)
+                                myTop.getHouses().some((house) => card.hasHouse(house))
                             ).length
                         };
                     }

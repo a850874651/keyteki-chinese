@@ -1,5 +1,5 @@
 const { randomUUID } = require('node:crypto');
-const _ = require('underscore');
+
 const GameActions = require('./GameActions');
 
 class GameObject {
@@ -49,13 +49,7 @@ class GameObject {
 
     mostRecentEffect(type) {
         const effects = this.effects.filter((effect) => effect.type === type);
-        const persistentEffects = effects.filter(
-            (effect) => effect.duration === 'persistentEffect'
-        );
-
-        // Prioritize persistent effects over other effects
-        // eg De-Animator overrides Animating Force
-        return _.last(persistentEffects.length ? persistentEffects : effects)?.getValue(this);
+        return effects[effects.length - 1]?.getValue(this);
     }
 
     allowGameAction(actionType, context = this.game.getFrameworkContext()) {

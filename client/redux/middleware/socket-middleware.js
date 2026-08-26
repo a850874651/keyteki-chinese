@@ -271,14 +271,43 @@ export const socketMiddleware = (store) => (next) => (action) => {
         });
 
         gameSocket.on('cleargamestate', () => {
-            store.dispatch(lobbyActions.clearGameState());
+            const currentState = store.getState();
+            // The game socket's `cleargamestate` for a finished game can arrive
+            // *after* the lobby socket has already published a new pending
+            // rematch game into `lobby.currentGame`. We only want to clear the
+            // slot when it still holds the finished game we're being notified
+            // about — not when it has been replaced by the rematch.
+            //
+            // A finished/in-progress game lives in the slot with `started: true`;
+            // a newly created pending rematch arrives with `started: false`
+            // (it doesn't flip to started until both players keep and the game
+            // socket sends the first gamestate). So:
+            //
+            //   - !currentGame              -> nothing to clear (no-op).
+            //   - currentGame.started       -> still the finished game, clear it.
+            //   - currentGame && !started   -> a rematch raced ahead of us; leave it.
+            //
+            // `clearGameState` only resets `currentGame`/`newGame`; `rootState`
+            // (the live board) is cleared separately by `gameSocketClosed` /
+            // the next gamestate patch, so skipping here doesn't leak board data.
+            if (!currentState.lobby.currentGame || currentState.lobby.currentGame.started) {
+                store.dispatch(lobbyActions.clearGameState());
+            }
         });
     }
 
     if (gameCloseRequested.match(action)) {
         if (gameSocket) {
             gameSocket.gameClosing = true;
-            gameSocket.close();
+            // Defer the actual close to the next macrotask so any in-flight
+            // emit() calls dispatched immediately before this (e.g. 'concede'
+            // and 'leavegame' from the Leave Game button) have a chance to
+            // flush over the transport. Without this, closing on the same
+            // tick can drop the just-queued packets and the server never
+            // sees the leave — leaving the user "stuck" in the game until
+            // they refresh.
+            const socketToClose = gameSocket;
+            setTimeout(() => socketToClose.close(), 0);
         }
         store.dispatch(gamesActions.socketClosed());
         store.dispatch(lobbyActions.gameSocketClosed());

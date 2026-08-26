@@ -26,7 +26,7 @@ class ShizyokuBuggy extends Card {
                     ]
                 })
             },
-            effect: '展示 {1}{0} {2}',
+            effect: '展示 {1}{0}{2}',
             effectArgs: (context) => [
                 context.target &&
                 context.target.length == 2 &&

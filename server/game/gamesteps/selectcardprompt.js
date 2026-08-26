@@ -1,5 +1,3 @@
-const _ = require('underscore');
-
 const AbilityContext = require('../AbilityContext.js');
 const CardSelector = require('../CardSelector.js');
 const EffectSource = require('../EffectSource.js');
@@ -54,7 +52,7 @@ class SelectCardPrompt extends UiPrompt {
         this.choosingPlayer = choosingPlayer;
 
         if (properties.source) {
-            if (_.isString(properties.source)) {
+            if (typeof properties.source === 'string') {
                 this.promptTitle = properties.source;
             } else {
                 this.source = properties.source;
@@ -75,7 +73,7 @@ class SelectCardPrompt extends UiPrompt {
         this.context =
             properties.context ||
             new AbilityContext({ game: game, player: choosingPlayer, source: this.source });
-        _.defaults(this.properties, this.defaultProperties());
+        this.properties = Object.assign({}, this.defaultProperties(), this.properties);
         if (properties.gameAction) {
             if (!Array.isArray(properties.gameAction)) {
                 this.properties.gameAction = [properties.gameAction];
@@ -115,8 +113,12 @@ class SelectCardPrompt extends UiPrompt {
     getDefaultControls() {
         let targets = this.context.targets ? Object.values(this.context.targets) : [];
         targets = targets.reduce((array, target) => array.concat(target), []);
-        if (targets.length === 0 && this.context.event && this.context.event.card) {
-            this.targets = [this.context.event.card];
+        if (targets.length === 0) {
+            if (this.context.subject) {
+                targets = [this.context.subject];
+            } else if (this.context.event && this.context.event.card) {
+                targets = [this.context.event.card];
+            }
         }
 
         return [
@@ -144,12 +146,32 @@ class SelectCardPrompt extends UiPrompt {
     highlightSelectableCards() {
         let allCards = this.selector.findPossibleCards(this.context);
         this.choosingPlayer.setSelectableCards(this.selector.getAllLegalTargets(this.context));
+        this.choosingPlayer.setPromptedPiles(this.getPromptedPiles());
 
         if (this.revealTargets && !this.revealFunc) {
             this.revealFunc = (card, player) =>
                 player === this.choosingPlayer && allCards.includes(card);
             this.game.cardVisibility.addRule(this.revealFunc);
         }
+    }
+
+    getPromptedPiles() {
+        const pileLocations = ['hand', 'discard', 'archives', 'purged', 'deck'];
+        const locations = (this.selector.location || []).filter((loc) =>
+            pileLocations.includes(loc)
+        );
+        if (locations.length === 0) {
+            return [];
+        }
+        const controllers =
+            this.selector.controller === 'any' ? ['self', 'opponent'] : [this.selector.controller];
+        const piles = [];
+        for (const location of locations) {
+            for (const controller of controllers) {
+                piles.push({ location, controller });
+            }
+        }
+        return piles;
     }
 
     activeCondition(player) {
@@ -167,7 +189,7 @@ class SelectCardPrompt extends UiPrompt {
             }
         }
 
-        if (this.game.manualMode && !_.any(buttons, (button) => button.arg === 'cancel')) {
+        if (this.game.manualMode && !buttons.some((button) => button.arg === 'cancel')) {
             buttons = buttons.concat({ text: 'Cancel Prompt', arg: 'cancel' });
         }
 
@@ -242,7 +264,7 @@ class SelectCardPrompt extends UiPrompt {
         if (!this.selectedCards.includes(card)) {
             this.selectedCards.push(card);
         } else {
-            this.selectedCards = _.reject(this.selectedCards, (c) => c === card);
+            this.selectedCards = this.selectedCards.filter((c) => c !== card);
         }
 
         this.choosingPlayer.setSelectedCards(this.selectedCards);
@@ -294,6 +316,7 @@ class SelectCardPrompt extends UiPrompt {
         this.selectedCards = [];
         this.choosingPlayer.clearSelectedCards();
         this.choosingPlayer.clearSelectableCards();
+        this.choosingPlayer.clearPromptedPiles();
 
         // Restore previous selections.
         this.choosingPlayer.setSelectedCards(this.previouslySelectedCards);

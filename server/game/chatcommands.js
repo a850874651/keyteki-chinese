@@ -1,10 +1,10 @@
-const _ = require('underscore');
 const Constants = require('../constants.js');
 const GameActions = require('./GameActions');
 const ManualModePrompt = require('./gamesteps/ManualModePrompt');
 const Deck = require('./deck');
 const RematchPrompt = require('./gamesteps/RematchPrompt');
 const ManualKeyForgePrompt = require('./gamesteps/ManualKeyForgePrompt.js');
+const chatCommands = require('./chatCommands.json');
 
 class ChatCommands {
     constructor(game) {
@@ -20,11 +20,15 @@ class ChatCommands {
             '/draw': this.draw,
             '/first-player': this.firstPlayer,
             '/forge': this.forge,
+            '/help': this.help,
             '/manual': this.manual,
             '/modify-clock': this.modifyClock,
             '/mulligan': this.mulligan,
             '/mute-spectators': this.muteSpectators,
             '/rematch': this.rematch,
+            '/rematch-swap-decks': this.rematchSwap,
+            '/rematch-change-decks': this.rematchChange,
+            '/reveal-hand': this.revealHand,
             '/shuffle': this.shuffle,
             '/start-clocks': this.startClocks,
             '/stop-clocks': this.stopClocks,
@@ -179,12 +183,16 @@ class ChatCommands {
 
     startClocks(player) {
         this.game.addAlert('danger', '{0} 重启了计时器', player);
-        _.each(this.game.getPlayers(), (player) => player.clock.restart());
+        for (const p of this.game.getPlayers()) {
+            p.clock.restart();
+        }
     }
 
     stopClocks(player) {
-        this.game.addAlert('danger', '{0} 暂停了计时器', player);
-        _.each(this.game.getPlayers(), (player) => player.clock.pause());
+        this.game.addAlert('danger', '{0} 停止了计时器', player);
+        for (const p of this.game.getPlayers()) {
+            p.clock.pause();
+        }
     }
 
     modifyClock(player, args) {
@@ -238,6 +246,22 @@ class ChatCommands {
         player.shuffleDeck();
     }
 
+    revealHand(player) {
+        this.game.addAlert(
+            'danger',
+            '{0} reveals their hand: {1}',
+            player,
+            player.hand.length ? player.hand : 'nothing'
+        );
+    }
+
+    help(player) {
+        this.game.addAlert('info', '{0} requests the manual mode command list:', player);
+        for (const entry of chatCommands) {
+            this.game.addAlert('info', `${entry.usage} - ${entry.description}`);
+        }
+    }
+
     mulligan(player) {
         this.game.addAlert('danger', '{0} 重调了手牌', player);
         player.takeMulligan();
@@ -277,18 +301,6 @@ class ChatCommands {
         });
 
         return true;
-    }
-
-    reveal(player) {
-        this.game.promptForSelect(player, {
-            activePromptTitle: 'Select a card',
-            cardCondition: (card) => card.facedown && card.controller === player,
-            onSelect: (player, card) => {
-                card.facedown = false;
-                this.game.addAlert('danger', '{0} 展示了 {1}', player, card);
-                return true;
-            }
-        });
     }
 
     disconnectMe(player) {
@@ -377,10 +389,41 @@ class ChatCommands {
 
         let lowerToken = token.toLowerCase();
 
-        return _.contains(this.tokens, lowerToken);
+        return this.tokens.includes(lowerToken);
     }
 
     rematch(player) {
+        this.queueRematch(player, 'same');
+    }
+
+    rematchSwap(player) {
+        this.queueRematch(player, 'swap');
+    }
+
+    rematchChange(player) {
+        this.queueRematch(player, 'change');
+    }
+
+    queueRematch(player, mode) {
+        const opponentLeft = this.game.getPlayers().some((other) => other !== player && other.left);
+        if (opponentLeft) {
+            this.game.addAlert(
+                'warning',
+                '{0} tried to start a rematch, but their opponent has left the game.',
+                player
+            );
+            return;
+        }
+
+        if (mode === 'swap' && this.game.gameFormat === 'adaptive-bo1') {
+            this.game.addAlert(
+                'warning',
+                '{0} cannot start a swap-decks rematch in adaptive: the format manages deck assignment itself.',
+                player
+            );
+            return;
+        }
+
         if (this.game.finishedAt) {
             this.game.addAlert('info', '{0} 请求再次对局', player);
         } else {
@@ -391,7 +434,7 @@ class ChatCommands {
             );
         }
 
-        this.game.queueStep(new RematchPrompt(this.game, player));
+        this.game.queueStep(new RematchPrompt(this.game, player, mode));
     }
 
     firstPlayer(player, args) {

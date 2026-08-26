@@ -14,7 +14,7 @@ class InHereSomewhere extends Card {
                         numCards: 2,
                         mode: 'exactly',
                         message: '{0} 使用 {1} 归档 {2}',
-                        messageArgs: (cards) => [context.player, context.source.name, cards]
+                        messageArgs: (cards) => [context.player, context.source, cards]
                     }
                 })),
                 falseGameAction: ability.actions.discard((context) => ({

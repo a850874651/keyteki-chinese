@@ -1,7 +1,6 @@
 const { Server } = require('socket.io');
 const Socket = require('./socket.js');
 const jwt = require('jsonwebtoken');
-const _ = require('underscore');
 
 const logger = require('./log');
 const PendingGame = require('./pendinggame');
@@ -221,12 +220,11 @@ class Lobby {
 
     // Actions
     mapGamesToGameSummaries(games) {
-        return _.chain(games)
+        return games
             .map((game) => game.getSummary())
-            .sortBy('createdAt')
-            .sortBy('started')
-            .reverse()
-            .value();
+            .sort((a, b) => (a.createdAt > b.createdAt ? 1 : a.createdAt < b.createdAt ? -1 : 0))
+            .sort((a, b) => (a.started > b.started ? 1 : a.started < b.started ? -1 : 0))
+            .reverse();
     }
 
     broadcastGameMessage(message, games) {
@@ -523,7 +521,8 @@ class Lobby {
                     game.gameFormat === gameDetails.gameFormat &&
                     Object.values(game.players).length < 2 &&
                     !game.password &&
-                    !game.gamePrivate
+                    !game.gamePrivate &&
+                    game.isVisibleFor(socket.user)
             );
 
             if (gameToJoin) {
@@ -1000,7 +999,7 @@ class Lobby {
         ];
 
         for (let player of Object.values(game.getPlayers()).filter(
-            (player) => player.name !== owner.username
+            (player) => player.name !== owner.username && !player.left
         )) {
             let socket = this.socketsByName[player.name];
 
@@ -1127,7 +1126,7 @@ class Lobby {
         );
 
         for (let player of Object.values(game.getPlayers()).filter(
-            (player) => player.name !== owner.username
+            (player) => player.name !== owner.username && !player.left
         )) {
             let socket = this.socketsByName[player.name];
 
@@ -1140,6 +1139,7 @@ class Lobby {
             player.deck = [];
 
             newGame.join(socket.id, player.user);
+            socket.joinChannel(newGame.id);
         }
 
         for (let player of Object.values(game.getPlayers())) {
@@ -1195,13 +1195,79 @@ class Lobby {
     }
 
     onBlocklistChanged(user) {
-        let updatedUser = this.users[user.username];
+        const updatedUser = this.users[user.username];
 
         if (!updatedUser) {
             return;
         }
 
+        const socket = this.socketsByName[user.username];
+        if (!socket) {
+            updatedUser.blockList = user.blockList;
+            return;
+        }
+
+        const oldBlockList = updatedUser.blockList || [];
+        const newBlockList = user.blockList || [];
+
+        const added = newBlockList.filter((entry) => !oldBlockList.includes(entry));
+        const removed = oldBlockList.filter((entry) => !newBlockList.includes(entry));
+
+        // Snapshot game visibility before the update
+        let gameVisibilityBefore = {};
+        for (let game of Object.values(this.games)) {
+            gameVisibilityBefore[game.id] = game.isVisibleFor(updatedUser);
+        }
+
         updatedUser.blockList = user.blockList;
+
+        // Send targeted removals for newly blocked users
+        for (let blockedName of added) {
+            let blockedUser = Object.values(this.users).find(
+                (u) => u.username.toLowerCase() === blockedName
+            );
+            if (blockedUser) {
+                socket.send('userleft', blockedUser.getShortSummary());
+            }
+        }
+
+        // Send targeted additions for newly unblocked users
+        for (let unblockedName of removed) {
+            let unblockedUser = Object.values(this.users).find(
+                (u) => u.username.toLowerCase() === unblockedName
+            );
+            if (unblockedUser) {
+                socket.send('newuser', unblockedUser.getShortSummary());
+            }
+        }
+
+        // Send targeted game removals/additions based on visibility changes
+        let gamesToRemove = [];
+        let gamesToAdd = [];
+        for (let game of Object.values(this.games)) {
+            let wasVisible = gameVisibilityBefore[game.id];
+            let isVisible = game.isVisibleFor(updatedUser);
+
+            if (wasVisible && !isVisible) {
+                gamesToRemove.push(game);
+            } else if (!wasVisible && isVisible) {
+                gamesToAdd.push(game);
+            }
+        }
+
+        if (gamesToRemove.length > 0) {
+            socket.send(
+                'removegame',
+                gamesToRemove.map((game) => game.getSummary())
+            );
+        }
+
+        if (gamesToAdd.length > 0) {
+            socket.send(
+                'newgame',
+                gamesToAdd.map((game) => game.getSummary())
+            );
+        }
     }
 
     onWorkerTimedOut(nodeName) {

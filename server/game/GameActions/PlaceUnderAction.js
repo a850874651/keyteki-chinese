@@ -17,9 +17,11 @@ class PlaceUnderAction extends CardGameAction {
         this.name = this.isGraft ? 'graft' : 'placeUnder';
         this.effectArgs = this.parent;
         if (this.isGraft) {
-            this.effectMsg = '嫁接 {0} 到 {1} 上';
+            this.effectMsg = '嫁接 {0} 到 {1}上';
+        } else if (this.facedown) {
+            this.effectMsg = '面朝下放置到 {1}下';
         } else {
-            this.effectMsg = '放 ' + (this.facedown ? '1张卡牌' : '{0}') + ' 到 {1} 下方';
+            this.effectMsg = '将 {0} 正面向上放在 {1}下';
         }
     }
 
@@ -55,11 +57,14 @@ class PlaceUnderAction extends CardGameAction {
         return super.createEvent(
             this.isGraft ? EVENTS.onCardGrafted : EVENTS.onPlaceUnder,
             { card, context },
-            () => {
+            (event) => {
                 if (card.location === 'play area') {
-                    context.game.raiseEvent(EVENTS.onCardLeavesPlay, { card, context }, () =>
-                        this.placeUnder(card)
+                    event.leavesPlayEvent = context.game.getEvent(
+                        EVENTS.onCardLeavesPlay,
+                        { card, context },
+                        () => this.placeUnder(card)
                     );
+                    event.addSubEvent(event.leavesPlayEvent);
                 } else {
                     this.placeUnder(card);
                 }

@@ -31,13 +31,13 @@ For detailed documentation with examples, see the `docs/` folder, which includes
 -   When writing a templated effect or message, use placeholders like `{0}`, `{1}`, etc., and provide corresponding values to ensure proper formatting. Do not concatenate strings or use template literals for game messages.
 -   Order object properties alphabetically where it makes sense when there isn't a strong logical order to the properties
 -   When adding guards to card implementations, prefer moving the guard into the underlying class rather than having every card implement the same guard logic.
--   Use `const` instead of `var` or `let` when variables are not reassigned
+-   Use `const` instead of `var` or `let` when variables are not reassigned - do this even when updating existing declarations that currently use `var` or `let`.
 
 ## Card Implementation Guide
 
 ### Card Data Structure
 
-Card implementations in Keyteki follow a specific pattern where each card's game logic is implemented in JavaScript files under `server/game/cards/`, while their descriptions and metadata are stored in JSON files under `keyteki-json-data/packs/`.
+Card implementations in Keyteki follow a specific pattern where each card's game logic is implemented in JavaScript files under `server/game/cards/`, while their descriptions and metadata are stored in JSON files under `master-vault-data/packs/`.
 
 ### Card Implementation Files
 
@@ -48,8 +48,8 @@ Card implementations in Keyteki follow a specific pattern where each card's game
 
 ### Card JSON Data
 
--   Card descriptions and metadata for each set are stored in JSON files under `keyteki-json-data/packs/<Set>.json`
--   Each set has its own JSON file (e.g., [PV.json](../keyteki-json-data/packs/PV.json))
+-   Card descriptions and metadata for each set are stored in JSON files under `master-vault-data/packs/<Set>.json`
+-   Each set has its own JSON file (e.g., [PV.json](../master-vault-data/packs/PV.json))
 -   The JSON structure has a top-level `cards` array containing card objects
 -   The JSON data contains:
     -   Card name, ID, and number
@@ -66,20 +66,20 @@ Card implementations in Keyteki follow a specific pattern where each card's game
 
 ```bash
 # Find a card by ID
-jq '.cards[] | select(.id == "dark-discovery")' keyteki-json-data/packs/DT.json
+jq '.cards[] | select(.id == "dark-discovery")' master-vault-data/packs/DT.json
 
 # Get just the card text
-jq '.cards[] | select(.id == "dark-discovery") | .text' keyteki-json-data/packs/DT.json
+jq '.cards[] | select(.id == "dark-discovery") | .text' master-vault-data/packs/DT.json
 
 # List all card IDs in a set
-jq '.cards[].id' keyteki-json-data/packs/DT.json
+jq '.cards[].id' master-vault-data/packs/DT.json
 ```
 
 **Incorrect jq usage** (these will fail):
 
 ```bash
 # WRONG: .[] iterates top-level keys, not the cards array
-jq '.[] | select(.id == "card-id")' keyteki-json-data/packs/DT.json
+jq '.[] | select(.id == "card-id")' master-vault-data/packs/DT.json
 ```
 
 ### Card Implementation Guidelines

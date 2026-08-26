@@ -39,13 +39,8 @@ class SoulLock extends Card {
                     }))
                 },
                 message:
-                    '{0} 使用 {1} 把 {2} 放入下方，防止 {3} 使用与这张卡拥有相同势力的卡牌',
-                messageArgs: (context) => [
-                    context.player,
-                    context.source,
-                    context.target,
-                    context.player.opponent
-                ],
+                    '{0} 使用 {1} 把 {2} 放到 {1} 下方并防止{3}使用与这张卡拥有相同势力的卡牌',
+                messageArgs: (context) => [context.player.opponent],
                 effectAlert: true
             }
         });

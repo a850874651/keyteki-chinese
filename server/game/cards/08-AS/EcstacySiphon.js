@@ -11,7 +11,7 @@ class EcstacySiphon extends Card {
                 numSteps: context.player.opponent ? context.player.opponent.hand.length : 0,
                 damageStep: 1
             })),
-            effect: "{1}每有1张手牌对1个敌方生物造成1点伤害 ",
+            effect: "{1}每有1张手牌对1个敌方生物造成1点伤害",
             effectArgs: (context) => context.player.opponent
         });
     }

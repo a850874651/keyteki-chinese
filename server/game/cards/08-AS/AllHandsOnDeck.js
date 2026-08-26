@@ -11,7 +11,7 @@ class AllHandsOnDeck extends Card {
                     promptForSelect: {
                         cardType: 'creature',
                         message: '{0} 使用 {1} 摧毁 {2}',
-                        messageArgs: (cards) => [context.player, context.source.name, cards]
+                        messageArgs: (cards) => [context.player, context.source, cards]
                     }
                 })),
                 falseGameAction: ability.actions.dealDamage((context) => ({
@@ -19,7 +19,7 @@ class AllHandsOnDeck extends Card {
                     promptForSelect: {
                         cardType: 'creature',
                         message: '{0} 使用 {1} 造成3点伤害对 {2}',
-                        messageArgs: (cards) => [context.player, context.source.name, cards]
+                        messageArgs: (cards) => [context.player, context.source, cards]
                     }
                 }))
             }),

@@ -3,7 +3,6 @@ const passport = require('passport');
 const jwt = require('jsonwebtoken');
 const crypto = require('crypto');
 const moment = require('moment');
-const _ = require('underscore');
 const EmailService = require('../services/EmailService');
 const fs = require('fs');
 const path = require('path');
@@ -1014,6 +1013,11 @@ module.exports.init = function (server, options) {
 
             user.blockList.push(lowerCaseUser);
 
+            userService.emit('onBlocklistChanged', {
+                username: user.username,
+                blockList: user.blockList
+            });
+
             let updatedUser = await userService.getUserById(user.id);
 
             res.send({
@@ -1061,8 +1065,13 @@ module.exports.init = function (server, options) {
                 return res.send({ success: false, message: 'Block list entry failed to remove' });
             }
 
-            user.blockList = _.reject(user.blockList, (user) => {
-                return user === lowerCaseUser;
+            user.blockList = user.blockList.filter((user) => {
+                return user !== lowerCaseUser;
+            });
+
+            userService.emit('onBlocklistChanged', {
+                username: user.username,
+                blockList: user.blockList
             });
 
             let updatedUser = await userService.getUserById(user.id);

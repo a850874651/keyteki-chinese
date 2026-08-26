@@ -9,9 +9,10 @@ class ResolveFateAction extends CardGameAction {
     }
 
     getEvent(card, context) {
-        let fateEvent = super.createEvent(EVENTS.onFate, { card: card, context: context }, () => {
-            context.game.addMessage('{0} 结算了 {1}的命运效果', context.player, card);
-        });
+        // Note: the "resolves the fate effect" message is emitted by
+        // FulfillProphecyAction before the fate event is opened so that it
+        // precedes any fate interrupt messages in the log.
+        const fateEvent = super.createEvent(EVENTS.onFate, { card: card, context: context });
 
         fateEvent.addChildEvent(
             context.game.actions

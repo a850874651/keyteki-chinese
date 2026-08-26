@@ -15,8 +15,13 @@ class BattleFleet extends Card {
                     amount: context.target.length
                 }))
             },
-            effect: '从其手牌展示{0}, 并抽 {1} 张牌',
-            effectArgs: (context) => (context.target.length ? context.target.length : 1)
+            effect: '{1}',
+            effectArgs: (context) => {
+                const n = context.target.length;
+                return n
+                    ? `从其手牌展示 ${context.target.map((c) => c.name).join(', ')}`
+                    : '没有从手牌展示火星卡牌';
+            }
         });
     }
 }

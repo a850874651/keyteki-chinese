@@ -1,4 +1,3 @@
-const _ = require('underscore');
 const Phase = require('../phase.js');
 const SimpleStep = require('../simplestep.js');
 const MulliganPrompt = require('./mulliganprompt.js');
@@ -16,7 +15,9 @@ class SetupPhase extends Phase {
             new FirstPlayerSelection(game),
             new SimpleStep(game, () => this.setupBegin()),
             new GameStartPrompt(game),
+            new SimpleStep(game, () => this.applyFirstPlayerHandSizeBonus()),
             new SimpleStep(game, () => this.drawStartingHands()),
+            new SimpleStep(game, () => this.removeFirstPlayerHandSizeBonus()),
             new SimpleStep(game, () => this.firstPlayerEffects()),
             new MulliganPrompt(game),
             new SimpleStep(game, () => this.startGame())
@@ -47,6 +48,15 @@ class SetupPhase extends Phase {
                 );
             }
         }
+
+        if (this.game.adaptiveFirstDeck) {
+            this.game.addAlert('info', '{0} will go first', {
+                link:
+                    'https://www.keyforgegame.com/deck-details/' + this.game.adaptiveFirstDeck.uuid,
+                argType: 'link',
+                label: this.game.adaptiveFirstDeck.name
+            });
+        }
     }
 
     setupBegin() {
@@ -55,10 +65,38 @@ class SetupPhase extends Phase {
         }
     }
 
-    firstPlayerEffects() {
+    applyFirstPlayerHandSizeBonus() {
+        // Temporarily give the first player +1 hand size so their starting
+        // refill draws one extra card (subject to chains) in a single event.
+        const player = this.game.activePlayer;
+        this.firstPlayerBonusContext = this.game.getFrameworkContext(player);
         this.game.actions
-            .draw({ amount: 1 })
-            .resolve(this.game.activePlayer, this.game.getFrameworkContext());
+            .untilPlayerTurnEnd({ effect: Effects.modifyHandSize(1) })
+            .resolve(player, this.firstPlayerBonusContext);
+    }
+
+    drawStartingHands() {
+        for (const player of this.game.getPlayers()) {
+            this.game.actions.shuffleDeck().resolve(player, this.game.getFrameworkContext());
+            this.game.actions
+                .draw({ refill: true })
+                .resolve(player, this.game.getFrameworkContext());
+        }
+        this.game.startingHandsDrawn = true;
+    }
+
+    removeFirstPlayerHandSizeBonus() {
+        const ctx = this.firstPlayerBonusContext;
+        this.game.effectEngine.unapplyAndRemove(
+            (effect) =>
+                effect.effect.type === 'modifyHandSize' &&
+                effect.duration === 'untilPlayerTurnEnd' &&
+                effect.source === ctx.source
+        );
+        this.firstPlayerBonusContext = null;
+    }
+
+    firstPlayerEffects() {
         this.game.actions
             .untilPlayerTurnEnd({
                 condition: () =>
@@ -70,20 +108,10 @@ class SetupPhase extends Phase {
             .resolve(this.game.activePlayer, this.game.getFrameworkContext(this.game.activePlayer));
     }
 
-    drawStartingHands() {
-        _.each(this.game.getPlayers(), (player) => {
-            this.game.actions.shuffleDeck().resolve(player, this.game.getFrameworkContext());
-            this.game.actions
-                .draw({ refill: true })
-                .resolve(player, this.game.getFrameworkContext());
-        });
-        this.game.startingHandsDrawn = true;
-    }
-
     startGame() {
-        _.each(this.game.getPlayers(), (player) => {
+        for (const player of this.game.getPlayers()) {
             player.readyToStart = true;
-        });
+        }
         this.game.raiseEvent(EVENTS.onGameStarted);
     }
 }

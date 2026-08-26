@@ -1,5 +1,3 @@
-const _ = require('underscore');
-
 class PlayerPromptState {
     constructor(player) {
         this.player = player;
@@ -13,6 +11,7 @@ class PlayerPromptState {
         this.selectableCards = [];
         this.cardDamage = {};
         this.selectedCards = [];
+        this.promptedPiles = [];
     }
 
     setSelectedCards(cards) {
@@ -31,17 +30,24 @@ class PlayerPromptState {
         this.selectableCards = [];
     }
 
+    setPromptedPiles(piles) {
+        this.promptedPiles = piles;
+    }
+
+    clearPromptedPiles() {
+        this.promptedPiles = [];
+    }
+
     setPrompt(prompt) {
         this.selectCard = prompt.selectCard || false;
         this.selectOrder = prompt.selectOrder || false;
         this.cardDamage = prompt.cardDamage || {};
         this.menuTitle = prompt.menuTitle || '';
         this.promptTitle = prompt.promptTitle;
-        this.buttons = _.map(prompt.buttons || [], (button) => {
+        this.buttons = (prompt.buttons || []).map((button) => {
             if (button.card) {
-                let card = button.card;
-                let properties = _.omit(button, 'card');
-                return _.extend(
+                const { card, ...properties } = button;
+                return Object.assign(
                     { text: card.name, arg: card.uuid, card: card.getShortSummary() },
                     properties
                 );
@@ -58,6 +64,7 @@ class PlayerPromptState {
         this.menuTitle = '';
         this.buttons = [];
         this.controls = [];
+        this.promptedPiles = [];
     }
 
     getCardSelectionState(card) {
@@ -83,7 +90,8 @@ class PlayerPromptState {
             menuTitle: this.menuTitle,
             promptTitle: this.promptTitle,
             buttons: this.buttons,
-            controls: this.controls
+            controls: this.controls,
+            promptedPiles: this.promptedPiles
         };
     }
 }

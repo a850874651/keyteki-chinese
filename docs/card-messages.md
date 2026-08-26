@@ -951,6 +951,27 @@ The same rule applies to prompt titles (see [`activePromptTitle`](#using-target)
 
 ## Best Practices
 
+-   **Pass card objects, not `.name`** - In `messageArgs`/`effectArgs`, always pass `context.source` (the card object), never `context.source.name` (a plain string). Card objects render as hoverable links in the game log; strings render as plain text. If you need the card name in a string concatenation, split the message template into separate placeholders instead:
+
+    ```javascript
+    // Bad - card name is plain text, not hoverable
+    messageArgs: (cards) => [context.player, context.source.name, cards]
+
+    // Good - card object renders as hoverable link
+    messageArgs: (cards) => [context.player, context.source, cards]
+
+    // Bad - string concatenation loses hoverability
+    message: '{0} uses {1} to use {2}{3}',
+    messageArgs: (context) => [context.player, context.source, context.target,
+        context.player.isHaunted() ? ' and archive ' + context.source.name : '']
+
+    // Good - split into separate placeholders
+    message: '{0} uses {1} to use {2}{3}{4}',
+    messageArgs: (context) => [context.player, context.source, context.target,
+        context.player.isHaunted() ? ' and archive ' : '',
+        context.player.isHaunted() ? context.source : '']
+    ```
+
 -   **Show actual values, not descriptions** - Instead of "lose half their amber", show "lose 3 amber".
 -   **Guard against undefined opponents** - Use `context.player.opponent ? ... : 0` for solo play compatibility.
 -   **List affected cards** - When destroying/affecting multiple cards, list them: "({3}), gaining a total of {4} amber".
@@ -970,7 +991,7 @@ The same rule applies to prompt titles (see [`activePromptTitle`](#using-target)
 | `context.targets`       | Multiple named targets               | `effectArgs: [Object.values(context.targets)]` |
 | `context.event`         | Triggering event (reactions)         | `effectArgs: [context.event.card]`             |
 | `context.event.card`    | Card from the event                  | For "when card destroyed" reactions            |
-| `context.event.clone`   | Clone of destroyed card              | Access neighbors after destruction             |
+| `context.event.clone`   | Card state before leaving play       | Access neighbors/amber after destruction       |
 | `context.house`         | Selected house                       | `effectArgs: [context.house]`                  |
 | `context.cardName`      | Named card (card-name mode)          | `effectArgs: [context.cardName]`               |
 | `context.select`        | Choice selection result              | `effectArgs: [context.select]`                 |

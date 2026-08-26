@@ -1,5 +1,6 @@
 import classNames from 'classnames';
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 
@@ -7,6 +8,7 @@ import AmberImage from '../../assets/img/amber.png';
 import CardBackImage from '../../assets/img/idbacks/cardback.jpg';
 import TideImage from '../../assets/img/tide/tide.png';
 import { Constants } from '../../constants';
+import { getRoleClass } from '../../util';
 import AlertPanel from '../Site/AlertPanel';
 import Avatar from '../Site/Avatar';
 import CardImage from './CardImage';
@@ -20,26 +22,8 @@ for (const colour of ['red', 'blue', 'yellow']) {
     };
 }
 
-const getRoleTextClass = (role) => {
-    switch ((role || '').toLowerCase()) {
-        case 'admin':
-            return 'text-red-500';
-        case 'contributor':
-            return 'text-cyan-600 dark:text-cyan-400';
-        case 'supporter':
-            return 'text-emerald-600 dark:text-emerald-400';
-        case 'winner':
-            return 'text-amber-600 dark:text-amber-400';
-        case 'previouswinner':
-            return 'text-fuchsia-600 dark:text-fuchsia-400';
-        default:
-            return 'text-foreground';
-    }
-};
-
 const Messages = ({ messages, onCardMouseOver, onCardMouseOut }) => {
     const { i18n } = useTranslation();
-    
     const compactChatAlertClass =
         '!mb-1 !rounded-xl !px-3 !py-2 text-sm [&_svg]:text-base [&_[data-slot="alert-content"]]:gap-0.5 [&_[data-slot="alert-description"]]:text-sm';
 
@@ -80,9 +64,16 @@ const Messages = ({ messages, onCardMouseOver, onCardMouseOut }) => {
         }
     };
 
-    const owner = useSelector(
-        (state) => state.lobby.currentGame.players[state.lobby.currentGame.owner]
-    );
+    const owner = useSelector((state) => {
+        const game = state.lobby.currentGame;
+        if (!game || !game.players) {
+            return undefined;
+        }
+        // Fall back to any remaining player if the original owner has left
+        // (e.g. they left the game and rejoined as a spectator), so message
+        // bubble alignment still works.
+        return game.players[game.owner] || Object.values(game.players)[0];
+    });
 
     for (let house of Constants.Houses) {
         tokens[house] = {
@@ -235,25 +226,26 @@ const Messages = ({ messages, onCardMouseOver, onCardMouseOut }) => {
                     </a>
                 );
             } else if (fragment.image && fragment.label) {
-                // 获取当前语言并显示对应的卡牌名称
-                let locale = i18n.language;
-                const displayLabel = fragment.locale?.[locale]?.name || fragment.label;
-                
+                const cardLabel =
+                    i18n.language !== 'en' && fragment.locale && fragment.locale[i18n.language]
+                        ? fragment.locale[i18n.language].name
+                        : fragment.label;
                 messages.push(
                     <span
                         key={index++}
                         className='cursor-pointer text-emerald-500 hover:text-cyan-400'
                         onMouseOver={onCardMouseOver.bind(this, {
                             image: <CardImage card={{ ...fragment, location: 'zoom' }} />,
-                            size: 'normal'
+                            size: 'normal',
+                            zoomClass: 'from-chat'
                         })}
-                        onMouseOut={onCardMouseOut.bind(this)}
+                        onMouseOut={onCardMouseOut}
                     >
-                        {displayLabel}
+                        {cardLabel}
                     </span>
                 );
             } else if (fragment.name && fragment.argType === 'player') {
-                const userClass = `username font-semibold ${getRoleTextClass(fragment.role)}`;
+                const userClass = `username ${getRoleClass(fragment.role)}`;
 
                 messages.push(
                     <div key={index++} className='message-chat flex items-center gap-1.5'>
@@ -264,7 +256,7 @@ const Messages = ({ messages, onCardMouseOver, onCardMouseOut }) => {
                     </div>
                 );
             } else if (fragment.argType === 'nonAvatarPlayer') {
-                const userClass = `username font-semibold ${getRoleTextClass(fragment.role)}`;
+                const userClass = `username ${getRoleClass(fragment.role)}`;
 
                 messages.push(
                     <span key={index++} className={userClass}>
@@ -287,8 +279,11 @@ const Messages = ({ messages, onCardMouseOver, onCardMouseOut }) => {
     const processKeywords = (message) => {
         let messages = [];
         let i = 0;
+        const parts = message.split(' ');
 
-        for (let token of message.split(' ')) {
+        for (let index = 0; index < parts.length; index++) {
+            let token = parts[index];
+            const isLast = index === parts.length - 1;
             let lowerToken = token.toLowerCase();
 
             if (tokens[lowerToken]) {
@@ -331,9 +326,11 @@ const Messages = ({ messages, onCardMouseOver, onCardMouseOut }) => {
                         src={tokenEntry.imageSrc}
                     />
                 );
-                messages.push(' ');
+                if (!isLast) {
+                    messages.push(' ');
+                }
             } else {
-                messages.push(token + ' ');
+                messages.push(isLast ? token : token + ' ');
             }
         }
 

@@ -13,14 +13,16 @@ class CauterizeVitality extends Card {
             },
             then: (preThenContext) => ({
                 condition: (context) =>
-                    !!context.player.opponent && preThenContext.target.bonusIcons.length > 0,
+                    !!preThenContext.target &&
+                    !!context.player.opponent &&
+                    preThenContext.target.bonusIcons.length > 0,
                 gameAction: ability.actions.loseAmber({
-                    amount: preThenContext.target.bonusIcons.length
+                    amount: preThenContext.target ? preThenContext.target.bonusIcons.length : 0
                 }),
                 message: '{0} 使用 {1} 使得 {3} 失去 {4} 琥珀',
                 messageArgs: (context) => [
                     context.player.opponent,
-                    preThenContext.target.bonusIcons.length
+                    preThenContext.target ? preThenContext.target.bonusIcons.length : 0
                 ]
             })
         });

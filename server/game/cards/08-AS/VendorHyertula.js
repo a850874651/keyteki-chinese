@@ -20,6 +20,7 @@ class VendorHyertula extends Card {
                 message: '{0} 使用 {1} 获得 {3} 的控制权',
                 messageArgs: (context) => [context.target],
                 then: (preThenContext) => ({
+                    condition: () => !!preThenContext.target,
                     gameAction: ability.actions.cardLastingEffect({
                         target: preThenContext.target,
                         duration: 'lastingEffect',

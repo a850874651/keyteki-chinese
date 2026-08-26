@@ -22,7 +22,7 @@ class OnTheMark extends Card {
                         message: '{0} 使用 {1} 放置 {2} 琥珀在 {3} 上',
                         messageArgs: (card) => [
                             context.player,
-                            context.source.name,
+                            context.source,
                             context.preThenEvents[0].clone.amber,
                             card
                         ]

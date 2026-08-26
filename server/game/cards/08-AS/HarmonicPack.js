@@ -6,19 +6,9 @@ class HarmonicPack extends Card {
     // If you do, deal an additional 3D to the same creature. Discard the revealed card.
     setupCardAbilities(ability) {
         this.play({
-            targets: {
-                creature: {
-                    cardType: 'creature',
-                    gameAction: ability.actions.dealDamage({ amount: 2 })
-                },
-                player: {
-                    mode: 'select',
-                    activePromptTitle: "Which player's archives",
-                    choices: {
-                        Mine: () => true,
-                        "Opponent's": (context) => !!context.player.opponent
-                    }
-                }
+            target: {
+                cardType: 'creature',
+                gameAction: ability.actions.dealDamage({ amount: 2 })
             },
             then: (preThenContext) => {
                 let damageEvents = [];
@@ -31,14 +21,22 @@ class HarmonicPack extends Card {
                     );
                 return {
                     alwaysTriggers: true,
+                    target: {
+                        mode: 'select',
+                        activePromptTitle: "Which player's archives",
+                        choices: {
+                            Mine: () => true,
+                            "Opponent's": (context) => !!context.player.opponent
+                        }
+                    },
                     gameAction: ability.actions.reveal((context) => {
                         damageEvents = context.preThenEvents || [];
+                        const archives =
+                            context.select === 'Mine'
+                                ? context.player.archives
+                                : context.player.opponent.archives;
                         return {
-                            target: _.shuffle(
-                                preThenContext.selects.player.choice === 'Mine'
-                                    ? context.player.archives
-                                    : context.player.opponent.archives
-                            )[0],
+                            target: archives.length > 0 ? _.shuffle(archives)[0] : [],
                             chatMessage: true,
                             location: 'archives'
                         };
@@ -49,17 +47,18 @@ class HarmonicPack extends Card {
                         // 3 damage is only dealt if the initial 2 damage was fully applied.
                         gameAction: ability.actions.sequential([
                             ability.actions.dealDamage(() => ({
-                                target: preThenContext.targets.creature,
+                                target: preThenContext.target,
                                 amount: dealtFullDamage() ? 3 : 0
                             })),
                             ability.actions.discard((context) => ({
-                                target: context.preThenEvent.card
+                                target: context.preThenEvent.card,
+                                chatMessage: false
                             }))
                         ]),
                         message: '{0} 使用 {1} 来 {3} 弃置 {4}',
                         messageArgs: (context) => [
-                            preThenContext.targets.creature && dealtFullDamage()
-                                ? `对 ${preThenContext.targets.creature.name} 造成额外3点伤害并 `
+                            preThenContext.target && dealtFullDamage()
+                                ? `对 ${preThenContext.target.name} 造成3点伤害并 `
                                 : '',
                             context.preThenEvent.card
                         ]

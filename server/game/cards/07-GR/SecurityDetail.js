@@ -8,7 +8,7 @@ class SecurityDetail extends Card {
                 controller: 'self',
                 cardType: 'creature',
                 gameAction: ability.actions.capture((context) => ({
-                    target: context.target.neighbors.concat(context.target)
+                    target: context.target ? context.target.neighbors.concat(context.target) : []
                 }))
             },
             effect: '抢占 1 琥珀到 {1} 上',

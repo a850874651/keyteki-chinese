@@ -5,10 +5,14 @@ class DrawnDown extends Card {
     setupCardAbilities(ability) {
         this.play({
             condition: (context) => !!context.player.opponent,
-            effect: "查看牌库顶 {2} 牌{3} 在 {1}的牌库",
+            effect: '{1}',
             effectArgs: (context) => {
                 const count = Math.min(3, context.player.opponent.deck.length);
-                return [context.player.opponent, count, count === 1 ? '' : 's'];
+                return count
+                    ? `查看牌库顶 ${count} 牌在${count === 1 ? '' : 's'} of ${
+                          context.player.opponent.name
+                      }的牌库`
+                    : `look at ${context.player.opponent.name}的牌库, 但是牌库是空的`;
             },
             gameAction: ability.actions.sequential([
                 ability.actions.conditional({

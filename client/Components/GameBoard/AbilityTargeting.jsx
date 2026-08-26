@@ -1,8 +1,8 @@
-import React, { useCallback } from 'react';
-import PropTypes from 'prop-types';
-import CardImage from './CardImage';
-import Icon from '../Icon';
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
+import PropTypes from 'prop-types';
+import React, { useCallback } from 'react';
+import Icon from '../Icon';
+import CardImage from './CardImage';
 
 const AbilityTargeting = (props) => {
     const onMouseOver = useCallback(
@@ -23,9 +23,10 @@ const AbilityTargeting = (props) => {
         [props]
     );
 
-    const renderSimpleCard = (card) => (
+    const renderSimpleCard = (card, style) => (
         <div
-            className='mb-2 h-24 w-16 shrink-0 overflow-hidden rounded-[6.25%] [&>canvas]:!h-full [&>canvas]:!w-full'
+            className='ability-targeting-card'
+            style={style}
             onMouseOut={() => onMouseOut(card)}
             onMouseOver={() =>
                 onMouseOver({
@@ -38,13 +39,27 @@ const AbilityTargeting = (props) => {
         </div>
     );
 
-    const targetCards = props.targets.map((target) => renderSimpleCard(target));
+    const count = props.targets.length;
+    // Overlap margin: spread cards across available width, overlapping when
+    // they don't fit. 100% = parent width, 4rem = card width (w-16).
+    const overlapMargin =
+        count > 1 ? { marginLeft: `calc((100% - ${count} * 4rem) / ${count - 1})` } : undefined;
 
     return (
-        <div className='flex flex-row items-center justify-center gap-2'>
-            {renderSimpleCard(props.source)}
-            {targetCards.length > 0 && <Icon icon={faArrowRight} />}
-            {targetCards}
+        <div className='ability-targeting'>
+            <div className='ability-targeting-source'>
+                {renderSimpleCard(props.source)}
+                {count > 0 && <Icon icon={faArrowRight} />}
+            </div>
+            {count > 0 && (
+                <div className={`ability-targeting-targets${count > 1 ? ' flex-1' : ''}`}>
+                    {props.targets.map((target, index) => (
+                        <React.Fragment key={target.uuid || index}>
+                            {renderSimpleCard(target, index > 0 ? overlapMargin : undefined)}
+                        </React.Fragment>
+                    ))}
+                </div>
+            )}
         </div>
     );
 };

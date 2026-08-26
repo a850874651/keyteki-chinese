@@ -4,28 +4,13 @@ class Cladogenesis extends Card {
     // Play: Each player discards the top card of their deck and reveals their hand. Discard each card that belongs to their discarded card's house. Each player refills their hand as if it were their "draw cards" step.
     setupCardAbilities(ability) {
         this.play({
-            effect:
-                "弃掉 {1}, 展示每位玩家的手牌, 并弃掉与其被弃掉的卡牌属于同一势力的每张卡牌",
-            effectArgs: (context) => {
-                let res = [];
-                let myTop = context.player.deck.length > 0 ? context.player.deck[0] : '';
-                if (myTop) {
-                    res.push(myTop);
-                }
-                if (context.player.opponent && context.player.opponent.deck.length > 0) {
-                    res.push(context.player.opponent.deck[0]);
-                }
-                if (res.length === 0) {
-                    return [['nothing']];
-                }
-                return [res];
-            },
+            effect: "弃掉每位玩家牌库顶的牌, 展示每位玩家的手牌, 并弃掉与其被弃掉的卡牌属于同一势力的每张卡牌",
             gameAction: ability.actions.sequential([
-                ability.actions.discard((context) => ({
-                    target: context.game
-                        .getPlayers()
-                        .filter((player) => player.deck.length > 0)
-                        .map((player) => player.deck[0])
+                ability.actions.discardTopOfDeck((context) => ({
+                    target: context.player
+                })),
+                ability.actions.discardTopOfDeck((context) => ({
+                    target: context.player.opponent
                 })),
                 ability.actions.reveal((context) => ({
                     target: context.player.hand,

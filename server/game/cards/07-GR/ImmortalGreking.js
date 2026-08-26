@@ -26,13 +26,16 @@ class ImmortalGreking extends Card {
                         until: {
                             onCardLeavesPlay: (event) => event.card === context.source
                         },
-                        effect: ability.effects.changeHouse(context.source.printedHouse)
+                        effect: ability.effects.changeHouse(context.source.getHouses())
                     }))
                 ])
             },
-            effect:
-                '获得 {1} 的控制权并将其放到其战线的任意位置, 使其属于 {2} 势力直到 {3} 离场',
-            effectArgs: (context) => [context.target, context.source.printedHouse, context.source]
+            effect: '获得 {1} 的控制权并将其放到其战线的任意位置, 使其属于 {2} 势力直到 {3} 离场',
+            effectArgs: (context) => [
+                context.target,
+                context.source.getHouses().join(' and '),
+                context.source
+            ]
         });
 
         this.destroyed({

@@ -14,7 +14,11 @@ class SpaceInvaders extends Card {
                 cardType: 'creature',
                 gameAction: ability.actions.makeTokenCreature()
             },
-            effect: '展示并将 {0} 作为代标生物放置入场'
+            effect: '{1}',
+            effectArgs: (context) =>
+                context.target.length
+                    ? `展示并作为代标 ${context.target.map((c) => c.name).join(', ')}`
+                    : '没有从手牌展示生物'
         });
     }
 }

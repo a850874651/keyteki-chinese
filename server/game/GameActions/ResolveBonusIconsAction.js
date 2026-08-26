@@ -5,7 +5,156 @@ class ResolveBonusIconsAction extends CardGameAction {
     setup() {
         super.setup();
         this.name = 'resolveBonusIcons';
-        this.effectMsg = '结算了 {0}的奖励图标';
+        this.effectMsg = "结算了 {0}的奖励图标";
+
+        // Ability replacements resolve to do an action rather than another bonus icon. They cannot be further replaced by bonus icon replacements.
+        this.abilityReplacements = {
+            steal: 'steal 1 amber',
+            'token-creature': 'make a token creature'
+        };
+
+        // Display names for prompt buttons
+        this.displayNames = {
+            'token-creature': 'Token Creature'
+        };
+    }
+
+    getDisplayName(icon) {
+        return this.displayNames[icon] || icon;
+    }
+
+    getAvailableReplacements(player, currentIcon, usedSources) {
+        // Returns array of {newIcon, source, effect} for replacements available from currentIcon
+        // Filters out effects whose source has already been used in this chain
+        const effects = player.effects.filter((e) => e.type === 'mayResolveBonusIconsAs');
+        const replacements = [];
+
+        for (const effect of effects) {
+            const source = effect.context?.source;
+            // Skip if this source has already been used in this chain
+            if (source && usedSources.has(source)) {
+                continue;
+            }
+            const value = effect.getValue(player);
+            // Skip no-op self-replacements (e.g. Amphora Captura's
+            // any-icon -> capture effect when the current icon is already
+            // capture). Without this filter the player would be offered
+            // duplicate buttons that resolve to the same outcome.
+            if (value.newIcon === currentIcon) {
+                continue;
+            }
+            if (value.icon === 'any' || value.icon === currentIcon) {
+                replacements.push({
+                    effect,
+                    newIcon: value.newIcon,
+                    source
+                });
+            }
+        }
+
+        return replacements;
+    }
+
+    promptForIconResolution(context, event, currentIcon, usedSources = new Set()) {
+        // Terminal replacements are actions, not icons and can no longer be
+        // chained - eg Amphora Capture can be replaced by Scrivener Favian, but
+        // not vice versa
+        if (currentIcon in this.abilityReplacements) {
+            this.resolveIcon(context, event, currentIcon);
+            return;
+        }
+
+        const replacements = this.getAvailableReplacements(
+            context.player,
+            currentIcon,
+            usedSources
+        );
+
+        if (replacements.length === 0) {
+            // No more replacements available, resolve the icon
+            this.resolveIcon(context, event, currentIcon);
+            return;
+        }
+
+        // Build choices: current icon + one entry per available replacement.
+        // We do NOT deduplicate by newIcon: when multiple sources offer the
+        // same replacement (e.g. both Puzzling Trinket and Amphora Captura
+        // replace amber with capture), the player must be able to choose
+        // which source to spend, since usedSources tracking affects which
+        // further chained replacements remain available downstream.
+        const choices = [this.getDisplayName(currentIcon)];
+        const handlers = [() => this.resolveIcon(context, event, currentIcon)];
+
+        // Count how many replacements target each newIcon so we only
+        // disambiguate the label with the source name when needed.
+        const newIconCounts = replacements.reduce((acc, r) => {
+            acc[r.newIcon] = (acc[r.newIcon] || 0) + 1;
+            return acc;
+        }, {});
+
+        for (const replacement of replacements) {
+            const baseLabel = this.getDisplayName(replacement.newIcon);
+            const label =
+                newIconCounts[replacement.newIcon] > 1 && replacement.source
+                    ? `${baseLabel} (${replacement.source.name})`
+                    : baseLabel;
+            choices.push(label);
+            handlers.push(() => {
+                // Print the replacement message
+                if (replacement.source) {
+                    const bonusIcons = ['amber', 'capture', 'damage', 'draw', 'discard', 'power'];
+                    if (bonusIcons.includes(replacement.newIcon)) {
+                        context.game.addMessage(
+                            "{0}  使用 {1} 将 {2}的 {3} 奖励图标视为 {4} {5} 奖励图标",
+                            context.player,
+                            replacement.source,
+                            event.card,
+                            currentIcon,
+                            'aeiou'.includes(replacement.newIcon[0].toLowerCase()) ? 'an' : 'a',
+                            replacement.newIcon
+                        );
+                    } else if (this.abilityReplacements[replacement.newIcon]) {
+                        context.game.addMessage(
+                            "{0} 使用 {1} 来结算 {2}的 {3} 奖励图标至 {4}",
+                            context.player,
+                            replacement.source,
+                            event.card,
+                            currentIcon,
+                            this.abilityReplacements[replacement.newIcon]
+                        );
+                    } else {
+                        context.game.addMessage(
+                            "{0} 使用 {1} 来结算 {2}的 {3} 奖励图标视为 {4}",
+                            context.player,
+                            replacement.source,
+                            event.card,
+                            currentIcon,
+                            replacement.newIcon
+                        );
+                    }
+                }
+                // Mark this source as used so it can't be used again in this chain
+                const newUsedSources = new Set(usedSources);
+                if (replacement.source) {
+                    newUsedSources.add(replacement.source);
+                }
+                // Continue prompting with the new icon
+                this.promptForIconResolution(context, event, replacement.newIcon, newUsedSources);
+            });
+        }
+
+        if (choices.length > 1) {
+            context.game.promptWithHandlerMenu(context.player, {
+                activePromptTitle: `你希望怎么结算 ${currentIcon} 奖励图标?`,
+                choices: choices,
+                context: context,
+                handlers: handlers,
+                source: event.card
+            });
+        } else {
+            // Only one choice (no valid replacements), just resolve
+            this.resolveIcon(context, event, currentIcon);
+        }
     }
 
     /**
@@ -39,35 +188,10 @@ class ResolveBonusIconsAction extends CardGameAction {
                     .gainAmber({ bonus: true })
                     .resolve(context.player, this.bonusIconContext(context, event.card, icon));
                 context.game.addMessage(
-                    '{0} 获得了1个琥珀，通过 {1}的奖励图标',
+                    "{0} 使用 {1}的琥珀奖励图标获得1琥珀",
                     context.player,
                     event.card
                 );
-                break;
-            case 'draw':
-                context.game.actions
-                    .draw({ bonus: true })
-                    .resolve(context.player, this.bonusIconContext(context, event.card, icon));
-                context.game.addMessage(
-                    '{0} 抽取了1张卡牌，通过 {1}的奖励图标',
-                    context.player,
-                    event.card
-                );
-                break;
-            case 'steal':
-                if (context.player.opponent && context.player.opponent.amber > 0) {
-                    context.game.actions
-                        .steal()
-                        .resolve(
-                            context.player.opponent,
-                            this.bonusIconContext(context, event.card, icon)
-                        );
-                    context.game.addMessage(
-                        '{0} 窃取了1个琥珀，通过 {1}的奖励图标',
-                        context.player,
-                        event.card
-                    );
-                }
                 break;
             case 'capture':
                 if (
@@ -88,10 +212,10 @@ class ResolveBonusIconsAction extends CardGameAction {
                                     this.bonusIconContext(context, event.card, icon, player)
                                 );
                             context.game.addMessage(
-                                '{0} 抢占了1个琥珀到 {1} 上，通过 {2}的奖励图标',
+                                "{0} 使用 {1}的奖励图标来抢占1琥珀到{2}",
                                 player,
-                                card,
-                                event.card
+                                event.card,
+                                card
                             );
                             return true;
                         }
@@ -102,8 +226,8 @@ class ResolveBonusIconsAction extends CardGameAction {
                 if (context.game.creaturesInPlay.length > 0) {
                     context.game.promptForSelect(context.game.activePlayer, {
                         activePromptTitle: 'Choose a creature to damage due to bonus icon',
-                        source: event.card,
                         cardType: 'creature',
+                        source: event.card,
                         onSelect: (player, card) => {
                             context.game.actions
                                 .dealDamage({ bonus: true })
@@ -112,10 +236,10 @@ class ResolveBonusIconsAction extends CardGameAction {
                                     this.bonusIconContext(context, event.card, icon, player)
                                 );
                             context.game.addMessage(
-                                '{0} 对 {1} 造成了1点伤害，通过 {2}的奖励图标',
+                                "{0} 使用 {1}的伤害奖励图标来对{2}造成1点伤害",
                                 player,
-                                card,
-                                event.card
+                                event.card,
+                                card
                             );
                             return true;
                         }
@@ -126,9 +250,9 @@ class ResolveBonusIconsAction extends CardGameAction {
                 if (context.player.hand.length > 0) {
                     context.game.promptForSelect(context.game.activePlayer, {
                         activePromptTitle: 'Choose a card to discard due to bonus icon',
-                        source: event.card,
-                        location: 'hand',
                         controller: 'self',
+                        location: 'hand',
+                        source: event.card,
                         onSelect: (player, card) => {
                             context.game.actions
                                 .discard({ chatMessage: false })
@@ -137,14 +261,37 @@ class ResolveBonusIconsAction extends CardGameAction {
                                     this.bonusIconContext(context, event.card, icon, player)
                                 );
                             context.game.addMessage(
-                                '{0} 弃掉了 {1} ，通过 {2}的奖励图标',
+                                "{0} 使用 {1}的奖励图标来弃置{2}",
                                 player,
-                                card,
-                                event.card
+                                event.card,
+                                card
                             );
                             return true;
                         }
                     });
+                }
+                break;
+            case 'draw':
+                context.game.actions
+                    .draw({ bonus: true })
+                    .resolve(context.player, this.bonusIconContext(context, event.card, icon));
+                context.game.addMessage(
+                    "{0} uses {1}'s draw bonus icon to draw a card",
+                    context.player,
+                    event.card
+                );
+                break;
+            case 'steal':
+                if (context.player.opponent && context.player.opponent.amber > 0) {
+                    context.game.actions
+                        .steal()
+                        .resolve(
+                            context.player.opponent,
+                            this.bonusIconContext(context, event.card, icon)
+                        );
+                    // No addMessage here: 'steal' only reaches resolveIcon as an
+                    // abilityReplacement (e.g. Scrivener Favian), and that
+                    // replacement flow emits its own resolution message.
                 }
                 break;
             case 'power':
@@ -162,17 +309,17 @@ class ResolveBonusIconsAction extends CardGameAction {
                                     this.bonusIconContext(context, event.card, icon, player)
                                 );
                             context.game.addMessage(
-                                "{0} adds a +1 power counter to {1} due to {2}'s bonus icon",
+                                "{0} uses {1}'s power bonus icon to add a +1 power counter to {2}",
                                 player,
-                                card,
-                                event.card
+                                event.card,
+                                card
                             );
                             return true;
                         }
                     });
                 }
                 break;
-            case 'token':
+            case 'token-creature':
                 if (context.player.tokenCard) {
                     context.game.actions
                         .makeTokenCreature()
@@ -180,12 +327,14 @@ class ResolveBonusIconsAction extends CardGameAction {
                             context.player.deck[0],
                             this.bonusIconContext(context, event.card, icon)
                         );
-                    context.game.addMessage(
-                        '{0} 制造了一个代标生物，通过 {1}的奖励图标',
-                        context.player,
-                        event.card
-                    );
                 }
+                break;
+            default:
+                context.game.addAlert(
+                    'danger',
+                    'Attempted to resolve unknown bonus icon type: {0}',
+                    icon
+                );
                 break;
         }
     }
@@ -195,50 +344,13 @@ class ResolveBonusIconsAction extends CardGameAction {
             EVENTS.onResolveBonusIcons,
             { card: card, context: context },
             (event) => {
-                for (let icon of event.card.bonusIcons) {
+                for (let icon of event.card.getResolvableBonusIcons()) {
                     const resolveCount = card.sumEffects('resolveBonusIconsAdditionalTime') + 1;
 
                     for (let rc = 0; rc < resolveCount; ++rc) {
-                        let choices = [icon];
-                        let mayResolveBonusIconsAsEffects =
-                            context.player.getEffects('mayResolveBonusIconsAs');
-
-                        if (mayResolveBonusIconsAsEffects) {
-                            let noIconAdded = false;
-
-                            while (!noIconAdded) {
-                                noIconAdded = true;
-
-                                for (let resolveBonusAsIcon of mayResolveBonusIconsAsEffects) {
-                                    if (
-                                        resolveBonusAsIcon.icon === 'any' ||
-                                        choices.includes(resolveBonusAsIcon.icon)
-                                    ) {
-                                        if (!choices.includes(resolveBonusAsIcon.newIcon)) {
-                                            choices.push(resolveBonusAsIcon.newIcon);
-                                            noIconAdded = false;
-                                        }
-                                    }
-                                }
-                            }
-                        }
-
-                        if (choices.length > 1) {
-                            context.game.promptWithHandlerMenu(context.player, {
-                                activePromptTitle:
-                                    'How do you wish to resolve this ' + icon + ' icon?',
-                                choices: choices,
-                                handlers: choices.map(
-                                    (choice) => () => this.resolveIcon(context, event, choice)
-                                ),
-                                context: context,
-                                source: card
-                            });
-                        } else {
-                            context.game.queueSimpleStep(() => {
-                                this.resolveIcon(context, event, icon);
-                            });
-                        }
+                        context.game.queueSimpleStep(() => {
+                            this.promptForIconResolution(context, event, icon);
+                        });
                     }
                 }
             }

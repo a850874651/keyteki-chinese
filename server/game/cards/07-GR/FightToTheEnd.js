@@ -18,7 +18,7 @@ class FightToTheEnd extends Card {
             },
             effect: '{1} 重整并使用 {0} 进行战斗',
             effectArgs: (context) =>
-                context.player.isHaunted()
+                context.player.isHaunted() && context.target
                     ? 'give ' + context.target.name + ' skirmish until it leaves play, then '
                     : '',
             then: (preThenContext) => ({

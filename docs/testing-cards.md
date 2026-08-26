@@ -125,7 +125,7 @@ this.setupTest({
 inPlay: ['creature-left', 'creature-middle', 'creature-right'];
 ```
 
-**Choosing test cards:** When selecting cards for `hand`, `inPlay`, or `discard`, check the JSON data for any cards that will be played or used during the test. Cards may have aember bonuses, keywords (taunt, elusive, etc.), power values, or abilities that interfere with assertions. Use `jq '.cards[] | select(.id == "card-id") | {id, amber, power, keywords, text}' keyteki-json-data/packs/*.json` to verify a card's properties before using it.
+**Choosing test cards:** When selecting cards for `hand`, `inPlay`, or `discard`, check the JSON data for any cards that will be played or used during the test. Cards may have bonus aember, keywords (taunt, elusive, etc.), power values, or abilities that interfere with assertions. Use `jq '.cards[] | select(.id == "card-id") | {id, amber, power, keywords, text}' master-vault-data/packs/*.json` to verify a card's properties before using it.
 
 ### Card State Setup
 
@@ -140,7 +140,7 @@ beforeEach(function () {
     });
 
     // Exhaust a creature
-    this.myCreature.exhausted = true;
+    this.myCreature.exhaust();
 
     // Ready a creature
     this.myCreature.ready();
@@ -475,7 +475,7 @@ expect(this.myCreature.tokens.damage).toBe(3);
 expect(this.myCreature.tokens.amber).toBeUndefined();
 
 // ❌ Workaround that hides the real issue
-expect((this.myCreature.tokens.damage || 0)).toBe(0);
+expect(this.myCreature.tokens.damage || 0).toBe(0);
 
 // ✅ Use the getter, which is always defined
 expect(this.myCreature.damage).toBe(3);
@@ -709,7 +709,7 @@ it('should gain 2 aember when destroyed', function () {
 
 ```javascript
 it('should ready and fight with a creature', function () {
-    this.dextre.exhausted = true;
+    this.dextre.exhaust();
     this.player1.useAction(this.gauntletOfCommand);
     expect(this.player1).toHavePrompt('Choose a creature');
     this.player1.clickCard(this.dextre);

@@ -1,5 +1,3 @@
-const _ = require('underscore');
-
 // Fail tests if Node emits a circular-dependency warning during module load.
 // These warnings ("Accessing non-existent property 'X' of module exports
 // inside circular dependency") indicate a require cycle that can cause subtle
@@ -28,6 +26,8 @@ require('./objectformatters.js');
 const DeckBuilder = require('./deckbuilder.js');
 const GameFlowWrapper = require('./gameflowwrapper.js');
 const { checkAllMessages } = require('./messagehelper.js');
+const { cardCamel } = require('./chat-utils.js');
+const { applySetupTest } = require('./setupTest.js');
 
 const deckBuilder = new DeckBuilder();
 
@@ -132,7 +132,7 @@ const customMatchers = {
     },
     toHavePromptButton: function (actual, expected) {
         const buttons = actual.currentButtons;
-        const pass = _.any(buttons, (button) => button === expected);
+        const pass = buttons.some((button) => button === expected);
 
         return {
             pass,
@@ -140,7 +140,7 @@ const customMatchers = {
                 if (pass) {
                     return `Expected ${actual.name} not to have prompt button "${expected}" but it did.`;
                 } else {
-                    const buttonText = _.map(buttons, (button) => '[' + button + ']').join('\n');
+                    const buttonText = buttons.map((button) => '[' + button + ']').join('\n');
                     return `Expected ${actual.name} to have prompt button "${expected}" but it had buttons:\n${buttonText}`;
                 }
             }
@@ -149,11 +149,11 @@ const customMatchers = {
     toHavePromptCardButton: function (actual, card) {
         const buttons = actual.currentPrompt().buttons;
 
-        if (_.isString(card)) {
+        if (typeof card === 'string') {
             card = actual.findCardByName(card);
         }
 
-        const pass = _.any(buttons, (button) => (button.card ? button.card.id : '') === card.id);
+        const pass = buttons.some((button) => (button.card ? button.card.id : '') === card.id);
 
         return {
             pass,
@@ -161,10 +161,9 @@ const customMatchers = {
                 if (pass) {
                     return `Expected ${actual.name} not to have prompt button "${card.name}" but it did.`;
                 } else {
-                    const buttonText = _.map(
-                        buttons,
-                        (button) => '[' + (button.card ? button.card.name : '') + ']'
-                    ).join('\n');
+                    const buttonText = buttons
+                        .map((button) => '[' + (button.card ? button.card.name : '') + ']')
+                        .join('\n');
                     return `Expected ${actual.name} to have prompt button "${card.name}" but it had buttons:\n${buttonText}`;
                 }
             }
@@ -176,7 +175,7 @@ const customMatchers = {
         player.checkUnserializableGameState();
 
         const buttons = player.currentPrompt().buttons;
-        const pass = _.any(buttons, (button) => button.text === 'No');
+        const pass = buttons.some((button) => button.text === 'No');
 
         if (pass) {
             player.clickPrompt('No');
@@ -191,7 +190,7 @@ const customMatchers = {
         };
     },
     toBeAbleToSelect: function (player, card) {
-        if (_.isString(card)) {
+        if (typeof card === 'string') {
             card = player.findCardByName(card);
         }
 
@@ -206,7 +205,7 @@ const customMatchers = {
         };
     },
     toBeAbleToPlay: function (player, card) {
-        if (_.isString(card)) {
+        if (typeof card === 'string') {
             card = player.findCardByName(card);
         }
 
@@ -255,11 +254,84 @@ const customMatchers = {
 // Register custom matchers with vitest's expect.extend
 expect.extend(customMatchers);
 
+// Card / Player / Game objects have huge, deeply-cyclic reference graphs
+// (Card -> controller -> game -> all players -> all cards -> events -> ...).
+// When a `toEqual`/`toContain`/etc. assertion fails involving one of these,
+// vitest's pretty-format diff serializer can take seconds to minutes and
+// blow the heap trying to walk the graph.
+//
+// 1. addEqualityTesters: short-circuit equality with reference identity for
+//    these classes. Two Cards are equal iff they are the same instance —
+//    deep-equal of Card fields is meaningless and ruinously expensive.
+// 2. addSnapshotSerializer: render them as short identifiers in any
+//    serialized output (assertion diffs, snapshots) instead of recursing.
+const Card = require('../../server/game/Card.js');
+const Player = require('../../server/game/player.js');
+const Game = require('../../server/game/game.js');
+
+expect.addEqualityTesters([
+    function gameObjectIdentityTester(a, b) {
+        const isGameObject = (v) => v instanceof Card || v instanceof Player || v instanceof Game;
+        if (isGameObject(a) || isGameObject(b)) {
+            return a === b;
+        }
+        return undefined; // fall back to default deep equality
+    }
+]);
+
+expect.addSnapshotSerializer({
+    test: (val) => val instanceof Card || val instanceof Player || val instanceof Game,
+    serialize: (val) => {
+        if (val instanceof Card) {
+            return `Card(${val.name}${val.location ? ' @ ' + val.location : ''})`;
+        }
+        if (val instanceof Player) {
+            return `Player(${val.name})`;
+        }
+        return 'Game';
+    }
+});
+
+// `addSnapshotSerializer` only affects snapshot matchers (toMatchSnapshot
+// etc.) — assertion-failure diffs go through @vitest/utils' diff.js, which
+// uses a fixed pretty-format plugin list with no extension hook. To prevent
+// failure diffs from recursing through the entire game object graph (and
+// blowing the heap when a `toEqual` against e.g. `cardsInPlay` fails), we
+// install our serializer by wrapping one of the existing plugin references
+// imported from @vitest/pretty-format. The plugin objects are shared by
+// reference with diff.js's PLUGINS array, so mutating their `test`/
+// `serialize` methods here is observed by both diff and snapshot paths.
+const prettyFormatPlugins = require('@vitest/pretty-format').plugins;
+const isGameObject = (v) => v instanceof Card || v instanceof Player || v instanceof Game;
+const serializeGameObject = (val) => {
+    if (val instanceof Card) {
+        return `Card(${val.name}${val.location ? ' @ ' + val.location : ''})`;
+    }
+    if (val instanceof Player) {
+        return `Player(${val.name})`;
+    }
+    return 'Game';
+};
+const targetPlugin = prettyFormatPlugins.AsymmetricMatcher;
+if (!targetPlugin.__keytekiWrapped) {
+    const originalTest = targetPlugin.test.bind(targetPlugin);
+    const originalSerialize = targetPlugin.serialize.bind(targetPlugin);
+    targetPlugin.test = (val) => isGameObject(val) || originalTest(val);
+    targetPlugin.serialize = (val, ...rest) =>
+        isGameObject(val) ? serializeGameObject(val) : originalSerialize(val, ...rest);
+    targetPlugin.__keytekiWrapped = true;
+}
+
 beforeEach(function () {
     // Clear previous test context
     for (let key of Object.keys(testContext)) {
         delete testContext[key];
     }
+
+    // `this.scenarioBreak()` is a no-op under vitest. In scenario mode
+    // (loaded via server/devtools/scenario/runner.js), it halts test execution
+    // at the call site so the dev can interact with the resulting game state.
+    this.scenarioBreak = () => {};
 
     this.flow = new GameFlowWrapper(cardsByCode);
 
@@ -269,108 +341,30 @@ beforeEach(function () {
     this.player1 = this.flow.player1;
     this.player2 = this.flow.player2;
 
-    _.each(ProxiedGameFlowWrapperMethods, (method) => {
+    for (const method of ProxiedGameFlowWrapperMethods) {
         this[method] = (...args) => this.flow[method].apply(this.flow, args);
-    });
+    }
 
     this.buildDeck = function (faction, cards) {
         return deckBuilder.buildDeck(faction, cards);
     };
 
-    this.cardCamel = function (card) {
-        let split = card.id.split('-');
-        for (let i = 1; i < split.length; i++) {
-            split[i] = split[i].slice(0, 1).toUpperCase() + split[i].slice(1);
-            // TODO Enable this and fix the tests it breaks
-            // if (split[i].length === 1) {
-            //     split[i] = split[i].toLowerCase();
-            // }
-        }
-        return split.join('');
-    };
+    this.cardCamel = cardCamel;
 
     /**
      * Factory method. Creates a new simulation of a game.
      * @param {Object} [options = {}] - specifies the state of the game
      */
     this.setupTest = function (options = {}) {
-        //Set defaults
-        if (!options.player1) {
-            options.player1 = {};
-        }
-
-        if (!options.player2) {
-            options.player2 = {};
-        }
-
-        if (options.gameFormat) {
-            this.game.gameFormat = options.gameFormat;
-        }
-
-        //Build decks
-        this.player1.selectDeck(deckBuilder.customDeck(options.player1));
-        this.player2.selectDeck(deckBuilder.customDeck(options.player2));
-
-        this.startGame();
-        //Setup phase
-
-        this.keepCards();
-        if (options.phase !== 'setup') {
-            // Choose a house
-            this.player1.clickPrompt(this.player1.currentButtons[0]);
-            this.player1.endTurn();
-            this.player2.clickPrompt(this.player2.currentButtons[0]);
-            this.player2.endTurn();
-            if (options.player1.house) {
-                this.player1.clickPrompt(options.player1.house);
-            }
-        }
-
-        //Player stats
-        this.player1.amber = options.player1.amber;
-        this.player2.amber = options.player2.amber;
-        this.player1.keys = options.player1.keys;
-        this.player2.keys = options.player2.keys;
-        this.player1.chains = options.player1.chains;
-        this.player2.chains = options.player2.chains;
-        //Token card
-        this.player1.token = options.player1.token;
-        this.player2.token = options.player2.token;
-        //Field
-        this.player1.hand = [];
-        this.player2.hand = [];
-        this.player1.inPlay = options.player1.inPlay;
-        this.player2.inPlay = options.player2.inPlay;
-        //Conflict deck related
-        this.player1.hand = options.player1.hand;
-        this.player2.hand = options.player2.hand;
-        this.player1.discard = options.player1.discard;
-        this.player2.discard = options.player2.discard;
-        this.player1.archives = options.player1.archives;
-        this.player2.archives = options.player2.archives;
-
-        for (let player of [this.player1, this.player2]) {
-            let cards = ['inPlay', 'hand', 'discard', 'archives'].reduce(
-                (array, location) => array.concat(player[location]),
-                []
-            );
-            for (let card of cards) {
-                // still allow access by token's name
-                let camel = this.cardCamel(card.isToken() ? card.tokenCard() : card);
-                if (!this[camel]) {
-                    this[camel] = card;
-                }
-            }
-
-            for (let prophecy of player.player.prophecyCards) {
-                let camel = this.cardCamel(prophecy);
-                if (!this[camel]) {
-                    this[camel] = prophecy;
-                }
-            }
-        }
-
-        this.game.checkGameState(true);
+        applySetupTest(options, {
+            game: this.game,
+            player1: this.player1,
+            player2: this.player2,
+            startGame: (...args) => this.startGame(...args),
+            keepCards: (...args) => this.keepCards(...args),
+            deckBuilder,
+            cardRegistry: this
+        });
     };
 });
 

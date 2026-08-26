@@ -30,7 +30,7 @@ class KeyPhase extends Phase {
             }
         } else {
             this.game.addMessage(
-                '{0} 未锻造钥匙.  他有 {1} 琥珀.  他的当前钥匙锻造费用为 {2} 琥珀',
+                '{0}未锻造钥匙. 他有 {1} 琥珀. 他的当前钥匙锻造费用为 {2} 琥珀',
                 this.game.activePlayer,
                 this.game.activePlayer.amber,
                 this.game.activePlayer.getCurrentKeyCost()

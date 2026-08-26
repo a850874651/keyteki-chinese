@@ -11,20 +11,29 @@ class Commpod extends Card {
                 location: 'hand',
                 cardCondition: (card) => card.hasHouse('mars'),
                 gameAction: ability.actions.sequentialForEach((context) => ({
-                    num: context.target.length,
+                    num: (context.target || []).length,
                     action: ability.actions.ready({
                         promptForSelect: {
                             optional: true,
                             activePromptTitle: 'Choose a creature to ready',
                             cardType: 'creature',
                             cardCondition: (card) => card.hasHouse('mars'),
-                            controller: 'self'
+                            controller: 'self',
+                            message: '{0} uses {1} to ready {2}',
+                            messageArgs: (card) => [context.player, context.source, card]
                         }
                     })
                 }))
             },
-            effect: 'reveal {0} and to ready a creature {1} times',
-            effectArgs: (context) => context.target.length
+            effect: '{1}',
+            effectArgs: (context) => {
+                const n = context.target.length;
+                return n
+                    ? `reveal ${context.target
+                          .map((c) => c.name)
+                          .join(', ')} and ready ${n} creature${n === 1 ? '' : 's'}`
+                    : 'reveal no Mars cards from their hand';
+            }
         });
     }
 }

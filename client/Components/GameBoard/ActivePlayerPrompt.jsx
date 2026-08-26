@@ -1,5 +1,5 @@
 import { Button, Tooltip } from '@heroui/react';
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import Panel from '../Site/Panel';
 import AbilityTargeting from './AbilityTargeting';
@@ -28,6 +28,43 @@ import CardImage from './CardImage';
  */
 const ActivePlayerPrompt = (props) => {
     const { t, i18n } = useTranslation();
+    const [buttonsDisabled, setButtonsDisabled] = useState(false);
+    const [forcePassDisabled, setForcePassDisabled] = useState(false);
+    const prevPromptTitle = useRef(null);
+    const prevForcePass = useRef(false);
+
+    useEffect(() => {
+        const titleText =
+            typeof props.promptTitle === 'string' ? props.promptTitle : props.promptTitle?.text;
+        if (titleText === 'Game Won' && prevPromptTitle.current !== 'Game Won') {
+            setButtonsDisabled(true);
+            const timer = setTimeout(() => setButtonsDisabled(false), 1500);
+            prevPromptTitle.current = titleText;
+            return () => {
+                clearTimeout(timer);
+                setButtonsDisabled(false);
+            };
+        }
+
+        prevPromptTitle.current = titleText;
+    }, [props.promptTitle]);
+
+    useEffect(() => {
+        if (props.forcePassAvailable && !prevForcePass.current) {
+            setForcePassDisabled(true);
+            const timer = setTimeout(() => setForcePassDisabled(false), 5000);
+            prevForcePass.current = true;
+            return () => {
+                clearTimeout(timer);
+                setForcePassDisabled(false);
+            };
+        }
+
+        if (!props.forcePassAvailable) {
+            prevForcePass.current = false;
+        }
+    }, [props.forcePassAvailable]);
+
     const iconAssetByName = {
         forgedkeyblue: new URL('../../assets/img/forgedkeyblue.png', import.meta.url).href,
         forgedkeyred: new URL('../../assets/img/forgedkeyred.png', import.meta.url).href,
@@ -125,7 +162,11 @@ const ActivePlayerPrompt = (props) => {
             const normalizedButtonText = buttonText.trim().toLowerCase();
             const isCancel =
                 normalizedButtonText === 'cancel' ||
+                normalizedButtonText === 'cancel prompt' ||
                 String(button.command || '')
+                    .toLowerCase()
+                    .includes('cancel') ||
+                String(button.arg || '')
                     .toLowerCase()
                     .includes('cancel');
             const hasIcon = Boolean(button.icon);
@@ -148,7 +189,7 @@ const ActivePlayerPrompt = (props) => {
                     }
                     onMouseOver={() => onMouseOver(button.card)}
                     onMouseOut={() => onMouseOut(button.card)}
-                    isDisabled={button.disabled}
+                    isDisabled={button.disabled || buttonsDisabled}
                 >
                     {hasIcon ? (
                         <span className='inline-flex min-w-0 items-center justify-center gap-2'>
@@ -333,6 +374,18 @@ const ActivePlayerPrompt = (props) => {
                     <h4 className='mb-2 text-base font-medium leading-snug'>{promptTexts}</h4>
                     <div className='space-y-1.5'>{getControls()}</div>
                     <div className='mt-2 space-y-1.5'>{getButtons()}</div>
+                    {props.forcePassAvailable && (
+                        <div className='mt-3 border-t border-border/50 pt-3'>
+                            <Button
+                                variant='primary'
+                                className='w-full justify-center whitespace-nowrap text-sm capitalize !px-2 !py-1.5'
+                                onPress={props.onForcePass}
+                                isDisabled={forcePassDisabled}
+                            >
+                                Force Pass Turn
+                            </Button>
+                        </div>
+                    )}
                 </div>
             </Panel>
         </div>

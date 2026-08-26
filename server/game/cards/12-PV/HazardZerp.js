@@ -19,22 +19,20 @@ class HazardZerp extends Card {
         });
 
         this.scrap({
-            effect: '弃置 {1} 并造成3点伤害对 {2}',
-            effectArgs: (context) => [
-                context.targets.discard ? context.targets.discard : 'nothing',
-                context.targets.damage ? context.targets.damage : 'nothing'
-            ],
-            targets: {
-                discard: {
-                    activePromptTitle: 'Choose a card to discard',
-                    location: 'hand',
-                    controller: 'self',
-                    gameAction: ability.actions.discard({ chatMessage: false })
-                },
-                damage: {
+            preferActionPromptMessage: true,
+            target: {
+                activePromptTitle: '选择一张牌弃置',
+                location: 'hand',
+                controller: 'self',
+                gameAction: ability.actions.discard()
+            },
+            then: {
+                alwaysTriggers: true,
+                target: {
                     cardType: 'creature',
                     gameAction: ability.actions.dealDamage({ amount: 3 })
-                }
+                },
+                message: '{0} uses {1} to deal 3 damage to {2}'
             }
         });
     }

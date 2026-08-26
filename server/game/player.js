@@ -44,6 +44,8 @@ class Player extends GameObject {
 
         this.left = false;
         this.disconnectedAt = null;
+        this.lastEventAt = Date.now();
+        this.inactive = false;
 
         this.promptState = new PlayerPromptState(this);
     }
@@ -146,8 +148,7 @@ class Player extends GameObject {
      * @param {String} playingType
      */
     isCardInPlayableLocation(card, playingType) {
-        return _.any(
-            this.playableLocations,
+        return this.playableLocations.some(
             (location) => location.playingType === playingType && location.contains(card)
         );
     }
@@ -192,10 +193,10 @@ class Player extends GameObject {
             // Log draws before any shuffle, without the refill suffix if more cards remain
             const suffix = remainingCards > 0 ? '' : options.refillSuffix || '';
             this.game.addMessage(
-                '{0} draws {1} card{2}{3}',
+                '{0} draws {1} {2}{3}',
                 this,
                 numCards,
-                numCards > 1 ? 's' : '',
+                numCards > 1 ? 'cards' : 'card',
                 suffix
             );
         }
@@ -287,7 +288,7 @@ class Player extends GameObject {
     }
 
     removePlayableLocation(location) {
-        this.playableLocations = _.reject(this.playableLocations, (l) => l === location);
+        this.playableLocations = this.playableLocations.filter((l) => l !== location);
     }
 
     beginRound() {
@@ -541,9 +542,14 @@ class Player extends GameObject {
         let oldTopOfDeck = card.owner.deck[0];
 
         // Snapshot neighbors before removing from battleline - needed for cards like Smite
-        // that reference "neighbors of the attacked creature" after it's destroyed
+        // that reference "neighbors of the attacked creature" after it's destroyed, and for
+        // the "If cards leave play while resolving an ability, later instructions in the
+        // same ability refer to the cards as they were immediately prior to leaving play"
+        // rule. Directional snapshots back the leftNeighbor()/rightNeighbor() fallbacks
+        // used by cards like Badgemagus / Prof. Emeritus Kering / Ghosthawk.
         if (card.location === 'play area' && card.type === 'creature') {
-            card.neighborsBeforeLeavingPlay = card.neighbors?.slice() || [];
+            card.leftNeighborBeforeLeavingPlay = card.leftNeighbor();
+            card.rightNeighborBeforeLeavingPlay = card.rightNeighbor();
         }
 
         this.removeCardFromPile(card);
@@ -716,6 +722,14 @@ class Player extends GameObject {
         this.promptState.clearSelectableCards();
     }
 
+    setPromptedPiles(piles) {
+        this.promptState.setPromptedPiles(piles);
+    }
+
+    clearPromptedPiles() {
+        this.promptState.clearPromptedPiles();
+    }
+
     getSummaryForCardList(list, activePlayer, hideWhenFaceup) {
         return list.map((card) => {
             return card.getSummary(activePlayer, hideWhenFaceup);
@@ -763,16 +777,19 @@ class Player extends GameObject {
 
     getAvailableHouses() {
         let availableHouses = this.hand.concat(this.cardsInPlay).reduce((houses, card) => {
-            let cardForHouses = card.isToken() && card.tokenCard() ? card.tokenCard() : card;
-
             // Only cards in play can use their house enhancements to control what houses are available.
-            let cardHouses =
-                cardForHouses.location === 'play area'
-                    ? cardForHouses.getHouses()
-                    : [cardForHouses.printedHouse];
+            // For in-play tokens, resolve houses via the in-play instance (not owner.tokenCard),
+            // so copyCard effects and house enhancements on the live card are respected.
+            let cardHouses;
+            if (card.location === 'play area') {
+                cardHouses = card.getHouses();
+            } else {
+                let cardForHouses = card.isToken() && card.tokenCard() ? card.tokenCard() : card;
+                cardHouses = [cardForHouses.printedHouse];
+            }
 
             if (card.anyEffect('changeHouse')) {
-                cardHouses = card.getEffects('changeHouse');
+                cardHouses = card.getEffects('changeHouse').flat();
             }
 
             for (let house of cardHouses) {
@@ -784,14 +801,16 @@ class Player extends GameObject {
             return houses;
         }, this.houses.slice());
         let stopHouseChoice = this.getEffects('stopHouseChoice');
-        let restrictHouseChoice = _.flatten(this.getEffects('restrictHouseChoice')).filter(
-            (house) => !stopHouseChoice.includes(house) && availableHouses.includes(house)
-        );
+        let restrictHouseChoice = this.getEffects('restrictHouseChoice')
+            .flat()
+            .filter((house) => !stopHouseChoice.includes(house) && availableHouses.includes(house));
         if (restrictHouseChoice.length > 0) {
             availableHouses = restrictHouseChoice;
         }
 
-        availableHouses = _.difference(_.uniq(availableHouses), this.getEffects('stopHouseChoice'));
+        availableHouses = [...new Set(availableHouses)].filter(
+            (house) => !this.getEffects('stopHouseChoice').includes(house)
+        );
         return availableHouses;
     }
 
@@ -981,7 +1000,10 @@ class Player extends GameObject {
             this.game.promptWithHandlerMenu(this, {
                 activePromptTitle: "How much amber do you want to spend from your opponent's pool?",
                 source: card,
-                choices: _.range(sourceMin, sourceMax + 1).map(String),
+                choices: Array.from(
+                    { length: sourceMax + 1 - sourceMin },
+                    (_, i) => i + sourceMin
+                ).map(String),
                 choiceHandler: (choice) =>
                     promptForOpponentPoolSource(index + 1, takenSoFar + parseInt(choice, 10))
             });
@@ -1212,7 +1234,7 @@ class Player extends GameObject {
                     values: { card: source.name }
                 },
                 source: source,
-                choices: _.range(min, max + 1),
+                choices: Array.from({ length: max + 1 - min }, (_, i) => i + min),
                 choiceHandler: (choice) => {
                     if (choice) {
                         // Track the token selection for later consumption
@@ -1463,6 +1485,7 @@ class Player extends GameObject {
             },
             cardback: 'cardback',
             disconnected: !!this.disconnectedAt,
+            inactive: this.inactive,
             activePlayer: this.game.activePlayer === this,
             canRaiseTide:
                 !this.isTideHigh() &&
@@ -1516,7 +1539,7 @@ class Player extends GameObject {
             state.clock = this.clock.getState();
         }
 
-        return _.extend(state, promptState);
+        return Object.assign(state, promptState);
     }
 
     prophecyIndex(prophecyCard) {
@@ -1565,7 +1588,7 @@ class Player extends GameObject {
         return !flipProphecy.activeProphecy;
     }
 
-    activateProphecy(context, prophecyCard, showMessage = true) {
+    activateProphecy(_, prophecyCard) {
         if (!this.canActivateProphecy(prophecyCard)) {
             return false;
         }
@@ -1573,9 +1596,7 @@ class Player extends GameObject {
         prophecyCard.activeProphecy = true;
         this.game.raiseEvent(EVENTS.onProphecyActivated, { prophecyCard: prophecyCard });
 
-        if (showMessage) {
-            this.game.addMessage('{0} 激活了他的预言 {1}', this, prophecyCard);
-        }
+        this.game.addMessage('{0} 激活了他的预言 {1}', this, prophecyCard);
 
         return true;
     }

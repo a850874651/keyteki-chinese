@@ -27,7 +27,7 @@ class WidespreadCorruption extends Card {
                     }))
                 ])
             },
-            effect: '抢占1琥珀在{1}上'
+            effect: '抢占1琥珀在{0}上'
         });
     }
 }

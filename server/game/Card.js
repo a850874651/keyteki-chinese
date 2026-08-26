@@ -1,5 +1,3 @@
-const _ = require('underscore');
-
 const AbilityDsl = require('./abilitydsl.js');
 const CardAction = require('./cardaction.js');
 const Constants = require('../constants.js');
@@ -34,6 +32,19 @@ class Card extends EffectSource {
         this.tokens = {};
         this.gigantic = false;
 
+        /**
+         * Abilities that this card has.
+         *
+         * **IMPORTANT NOTE:** These arrays will include the _sum_ of abilities
+         * put on the card. Specifically, if a card is copying another card (for
+         * example, it’s face-down as a token creature), these arrays will have
+         * both the original card’s effects and the token creature’s effects.
+         *
+         * You in general will want to look at the
+         * actions/reactions/persistentEffects properties instead, as those will
+         * reflect what is actually active in the game, since they are sensitive
+         * both to text box blanking effects as well as copy card effects.
+         */
         this.abilities = {
             actions: [],
             reactions: [],
@@ -71,6 +82,8 @@ class Card extends EffectSource {
         this.clonedType = null;
         this.clonedNeighbors = null;
         this.clonedPurgedCards = null;
+        this.leftNeighborBeforeLeavingPlay = null;
+        this.rightNeighborBeforeLeavingPlay = null;
 
         this.powerPrinted = cardData.power;
         this.armorPrinted = cardData.armor;
@@ -96,7 +109,11 @@ class Card extends EffectSource {
             { command: 'remAmber', text: 'Remove 1 amber', menu: 'tokens' },
             { command: 'stun', text: 'Stun/Remove Stun', menu: 'tokens' },
             { command: 'ward', text: 'Ward/Remove Ward', menu: 'tokens' },
-            { command: 'enrage', text: 'Enrage/Remove Enrage', menu: 'tokens' }
+            { command: 'enrage', text: 'Enrage/Remove Enrage', menu: 'tokens' },
+            { command: 'under', text: 'Modify cards under', menu: 'main' },
+            { command: 'main', text: 'Back', menu: 'under' },
+            { command: 'placeFaceup', text: 'Place card faceup', menu: 'under' },
+            { command: 'placeFacedown', text: 'Place card facedown', menu: 'under' }
         ];
 
         this.endRound();
@@ -147,9 +164,12 @@ class Card extends EffectSource {
     }
 
     tokenCard() {
-        return this.game
-            .getPlayers()
-            .find((player) => player.tokenCard && player.tokenCard.name === this.name)?.tokenCard;
+        // Tokens are always created from their owner's own deck,
+        // and each player has at most one token card definition,
+        // so the owner's tokenCard is the canonical resolution.
+        // Avoid looking up by `this.name`, which can be overridden
+        //  by a copyCard effect.
+        return this.owner && this.owner.tokenCard;
     }
 
     isProphecy() {
@@ -163,9 +183,8 @@ class Card extends EffectSource {
 
         let actions = this.abilities.actions;
         if (this.anyEffect('copyCard')) {
-            let mostRecentEffect = _.last(
-                this.effects.filter((effect) => effect.type === 'copyCard')
-            );
+            let copyEffects = this.effects.filter((effect) => effect.type === 'copyCard');
+            let mostRecentEffect = copyEffects[copyEffects.length - 1];
             actions = mostRecentEffect.value.getActions(this);
         }
 
@@ -187,9 +206,8 @@ class Card extends EffectSource {
         const TriggeredAbilityTypes = ['interrupt', 'reaction'];
         let reactions = this.abilities.reactions;
         if (this.anyEffect('copyCard')) {
-            let mostRecentEffect = _.last(
-                this.effects.filter((effect) => effect.type === 'copyCard')
-            );
+            let copyEffects = this.effects.filter((effect) => effect.type === 'copyCard');
+            let mostRecentEffect = copyEffects[copyEffects.length - 1];
             reactions = mostRecentEffect.value.getReactions(this);
         }
 
@@ -227,9 +245,8 @@ class Card extends EffectSource {
 
         let persistentEffects = this.abilities.persistentEffects;
         if (this.anyEffect('copyCard')) {
-            let mostRecentEffect = _.last(
-                this.effects.filter((effect) => effect.type === 'copyCard')
-            );
+            let copyEffects = this.effects.filter((effect) => effect.type === 'copyCard');
+            let mostRecentEffect = copyEffects[copyEffects.length - 1];
             persistentEffects = mostRecentEffect.value.getPersistentEffects(this);
         }
 
@@ -446,6 +463,25 @@ class Card extends EffectSource {
     }
 
     fate(properties) {
+        // Re-attribute the auto-generated "uses {fateCard} to ..." message to
+        // the active player (who triggered the prophecy fulfillment) rather
+        // than the fate card's controller, without altering context.player so
+        // that card targeting (e.g. controller: 'opponent') is unaffected.
+        const wrapped = Object.assign({}, properties);
+        if (wrapped.effect && !wrapped.message) {
+            const origEffect = wrapped.effect;
+            const origEffectArgs = wrapped.effectArgs;
+            wrapped.message = '{0} uses {1} to ' + origEffect;
+            wrapped.messageArgs = (context) => {
+                const extra =
+                    typeof origEffectArgs === 'function'
+                        ? origEffectArgs(context)
+                        : origEffectArgs || [];
+                return [context.game.activePlayer, context.source, ...[].concat(extra)];
+            };
+            delete wrapped.effect;
+            delete wrapped.effectArgs;
+        }
         return this.interrupt(
             Object.assign(
                 {
@@ -456,7 +492,7 @@ class Card extends EffectSource {
                     location: 'any',
                     effectAlert: true
                 },
-                properties
+                wrapped
             )
         );
     }
@@ -607,7 +643,7 @@ class Card extends EffectSource {
             throw new Error(`'${location}' is not a supported effect location.`);
         }
 
-        let ability = _.extend(
+        let ability = Object.assign(
             {
                 abilityType: 'persistentEffect',
                 duration: 'persistentEffect',
@@ -646,7 +682,7 @@ class Card extends EffectSource {
         }
         let copyEffect = this.mostRecentEffect('copyCard');
         let traits = copyEffect ? copyEffect.traits : this.getBottomCard().traits;
-        return _.uniq(traits.concat(this.getEffects('addTrait')));
+        return [...new Set(traits.concat(this.getEffects('addTrait')))];
     }
 
     getHouseEnhancements() {
@@ -658,11 +694,18 @@ class Card extends EffectSource {
             .filter((e) => Constants.Houses.includes(e.toLowerCase()));
     }
 
+    getResolvableBonusIcons() {
+        return this.bonusIcons.filter((icon) => {
+            const normalized = icon.replace(/\s/g, '').toLowerCase();
+            return !Constants.Houses.includes(normalized);
+        });
+    }
+
     getHouses() {
         let combinedHouses = [];
 
         if (this.anyEffect('changeHouse')) {
-            combinedHouses = combinedHouses.concat(this.getEffects('changeHouse'));
+            combinedHouses = combinedHouses.concat(this.getEffects('changeHouse').flat());
         } else {
             let copyEffect = this.mostRecentEffect('copyCard');
             combinedHouses.push(copyEffect ? copyEffect.printedHouse : this.printedHouse);
@@ -697,11 +740,11 @@ class Card extends EffectSource {
     }
 
     applyAnyLocationPersistentEffects() {
-        _.each(this.persistentEffects, (effect) => {
+        for (const effect of this.persistentEffects) {
             if (effect.location === 'any') {
                 effect.ref = this.addEffectToEngine(effect);
             }
-        });
+        }
     }
 
     onLeavesPlay() {
@@ -742,14 +785,40 @@ class Card extends EffectSource {
         this.elusiveUsed = false;
     }
 
+    /**
+     * Returns true if this card has any reaction whose target step resolves
+     * a `GainsTextBoxAction` (i.e. a Doppelganger-style “copy a neighbor’s
+     * text box” ability). Uses the runtime reactions list so abilities granted
+     * via CopyCard (e.g. tokens, Mimic Gel copies) or gainAbility effects are
+     * also detected. Used to spot infinite copy loops (e.g. two Doppelgangers
+     * next to each other) so the infinite-loop rule can be applied.
+     */
+    hasGainsTextBoxAbility() {
+        if (this.isBlank()) {
+            return false;
+        }
+        const GainsTextBoxAction = require('./GameActions/GainsTextBoxAction');
+        const isGainsTextBox = (action) => action instanceof GainsTextBoxAction;
+        return this.getReactions(true).some(
+            (reaction) =>
+                reaction.targets &&
+                reaction.targets.some(
+                    (target) =>
+                        target.properties &&
+                        Array.isArray(target.properties.gameAction) &&
+                        target.properties.gameAction.some(isGainsTextBox)
+                )
+        );
+    }
+
     updateAbilityEvents(from, to) {
-        _.each(this.getReactions(true), (reaction) => {
+        for (const reaction of this.getReactions(true)) {
             if (reaction.location.includes(to) && !reaction.location.includes(from)) {
                 reaction.registerEvents();
             } else if (!reaction.location.includes(to) && reaction.location.includes(from)) {
                 reaction.unregisterEvents();
             }
-        });
+        }
     }
 
     updateEffects(from = '', to = '') {
@@ -759,7 +828,7 @@ class Card extends EffectSource {
 
         let effectLocations = ['play area', 'discard'];
 
-        _.each(this.getPersistentEffects(true), (effect) => {
+        for (const effect of this.getPersistentEffects(true)) {
             if (effect.location !== 'any') {
                 if (
                     effectLocations.includes(effect.location) &&
@@ -778,7 +847,7 @@ class Card extends EffectSource {
                     effect.ref = [];
                 }
             }
-        });
+        }
     }
 
     updateEffectContexts() {
@@ -826,7 +895,7 @@ class Card extends EffectSource {
         }
     }
 
-    getMenu() {
+    getMenu(activePlayer) {
         var menu = [];
 
         // Special handling for prophecy cards in manual mode
@@ -859,9 +928,49 @@ class Card extends EffectSource {
             return [{ command: 'reveal', text: 'Reveal', menu: 'main' }];
         }
 
+        // Upgrades should only be returned to hand - they cannot be otherwise interacted with while attached to a creature, and don't need their own menu options
+        if (this.parent) {
+            menu.push({ command: 'click', text: 'Select Card', menu: 'main' });
+            menu.push({ command: 'returnToHand', text: 'Return to hand', menu: 'main' });
+            return menu;
+        }
+
         menu.push({ command: 'click', text: 'Select Card', menu: 'main' });
         if (this.location === 'play area') {
-            menu = menu.concat(this.menu);
+            // Render the static menu, but rewrite a few toggle entries to
+            // reflect the card's current state instead of the generic
+            // 'X/Remove X' wording.
+            const dynamicLabels = {
+                exhaust: this.exhausted ? 'Ready' : 'Exhaust',
+                stun: this.stunned ? 'Remove Stun' : 'Stun',
+                ward: this.warded ? 'Remove Ward' : 'Ward',
+                enrage: this.enraged ? 'Remove Enrage' : 'Enrage'
+            };
+            menu = menu.concat(
+                this.menu.map((item) =>
+                    dynamicLabels[item.command]
+                        ? { ...item, text: dynamicLabels[item.command] }
+                        : item
+                )
+            );
+            // Dynamic 'take' entries, one per card currently placed
+            // beneath this card. Players can see facedown cards they
+            // placed themselves, so always label by name in the menu;
+            // log lines hide the name for opponent visibility.
+            // Only the controller of the host card can take cards out
+            // from under it: opponents can place cards under enemy
+            // creatures but cannot take them, and shouldn't be able to
+            // see what cards are under a card.
+            if (!activePlayer || activePlayer === this.controller) {
+                for (const child of this.childCards) {
+                    menu.push({
+                        command: 'takeChild',
+                        arg: child.uuid,
+                        text: 'Take ' + child.name,
+                        menu: 'under'
+                    });
+                }
+            }
         }
 
         return menu;
@@ -881,7 +990,7 @@ class Card extends EffectSource {
             return;
         }
 
-        if (_.isUndefined(this.tokens[type])) {
+        if (this.tokens[type] === undefined) {
             this.tokens[type] = 0;
         }
 
@@ -977,8 +1086,8 @@ class Card extends EffectSource {
 
         clone.clonedType = clone.type;
         clone.upgrades = this.upgrades.map((upgrade) => upgrade.createSnapshot());
-        clone.effects = _.clone(this.effects);
-        clone.tokens = _.clone(this.tokens);
+        clone.effects = [...this.effects];
+        clone.tokens = { ...this.tokens };
         clone.controller = this.controller;
         clone.clonedPurgedCards = this.purgedCards;
         clone.exhausted = this.exhausted;
@@ -1350,27 +1459,40 @@ class Card extends EffectSource {
     }
 
     leftNeighbor() {
-        let neighbor;
-        if (this.type === 'creature') {
-            let creatures = this.controller.creaturesInPlay;
-            let index = creatures.indexOf(this);
-            if (index > 0) {
-                neighbor = creatures[index - 1];
-            }
+        if (this.type !== 'creature') {
+            return undefined;
         }
-        return neighbor;
+
+        const creatures = this.controller.creaturesInPlay;
+        const index = creatures.indexOf(this);
+        if (index > 0) {
+            return creatures[index - 1];
+        } else if (index === -1) {
+            // Source is no longer in play. Per the rules, later instructions in
+            // the same ability refer to cards as they were immediately prior to
+            // leaving play, so fall back to the snapshot captured on leave.
+            return this.leftNeighborBeforeLeavingPlay || undefined;
+        }
+        return undefined;
     }
 
     rightNeighbor() {
-        let neighbor;
-        if (this.type === 'creature') {
-            let creatures = this.controller.creaturesInPlay;
-            let index = creatures.indexOf(this);
-            if (index < creatures.length - 1) {
-                neighbor = creatures[index + 1];
-            }
+        if (this.type !== 'creature') {
+            return undefined;
         }
-        return neighbor;
+
+        const creatures = this.controller.creaturesInPlay;
+        const index = creatures.indexOf(this);
+        if (index >= 0 && index < creatures.length - 1) {
+            return creatures[index + 1];
+        } else if (index === -1) {
+            return this.rightNeighborBeforeLeavingPlay || undefined;
+        }
+        return undefined;
+    }
+
+    getNeighbors() {
+        return [this.leftNeighbor(), this.rightNeighbor()].filter(Boolean);
     }
 
     ignores(trait) {
@@ -1429,12 +1551,29 @@ class Card extends EffectSource {
             cardback: this.owner.deckData.cardback,
             childCards: childCards,
             controlled: this.owner !== this.controller,
+            // Tokens always have a baseline `copyCard(tokenCard)` effect (see
+            // MakeTokenCreatureAction); ignore that self-copy and only flag
+            // `copying` when something else (e.g. Mirror Shell, Mimic Gel)
+            // overrides the card's identity. FlipAction uses `copyCard(card)`
+            // when un-tokenizing, which is also a baseline self-reference.
+            copying: (() => {
+                const copyEffect = this.mostRecentEffect('copyCard');
+                if (
+                    !copyEffect ||
+                    (this.isToken() && copyEffect === this.tokenCard()) ||
+                    copyEffect === this
+                ) {
+                    return false;
+                }
+
+                return true;
+            })(),
             exhausted: this.exhausted,
             facedown: this.facedown,
             location: this.location,
             locale: this.locale,
             number: tokenCardOrThis.cardData.number,
-            menu: this.getMenu(),
+            menu: this.getMenu(activePlayer),
             name: this.name,
             new: this.new,
             printedHouse: tokenCardOrThis.printedHouse,
